@@ -11,7 +11,8 @@ dev.R
 cdn/
 export/
 _freeze/
-_extensions
+_extensions/
+_site/
 
 # Quarto output
 *.log
