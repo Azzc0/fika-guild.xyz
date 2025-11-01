@@ -1,0 +1,299 @@
+---
+description: "Schackmatt"
+date: 2025-10-15
+image: https://res.cloudinary.com/dhmmkvcpy/image/upload/t_250x100/thumb/chess
+footer: "Veckobladet 42 (2025) - [🏠 Tillbaka till hemsidan](https://your-domain.com)"
+format: 
+  revealjs:
+    title-slide: false
+freeze: true
+---
+
+# V.42 2025 {.no-title background-image="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto/f_auto/t_1920x1080/bgs/mysteries" }
+
+```{r}
+library(here)
+here::i_am("veckobladet/V42-2025.qmd")
+
+# Now source your scripts - these should all work
+source(here("scripts", "01_database.R"))
+# source(here("scripts", "02_registry.R")) 
+# source(here("scripts", "03_parser.R"))
+# source(here("scripts", "04_data_entry.R"))
+source(here("scripts", "05_queries.R")) 
+source(here("scripts", "06_presentation.R"))
+
+
+current_week <- 42
+current_year <- 2025
+
+prepare_week_data(current_year, current_week-1)
+kara_session <- get_session_id_cached("Kara", current_year, current_week-1)
+naxx_session <- get_session_id_cached("Naxx", current_year, current_week-1)  
+aq40_session <- get_session_id_cached("AQ40", current_year, current_week-1)
+bwl_session <- get_session_id_cached("BWL", current_year, current_week-1)
+mc_session <- get_session_id_cached("MC", current_year, current_week-1)
+
+kara_text <- "
+
+Kara text
+"
+kara_notes <- "
+
+Kara notes
+"
+
+naxx_text <- "
+
+Naxx text
+"
+
+naxx_notes <- "
+
+Naxx notes
+"
+
+aq_text <- "
+
+AQ text
+"
+
+aq_notes <- "
+
+AQ notes
+"
+
+bwl_text <- "
+
+bwl text
+"
+
+bwl_notes <- "
+BWL ntoes
+"
+
+mc_text <- "
+
+mc text
+"
+
+mc_notes <- "
+mc notes
+"
+```
+
+
+{{< include partials/intro.qmd >}}
+
+::: {.notes}
+Då var det onsdag och dags för veckobladet i vanlig ordning. denna veckan fick vi en uppdatering till måndagen istället för till onsdagen.
+
+Vi har haft ett officermöte och lite detaljer ifrån det tar vi mot slutet.
+:::
+
+# Changelog {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Library_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+
+::: {.patch-notes .auto-rotator}
+<!-- Ctrl+h remove regular expression </?(ul|div)> Also replace the first <li> with "- " to get the bullets to work properly. -->
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+<li><span style="color:#ffbf40">Palefur Cloak</span>, <span style="color:#ffbf40">Stoutheart Shawl</span> and <span style="color:#ffbf40">Verix' Navigator Cloak</span> are now correctly enchantable.</li>
+<li>Fixed an issue where <span style="color:#ffbf40">Magnetic Band</span> could not be disenchanted.</li>
+<li>Fixed an issue with <span style="color:#ffbf40">Demon Hair Bow</span> interacting with quivers.</li>
+<li><span style="color:#ffbf40">Master Strike (Mace)</span> disorient effect is now cancelled by damage as intended.</li>
+<li>Fixed an issue where <span style="color:#ffbf40">Echo of Medivh</span> sometimes dropped only one item.</li>
+<li>Reduced damage of <span style="color:#ffbf40">Wobblefree Fizz‑rifle</span>.</li>
+<li>Fixed <span style="color:#ffbf40">Arctiras</span> using Frost Nova too often.</li>
+<li>Quest <span style="color:#ffbf40">Saving the Shadowtooth</span> will now show its rewards.</li>
+<li>Corrected drop rate for <span style="color:#ffbf40">Iron Pommel</span>.</li>
+<li>Fixed duplicate‑item issues with the <span style="color:#ffbf40">Beached Sea Creature</span> and <span style="color:#ffbf40">Sea Turtle</span> quests.</li>
+<li><span style="color:#ffbf40">Erennius</span> should now always stop attacking after <span style="color:#ffbf40">Solnius</span> dies.</li>
+<li>It is no longer possible for multiple <span style="color:#ffbf40">Razormane Pathfinders</span> to spawn from the quest item.</li>
+<li><span style="color:#ffbf40">Enhancing Winds</span> now properly increases block amount.</li>
+<li>Adjusted armor values of numerous NPCs in new dungeons and extensions.</li>
+<li>Fixed <span style="color:#ffbf40">Magicspark Leggings</span> losing their effect upon entering the Blood Ring.</li>
+<li><span style="color:#ffbf40">Jarg'ukk</span> can now repair your items.</li>
+<li><span style="color:#ffbf40">Concoction of the Emerald Mongoose</span> now grants healing power and spell crit as well.</li>
+<li>Fixed incorrect disenchant loot for <span style="color:#ffbf40">Grim Reaches</span> quest rewards.</li>
+<li>You can no longer use the appearance of quest items such as <span style="color:#ffbf40">Egan's Blaster</span> for transmogrification.</li>
+<li><span style="color:#ffbf40">Anubisath Warders</span> now select only two crowd‑control types instead of all possible ones.</li>
+<li><span style="color:#ffbf40">Cloudplate Wristguards</span> armor increased from 246 to 346.</li>
+<li><span style="color:#ffbf40">Azure Silk Hood</span>: Increased Intellect from 7 → 8, added 7 Frost Spellpower.</li>
+<li>Fixed an issue that caused <span style="color:#ffbf40">Shield of Baggoth</span> to have more block and less armor than intended.</li>
+<li>Changed several relics to be unique, matching other relics.</li>
+<li>Added missing 10 Arcane Resistance to <span style="color:#ffbf40">Judgement Leggings</span> and <span style="color:#ffbf40">Judgement Legguards</span>.</li>
+<li>Added missing 10 Frost Resistance to <span style="color:#ffbf40">Judgement Helmet</span> and <span style="color:#ffbf40">Judgement Crown</span>.</li>
+<li>Added missing 10 Fire Resistance to <span style="color:#ffbf40">Judgement Chestguard</span> and <span style="color:#ffbf40">Judgement Chestplate</span>.</li>
+<li>Added a 10‑minute cooldown to <span style="color:#ffbf40">Shadow‑Weaver's Cape</span> slow‑fall effect.</li>
+<li>Fixed the <span style="color:#ffbf40">Rune‑Etched</span> item set not granting its set bonuses.</li>
+<li>Fixed sheathing for <span style="color:#ffbf40">Spire of Channeled Power</span>.</li>
+<li><span style="color:#ffbf40">Horn of Engryss</span>: removed on‑use Thorns effect, increased armor from 15 → 30, added 8 Stamina and 3 Nature Damage Thorns effect.</li>
+<li><span style="color:#ffbf40">Jadestone Protector</span>: replaced 3 % Resilience with 1 % Block Chance, increased Defense from 8 → 9.</li>
+<li><span style="color:#ffbf40">Thunder Brew Special Reserve</span> no longer disappears after some time.</li>
+<li>Changed <span style="color:#ffbf40">Darnassus Sentinel Glaive</span>'s weapon type to One‑Handed Sword.</li>
+<li><span style="color:#ffbf40">Half Eaten Mutton Chop</span> is now a One‑Handed Mace, allowing transmogrification.</li>
+<li>Slightly reduced <span style="color:#ffbf40">Stormreaver Fang</span>'s sell price.</li>
+<li><span style="color:#ffbf40">Rufus' Trusty Tankard</span>: reduced DPS from 31.7 → 25.6, reduced Stamina from 8 → 6. Updated disenchant output.</li>
+<li><span style="color:#ffbf40">Kinrial's Scalpel</span>: reduced DPS from 31.6 → 25.6, reduced Strength from 8 → 6, reduced Agility from 7 → 5. Updated disenchant output.</li>
+<li><span style="color:#ffbf40">Noppsy's Compendium</span>: reduced Intellect from 8 → 6. Updated disenchant output.</li>
+<li><span style="color:#ffbf40">Nippsy's Precision Rifle</span>: reduced DPS from 24.7 → 20.7, reduced Agility from 6 → 4, reduced Intellect from 5 → 4. Updated disenchant output.</li>
+<li><span style="color:#ffbf40">Ionized Metal Grips</span>: reduced Armor from 152 → 147, reduced Stamina from 6 → 4.</li>
+<li>Fixed a name typo for <span style="color:#ffbf40">Northwind Guard Breaches</span>.</li>
+<li>Fixed an issue where <span style="color:#ffbf40">Legacki</span> could become stuck.</li>
+<li>Fixed an issue where <span style="color:#ffbf40">Poisonous Mushroom</span> dealt more damage than intended.</li>
+<li>Removed unused <span style="color:#ffbf40">Davingrad's Camp</span> from the Cartographer achievement requirement.</li>
+<li>In‑game messages that were previously English‑only can now be localized.</li>
+<li><span style="color:#ffbf40">Varimathras</span> will no longer attack players during the quest <span style="color:#ffbf40">To Catch a Rat</span>.</li>
+<li><span style="color:#ffbf40">Dark Rider</span> summoned during the quest <span style="color:#ffbf40">Scythe of the Goddess</span> will now despawn when combat ends.</li>
+<li><span style="color:#ffbf40">Gloves of Unwinding Mystery</span>: Spellpower lowered from 22 → 9.</li>
+<li>The mailbox has been added to <span style="color:#ffbf40">Dun Kithas</span>.</li>
+<li>Players can now acquire another <span style="color:#ffbf40">Orphan Whistle</span> if the original is lost while completing the Children’s Week questline.</li>
+<li><span style="color:#ffbf40">Torble Sparksprocket</span> and all associated quests have been removed.</li>
+<li>Hardcore players can no longer earn XP inside battlegrounds.</li>
+<li><span style="color:#ffbf40">Whirlwind</span> can now trigger weapon procs.</li>
+<li><span style="color:#ffbf40">Deep Wounds</span> has been fixed to deal the intended amount of damage.</li>
+<li>Critical damage from <span style="color:#ffbf40">Coordinated Assault</span> can now enable the ability <span style="color:#ffbf40">Baited Shot</span>.</li>
+
+
+:::
+
+::: {.notes}
+Changelog notes
+:::
+
+
+# Föregående vecka {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/CoT_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+
+```{r}
+#| echo: false
+#| results: asis
+schedule <- list(
+  list(day = "Onsdag", time = "20:00", title = "Chill MC", img = "mc.png"),
+  list(day = "Torsdag", time = "19:30", title = "⭐Kara40", img = "returntokara.png"),
+  list(day = "Fredag", time = "20:30", title = "Blackwing Lair", img = "bwl.png"),
+  list(day = "Lördag", time = "20:00", title = "AQ40", img = "aq40.png"),
+  list(day = "Söndag", time = "19:30", title = "⭐Kara40", img = "returntokara.png"),
+  list(day = "Måndag", time = "20:00", title = "Chill ZG", img = "zg.png"),
+  list(day = "Tisdag", time = "19:30", title = "⭐Naxx main", img = "naxx.png"),
+  list(day = "Tisdag", time = "22:00", title = "Naxx alt", img = "naxx.png")
+)
+cat(schedule_presentation(schedule))
+```
+
+::: {.notes}
+
+:::
+
+
+```{r}
+#| echo: false
+#| results: asis
+if (!is.null(kara_session)) {
+  message("Including Kara partial, session: ", kara_session)
+  res <- knitr::knit_child(here("veckobladet", "partials", "kara.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+if (!is.null(naxx_session)) {
+  res <- knitr::knit_child(here("veckobladet", "partials", "naxx.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+if (!is.null(aq40_session)) {
+  res <- knitr::knit_child(here("veckobladet", "partials", "aq.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+if (!is.null(bwl_session)) {
+  res <- knitr::knit_child(here("veckobladet", "partials", "bwl.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+if (!is.null(mc_session)) {
+  res <- knitr::knit_child(here("veckobladet", "partials", "mc.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+```
+
+
+# Kommande vecka {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/ToK_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+
+:::: {.raid-schedule}
+
+::: {.raid-box}
+**Onsdag**
+
+Chill MC
+
+![20:00](https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/mc.png)
+:::
+
+::: {.raid-box}
+**Torsdag**
+
+⭐Kara40
+
+![20:00](https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/returntokara.png)
+:::
+
+::: {.raid-box}
+**Fredag**
+
+Blackwing Lair
+
+![20:00](https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/bwl.png)
+:::
+
+::: {.raid-box}
+**Lördag**
+
+AQ40
+
+![20:00](https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/aq40.png)
+:::
+
+::: {.raid-box}
+**Söndag**
+
+⭐Kara40
+
+![20:00](https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/returntokara.png)
+:::
+
+::: {.raid-box}
+**Måndag**
+
+Chill ZG
+
+![20:00](https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/zg.png)
+:::
+
+::: {.raid-box}
+**Tisdag**
+
+Naxxramas
+
+:::{.r-stack}
+![19:30](https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/naxx.png)
+
+:::
+
+:::
+
+::::
+
+# Avslut {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Nordanaar_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+- Huvudräder ändrad tid: 20:00-22:00 (start 16:e Oktober)
+- Eventuellt att vi drar någon minut extra efter 22:00 om vi tar en paus vid 21:00 mellan våra elixir. 
+- Avvakta med 2h buffar till vi är vid första bossen. ;D
+
+
+::: {.notes}
+
+Glöm inte bort att vi justerat rädtiderna nu. Eventuellt att vi drar någon minut extra efter 22:00 om vi tar en paus vid 21:00 mellan våra elixir. Avvakta med 2h buffar till vi är vid första bossen. ;D
+
+:::

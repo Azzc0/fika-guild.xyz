@@ -1,0 +1,2033 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Fika</title>
+<link>https://fika-guild.xyz/veckobladet.html</link>
+<atom:link href="https://fika-guild.xyz/veckobladet.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<generator>quarto-1.7.32</generator>
+<lastBuildDate>Thu, 16 Oct 2025 22:00:00 GMT</lastBuildDate>
+<item>
+  <title></title>
+  <link>https://fika-guild.xyz/veckobladet/V43-2025.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="v.43-2025" class="level1 no-title" data-background-image="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto/f_auto/t_1920x1080/bgs/mysteries">
+
+
+
+</section>
+
+ ]]></description>
+  <guid>https://fika-guild.xyz/veckobladet/V43-2025.html</guid>
+  <pubDate>Thu, 16 Oct 2025 22:00:00 GMT</pubDate>
+</item>
+<item>
+  <title></title>
+  <link>https://fika-guild.xyz/veckobladet/V41-2025.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="v.41-2025" class="level1 no-title" data-background-image="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto/f_auto/t_1920x1080/bgs/mysteries">
+<h1 class="no-title" data-background-image="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto/f_auto/t_1920x1080/bgs/mysteries">V.41 2025</h1>
+<div class="notes">
+
+</div>
+<!-- Use viewport units instead of percentages -->
+<div style="height: 100vh;">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/icons/fika.png" class="img-fluid" style="position: absolute; top: -5px; left: 50%; transform: translateX(-50%); width: 350px; height: auto; z-index: 3"></p>
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/intro/41.jpg" class="img-fluid" style="position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%); width: 800px; height: auto; z-index: 2"></p>
+<div style="position: absolute; top: 25px; left: 50%; transform: translateX(-50%); width: 400px; height: 200px; background: black; opacity: 0.6; border-radius: 50%; filter: blur(20px); z-index: 1;">
+
+</div>
+</div>
+<div style="position: absolute; right: -9%; top: -2%; width: 30%; height: 100%; display: flex; flex-direction: column; align-items: center;z-index:3;">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/icons/logo.webp" class="img-fluid" style="width: 315px; height: auto; margin-top: 30px;"> <img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/icons/tabard.png" class="img-fluid" style="width: 250px; height: auto; margin-top: -30px;"></p>
+</div>
+<div class="notes">
+<p>Då var det onsdag och dags för veckobladet i vanlig ordning. denna veckan fick vi en uppdatering till måndagen istället för till onsdagen.</p>
+<p>Vi har haft ett officermöte och lite detaljer ifrån det tar vi mot slutet.</p>
+</div>
+</section>
+<section id="changelog" class="level1" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Library_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h1 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Library_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">Changelog</h1>
+<div class="patch-notes auto-rotator">
+<!-- Ctrl+h remove regular expression </?(ul|div)> Also replace the first <li> with "- " to get the bullets to work properly. -->
+<ul>
+<li>&nbsp; <!-- Invisible spacer --></li>
+<li>&nbsp; <!-- Invisible spacer --><br>
+</li>
+<li>&nbsp; <!-- Invisible spacer --></li>
+<li>&nbsp; <!-- Invisible spacer --><br>
+</li>
+<li>&nbsp; <!-- Invisible spacer --></li>
+<li>&nbsp; <!-- Invisible spacer --><br>
+</li>
+<li>&nbsp; <!-- Invisible spacer --></li>
+<li>&nbsp; <!-- Invisible spacer --><br>
+</li>
+<li>&nbsp; <!-- Invisible spacer --></li>
+<li>&nbsp; <!-- Invisible spacer --><br>
+
+</li><li>
+Reduced <span style="color:#ffbf40">Tailoring </span>skill requirement for the quest <span style="color:#ffbf40">The Undermarket</span> from 250 to 230.
+</li>
+<li>
+Fixed issues when <span style="color:#ffbf40">Baited Shot</span> did not trigger from <span style="color:#ffbf40">Coordinated Assault</span> or spell crits.
+</li>
+<li>
+<span style="color:#ffbf40">Baited Shot </span> will now provide a combat text cue when it becomes active.
+</li>
+<li>
+Updated <span style="color:#ffbf40">Crocolisk’s Death Roll</span>: now benefits from <span style="color:#ffbf40">Kill Command</span>. Critical strikes from each hit can now rigger <span style="color:#ffbf40">Baited Shot</span>.
+</li>
+<li>
+Crab’s <span style="color:#ffbf40">Bubble Barrier</span> now benefits from <span style="color:#ffbf40">Kill Command</span>.
+</li>
+<li>
+Baron Geddon’s <span style="color:#ffbf40">Living Bomb</span> will fade from the player after changing map.
+</li>
+<li>
+Reduced <span style="color:#ffbf40">Legion Strike</span> duration to 4 seconds to allow proper autocast behavior.
+</li>
+<li>
+Fixed issue with some buff/debuff icons not showing properly.
+</li>
+<li>
+Fixed party member buffs tooltip sometimes showing buffs of a different unit.
+</li>
+<li>
+Increased shown buffs to 32 and debuffs to 16.
+</li>
+<li>
+Fixed texture in <span style="color:#ffbf40">Arena</span> tab turning white under certain conditions and Fixed Unlock frame and Reset Position menu options not showing on TargetFrame if target is not a player.
+</li>
+<li>
+Added <span style="color:#ffbf40">Promote to Master Looter</span> menu option to Raid menu. You no longer have to be in the same party with a player to see this option.
+</li>
+<li>
+Added new companions.
+</li>
+<li>
+Fixed multiple issues in <span style="color:#ffbf40">Grim Reaches</span>.
+</li>
+<li>
+Fixed bounding issues in <span style="color:#ffbf40">Shadowfang Keep</span>.
+</li>
+<li>
+Improved visual of <span style="color:#ffbf40">Kill Command</span>.
+</li>
+<li>
+Fixed <span style="color:#ffbf40">Jadestone Protector</span> model.
+</li>
+<li>
+Fixed multiple crashes in <span style="color:#ffbf40">Dragonmaw Retreat</span> and <span style="color:#ffbf40">Stormwrought Castle</span>.
+</li>
+<li>
+Fixed instances where NPCs would flicker in certain areas.
+</li>
+<li>
+Added a tooltip hint when hovering over bag items with the trade/mail/auction house window opened.
+</li>
+<li>
+Fixed an issue where damage from <span style="color:#ffbf40">Nexus Shoulderpads</span> was not visible in the combat log.
+</li>
+<li>
+Clarified <span style="color:#ffbf40">Blessing of Sanctuary</span> tooltip.
+</li>
+<li>
+<span style="color:#ffbf40">Mid-Autumn Festival</span> event is now active.
+</li>
+<li>
+<span style="color:#ffbf40; font-size:1.1em;">Launcher</span>
+</li>
+<li>
+Improved local file verification speed.
+</li>
+<li>
+Apply exe tweaks on changes without requiring verification.
+</li>
+<li>
+Modify <span style="color:#ffbf40">dlls.txt</span> directly without triggering updates.
+</li>
+<li>
+Enhanced error handling for <span style="color:#ffbf40">realmlist.wtf</span>, <span style="color:#ffbf40">dlls.txt</span>, and <span style="color:#ffbf40">WDB</span> edits.
+</li>
+<li>
+Characters including <span style="color:#ffbf40">Remorseful Highborne</span>, <span style="color:#ffbf40">Stonard Scout</span>, <span style="color:#ffbf40">Lord Gregor Lescovar</span>, <span style="color:#ffbf40">Dashel Stonefist</span>, <span style="color:#ffbf40">Private Hendel</span>, <span style="color:#ffbf40">Bartleby</span>, and <span style="color:#ffbf40">Calvin Montague</span> no longer enable PvP on the attacker when attacked.
+</li>
+<li>
+Made fishing possible again in <span style="color:#ffbf40">Elwynn Forest</span> and <span style="color:#ffbf40">Stormwind</span>.
+</li>
+<li>
+<span style="color:#ffbf40">Bristlewhisker Cavern</span> is now discoverable.
+</li>
+</ul>
+</div>
+<div class="notes">
+<p>Mid-Autumn Festival är nu aktiv!</p>
+<p>Buff/debuff ändringar, förhoppningsvis får vi mindre spökeri med buffarna (såsom att man inte ser att man drar en elixir eller liknande). Fler av dem kommer synas också.</p>
+<p>Promote to Master Looter meny i raid menyn.</p>
+<p>Flimmrande npcer har fått lite uppmärksamhet, kanske är varningen för epilepsi vid Hearthglen i WPL obefogad?</p>
+<p>Launcher justeringar.</p>
+</div>
+</section>
+<section id="föregående-vecka" class="level1" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/CoT_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h1 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/CoT_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">Föregående vecka</h1>
+<div class="notes">
+
+</div>
+<div class="raid-schedule">
+<div class="raid-box">
+<p><strong>Onsdag</strong></p>
+<p>Chill MC</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/mc.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Torsdag</strong></p>
+<p>⭐Kara40</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/returntokara.png" class="img-fluid figure-img"></p>
+<figcaption>19:30</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Fredag</strong></p>
+<p>Blackwing Lair</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/bwl.png" class="img-fluid figure-img"></p>
+<figcaption>20:30</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Lördag</strong></p>
+<p>AQ40</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/aq40.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Söndag</strong></p>
+<p>⭐Kara40</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/returntokara.png" class="img-fluid figure-img"></p>
+<figcaption>19:30</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Måndag</strong></p>
+<p>Chill ZG</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/zg.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Tisdag</strong></p>
+<p>Naxx alt</p>
+<div class="r-stack">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/naxx.png" class="img-fluid figure-img"></p>
+<figcaption>19:30</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<section id="tower-of-karazhan" class="level2" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Kara_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h2 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Kara_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5" class="anchored" data-anchor-id="tower-of-karazhan">Tower of Karazhan</h2>
+<div class="notes">
+<p>I torsdags hade vi en riktigr bra grupp med oss. Incantagos pulle som vi lagt tid på att bemästra hade vi stor nytta av. Anomalus gjorde vi gigantiska kliv omot och plockade ned första kvällen. Trash efter Anomalus behöver stor respekt och för att hålla oss konsekventa kommer vi använda de automarkeringar vi har tillgång till. Detta innebär, precis som i Temple of Ahn’Qiraj, att skulle inte nödvändigtvis är det som ska dö först.</p>
+<p>Väl inne på schakbrädet stod vi kanske och bankade huvudet emot väggen och körde med Knight sist. Vi kommer <strong>inte</strong> ta Knight sist nästa gång utan pröva oss fram med Bishop istället.</p>
+<p>Oavsett vem som står kvar sist så måste vi släppa tunnelseendet och jaga adds. Det var både pawns och Ghastly Horsemen kvar vid liv. Det är framförallt Melee som behöver springa, ju färre kropppar vid den stora pjäsen, som fortfarande gör nytta, desto bättre för att inte fylla upp med void zones.</p>
+<p>Med Bishop sist kommer vi ha en kortare P3. Värt att notera att Tranquillity komer kunna nyttjas mer effektivt, det är mer rädskada som kommer ut på mindre tid Volley och Fury samtidigt.</p>
+<p>vi kommer inte behöva jaga några Ghastly Horsemen men det är oklart vad Bishop har för tredje ability.</p>
+<p>En Passant är en ability som gör skada ifrån Pawns i sista fasen. Det är en direkt AoE, inte en cleave som de gör.</p>
+<p>Glöm inte att plocka ut din PvP trinket innan vi tågar in nästa gång!</p>
+</div>
+<div class="columns">
+<div id="raid" class="column" style="font-size:0.55em">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Boss</th>
+<th>Tid</th>
+<th>Wipes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Keeper Gnarlmoon</td>
+<td>&nbsp;&nbsp;&nbsp;16:28 <span class="comp best">-37:51</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Ley-Watcher Incantagos</td>
+<td>&nbsp;&nbsp;&nbsp;47:51 <span class="comp first"></span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Anomalus</td>
+<td>2:06:26 <span class="comp first"></span></td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>Echo of Medivh</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Chess Event</td>
+<td>–:–:–</td>
+<td>13</td>
+</tr>
+<tr class="even">
+<td>Sanv Tas’dal</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Kruul</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Rupturan the Broken</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Mephistroth</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Totalt</td>
+<td>5:04:00</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="height:100%;max-height: 100vh;">
+<div style="display: flex; flex-direction: column; height: 100%; min-height:0;">
+<div id="raid" style="flex: 0 0 auto;">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Huvudräd</td>
+<td>Nytorpa</td>
+</tr>
+<tr class="even">
+<td>Tors/Söndag</td>
+<td>19:30-22:00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="raid" style="flex: 1 1 auto;">
+<p><strong>Nästa gång: Bishop sist</strong></p>
+<ul>
+<li>Mycket mindre HP och förhoppningsvis mindre armor.</li>
+<li>Färre adds att jaga - måste fortfarande få högre prio än senast.</li>
+<li>Queen’s Fury + Shadow Bolt Volley, mer räd skada initialt i P3 men forhoppningsvis inte lika länge.</li>
+</ul>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode lua code-with-copy"><code class="sourceCode lua"><span id="cb1-1"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">tar</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">Queen</span></span>
+<span id="cb1-2"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">bow</span></span></code></pre></div>
+</div>
+<div id="raid" style="flex: 0 0 auto;margin-bottom:90px">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Epics</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>7st</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p></p><table class="loot-table"> <thead> <tr> <th>Loot</th> <th>Karaktär</th> </tr> </thead> <tbody> <tr> <td> <span style="color:#a335ee">[Idol of Laceration]</span> </td> <td>Ailanai</td> </tr> <tr> <td> <span style="color:#a335ee">[Gloves of Nourishment]</span> </td> <td>Ailanai</td> </tr> <tr> <td> <span style="color:#a335ee">[Jewel of Wild Magics]</span> </td> <td>Marmis</td> </tr> <tr> <td> <span style="color:#a335ee">[Choker of Terminal Arcanum]</span> </td> <td>Quickfall</td> </tr> </tbody> </table><p></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="naxxramas" class="level2" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Naxx_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h2 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Naxx_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5" class="anchored" data-anchor-id="naxxramas">Naxxramas</h2>
+<div class="notes">
+<p>Naxx notes</p>
+</div>
+<div class="columns">
+<div id="raid" class="column" style="font-size:0.55em">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Boss</th>
+<th>Tid</th>
+<th>Wipes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Anub’Rekhan</td>
+<td>&nbsp;&nbsp;&nbsp;05:38</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Grand Widow Faerlina</td>
+<td>&nbsp;&nbsp;&nbsp;16:29 <span class="comp slower">+0:47</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Maexxna</td>
+<td>&nbsp;&nbsp;&nbsp;25:24 <span class="comp slower">+0:22</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Noth the Plaguebringer</td>
+<td>&nbsp;&nbsp;&nbsp;33:17</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Heigan the Unclean</td>
+<td>&nbsp;&nbsp;&nbsp;37:46 <span class="comp faster">-0:34</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Loatheb</td>
+<td>&nbsp;&nbsp;&nbsp;43:33 <span class="comp faster">-0:23</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Patchwerk</td>
+<td>1:00:25</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Grobbulus</td>
+<td>1:06:57 <span class="comp faster">-0:26</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Gluth</td>
+<td>1:13:06 <span class="comp slower">+1:27</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Thaddius</td>
+<td>1:31:05 <span class="comp worst">+14:28</span></td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>Instructor Razuvious</td>
+<td>1:43:56</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Gothik the Harvester</td>
+<td>1:53:11 <span class="comp faster">-0:36</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>The Four Horsemen</td>
+<td>2:11:50 <span class="comp slower">+0:55</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Sapphiron</td>
+<td>2:18:42 <span class="comp slower">+9:24</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Kel’Thuzad</td>
+<td>2:49:39 <span class="comp slower">+17:46</span></td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="height:100%;max-height: 100vh;">
+<div style="display: flex; flex-direction: column; height: 100%; min-height:0;">
+<div id="raid" style="flex: 0 0 auto;">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Extraräd</td>
+<td>Azzco (Coazz)</td>
+</tr>
+<tr class="even">
+<td>Tisdag</td>
+<td>19:30-22:00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="raid" style="flex: 1 1 auto;">
+<p>Naxx text</p>
+</div>
+<div id="raid" style="flex: 0 0 auto;margin-bottom:90px">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Epics</th>
+<th>Legendaries</th>
+<th>Plate Scraps</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>50st</td>
+<td>1st</td>
+<td>1st</td>
+</tr>
+</tbody>
+</table>
+<p></p><table class="loot-table"> <thead> <tr> <th>Loot</th> <th>Karaktär</th> </tr> </thead> <tbody> <tr> <td> <span style="color:#a335ee">[Might of the Scourge]</span> </td> <td>Stompzilla</td> </tr> <tr> <td> <span style="color:#ff8000">[Splinter of Atiesh]</span> </td> <td>Gahandulf</td> </tr> <tr> <td> <span style="color:#a335ee">[Desecrated Leggings]</span> </td> <td>Agnhild</td> </tr> <tr> <td> <span style="color:#a335ee">[Desecrated Shoulderpads]</span> </td> <td>Agnhild</td> </tr> </tbody> </table><p></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="temple-of-ahnqiraj" class="level2" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/AQ_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h2 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/AQ_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5" class="anchored" data-anchor-id="temple-of-ahnqiraj">Temple of Ahn’Qiraj</h2>
+<div class="notes">
+<p>Lite krota i rocken och vi fick inte lika mycket tid för Trash mellan Twins och Ouro. vi tog dessutom lite extra tid för att förklara C’Thun fighten då vi hade spontan invites för att fylla upp.</p>
+</div>
+<div class="columns">
+<div id="raid" class="column" style="font-size:0.55em">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Boss</th>
+<th>Tid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>The Prophet Skeram</td>
+<td>&nbsp;&nbsp;&nbsp;10:04 <span class="comp slower">+2:29</span></td>
+</tr>
+<tr class="even">
+<td>Silithid Royalty</td>
+<td>&nbsp;&nbsp;&nbsp;19:55</td>
+</tr>
+<tr class="odd">
+<td>Battleguard Sartura</td>
+<td>&nbsp;&nbsp;&nbsp;29:56</td>
+</tr>
+<tr class="even">
+<td>Fankriss the Unyielding</td>
+<td>&nbsp;&nbsp;&nbsp;35:28 <span class="comp faster">-1:16</span></td>
+</tr>
+<tr class="odd">
+<td>Viscidus</td>
+<td>&nbsp;&nbsp;&nbsp;39:33</td>
+</tr>
+<tr class="even">
+<td>Princess Huhuran</td>
+<td>&nbsp;&nbsp;&nbsp;48:42</td>
+</tr>
+<tr class="odd">
+<td>Twin Emperors</td>
+<td>1:06:49 <span class="comp slower">+3:11</span></td>
+</tr>
+<tr class="even">
+<td>Ouro</td>
+<td>1:25:32 <span class="comp slower">+3:08</span></td>
+</tr>
+<tr class="odd">
+<td>C’Thun</td>
+<td>1:49:17 <span class="comp slower">+7:05</span></td>
+</tr>
+<tr class="even">
+<td>Totalt</td>
+<td>1:51:00 <span class="comp worst">+12:50</span></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="height:100%;max-height: 100vh;">
+<div style="display: flex; flex-direction: column; height: 100%; min-height:0;">
+<div id="raid" style="flex: 0 0 auto;">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Extraräd</td>
+<td>Azzco (Coazz)</td>
+</tr>
+<tr class="even">
+<td>Lördag</td>
+<td>20:00-22:00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="raid" style="flex: 1 1 auto;">
+<p>Lite mindre Trash mellan Twins och Ouro denna veckan.</p>
+</div>
+<div id="raid" style="flex: 0 0 auto;margin-bottom:90px">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Epics</th>
+<th>Nycklar</th>
+<th>Sages</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>27st</td>
+<td>1st</td>
+<td>0st</td>
+</tr>
+</tbody>
+</table>
+<p></p><table class="loot-table"> <thead> <tr> <th>Loot</th> <th>Karaktär</th> </tr> </thead> <tbody> <tr> <td> <span style="color:#a335ee">[Belt of Never-ending Agony]</span> </td> <td>Ailanai</td> </tr> <tr> <td> <span style="color:#a335ee">[Silithid Carapace Chestguard]</span> </td> <td>Aktarare</td> </tr> <tr> <td> <span style="color:#a335ee">[Imperial Qiraji Armaments]</span> </td> <td>Bubkez</td> </tr> <tr> <td> <span style="color:#a335ee">[Gloves of the Fallen Prophet]</span> </td> <td>Bubkez</td> </tr> </tbody> </table><p></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="blackwing-lair" class="level2" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/BWL_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h2 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/BWL_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5" class="anchored" data-anchor-id="blackwing-lair">Blackwing Lair</h2>
+<div class="notes">
+<p>Smidig räd med lagom tempo. TWRA strular lite gran men det är högst troligen något som kan justeras med en omskrivning av källdatan, tråligen inte någon addon uppdatering som behövs.</p>
+</div>
+<div class="columns">
+<div id="raid" class="column" style="font-size:0.55em">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Boss</th>
+<th>Tid</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Razorgore the Untamed</td>
+<td>&nbsp;&nbsp;&nbsp;07:12 <span class="comp first"></span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Vaelastrasz the Corrupt</td>
+<td>&nbsp;&nbsp;&nbsp;10:57 <span class="comp first"></span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Broodlord Lashlayer</td>
+<td>&nbsp;&nbsp;&nbsp;27:41 <span class="comp first"></span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Firemaw</td>
+<td>&nbsp;&nbsp;&nbsp;39:22 <span class="comp first"></span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Ebonroc</td>
+<td>&nbsp;&nbsp;&nbsp;56:28 <span class="comp first"></span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Flamegor</td>
+<td>&nbsp;&nbsp;&nbsp;59:01 <span class="comp first"></span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Chromaggus</td>
+<td>1:10:46 <span class="comp first"></span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Nefarian</td>
+<td>1:23:54 <span class="comp first"></span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="height:100%;max-height: 100vh;">
+<div style="display: flex; flex-direction: column; height: 100%; min-height:0;">
+<div id="raid" style="flex: 0 0 auto;">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Extraräd</td>
+<td>Recin (Icepack)</td>
+</tr>
+<tr class="even">
+<td>Fredag</td>
+<td>20:30-22:00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="raid" style="flex: 1 1 auto;">
+<p>Lite väl många healers men kanske var det det som behövads för att övertyga drakarna att droppa sina trinkets?</p>
+</div>
+<div id="raid" style="flex: 0 0 auto;margin-bottom:90px">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Epics</th>
+<th>Elementium</th>
+<th>Sand</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>31st</td>
+<td>1st</td>
+<td>1st</td>
+</tr>
+</tbody>
+</table>
+<p></p><table class="loot-table"> <thead> <tr> <th>Loot</th> <th>Karaktär</th> </tr> </thead> <tbody> <tr> <td> <span style="color:#a335ee">[Rejuvenating Gem]</span> </td> <td>Lurantar</td> </tr> <tr> <td> <span style="color:#a335ee">[Rejuvenating Gem]</span> </td> <td>Pallarinte</td> </tr> <tr> <td> <span style="color:#a335ee">[Dragonstalker's Greaves]</span> </td> <td>Baldhunter</td> </tr> <tr> <td> <span style="color:#a335ee">[Dragonbreath Hand Cannon]</span> </td> <td>Chizhera</td> </tr> </tbody> </table><p></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="molten-core" class="level2" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/MC_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h2 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/MC_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5" class="anchored" data-anchor-id="molten-core">Molten Core</h2>
+<div class="notes">
+<p>En smidig räd med en wipe på Baron Geddon. Det är viktigt att vi är på hugget med Lava Elemental packen och hugger dem i rätt tillfälle så vi inte får bossen med oss.</p>
+</div>
+<div class="columns">
+<div id="raid" class="column" style="font-size:0.55em">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Boss</th>
+<th>Tid</th>
+<th>Wipes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Incindis</td>
+<td>&nbsp;&nbsp;&nbsp;03:53</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Lucifron</td>
+<td>&nbsp;&nbsp;&nbsp;10:29</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Magmadar</td>
+<td>&nbsp;&nbsp;&nbsp;15:22</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Twin Golems</td>
+<td>&nbsp;&nbsp;&nbsp;20:19</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Sorcerer-Thane Thaurissan</td>
+<td>&nbsp;&nbsp;&nbsp;27:44</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Garr</td>
+<td>&nbsp;&nbsp;&nbsp;39:38</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Shazzrah</td>
+<td>&nbsp;&nbsp;&nbsp;53:45</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Baron Geddon</td>
+<td>&nbsp;&nbsp;&nbsp;51:31</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>Sulfuron Harbinger</td>
+<td>1:01:13</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Golemagg the Incinerator</td>
+<td>1:05:39</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Majordomo Executus</td>
+<td>1:13:05</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Ragnaros</td>
+<td>1:22:33</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Totalt</td>
+<td>1:24:00 <span class="comp first"> </span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="height:100%;max-height: 100vh;">
+<div style="display: flex; flex-direction: column; height: 100%; min-height:0;">
+<div id="raid" style="flex: 0 0 auto;">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Extraräd</td>
+<td>Boonkers &amp; Pooras</td>
+</tr>
+<tr class="even">
+<td>Onsdag</td>
+<td>20:00-22:00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="raid" style="flex: 1 1 auto;">
+<p>Boonkers som RL.</p>
+</div>
+<div id="raid" style="flex: 0 0 auto;margin-bottom:90px">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Epics</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>39st</td>
+</tr>
+</tbody>
+</table>
+<p></p><table class="loot-table"> <thead> <tr> <th>Loot</th> <th>Karaktär</th> </tr> </thead> <tbody> <tr> <td> <span style="color:#a335ee">[Giantstalker's Gloves]</span> </td> <td>Baldhunter</td> </tr> <tr> <td> <span style="color:#a335ee">[Striker's Mark]</span> </td> <td>Cliffholger</td> </tr> <tr> <td> <span style="color:#a335ee">[Staff of Dominance]</span> </td> <td>Dunderrik</td> </tr> <tr> <td> <span style="color:#a335ee">[Plans: Sageblade]</span> </td> <td>Dunderrik</td> </tr> </tbody> </table><p></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="kommande-vecka" class="level1" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/ToK_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h1 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/ToK_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">Kommande vecka</h1>
+<div class="raid-schedule">
+<div class="raid-box">
+<p><strong>Onsdag</strong></p>
+<p>Chill MC</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/mc.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Torsdag</strong></p>
+<p>⭐Kara40</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/returntokara.png" class="img-fluid figure-img"></p>
+<figcaption>19:30</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Fredag</strong></p>
+<p>Blackwing Lair</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/bwl.png" class="img-fluid figure-img"></p>
+<figcaption>20:30</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Lördag</strong></p>
+<p>AQ40</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/aq40.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Söndag</strong></p>
+<p>⭐Kara40</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/returntokara.png" class="img-fluid figure-img"></p>
+<figcaption>19:30</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Måndag</strong></p>
+<p>Chill ZG</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/zg.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Tisdag</strong></p>
+<p>Naxx alt</p>
+<div class="r-stack">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/naxx.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="officermöte" class="level1" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Nordanaar_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h1 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Nordanaar_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">Officermöte</h1>
+<ul>
+<li>Huvudräder ändrad tid: 20:00-22:00 (start 16:e Oktober)</li>
+<li>Presentkort till AH kommer delas ut till de som är med i våran progress</li>
+</ul>
+<div class="patch-notes auto-rotator" style="bottom:1em;height:12em;">
+<!-- Ctrl+h remove regular expression </?(ul|div)> Also replace the first <li> with "- " to get the bullets to work properly. -->
+<ul>
+<li>&nbsp; <!-- Invisible spacer --></li>
+<li>&nbsp; <!-- Invisible spacer --><br>
+</li>
+<li>&nbsp; <!-- Invisible spacer --></li>
+<li>&nbsp; <!-- Invisible spacer --><br>
+
+</li><li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has demoted Miljogreta to Raider</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Taengil to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Pallarinte to Core INTE ÄN</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Aktarare to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Xzu to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has demoted Chopaholic to Raider</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Artchi to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Ailanai to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Cliffholger to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has demoted Supermongo to Raider</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Arcaneyy to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Bubkez to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Stompzilla to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Trdn to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has demoted Majsa to Raider</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Ugge to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has demoted Miljogreta to Raider</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Taengil to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Pallarinte to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Aktarare to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Xzu to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has demoted Chopaholic to Raider</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Artchi to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Ailanai to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Cliffholger to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has demoted Supermongo to Raider</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Arcaneyy to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Bubkez to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Stompzilla to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Trdn to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has demoted Majsa to Raider</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Ugge to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has demoted Miljogreta to Raider</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Taengil to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Pallarinte to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Aktarare to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Xzu to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has demoted Chopaholic to Raider</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Artchi to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Ailanai to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Cliffholger to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has demoted Supermongo to Raider</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Arcaneyy to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Bubkez to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Stompzilla to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Trdn to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has demoted Majsa to Raider</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Ugge to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has demoted Miljogreta to Raider</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Taengil to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Pallarinte to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Aktarare to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Xzu to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has demoted Chopaholic to Raider</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Artchi to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Ailanai to Core Prospect</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Cliffholger to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has demoted Supermongo to Raider</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Arcaneyy to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Bubkez to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Stompzilla to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Trdn to Core</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has demoted Majsa to Raider</span>
+</li>
+<li>
+<span style="color:#ffff00;font-family:'Cinzel',serif;">Nochin has promoted Ugge to Core</span>
+</li>
+</ul>
+</div>
+<div class="notes">
+<p>Vi justerar rädtiden på huvudräderna till två fokuserade timmar. Förhoppningen är att vi får med de som har haft problem att komma i tid och att vi är lite mer ekonomiska med våra buffar. Med det sagt så är sen ankomst numera högst tio minuter. Vet du med dig att du blir senare än så ber vi dig att signa upp som absence eller tentative istället så vi inte möblerar om räden för någon som inte kan komma i rimlig tid.</p>
+<p>Med denna ändringen så tar vi och jsuterar BWL startt tid till 20:00 så vi har samma starta tid på samtliga räder (förutom Naxxramas).</p>
+<p>Vi kommer dela ut lite guld till de som är med i våra progression räder.</p>
+<p>Rankerna har justerats en del efter långt uppehåll. Vi sätter in begränsningar på antal core spelare och inför en Core Prospect rank för de som definitivt är värda core ranken men som inte får plats. Så fort det blir en öppning fyller vi på ifrån den i första hand. Dock är det värt att notera att en del klasser redan är överfulla och en demote behöver inte nödvändigtvis innebära att en plats blir öppen.</p>
+<p>Core laget är alltså den uppsättningen vi vill ha med oss i progression och får vi med alla core på en kväll så har vi en jätte bra komp. Vi ställer större krav på våra core spelare och det är framförallt klassledare som ska se till att vi håller det måttet om det så gäller enchants, förnödenheter eller prestation.</p>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <guid>https://fika-guild.xyz/veckobladet/V41-2025.html</guid>
+  <pubDate>Tue, 14 Oct 2025 22:00:00 GMT</pubDate>
+  <media:content url="https://res.cloudinary.com/dhmmkvcpy/image/upload/t_250x100/thumb/Ano" medium="image"/>
+</item>
+<item>
+  <title></title>
+  <link>https://fika-guild.xyz/veckobladet/V42-2025.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="v.42-2025" class="level1 no-title" data-background-image="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto/f_auto/t_1920x1080/bgs/mysteries">
+<h1 class="no-title" data-background-image="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto/f_auto/t_1920x1080/bgs/mysteries">V.42 2025</h1>
+<div class="notes">
+
+</div>
+<!-- Use viewport units instead of percentages -->
+<div style="height: 100vh;">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/icons/fika.png" class="img-fluid" style="position: absolute; top: -5px; left: 50%; transform: translateX(-50%); width: 350px; height: auto; z-index: 3"></p>
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/intro/42.jpg" class="img-fluid" style="position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%); width: 800px; height: auto; z-index: 2"></p>
+<div style="position: absolute; top: 25px; left: 50%; transform: translateX(-50%); width: 400px; height: 200px; background: black; opacity: 0.6; border-radius: 50%; filter: blur(20px); z-index: 1;">
+
+</div>
+</div>
+<div style="position: absolute; right: -9%; top: -2%; width: 30%; height: 100%; display: flex; flex-direction: column; align-items: center;z-index:3;">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/icons/logo.webp" class="img-fluid" style="width: 315px; height: auto; margin-top: 30px;"> <img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/icons/tabard.png" class="img-fluid" style="width: 250px; height: auto; margin-top: -30px;"></p>
+</div>
+<div class="notes">
+<p>Då var det onsdag och dags för veckobladet i vanlig ordning. denna veckan fick vi en uppdatering till måndagen istället för till onsdagen.</p>
+<p>Vi har haft ett officermöte och lite detaljer ifrån det tar vi mot slutet.</p>
+</div>
+</section>
+<section id="changelog" class="level1" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Library_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h1 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Library_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">Changelog</h1>
+<div class="patch-notes auto-rotator">
+<!-- Ctrl+h remove regular expression </?(ul|div)> Also replace the first <li> with "- " to get the bullets to work properly. -->
+<ul>
+<li>&nbsp; <!-- Invisible spacer --></li>
+<li>&nbsp; <!-- Invisible spacer --><br>
+</li>
+<li>&nbsp; <!-- Invisible spacer --></li>
+<li>&nbsp; <!-- Invisible spacer --><br>
+</li>
+<li>&nbsp; <!-- Invisible spacer --></li>
+<li>&nbsp; <!-- Invisible spacer --><br>
+</li>
+<li>&nbsp; <!-- Invisible spacer --></li>
+<li>&nbsp; <!-- Invisible spacer --><br>
+</li>
+<li>&nbsp; <!-- Invisible spacer --></li>
+<li>&nbsp; <!-- Invisible spacer --><br>
+
+</li><li>
+<span style="color:#ffbf40">Palefur Cloak</span>, <span style="color:#ffbf40">Stoutheart Shawl</span> and <span style="color:#ffbf40">Verix’ Navigator Cloak</span> are now correctly enchantable.
+</li>
+<li>
+Fixed an issue where <span style="color:#ffbf40">Magnetic Band</span> could not be disenchanted.
+</li>
+<li>
+Fixed an issue with <span style="color:#ffbf40">Demon Hair Bow</span> interacting with quivers.
+</li>
+<li>
+<span style="color:#ffbf40">Master Strike (Mace)</span> disorient effect is now cancelled by damage as intended.
+</li>
+<li>
+Fixed an issue where <span style="color:#ffbf40">Echo of Medivh</span> sometimes dropped only one item.
+</li>
+<li>
+Reduced damage of <span style="color:#ffbf40">Wobblefree Fizz‑rifle</span>.
+</li>
+<li>
+Fixed <span style="color:#ffbf40">Arctiras</span> using Frost Nova too often.
+</li>
+<li>
+Quest <span style="color:#ffbf40">Saving the Shadowtooth</span> will now show its rewards.
+</li>
+<li>
+Corrected drop rate for <span style="color:#ffbf40">Iron Pommel</span>.
+</li>
+<li>
+Fixed duplicate‑item issues with the <span style="color:#ffbf40">Beached Sea Creature</span> and <span style="color:#ffbf40">Sea Turtle</span> quests.
+</li>
+<li>
+<span style="color:#ffbf40">Erennius</span> should now always stop attacking after <span style="color:#ffbf40">Solnius</span> dies.
+</li>
+<li>
+It is no longer possible for multiple <span style="color:#ffbf40">Razormane Pathfinders</span> to spawn from the quest item.
+</li>
+<li>
+<span style="color:#ffbf40">Enhancing Winds</span> now properly increases block amount.
+</li>
+<li>
+Adjusted armor values of numerous NPCs in new dungeons and extensions.
+</li>
+<li>
+Fixed <span style="color:#ffbf40">Magicspark Leggings</span> losing their effect upon entering the Blood Ring.
+</li>
+<li>
+<span style="color:#ffbf40">Jarg’ukk</span> can now repair your items.
+</li>
+<li>
+<span style="color:#ffbf40">Concoction of the Emerald Mongoose</span> now grants healing power and spell crit as well.
+</li>
+<li>
+Fixed incorrect disenchant loot for <span style="color:#ffbf40">Grim Reaches</span> quest rewards.
+</li>
+<li>
+You can no longer use the appearance of quest items such as <span style="color:#ffbf40">Egan’s Blaster</span> for transmogrification.
+</li>
+<li>
+<span style="color:#ffbf40">Anubisath Warders</span> now select only two crowd‑control types instead of all possible ones.
+</li>
+<li>
+<span style="color:#ffbf40">Cloudplate Wristguards</span> armor increased from 246 to 346.
+</li>
+<li>
+<span style="color:#ffbf40">Azure Silk Hood</span>: Increased Intellect from 7 → 8, added 7 Frost Spellpower.
+</li>
+<li>
+Fixed an issue that caused <span style="color:#ffbf40">Shield of Baggoth</span> to have more block and less armor than intended.
+</li>
+<li>
+Changed several relics to be unique, matching other relics.
+</li>
+<li>
+Added missing 10 Arcane Resistance to <span style="color:#ffbf40">Judgement Leggings</span> and <span style="color:#ffbf40">Judgement Legguards</span>.
+</li>
+<li>
+Added missing 10 Frost Resistance to <span style="color:#ffbf40">Judgement Helmet</span> and <span style="color:#ffbf40">Judgement Crown</span>.
+</li>
+<li>
+Added missing 10 Fire Resistance to <span style="color:#ffbf40">Judgement Chestguard</span> and <span style="color:#ffbf40">Judgement Chestplate</span>.
+</li>
+<li>
+Added a 10‑minute cooldown to <span style="color:#ffbf40">Shadow‑Weaver’s Cape</span> slow‑fall effect.
+</li>
+<li>
+Fixed the <span style="color:#ffbf40">Rune‑Etched</span> item set not granting its set bonuses.
+</li>
+<li>
+Fixed sheathing for <span style="color:#ffbf40">Spire of Channeled Power</span>.
+</li>
+<li>
+<span style="color:#ffbf40">Horn of Engryss</span>: removed on‑use Thorns effect, increased armor from 15 → 30, added 8 Stamina and 3 Nature Damage Thorns effect.
+</li>
+<li>
+<span style="color:#ffbf40">Jadestone Protector</span>: replaced 3 % Resilience with 1 % Block Chance, increased Defense from 8 → 9.
+</li>
+<li>
+<span style="color:#ffbf40">Thunder Brew Special Reserve</span> no longer disappears after some time.
+</li>
+<li>
+Changed <span style="color:#ffbf40">Darnassus Sentinel Glaive</span>’s weapon type to One‑Handed Sword.
+</li>
+<li>
+<span style="color:#ffbf40">Half Eaten Mutton Chop</span> is now a One‑Handed Mace, allowing transmogrification.
+</li>
+<li>
+Slightly reduced <span style="color:#ffbf40">Stormreaver Fang</span>’s sell price.
+</li>
+<li>
+<span style="color:#ffbf40">Rufus’ Trusty Tankard</span>: reduced DPS from 31.7 → 25.6, reduced Stamina from 8 → 6. Updated disenchant output.
+</li>
+<li>
+<span style="color:#ffbf40">Kinrial’s Scalpel</span>: reduced DPS from 31.6 → 25.6, reduced Strength from 8 → 6, reduced Agility from 7 → 5. Updated disenchant output.
+</li>
+<li>
+<span style="color:#ffbf40">Noppsy’s Compendium</span>: reduced Intellect from 8 → 6. Updated disenchant output.
+</li>
+<li>
+<span style="color:#ffbf40">Nippsy’s Precision Rifle</span>: reduced DPS from 24.7 → 20.7, reduced Agility from 6 → 4, reduced Intellect from 5 → 4. Updated disenchant output.
+</li>
+<li>
+<span style="color:#ffbf40">Ionized Metal Grips</span>: reduced Armor from 152 → 147, reduced Stamina from 6 → 4.
+</li>
+<li>
+Fixed a name typo for <span style="color:#ffbf40">Northwind Guard Breaches</span>.
+</li>
+<li>
+Fixed an issue where <span style="color:#ffbf40">Legacki</span> could become stuck.
+</li>
+<li>
+Fixed an issue where <span style="color:#ffbf40">Poisonous Mushroom</span> dealt more damage than intended.
+</li>
+<li>
+Removed unused <span style="color:#ffbf40">Davingrad’s Camp</span> from the Cartographer achievement requirement.
+</li>
+<li>
+In‑game messages that were previously English‑only can now be localized.
+</li>
+<li>
+<span style="color:#ffbf40">Varimathras</span> will no longer attack players during the quest <span style="color:#ffbf40">To Catch a Rat</span>.
+</li>
+<li>
+<span style="color:#ffbf40">Dark Rider</span> summoned during the quest <span style="color:#ffbf40">Scythe of the Goddess</span> will now despawn when combat ends.
+</li>
+<li>
+<span style="color:#ffbf40">Gloves of Unwinding Mystery</span>: Spellpower lowered from 22 → 9.
+</li>
+<li>
+The mailbox has been added to <span style="color:#ffbf40">Dun Kithas</span>.
+</li>
+<li>
+Players can now acquire another <span style="color:#ffbf40">Orphan Whistle</span> if the original is lost while completing the Children’s Week questline.
+</li>
+<li>
+<span style="color:#ffbf40">Torble Sparksprocket</span> and all associated quests have been removed.
+</li>
+<li>
+Hardcore players can no longer earn XP inside battlegrounds.
+</li>
+<li>
+<span style="color:#ffbf40">Whirlwind</span> can now trigger weapon procs.
+</li>
+<li>
+<span style="color:#ffbf40">Deep Wounds</span> has been fixed to deal the intended amount of damage.
+</li>
+<li>
+Critical damage from <span style="color:#ffbf40">Coordinated Assault</span> can now enable the ability <span style="color:#ffbf40">Baited Shot</span>.
+</li>
+</ul>
+</div>
+<div class="notes">
+<p>Changelog notes</p>
+</div>
+</section>
+<section id="föregående-vecka" class="level1" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/CoT_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h1 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/CoT_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">Föregående vecka</h1>
+<div class="raid-schedule">
+<div class="raid-box">
+<p><strong>Onsdag</strong></p>
+<p>Chill MC</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/mc.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Torsdag</strong></p>
+<p>⭐Kara40</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/returntokara.png" class="img-fluid figure-img"></p>
+<figcaption>19:30</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Fredag</strong></p>
+<p>Blackwing Lair</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/bwl.png" class="img-fluid figure-img"></p>
+<figcaption>20:30</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Lördag</strong></p>
+<p>AQ40</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/aq40.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Söndag</strong></p>
+<p>⭐Kara40</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/returntokara.png" class="img-fluid figure-img"></p>
+<figcaption>19:30</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Måndag</strong></p>
+<p>Chill ZG</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/zg.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Tisdag</strong></p>
+<p>⭐Naxx main</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/naxx.png" class="img-fluid figure-img"></p>
+<figcaption>19:30</figcaption>
+</figure>
+</div>
+<p>Naxx alt</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/naxx.png" class="img-fluid figure-img"></p>
+<figcaption>22:00</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="notes">
+
+</div>
+<section id="tower-of-karazhan" class="level2" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Kara_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h2 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Kara_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5" class="anchored" data-anchor-id="tower-of-karazhan">Tower of Karazhan</h2>
+<div class="notes">
+<p>Kara notes</p>
+</div>
+<div class="columns">
+<div id="raid" class="column" style="font-size:0.55em">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Boss</th>
+<th>Tid</th>
+<th>Wipes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Keeper Gnarlmoon</td>
+<td>&nbsp;&nbsp;&nbsp;18:58 <span class="comp faster">-22:44</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Ley-Watcher Incantagos</td>
+<td>&nbsp;&nbsp;&nbsp;43:39 <span class="comp best">-4:12</span></td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>Anomalus</td>
+<td>1:01:11 <span class="comp best">-1:05:15</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Echo of Medivh</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Chess Event</td>
+<td>2:29:23</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>Sanv Tas’dal</td>
+<td>3:07:13 <span class="comp first"></span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Kruul</td>
+<td>–:–:–</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>Rupturan the Broken</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Mephistroth</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Totalt</td>
+<td>5:00:11</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="height:100%;max-height: 100vh;">
+<div style="display: flex; flex-direction: column; height: 100%; min-height:0;">
+<div id="raid" style="flex: 0 0 auto;">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Huvudräd</td>
+<td>Nytorpa</td>
+<td><a href="https://turtlogs.com/viewer/50507/base" class="log">1</a> <a href="https://turtlogs.com/viewer/51231/base" class="log">2</a></td>
+</tr>
+<tr class="even">
+<td>Tors/Söndag</td>
+<td>19:30-22:00</td>
+<td><a href="https://youtu.be/FIOlYh-4K_Y" class="vod">2</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="raid" style="flex: 1 1 auto;">
+<p>Kara text</p>
+</div>
+<div id="raid" style="flex: 0 0 auto;margin-bottom:90px">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Epics</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>15st</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p></p><table class="loot-table"> <thead> <tr> <th>Loot</th> <th>Karaktär</th> </tr> </thead> <tbody> <tr> <td> <span style="color:#a335ee">[Loop of Infused Renewal]</span> </td> <td>Ailanai</td> </tr> <tr> <td> <span style="color:#a335ee">[Manadrenched Feather Slippers]</span> </td> <td>Ambulans</td> </tr> <tr> <td> <span style="color:#a335ee">[Insomnius' Retribution]</span> </td> <td>Ambulans</td> </tr> <tr> <td> <span style="color:#a335ee">[Branch of Resolute Defense]</span> </td> <td>Cliffholger</td> </tr> </tbody> </table><p></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="temple-of-ahnqiraj" class="level2" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/AQ_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h2 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/AQ_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5" class="anchored" data-anchor-id="temple-of-ahnqiraj">Temple of Ahn’Qiraj</h2>
+<div class="notes">
+<p>AQ notes</p>
+</div>
+<div class="columns">
+<div id="raid" class="column" style="font-size:0.55em">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Boss</th>
+<th>Tid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>The Prophet Skeram</td>
+<td>&nbsp;&nbsp;&nbsp;05:44 <span class="comp best">-2:11</span></td>
+</tr>
+<tr class="even">
+<td>Silithid Royalty</td>
+<td>&nbsp;&nbsp;&nbsp;13:46</td>
+</tr>
+<tr class="odd">
+<td>Battleguard Sartura</td>
+<td>&nbsp;&nbsp;&nbsp;22:18</td>
+</tr>
+<tr class="even">
+<td>Fankriss the Unyielding</td>
+<td>&nbsp;&nbsp;&nbsp;27:22 <span class="comp slower">+0:32</span></td>
+</tr>
+<tr class="odd">
+<td>Viscidus</td>
+<td>&nbsp;&nbsp;&nbsp;31:01</td>
+</tr>
+<tr class="even">
+<td>Princess Huhuran</td>
+<td>&nbsp;&nbsp;&nbsp;38:59</td>
+</tr>
+<tr class="odd">
+<td>Twin Emperors</td>
+<td>&nbsp;&nbsp;&nbsp;51:16 <span class="comp faster">-3:08</span></td>
+</tr>
+<tr class="even">
+<td>Ouro</td>
+<td>1:16:38 <span class="comp slower">+3:29</span></td>
+</tr>
+<tr class="odd">
+<td>C’Thun</td>
+<td>1:32:32 <span class="comp faster">-0:58</span></td>
+</tr>
+<tr class="even">
+<td>Totalt</td>
+<td>1:32:00 <span class="comp faster">-8:00</span></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="height:100%;max-height: 100vh;">
+<div style="display: flex; flex-direction: column; height: 100%; min-height:0;">
+<div id="raid" style="flex: 0 0 auto;">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Extraräd</td>
+<td>Azzco (Coazz)</td>
+<td><a href="https://turtlogs.com/viewer/50930/base" class="log">1</a></td>
+</tr>
+<tr class="even">
+<td>Lördag</td>
+<td>20:00-22:00</td>
+<td><a href="https://youtu.be/Ien8mLBx5vE" class="vod">1</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="raid" style="flex: 1 1 auto;">
+<p>AQ text</p>
+</div>
+<div id="raid" style="flex: 0 0 auto;margin-bottom:90px">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Epics</th>
+<th>Nycklar</th>
+<th>Sages</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>31st</td>
+<td>1st</td>
+<td>1st</td>
+</tr>
+</tbody>
+</table>
+<p></p><table class="loot-table"> <thead> <tr> <th>Loot</th> <th>Karaktär</th> </tr> </thead> <tbody> <tr> <td> <span style="color:#a335ee">[Ring of Emperor Vek'lor]</span> </td> <td>Ailanai</td> </tr> <tr> <td> <span style="color:#a335ee">[Ancient Qiraji Ripper]</span> </td> <td>Amorasmira</td> </tr> <tr> <td> <span style="color:#a335ee">[Huhuran's Stinger]</span> </td> <td>Baldhunter</td> </tr> <tr> <td> <span style="color:#a335ee">[Burrower Bracers]</span> </td> <td>Burklock</td> </tr> </tbody> </table><p></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="blackwing-lair" class="level2" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/BWL_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h2 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/BWL_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5" class="anchored" data-anchor-id="blackwing-lair">Blackwing Lair</h2>
+<div class="notes">
+<p>BWL ntoes</p>
+</div>
+<div class="columns">
+<div id="raid" class="column" style="font-size:0.55em">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Boss</th>
+<th>Tid</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Razorgore the Untamed</td>
+<td>&nbsp;&nbsp;&nbsp;06:51 <span class="comp best">-0:21</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Vaelastrasz the Corrupt</td>
+<td>&nbsp;&nbsp;&nbsp;10:17 <span class="comp best">-0:41</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Broodlord Lashlayer</td>
+<td>&nbsp;&nbsp;&nbsp;24:36 <span class="comp best">-3:05</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Firemaw</td>
+<td>&nbsp;&nbsp;&nbsp;34:11 <span class="comp best">-5:11</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Ebonroc</td>
+<td>&nbsp;&nbsp;&nbsp;47:53 <span class="comp best">-8:36</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Flamegor</td>
+<td>&nbsp;&nbsp;&nbsp;49:35 <span class="comp best">-9:26</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Chromaggus</td>
+<td>&nbsp;&nbsp;&nbsp;57:06 <span class="comp best">-13:40</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Nefarian</td>
+<td>1:07:42 <span class="comp best">-16:12</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="height:100%;max-height: 100vh;">
+<div style="display: flex; flex-direction: column; height: 100%; min-height:0;">
+<div id="raid" style="flex: 0 0 auto;">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Extraräd</td>
+<td>Recin (Icepack)</td>
+<td><a href="https://turtlogs.com/viewer/50708/base" class="log">1</a></td>
+</tr>
+<tr class="even">
+<td>Fredag</td>
+<td>20:30-22:00</td>
+<td><a href="https://youtu.be/QeK2DCCc0vs" class="vod">1</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="raid" style="flex: 1 1 auto;">
+<p>bwl text</p>
+</div>
+<div id="raid" style="flex: 0 0 auto;margin-bottom:90px">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Epics</th>
+<th>Elementium</th>
+<th>Sand</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>34st</td>
+<td>1st</td>
+<td>1st</td>
+</tr>
+</tbody>
+</table>
+<p></p><table class="loot-table"> <thead> <tr> <th>Loot</th> <th>Karaktär</th> </tr> </thead> <tbody> <tr> <td> <span style="color:#a335ee">[Venomous Totem]</span> </td> <td>Amorasmira</td> </tr> <tr> <td> <span style="color:#a335ee">[Head of the Broodlord Lashlayer]</span> </td> <td>Bcop</td> </tr> <tr> <td> <span style="color:#a335ee">[Dragonstalker's Greaves]</span> </td> <td>Beauquietus</td> </tr> <tr> <td> <span style="color:#a335ee">[Stormrage Chestguard]</span> </td> <td>Chubshift</td> </tr> </tbody> </table><p></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="molten-core" class="level2" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/MC_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h2 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/MC_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5" class="anchored" data-anchor-id="molten-core">Molten Core</h2>
+<div class="notes">
+<p>mc notes</p>
+</div>
+<div class="columns">
+<div id="raid" class="column" style="font-size:0.55em">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Boss</th>
+<th>Tid</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Incindis</td>
+<td>&nbsp;&nbsp;&nbsp;30:15</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Lucifron</td>
+<td>&nbsp;&nbsp;&nbsp;34:38</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Magmadar</td>
+<td>&nbsp;&nbsp;&nbsp;38:15</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Twin Golems</td>
+<td>1:08:00</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Sorcerer-Thane Thaurissan</td>
+<td>1:13:46</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Garr</td>
+<td>&nbsp;&nbsp;&nbsp;46:34</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Shazzrah</td>
+<td>&nbsp;&nbsp;&nbsp;56:10</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Baron Geddon</td>
+<td>&nbsp;&nbsp;&nbsp;54:02</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Sulfuron Harbinger</td>
+<td>1:01:14</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Golemagg the Incinerator</td>
+<td>1:05:09</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Majordomo Executus</td>
+<td>1:21:38</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Ragnaros</td>
+<td>1:29:08</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Totalt</td>
+<td>1:32:00 <span class="comp worst">+8:00</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="height:100%;max-height: 100vh;">
+<div style="display: flex; flex-direction: column; height: 100%; min-height:0;">
+<div id="raid" style="flex: 0 0 auto;">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Extraräd</td>
+<td>Boonkers &amp; Pooras</td>
+<td><a href="https://turtlogs.com/viewer/50810/base" class="log">1</a></td>
+</tr>
+<tr class="even">
+<td>Onsdag</td>
+<td>20:00-22:00</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="raid" style="flex: 1 1 auto;">
+<p>mc text</p>
+</div>
+<div id="raid" style="flex: 0 0 auto;margin-bottom:90px">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Epics</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>42st</td>
+</tr>
+</tbody>
+</table>
+<p></p><table class="loot-table"> <thead> <tr> <th>Loot</th> <th>Karaktär</th> </tr> </thead> <tbody> <tr> <td> <span style="color:#ff8000">[Bindings of the Windseeker]</span> </td> <td>Boonkers</td> </tr> <tr> <td> <span style="color:#a335ee">[Onslaught Girdle]</span> </td> <td>Krelle</td> </tr> <tr> <td> <span style="color:#a335ee">[Idol of the Forgotten Wilds]</span> </td> <td>Ailanai</td> </tr> <tr> <td> <span style="color:#a335ee">[Dragonstalker's Legguards]</span> </td> <td>Baldhunter</td> </tr> </tbody> </table><p></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="kommande-vecka" class="level1" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/ToK_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h1 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/ToK_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">Kommande vecka</h1>
+<div class="raid-schedule">
+<div class="raid-box">
+<p><strong>Onsdag</strong></p>
+<p>Chill MC</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/mc.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Torsdag</strong></p>
+<p>⭐Kara40</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/returntokara.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Fredag</strong></p>
+<p>Blackwing Lair</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/bwl.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Lördag</strong></p>
+<p>AQ40</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/aq40.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Söndag</strong></p>
+<p>⭐Kara40</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/returntokara.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Måndag</strong></p>
+<p>Chill ZG</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/zg.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Tisdag</strong></p>
+<p>Naxxramas</p>
+<div class="r-stack">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/naxx.png" class="img-fluid figure-img"></p>
+<figcaption>19:30</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="avslut" class="level1" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Nordanaar_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h1 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Nordanaar_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">Avslut</h1>
+<ul>
+<li>Huvudräder ändrad tid: 20:00-22:00 (start 16:e Oktober)</li>
+<li>Eventuellt att vi drar någon minut extra efter 22:00 om vi tar en paus vid 21:00 mellan våra elixir.</li>
+<li>Avvakta med 2h buffar till vi är vid första bossen. ;D</li>
+</ul>
+<div class="notes">
+<p>Glöm inte bort att vi justerat rädtiderna nu. Eventuellt att vi drar någon minut extra efter 22:00 om vi tar en paus vid 21:00 mellan våra elixir. Avvakta med 2h buffar till vi är vid första bossen. ;D</p>
+</div>
+
+
+</section>
+
+ ]]></description>
+  <guid>https://fika-guild.xyz/veckobladet/V42-2025.html</guid>
+  <pubDate>Tue, 14 Oct 2025 22:00:00 GMT</pubDate>
+  <media:content url="https://res.cloudinary.com/dhmmkvcpy/image/upload/t_250x100/thumb/chess" medium="image"/>
+</item>
+</channel>
+</rss>

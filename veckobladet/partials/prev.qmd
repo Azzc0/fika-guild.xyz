@@ -1,0 +1,67 @@
+# Föregående vecka {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/CoT_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+::: {.notes}
+:::
+
+:::: {.raid-schedule}
+
+::: {.raid-box}
+**Onsdag**
+
+Chill MC
+
+![20:00]({{< meta cdn >}}/raid/mc.png)
+:::
+
+::: {.raid-box}
+**Torsdag**
+
+⭐Kara40
+
+![19:30]({{< meta cdn >}}/raid/returntokara.png)
+:::
+
+::: {.raid-box}
+**Fredag**
+
+Blackwing Lair
+
+![20:30]({{< meta cdn >}}/raid/bwl.png)
+:::
+
+::: {.raid-box}
+**Lördag**
+
+AQ40
+
+![20:00]({{< meta cdn >}}/raid/aq40.png)
+:::
+
+::: {.raid-box}
+**Söndag**
+
+⭐Kara40
+
+![19:30]({{< meta cdn >}}/raid/returntokara.png)
+:::
+
+::: {.raid-box}
+**Måndag**
+
+Chill ZG
+
+![20:00]({{< meta cdn >}}/raid/zg.png)
+:::
+
+::: {.raid-box}
+**Tisdag**
+
+Naxx alt
+
+:::{.r-stack}
+![19:30]({{< meta cdn >}}/raid/naxx.png)
+
+:::
+
+:::
+
+::::

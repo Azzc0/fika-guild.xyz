@@ -1,0 +1,20 @@
+# Private data and scripts
+private/
+data/
+*.RData
+*.sqlite
+*.yaml
+*.yml
+.env
+cdn/
+dev.R
+cdn/
+export/
+_freeze/
+_extensions
+
+# Quarto output
+*.log
+*.tmp
+
+/.quarto/

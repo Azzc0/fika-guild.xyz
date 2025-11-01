@@ -1,0 +1,23 @@
+
+::: {.notes}
+:::
+
+<!-- Use viewport units instead of percentages -->
+::: {style="height: 100vh;"}
+
+![](https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/icons/fika.png){style="position: absolute; top: -5px; left: 50%; transform: translateX(-50%); width: 350px; height: auto; z-index: 3"}
+
+```{r}
+#| echo: false
+#| results: 'asis'
+cat(sprintf('![](https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/intro/%d.jpg){style="position: absolute; top: 35%%; left: 50%%; transform: translate(-50%%, -50%%); width: 800px; height: auto; z-index: 2"}', current_week))
+```
+
+<div style="position: absolute; top: 25px; left: 50%; transform: translateX(-50%); width: 400px; height: 200px; background: black; opacity: 0.6; border-radius: 50%; filter: blur(20px); z-index: 1;"></div>
+
+:::
+
+::: {style="position: absolute; right: -9%; top: -2%; width: 30%; height: 100%; display: flex; flex-direction: column; align-items: center;z-index:3;"}
+![](https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/icons/logo.webp){style="width: 315px; height: auto; margin-top: 30px;"}
+![](https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/icons/tabard.png){style="width: 250px; height: auto; margin-top: -30px;"}
+:::

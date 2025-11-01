@@ -1,0 +1,65 @@
+## Naxxramas {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Naxx_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+
+
+::: {.notes}
+`r kara_notes`
+
+`r kara_session`
+
+`r naxx_session`
+
+`r aq40_session`
+
+`r bwl_session`
+
+`r mc_session`
+
+:::
+
+:::::: {.columns}
+
+::::: {.column width="25%" #raid style="font-size:0.55em"}
+
+
+| Boss | Tid |försök
+|---|---|---
+|Anub|asd|
+|asd|asdasd|
+
+
+
+
+:::::
+
+::::: {.column style="height:100%;max-height: 100vh;"}
+:::: {style="display: flex; flex-direction: column; height: 100%; min-height:0;"}
+::: {#raid style="flex: 0 0 auto;"}
+|   |   |
+|---|---|
+|Huvudräd|Azzco|
+|Torsdag|
+:::
+
+::: {#raid style="flex: 1 1 auto;"}
+
+
+`r kara_text`
+
+
+:::
+
+::: {#raid style="flex: 0 0 auto;margin-bottom:50px"}
+|Epics| Legandaries | Plate Scraps|
+|---|---|---|
+
+
+
+
+
+:::
+
+::::
+
+:::::
+
+::::::

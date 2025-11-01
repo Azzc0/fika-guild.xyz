@@ -1,0 +1,11 @@
+---
+description: "Anomalus gick ned för första gången"
+date: 2025-10-17
+footer: "Veckobladet 43 (2025) - [🏠 Tillbaka till hemsidan](https://your-domain.com)"
+format: 
+  revealjs:
+    title-slide: false
+    theme: veckobladet.scss
+freeze: true
+---
+# V.43 2025 {.no-title background-image="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto/f_auto/t_1920x1080/bgs/mysteries" }

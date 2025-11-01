@@ -1,0 +1,74 @@
+## Blackwing Lair {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/BWL_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+
+
+::: {.notes}
+
+`r bwl_notes`
+
+:::
+
+:::::: {.columns}
+
+::::: {.column width="25%" #raid style="font-size:0.55em"}
+
+
+
+| Boss | Tid `r if (session_has_wipes(bwl_session)) "| Wipes" else ""` |
+|---|---|---
+| Razorgore the Untamed | `r get_boss_time_with_comparison(bwl_session, "Razorgore the Untamed")` | `r get_boss_wipes(bwl_session, "Razorgore the Untamed")` |
+| Vaelastrasz the Corrupt | `r get_boss_time_with_comparison(bwl_session, "Vaelastrasz the Corrupt")` | `r get_boss_wipes(bwl_session, "Vaelastrasz the Corrupt")` |
+| Broodlord Lashlayer | `r get_boss_time_with_comparison(bwl_session, "Broodlord Lashlayer")` | `r get_boss_wipes(bwl_session, "Broodlord Lashlayer")` |
+| Firemaw | `r get_boss_time_with_comparison(bwl_session, "Firemaw")` | `r get_boss_wipes(bwl_session, "Firemaw")` |
+| Ebonroc | `r get_boss_time_with_comparison(bwl_session, "Ebonroc")` | `r get_boss_wipes(bwl_session, "Ebonroc")` |
+| Flamegor | `r get_boss_time_with_comparison(bwl_session, "Flamegor")` | `r get_boss_wipes(bwl_session, "Flamegor")` |
+| Chromaggus | `r get_boss_time_with_comparison(bwl_session, "Chromaggus")` | `r get_boss_wipes(bwl_session, "Chromaggus")` |
+| Nefarian | `r get_boss_time_with_comparison(bwl_session, "Nefarian")` | `r get_boss_wipes(bwl_session, "Nefarian")` |
+
+
+
+:::::
+
+::::: {.column style="height:100%;max-height: 100vh;"}
+:::: {style="display: flex; flex-direction: column; height: 100%; min-height:0;"}
+::: {#raid style="flex: 0 0 auto;"}
+|   |   |`r if (session_has_links(bwl_session)) "   |" else ""`
+|---|---|`r if (session_has_links(bwl_session)) "---|" else ""`
+|Extraräd |Recin (Icepack)| `r get_all_turtlogs_links(bwl_session)`
+|Fredag| 20:30-22:00| `r get_all_vod_links(bwl_session)`
+:::
+
+::: {#raid style="flex: 1 1 auto;"}
+
+
+`r bwl_text`
+
+
+:::
+
+::: {#raid style="flex: 0 0 auto;margin-bottom:90px"}
+
+|Epics| Elementium | Sand|
+|---|---|---|
+|`r get_loot_count_by_rarity(bwl_session, "Epic")`st |`r get_item_count(bwl_session, "Elementium Ore")`st |`r get_item_count(bwl_session, "Hourglass Sand")`st
+
+```{r}
+#| output: asis
+priority_list <- c(
+  "Drake Fang Talsimon",
+  "Rejuvenating Gem", 
+  "Neltharion's Tear"
+)
+exclude_list <- c(
+  "Elementium Ore"
+)
+```
+
+`r create_loot_table(bwl_session, priority_list, max_items = 4)`
+
+:::
+
+::::
+
+:::::
+
+::::::

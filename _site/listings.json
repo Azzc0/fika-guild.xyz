@@ -1,0 +1,25 @@
+[
+  {
+    "listing": "/news.html",
+    "items": [
+      "/news/test.html"
+    ]
+  },
+  {
+    "listing": "/veckobladet.html",
+    "items": [
+      "/veckobladet/V43-2025.html",
+      "/veckobladet/V41-2025.html",
+      "/veckobladet/V42-2025.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/veckobladet/V43-2025.html",
+      "/veckobladet/V41-2025.html",
+      "/veckobladet/V42-2025.html",
+      "/news/test.html"
+    ]
+  }
+]

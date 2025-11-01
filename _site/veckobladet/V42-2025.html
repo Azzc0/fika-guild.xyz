@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2025-10-15">
+<meta name="description" content="Schackmatt">
+
+<title>v42-2025 – Fika</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-ab57165ed3f3ef9ee41419c243f1f2ae.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-747848a529f0d4daf6f2affccbbd3587.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-ab57165ed3f3ef9ee41419c243f1f2ae.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const queryPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkModeDefault = queryPrefersDark.matches;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    queryPrefersDark.addEventListener("change", e => {
+      if(window.localStorage.getItem("quarto-color-scheme") !== null)
+        return;
+      const alternate = e.matches
+      toggleColorMode(alternate);
+      localAlternateSentinel = e.matches ? 'alternate' : 'default'; // this is used alongside local storage!
+      toggleGiscusIfUsed(alternate, darkModeDefault);
+    });
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/c_crop,x_23,y_87,w_85,h_85/icons/fika.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Fika</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Hem</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../raidweek.html"> 
+<span class="menu-text">Räder</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-nyheter" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Nyheter</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-nyheter">    
+        <li>
+    <a class="dropdown-item" href="../news.html">
+ <span class="dropdown-text">Allmänt</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../veckobladet.html">
+ <span class="dropdown-text">Veckobladet</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-resurser" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-info-circle" role="img">
+</i> 
+ <span class="menu-text">Resurser</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-resurser">    
+        <li>
+    <a class="dropdown-item" href="../enchants.html">
+ <span class="dropdown-text">Enchants</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../consumables.html">
+ <span class="dropdown-text">Förnödenheter</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-regler" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-paragraph" role="img">
+</i> 
+ <span class="menu-text">Regler</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-regler">    
+        <li>
+    <a class="dropdown-item" href="../rules.html">
+ <span class="dropdown-text">Fika guild</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../raidrules.html">
+ <span class="dropdown-text">Räder</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://discord.gg/Dx8KBHZASG"> <i class="bi bi-discord" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#v.42-2025" id="toc-v.42-2025" class="nav-link active" data-scroll-target="#v.42-2025">V.42 2025</a></li>
+  <li><a href="#changelog" id="toc-changelog" class="nav-link" data-scroll-target="#changelog">Changelog</a></li>
+  <li><a href="#föregående-vecka" id="toc-föregående-vecka" class="nav-link" data-scroll-target="#föregående-vecka">Föregående vecka</a>
+  <ul class="collapse">
+  <li><a href="#tower-of-karazhan" id="toc-tower-of-karazhan" class="nav-link" data-scroll-target="#tower-of-karazhan">Tower of Karazhan</a></li>
+  <li><a href="#temple-of-ahnqiraj" id="toc-temple-of-ahnqiraj" class="nav-link" data-scroll-target="#temple-of-ahnqiraj">Temple of Ahn’Qiraj</a></li>
+  <li><a href="#blackwing-lair" id="toc-blackwing-lair" class="nav-link" data-scroll-target="#blackwing-lair">Blackwing Lair</a></li>
+  <li><a href="#molten-core" id="toc-molten-core" class="nav-link" data-scroll-target="#molten-core">Molten Core</a></li>
+  </ul></li>
+  <li><a href="#kommande-vecka" id="toc-kommande-vecka" class="nav-link" data-scroll-target="#kommande-vecka">Kommande vecka</a></li>
+  <li><a href="#avslut" id="toc-avslut" class="nav-link" data-scroll-target="#avslut">Avslut</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="V42-2025.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+</div>
+
+<div>
+  <div class="description">
+    Schackmatt
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 15, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="v.42-2025" class="level1 no-title" data-background-image="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto/f_auto/t_1920x1080/bgs/mysteries">
+<h1 class="no-title" data-background-image="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto/f_auto/t_1920x1080/bgs/mysteries">V.42 2025</h1>
+<div class="notes">
+
+</div>
+<!-- Use viewport units instead of percentages -->
+<div style="height: 100vh;">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/icons/fika.png" class="img-fluid" style="position: absolute; top: -5px; left: 50%; transform: translateX(-50%); width: 350px; height: auto; z-index: 3"></p>
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/intro/42.jpg" class="img-fluid" style="position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%); width: 800px; height: auto; z-index: 2"></p>
+<div style="position: absolute; top: 25px; left: 50%; transform: translateX(-50%); width: 400px; height: 200px; background: black; opacity: 0.6; border-radius: 50%; filter: blur(20px); z-index: 1;">
+
+</div>
+</div>
+<div style="position: absolute; right: -9%; top: -2%; width: 30%; height: 100%; display: flex; flex-direction: column; align-items: center;z-index:3;">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/icons/logo.webp" class="img-fluid" style="width: 315px; height: auto; margin-top: 30px;"> <img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/icons/tabard.png" class="img-fluid" style="width: 250px; height: auto; margin-top: -30px;"></p>
+</div>
+<div class="notes">
+<p>Då var det onsdag och dags för veckobladet i vanlig ordning. denna veckan fick vi en uppdatering till måndagen istället för till onsdagen.</p>
+<p>Vi har haft ett officermöte och lite detaljer ifrån det tar vi mot slutet.</p>
+</div>
+</section>
+<section id="changelog" class="level1" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Library_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h1 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Library_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">Changelog</h1>
+<div class="patch-notes auto-rotator">
+<!-- Ctrl+h remove regular expression </?(ul|div)> Also replace the first <li> with "- " to get the bullets to work properly. -->
+<ul>
+<li>&nbsp; <!-- Invisible spacer --></li>
+<li>&nbsp; <!-- Invisible spacer --><br>
+</li>
+<li>&nbsp; <!-- Invisible spacer --></li>
+<li>&nbsp; <!-- Invisible spacer --><br>
+</li>
+<li>&nbsp; <!-- Invisible spacer --></li>
+<li>&nbsp; <!-- Invisible spacer --><br>
+</li>
+<li>&nbsp; <!-- Invisible spacer --></li>
+<li>&nbsp; <!-- Invisible spacer --><br>
+</li>
+<li>&nbsp; <!-- Invisible spacer --></li>
+<li>&nbsp; <!-- Invisible spacer --><br>
+
+</li><li>
+<span style="color:#ffbf40">Palefur Cloak</span>, <span style="color:#ffbf40">Stoutheart Shawl</span> and <span style="color:#ffbf40">Verix’ Navigator Cloak</span> are now correctly enchantable.
+</li>
+<li>
+Fixed an issue where <span style="color:#ffbf40">Magnetic Band</span> could not be disenchanted.
+</li>
+<li>
+Fixed an issue with <span style="color:#ffbf40">Demon Hair Bow</span> interacting with quivers.
+</li>
+<li>
+<span style="color:#ffbf40">Master Strike (Mace)</span> disorient effect is now cancelled by damage as intended.
+</li>
+<li>
+Fixed an issue where <span style="color:#ffbf40">Echo of Medivh</span> sometimes dropped only one item.
+</li>
+<li>
+Reduced damage of <span style="color:#ffbf40">Wobblefree Fizz‑rifle</span>.
+</li>
+<li>
+Fixed <span style="color:#ffbf40">Arctiras</span> using Frost Nova too often.
+</li>
+<li>
+Quest <span style="color:#ffbf40">Saving the Shadowtooth</span> will now show its rewards.
+</li>
+<li>
+Corrected drop rate for <span style="color:#ffbf40">Iron Pommel</span>.
+</li>
+<li>
+Fixed duplicate‑item issues with the <span style="color:#ffbf40">Beached Sea Creature</span> and <span style="color:#ffbf40">Sea Turtle</span> quests.
+</li>
+<li>
+<span style="color:#ffbf40">Erennius</span> should now always stop attacking after <span style="color:#ffbf40">Solnius</span> dies.
+</li>
+<li>
+It is no longer possible for multiple <span style="color:#ffbf40">Razormane Pathfinders</span> to spawn from the quest item.
+</li>
+<li>
+<span style="color:#ffbf40">Enhancing Winds</span> now properly increases block amount.
+</li>
+<li>
+Adjusted armor values of numerous NPCs in new dungeons and extensions.
+</li>
+<li>
+Fixed <span style="color:#ffbf40">Magicspark Leggings</span> losing their effect upon entering the Blood Ring.
+</li>
+<li>
+<span style="color:#ffbf40">Jarg’ukk</span> can now repair your items.
+</li>
+<li>
+<span style="color:#ffbf40">Concoction of the Emerald Mongoose</span> now grants healing power and spell crit as well.
+</li>
+<li>
+Fixed incorrect disenchant loot for <span style="color:#ffbf40">Grim Reaches</span> quest rewards.
+</li>
+<li>
+You can no longer use the appearance of quest items such as <span style="color:#ffbf40">Egan’s Blaster</span> for transmogrification.
+</li>
+<li>
+<span style="color:#ffbf40">Anubisath Warders</span> now select only two crowd‑control types instead of all possible ones.
+</li>
+<li>
+<span style="color:#ffbf40">Cloudplate Wristguards</span> armor increased from 246 to 346.
+</li>
+<li>
+<span style="color:#ffbf40">Azure Silk Hood</span>: Increased Intellect from 7 → 8, added 7 Frost Spellpower.
+</li>
+<li>
+Fixed an issue that caused <span style="color:#ffbf40">Shield of Baggoth</span> to have more block and less armor than intended.
+</li>
+<li>
+Changed several relics to be unique, matching other relics.
+</li>
+<li>
+Added missing 10 Arcane Resistance to <span style="color:#ffbf40">Judgement Leggings</span> and <span style="color:#ffbf40">Judgement Legguards</span>.
+</li>
+<li>
+Added missing 10 Frost Resistance to <span style="color:#ffbf40">Judgement Helmet</span> and <span style="color:#ffbf40">Judgement Crown</span>.
+</li>
+<li>
+Added missing 10 Fire Resistance to <span style="color:#ffbf40">Judgement Chestguard</span> and <span style="color:#ffbf40">Judgement Chestplate</span>.
+</li>
+<li>
+Added a 10‑minute cooldown to <span style="color:#ffbf40">Shadow‑Weaver’s Cape</span> slow‑fall effect.
+</li>
+<li>
+Fixed the <span style="color:#ffbf40">Rune‑Etched</span> item set not granting its set bonuses.
+</li>
+<li>
+Fixed sheathing for <span style="color:#ffbf40">Spire of Channeled Power</span>.
+</li>
+<li>
+<span style="color:#ffbf40">Horn of Engryss</span>: removed on‑use Thorns effect, increased armor from 15 → 30, added 8 Stamina and 3 Nature Damage Thorns effect.
+</li>
+<li>
+<span style="color:#ffbf40">Jadestone Protector</span>: replaced 3 % Resilience with 1 % Block Chance, increased Defense from 8 → 9.
+</li>
+<li>
+<span style="color:#ffbf40">Thunder Brew Special Reserve</span> no longer disappears after some time.
+</li>
+<li>
+Changed <span style="color:#ffbf40">Darnassus Sentinel Glaive</span>’s weapon type to One‑Handed Sword.
+</li>
+<li>
+<span style="color:#ffbf40">Half Eaten Mutton Chop</span> is now a One‑Handed Mace, allowing transmogrification.
+</li>
+<li>
+Slightly reduced <span style="color:#ffbf40">Stormreaver Fang</span>’s sell price.
+</li>
+<li>
+<span style="color:#ffbf40">Rufus’ Trusty Tankard</span>: reduced DPS from 31.7 → 25.6, reduced Stamina from 8 → 6. Updated disenchant output.
+</li>
+<li>
+<span style="color:#ffbf40">Kinrial’s Scalpel</span>: reduced DPS from 31.6 → 25.6, reduced Strength from 8 → 6, reduced Agility from 7 → 5. Updated disenchant output.
+</li>
+<li>
+<span style="color:#ffbf40">Noppsy’s Compendium</span>: reduced Intellect from 8 → 6. Updated disenchant output.
+</li>
+<li>
+<span style="color:#ffbf40">Nippsy’s Precision Rifle</span>: reduced DPS from 24.7 → 20.7, reduced Agility from 6 → 4, reduced Intellect from 5 → 4. Updated disenchant output.
+</li>
+<li>
+<span style="color:#ffbf40">Ionized Metal Grips</span>: reduced Armor from 152 → 147, reduced Stamina from 6 → 4.
+</li>
+<li>
+Fixed a name typo for <span style="color:#ffbf40">Northwind Guard Breaches</span>.
+</li>
+<li>
+Fixed an issue where <span style="color:#ffbf40">Legacki</span> could become stuck.
+</li>
+<li>
+Fixed an issue where <span style="color:#ffbf40">Poisonous Mushroom</span> dealt more damage than intended.
+</li>
+<li>
+Removed unused <span style="color:#ffbf40">Davingrad’s Camp</span> from the Cartographer achievement requirement.
+</li>
+<li>
+In‑game messages that were previously English‑only can now be localized.
+</li>
+<li>
+<span style="color:#ffbf40">Varimathras</span> will no longer attack players during the quest <span style="color:#ffbf40">To Catch a Rat</span>.
+</li>
+<li>
+<span style="color:#ffbf40">Dark Rider</span> summoned during the quest <span style="color:#ffbf40">Scythe of the Goddess</span> will now despawn when combat ends.
+</li>
+<li>
+<span style="color:#ffbf40">Gloves of Unwinding Mystery</span>: Spellpower lowered from 22 → 9.
+</li>
+<li>
+The mailbox has been added to <span style="color:#ffbf40">Dun Kithas</span>.
+</li>
+<li>
+Players can now acquire another <span style="color:#ffbf40">Orphan Whistle</span> if the original is lost while completing the Children’s Week questline.
+</li>
+<li>
+<span style="color:#ffbf40">Torble Sparksprocket</span> and all associated quests have been removed.
+</li>
+<li>
+Hardcore players can no longer earn XP inside battlegrounds.
+</li>
+<li>
+<span style="color:#ffbf40">Whirlwind</span> can now trigger weapon procs.
+</li>
+<li>
+<span style="color:#ffbf40">Deep Wounds</span> has been fixed to deal the intended amount of damage.
+</li>
+<li>
+Critical damage from <span style="color:#ffbf40">Coordinated Assault</span> can now enable the ability <span style="color:#ffbf40">Baited Shot</span>.
+</li>
+</ul>
+</div>
+<div class="notes">
+<p>Changelog notes</p>
+</div>
+</section>
+<section id="föregående-vecka" class="level1" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/CoT_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h1 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/CoT_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">Föregående vecka</h1>
+<div class="raid-schedule">
+<div class="raid-box">
+<p><strong>Onsdag</strong></p>
+<p>Chill MC</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/mc.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Torsdag</strong></p>
+<p>⭐Kara40</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/returntokara.png" class="img-fluid figure-img"></p>
+<figcaption>19:30</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Fredag</strong></p>
+<p>Blackwing Lair</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/bwl.png" class="img-fluid figure-img"></p>
+<figcaption>20:30</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Lördag</strong></p>
+<p>AQ40</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/aq40.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Söndag</strong></p>
+<p>⭐Kara40</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/returntokara.png" class="img-fluid figure-img"></p>
+<figcaption>19:30</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Måndag</strong></p>
+<p>Chill ZG</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/zg.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Tisdag</strong></p>
+<p>⭐Naxx main</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/naxx.png" class="img-fluid figure-img"></p>
+<figcaption>19:30</figcaption>
+</figure>
+</div>
+<p>Naxx alt</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/naxx.png" class="img-fluid figure-img"></p>
+<figcaption>22:00</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="notes">
+
+</div>
+<section id="tower-of-karazhan" class="level2" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Kara_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h2 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Kara_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5" class="anchored" data-anchor-id="tower-of-karazhan">Tower of Karazhan</h2>
+<div class="notes">
+<p>Kara notes</p>
+</div>
+<div class="columns">
+<div id="raid" class="column" style="font-size:0.55em">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Boss</th>
+<th>Tid</th>
+<th>Wipes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Keeper Gnarlmoon</td>
+<td>&nbsp;&nbsp;&nbsp;18:58 <span class="comp faster">-22:44</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Ley-Watcher Incantagos</td>
+<td>&nbsp;&nbsp;&nbsp;43:39 <span class="comp best">-4:12</span></td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>Anomalus</td>
+<td>1:01:11 <span class="comp best">-1:05:15</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Echo of Medivh</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Chess Event</td>
+<td>2:29:23</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>Sanv Tas’dal</td>
+<td>3:07:13 <span class="comp first"></span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Kruul</td>
+<td>–:–:–</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>Rupturan the Broken</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Mephistroth</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Totalt</td>
+<td>5:00:11</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="height:100%;max-height: 100vh;">
+<div style="display: flex; flex-direction: column; height: 100%; min-height:0;">
+<div id="raid" style="flex: 0 0 auto;">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Huvudräd</td>
+<td>Nytorpa</td>
+<td><a href="https://turtlogs.com/viewer/50507/base" class="log">1</a> <a href="https://turtlogs.com/viewer/51231/base" class="log">2</a></td>
+</tr>
+<tr class="even">
+<td>Tors/Söndag</td>
+<td>19:30-22:00</td>
+<td><a href="https://youtu.be/FIOlYh-4K_Y" class="vod">2</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="raid" style="flex: 1 1 auto;">
+<p>Kara text</p>
+</div>
+<div id="raid" style="flex: 0 0 auto;margin-bottom:90px">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Epics</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>15st</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p></p><table class="loot-table"> <thead> <tr> <th>Loot</th> <th>Karaktär</th> </tr> </thead> <tbody> <tr> <td> <span style="color:#a335ee">[Loop of Infused Renewal]</span> </td> <td>Ailanai</td> </tr> <tr> <td> <span style="color:#a335ee">[Manadrenched Feather Slippers]</span> </td> <td>Ambulans</td> </tr> <tr> <td> <span style="color:#a335ee">[Insomnius' Retribution]</span> </td> <td>Ambulans</td> </tr> <tr> <td> <span style="color:#a335ee">[Branch of Resolute Defense]</span> </td> <td>Cliffholger</td> </tr> </tbody> </table><p></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="temple-of-ahnqiraj" class="level2" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/AQ_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h2 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/AQ_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5" class="anchored" data-anchor-id="temple-of-ahnqiraj">Temple of Ahn’Qiraj</h2>
+<div class="notes">
+<p>AQ notes</p>
+</div>
+<div class="columns">
+<div id="raid" class="column" style="font-size:0.55em">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Boss</th>
+<th>Tid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>The Prophet Skeram</td>
+<td>&nbsp;&nbsp;&nbsp;05:44 <span class="comp best">-2:11</span></td>
+</tr>
+<tr class="even">
+<td>Silithid Royalty</td>
+<td>&nbsp;&nbsp;&nbsp;13:46</td>
+</tr>
+<tr class="odd">
+<td>Battleguard Sartura</td>
+<td>&nbsp;&nbsp;&nbsp;22:18</td>
+</tr>
+<tr class="even">
+<td>Fankriss the Unyielding</td>
+<td>&nbsp;&nbsp;&nbsp;27:22 <span class="comp slower">+0:32</span></td>
+</tr>
+<tr class="odd">
+<td>Viscidus</td>
+<td>&nbsp;&nbsp;&nbsp;31:01</td>
+</tr>
+<tr class="even">
+<td>Princess Huhuran</td>
+<td>&nbsp;&nbsp;&nbsp;38:59</td>
+</tr>
+<tr class="odd">
+<td>Twin Emperors</td>
+<td>&nbsp;&nbsp;&nbsp;51:16 <span class="comp faster">-3:08</span></td>
+</tr>
+<tr class="even">
+<td>Ouro</td>
+<td>1:16:38 <span class="comp slower">+3:29</span></td>
+</tr>
+<tr class="odd">
+<td>C’Thun</td>
+<td>1:32:32 <span class="comp faster">-0:58</span></td>
+</tr>
+<tr class="even">
+<td>Totalt</td>
+<td>1:32:00 <span class="comp faster">-8:00</span></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="height:100%;max-height: 100vh;">
+<div style="display: flex; flex-direction: column; height: 100%; min-height:0;">
+<div id="raid" style="flex: 0 0 auto;">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Extraräd</td>
+<td>Azzco (Coazz)</td>
+<td><a href="https://turtlogs.com/viewer/50930/base" class="log">1</a></td>
+</tr>
+<tr class="even">
+<td>Lördag</td>
+<td>20:00-22:00</td>
+<td><a href="https://youtu.be/Ien8mLBx5vE" class="vod">1</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="raid" style="flex: 1 1 auto;">
+<p>AQ text</p>
+</div>
+<div id="raid" style="flex: 0 0 auto;margin-bottom:90px">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Epics</th>
+<th>Nycklar</th>
+<th>Sages</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>31st</td>
+<td>1st</td>
+<td>1st</td>
+</tr>
+</tbody>
+</table>
+<p></p><table class="loot-table"> <thead> <tr> <th>Loot</th> <th>Karaktär</th> </tr> </thead> <tbody> <tr> <td> <span style="color:#a335ee">[Ring of Emperor Vek'lor]</span> </td> <td>Ailanai</td> </tr> <tr> <td> <span style="color:#a335ee">[Ancient Qiraji Ripper]</span> </td> <td>Amorasmira</td> </tr> <tr> <td> <span style="color:#a335ee">[Huhuran's Stinger]</span> </td> <td>Baldhunter</td> </tr> <tr> <td> <span style="color:#a335ee">[Burrower Bracers]</span> </td> <td>Burklock</td> </tr> </tbody> </table><p></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="blackwing-lair" class="level2" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/BWL_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h2 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/BWL_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5" class="anchored" data-anchor-id="blackwing-lair">Blackwing Lair</h2>
+<div class="notes">
+<p>BWL ntoes</p>
+</div>
+<div class="columns">
+<div id="raid" class="column" style="font-size:0.55em">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Boss</th>
+<th>Tid</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Razorgore the Untamed</td>
+<td>&nbsp;&nbsp;&nbsp;06:51 <span class="comp best">-0:21</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Vaelastrasz the Corrupt</td>
+<td>&nbsp;&nbsp;&nbsp;10:17 <span class="comp best">-0:41</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Broodlord Lashlayer</td>
+<td>&nbsp;&nbsp;&nbsp;24:36 <span class="comp best">-3:05</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Firemaw</td>
+<td>&nbsp;&nbsp;&nbsp;34:11 <span class="comp best">-5:11</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Ebonroc</td>
+<td>&nbsp;&nbsp;&nbsp;47:53 <span class="comp best">-8:36</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Flamegor</td>
+<td>&nbsp;&nbsp;&nbsp;49:35 <span class="comp best">-9:26</span></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Chromaggus</td>
+<td>&nbsp;&nbsp;&nbsp;57:06 <span class="comp best">-13:40</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Nefarian</td>
+<td>1:07:42 <span class="comp best">-16:12</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="height:100%;max-height: 100vh;">
+<div style="display: flex; flex-direction: column; height: 100%; min-height:0;">
+<div id="raid" style="flex: 0 0 auto;">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Extraräd</td>
+<td>Recin (Icepack)</td>
+<td><a href="https://turtlogs.com/viewer/50708/base" class="log">1</a></td>
+</tr>
+<tr class="even">
+<td>Fredag</td>
+<td>20:30-22:00</td>
+<td><a href="https://youtu.be/QeK2DCCc0vs" class="vod">1</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="raid" style="flex: 1 1 auto;">
+<p>bwl text</p>
+</div>
+<div id="raid" style="flex: 0 0 auto;margin-bottom:90px">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Epics</th>
+<th>Elementium</th>
+<th>Sand</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>34st</td>
+<td>1st</td>
+<td>1st</td>
+</tr>
+</tbody>
+</table>
+<p></p><table class="loot-table"> <thead> <tr> <th>Loot</th> <th>Karaktär</th> </tr> </thead> <tbody> <tr> <td> <span style="color:#a335ee">[Venomous Totem]</span> </td> <td>Amorasmira</td> </tr> <tr> <td> <span style="color:#a335ee">[Head of the Broodlord Lashlayer]</span> </td> <td>Bcop</td> </tr> <tr> <td> <span style="color:#a335ee">[Dragonstalker's Greaves]</span> </td> <td>Beauquietus</td> </tr> <tr> <td> <span style="color:#a335ee">[Stormrage Chestguard]</span> </td> <td>Chubshift</td> </tr> </tbody> </table><p></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="molten-core" class="level2" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/MC_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h2 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/MC_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5" class="anchored" data-anchor-id="molten-core">Molten Core</h2>
+<div class="notes">
+<p>mc notes</p>
+</div>
+<div class="columns">
+<div id="raid" class="column" style="font-size:0.55em">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Boss</th>
+<th>Tid</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Incindis</td>
+<td>&nbsp;&nbsp;&nbsp;30:15</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Lucifron</td>
+<td>&nbsp;&nbsp;&nbsp;34:38</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Magmadar</td>
+<td>&nbsp;&nbsp;&nbsp;38:15</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Twin Golems</td>
+<td>1:08:00</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Sorcerer-Thane Thaurissan</td>
+<td>1:13:46</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Garr</td>
+<td>&nbsp;&nbsp;&nbsp;46:34</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Shazzrah</td>
+<td>&nbsp;&nbsp;&nbsp;56:10</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Baron Geddon</td>
+<td>&nbsp;&nbsp;&nbsp;54:02</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Sulfuron Harbinger</td>
+<td>1:01:14</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Golemagg the Incinerator</td>
+<td>1:05:09</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Majordomo Executus</td>
+<td>1:21:38</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Ragnaros</td>
+<td>1:29:08</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Totalt</td>
+<td>1:32:00 <span class="comp worst">+8:00</span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="height:100%;max-height: 100vh;">
+<div style="display: flex; flex-direction: column; height: 100%; min-height:0;">
+<div id="raid" style="flex: 0 0 auto;">
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td>Extraräd</td>
+<td>Boonkers &amp; Pooras</td>
+<td><a href="https://turtlogs.com/viewer/50810/base" class="log">1</a></td>
+</tr>
+<tr class="even">
+<td>Onsdag</td>
+<td>20:00-22:00</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="raid" style="flex: 1 1 auto;">
+<p>mc text</p>
+</div>
+<div id="raid" style="flex: 0 0 auto;margin-bottom:90px">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Epics</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>42st</td>
+</tr>
+</tbody>
+</table>
+<p></p><table class="loot-table"> <thead> <tr> <th>Loot</th> <th>Karaktär</th> </tr> </thead> <tbody> <tr> <td> <span style="color:#ff8000">[Bindings of the Windseeker]</span> </td> <td>Boonkers</td> </tr> <tr> <td> <span style="color:#a335ee">[Onslaught Girdle]</span> </td> <td>Krelle</td> </tr> <tr> <td> <span style="color:#a335ee">[Idol of the Forgotten Wilds]</span> </td> <td>Ailanai</td> </tr> <tr> <td> <span style="color:#a335ee">[Dragonstalker's Legguards]</span> </td> <td>Baldhunter</td> </tr> </tbody> </table><p></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="kommande-vecka" class="level1" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/ToK_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h1 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/ToK_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">Kommande vecka</h1>
+<div class="raid-schedule">
+<div class="raid-box">
+<p><strong>Onsdag</strong></p>
+<p>Chill MC</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/mc.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Torsdag</strong></p>
+<p>⭐Kara40</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/returntokara.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Fredag</strong></p>
+<p>Blackwing Lair</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/bwl.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Lördag</strong></p>
+<p>AQ40</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/aq40.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Söndag</strong></p>
+<p>⭐Kara40</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/returntokara.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Måndag</strong></p>
+<p>Chill ZG</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/zg.png" class="img-fluid figure-img"></p>
+<figcaption>20:00</figcaption>
+</figure>
+</div>
+</div>
+<div class="raid-box">
+<p><strong>Tisdag</strong></p>
+<p>Naxxramas</p>
+<div class="r-stack">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/naxx.png" class="img-fluid figure-img"></p>
+<figcaption>19:30</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="avslut" class="level1" data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Nordanaar_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">
+<h1 data-background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Nordanaar_bg.mp4" data-background-video-loop="true" preload="auto" data-background-video-muted="true" data-background-opacity="0.5">Avslut</h1>
+<ul>
+<li>Huvudräder ändrad tid: 20:00-22:00 (start 16:e Oktober)</li>
+<li>Eventuellt att vi drar någon minut extra efter 22:00 om vi tar en paus vid 21:00 mellan våra elixir.</li>
+<li>Avvakta med 2h buffar till vi är vid första bossen. ;D</li>
+</ul>
+<div class="notes">
+<p>Glöm inte bort att vi justerat rädtiderna nu. Eventuellt att vi drar någon minut extra efter 22:00 om vi tar en paus vid 21:00 mellan våra elixir. Avvakta med 2h buffar till vi är vid första bossen. ;D</p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+
+<script>
+  // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+  // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+  // slide changes (different for each slide format).
+  (function () {
+    // dispatch for htmlwidgets
+    function fireSlideEnter() {
+      const event = window.document.createEvent("Event");
+      event.initEvent("slideenter", true, true);
+      window.document.dispatchEvent(event);
+    }
+
+    function fireSlideChanged(previousSlide, currentSlide) {
+      fireSlideEnter();
+
+      // dispatch for shiny
+      if (window.jQuery) {
+        if (previousSlide) {
+          window.jQuery(previousSlide).trigger("hidden");
+        }
+        if (currentSlide) {
+          window.jQuery(currentSlide).trigger("shown");
+        }
+      }
+    }
+
+    // hookup for slidy
+    if (window.w3c_slidy) {
+      window.w3c_slidy.add_observer(function (slide_num) {
+        // slide_num starts at position 1
+        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+      });
+    }
+
+  })();
+</script>
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/fika-guild\.xyz");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+accordion.html
+
+
+
+
+</body></html>

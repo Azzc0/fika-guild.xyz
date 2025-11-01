@@ -1,0 +1,71 @@
+## Temple of Ahn'Qiraj {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/AQ_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+
+
+::: {.notes}
+
+`r aq_notes`
+
+:::
+
+:::::: {.columns}
+
+::::: {.column width="25%" #raid style="font-size:0.55em"}
+
+
+
+| Boss | Tid `r if (session_has_wipes(aq40_session)) "Wipes" else ""` |
+|---|---|
+| The Prophet Skeram | `r get_boss_time_with_comparison(aq40_session, "The Prophet Skeram")` | `r get_boss_wipes(aq40_session, "The Prophet Skeram")` |
+| Silithid Royalty | `r get_boss_time(aq40_session, "Silithid Royalty")` | `r get_boss_wipes(aq40_session, "Silithid Royalty")` |
+| Battleguard Sartura | `r get_boss_time(aq40_session, "Battleguard Sartura")` | `r get_boss_wipes(aq40_session, "Battleguard Sartura")` |
+| Fankriss the Unyielding | `r get_boss_time_with_comparison(aq40_session, "Fankriss the Unyielding", "Princess Huhuran")` | `r get_boss_wipes(aq40_session, "Fankriss the Unyielding")` |
+| Viscidus | `r get_boss_time(aq40_session, "Viscidus")` | `r get_boss_wipes(aq40_session, "Viscidus")` |
+| Princess Huhuran | `r get_boss_time(aq40_session, "Princess Huhuran")` | `r get_boss_wipes(aq40_session, "Princess Huhuran")` |
+| Twin Emperors | `r get_boss_time_with_comparison(aq40_session, "Twin Emperors", "Princess Huhuran")` | `r get_boss_wipes(aq40_session, "Twin Emperors")` |
+| Ouro | `r get_boss_time_with_comparison(aq40_session, "Ouro", "Princess Huhuran")` | `r get_boss_wipes(aq40_session, "Ouro")` |
+| C'Thun | `r get_boss_time_with_comparison(aq40_session, "C'Thun", "Princess Huhuran")` | `r get_boss_wipes(aq40_session, "C'Thun")` |
+| Totalt | `r get_raid_duration_with_comparison(aq40_session)` | |
+
+
+
+
+:::::
+
+::::: {.column style="height:100%;max-height: 100vh;"}
+:::: {style="display: flex; flex-direction: column; height: 100%; min-height:0;"}
+::: {#raid style="flex: 0 0 auto;"}
+|   |   |`r if (session_has_links(aq40_session)) "   |" else ""`
+|---|---|`r if (session_has_links(aq40_session)) "---|" else ""`
+|Extraräd |Azzco (Coazz)|`r get_all_turtlogs_links(aq40_session)`
+|Lördag| 20:00-22:00|`r get_all_vod_links(aq40_session)`
+:::
+
+::: {#raid style="flex: 1 1 auto;"}
+
+`r aq_text`
+
+:::
+
+::: {#raid style="flex: 0 0 auto;margin-bottom:90px"}
+|Epics| Nycklar | Sages|
+|---|---|---|
+|`r get_loot_count_by_rarity(aq40_session, "Epic")`st |`r get_item_count(aq40_session, "Greater Scarab Coffer Key")`st |`r get_item_count(aq40_session, "Idol of the Sage")`st
+
+```{r}
+#| output: asis
+priority_list <- c(
+    "Base of Atiesh"
+)
+exclude_list <- c(
+)
+```
+
+`r create_loot_table(aq40_session, priority_list, max_items = 4)`
+
+:::
+
+::::
+
+:::::
+
+::::::

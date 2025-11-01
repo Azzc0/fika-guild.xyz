@@ -1,0 +1,19 @@
+---
+title: "Räder kommande vecka"
+page-layout: full
+toc: false
+---
+
+```{=html}
+<div class="raid-week" id="raidSchedule">
+    <!-- Content populated by JavaScript -->
+</div>
+<script type="module" src="mock-data.js"></script>
+<script type="module" src="raid-schedule.js"></script>
+```
+Ovan ser du de räder som ligger på schemat för <Fika>.
+
+## Vad händer innan räden
+Strax en timme innan räd tittar klassledare och officers på grupperna, halvtimme innan räden försöker vi vara klara med detta och skicka ut aktuell comp i samma kanal som signupen. Därefter börjar vi med invites.
+
+När klockan är 

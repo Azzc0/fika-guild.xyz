@@ -1,0 +1,15 @@
+---
+title: "Nyheter"
+format:
+  html:
+    page-layout: article
+listing:
+  contents: news
+  type: grid
+  sort: "date desc"
+  categories: true
+  feed: true
+  image-align: left
+  image-height: 120px
+  image-placeholder: https://res.cloudinary.com/dhmmkvcpy/image/upload/t_250x100/bgs/mysteries
+---

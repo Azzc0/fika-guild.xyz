@@ -1,0 +1,67 @@
+## Tower of Karazhan {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Kara_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+
+
+::: {.notes}
+`r kara_notes`
+
+:::
+
+:::::: {.columns}
+
+::::: {.column width="25%" #raid style="font-size:0.55em"}
+
+| Boss | Tid `r if (session_has_wipes(kara_session)) "|  Wipes" else ""`
+|---|---|---
+| Keeper Gnarlmoon | `r get_boss_time_with_comparison(kara_session, "Keeper Gnarlmoon")` | `r get_boss_wipes(kara_session, "Keeper Gnarlmoon")` |
+| Ley-Watcher Incantagos | `r get_boss_time_with_comparison(kara_session, "Ley-Watcher Incantagos")` | `r get_boss_wipes(kara_session, "Ley-Watcher Incantagos")` |
+| Anomalus | `r get_boss_time_with_comparison(kara_session, "Anomalus")` | `r get_boss_wipes(kara_session, "Anomalus")` |
+| Echo of Medivh | `r get_boss_time(kara_session, "Echo of Medivh")` | `r get_boss_wipes(kara_session, "Echo of Medivh")` |
+| Chess Event | `r get_boss_time(kara_session, "Chess Event")` | `r get_boss_wipes(kara_session, "Chess Event")` |
+| Sanv Tas'dal | `r get_boss_time_with_comparison(kara_session, "Sanv Tas'dal")` | `r get_boss_wipes(kara_session, "Sanv Tas'dal")` |
+| Kruul | `r get_boss_time_with_comparison(kara_session, "Kruul")` | `r get_boss_wipes(kara_session, "Kruul")` |
+| Rupturan the Broken | `r get_boss_time_with_comparison(kara_session, "Rupturan the Broken", "Chess Event")` | `r get_boss_wipes(kara_session, "Rupturan the Broken")` |
+| Mephistroth | `r get_boss_time_with_comparison(kara_session, "Mephistroth", "Chess Event")` | `r get_boss_wipes(kara_session, "Mephistroth")` |
+| Totalt | `r get_raid_duration_with_comparison(kara_session)` | |
+
+:::::
+
+::::: {.column style="height:100%;max-height: 100vh;"}
+:::: {style="display: flex; flex-direction: column; height: 100%; min-height:0;"}
+::: {#raid style="flex: 0 0 auto;"}
+|   |   |`r if (session_has_links(kara_session)) "   |" else ""`
+|---|---|`r if (session_has_links(kara_session)) "---|" else ""`
+|Huvudräd|Nytorpa|`r get_all_turtlogs_links(kara_session)`
+|Tors/Söndag| 19:30-22:00|`r get_all_vod_links(kara_session)`
+:::
+
+::: {#raid style="flex: 1 1 auto;"}
+
+`r kara_text`
+
+
+:::
+
+::: {#raid style="flex: 0 0 auto;margin-bottom:90px"}
+
+|Epics|
+|---|---|---|
+|`r get_loot_count_by_rarity(kara_session, "Epic")`st |
+
+```{r}
+priority_list <- c(
+  # Add Kara priority items here once you know what's good
+)
+exclude_list <- c(
+  # Add exclude items when we kow more
+)
+```
+
+`r create_loot_table(kara_session, priority_list, max_items = 4)`
+
+:::
+
+::::
+
+:::::
+
+::::::

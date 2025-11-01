@@ -1,0 +1,155 @@
+---
+page-layout: full
+---
+
+Här kanske vi kan lägga till vem som kan göra vilken enchant?
+
+# Övergripande
+
+Olika yrken och specifika förnödenheter kan applicera olika förbättringar beroende på vad det är som behöver förbättras.
+
+### Armor Kits
+Platser: Chest Legs Hand Feet
+
+### Böcker
+Platser: Head Legs
+Head & Legs behöver speciella saker för att förbättra. I Burning Steppes eller Dire Maul biblioteket kan få tag i böcker som kan läggas på dessa platser. I Zul'Gurub kan man komma över klass enchant ifrån Zanza.
+
+# ![Druid](https://cdn.discordapp.com/emojis/579532029675438081.png){width=16} Druid
+::: {.panel-tabset}
+# ![Ranged](https://cdn.discordapp.com/emojis/592446395596931072.png) ![Balance](https://cdn.discordapp.com/emojis/637564171994529798.png){width=16} Balance
+## Head
+
+## Neck
+
+## Shoulder
+
+## Cloak
+
+## Chest
+
+## Bracer
+
+## Gloves
+
+## Belt
+
+## Legs
+
+## Feet
+
+## Rings
+
+## Weapon
+
+## Shield
+
+
+# ![Melee](https://cdn.discordapp.com/emojis/734439523328720913.png) ![Feral](https://cdn.discordapp.com/emojis/637564172061900820.png){width=16} Feral
+
+# ![Tank](https://cdn.discordapp.com/emojis/878310168289505301.png){width=16} ![Guardian](https://cdn.discordapp.com/emojis/637564171696734209.png){width=16} Guardian
+
+# ![Healer](https://cdn.discordapp.com/emojis/898011741735235645.png) ![Restoration](https://cdn.discordapp.com/emojis/637564172007112723.png){width=16} Restoration
+
+:::
+# ![Mage](https://cdn.discordapp.com/emojis/579532030161977355.png){width=16} Mage
+::: {.panel-tabset}
+
+# ![Ranged](https://cdn.discordapp.com/emojis/592446395596931072.png) ![Arcane](https://cdn.discordapp.com/emojis/637564231545389056.png){width=16} Arcane
+
+# ![Ranged](https://cdn.discordapp.com/emojis/592446395596931072.png) ![Fire](https://cdn.discordapp.com/emojis/637564231239073802.png){width=16} Fire
+
+# ![Ranged](https://cdn.discordapp.com/emojis/592446395596931072.png) ![Frost](https://cdn.discordapp.com/emojis/637564231469891594.png){width=16} Frost
+
+:::
+# ![Hunter](https://cdn.discordapp.com/emojis/579532029880827924.png){width=16} Hunter
+::: {.panel-tabset}
+
+# ![Ranged](https://cdn.discordapp.com/emojis/592446395596931072.png) ![Beast Mastery](https://cdn.discordapp.com/emojis/637564202021814277.png){width=16} Beast Mastery
+
+# ![Ranged](https://cdn.discordapp.com/emojis/592446395596931072.png) ![Marskman](https://cdn.discordapp.com/emojis/637564202084466708.png){width=16} Marskmanship
+
+# ![Melee](https://cdn.discordapp.com/emojis/734439523328720913.png) ![Survival](https://cdn.discordapp.com/emojis/637564202130866186.png){width=16} Survival
+
+:::
+# ![Paladin](https://cdn.discordapp.com/emojis/579532029906124840.png){width=16} Paladin
+::: {.panel-tabset}
+
+# ![Healer](https://cdn.discordapp.com/emojis/898011741735235645.png) ![Holy1](https://cdn.discordapp.com/emojis/637564297622454272.png){width=16} Holy
+
+# ![Tank](https://cdn.discordapp.com/emojis/878310168289505301.png){width=16} ![Protection1](https://cdn.discordapp.com/emojis/637564297647489034.png){width=16} Protection
+
+# ![Melee](https://cdn.discordapp.com/emojis/734439523328720913.png) ![Retribution](https://cdn.discordapp.com/emojis/637564297953673216.png){width=16} Retribution
+
+:::
+# ![Priest](https://cdn.discordapp.com/emojis/579532029901799437.png){width=16} Priest
+::: {.panel-tabset}
+
+# ![Healer](https://cdn.discordapp.com/emojis/898011741735235645.png) ![Discipline](https://cdn.discordapp.com/emojis/637564323442720768.png){width=16} Discipline
+
+# ![Ranged](https://cdn.discordapp.com/emojis/592446395596931072.png) ![Smite](https://cdn.discordapp.com/emojis/887257034066653184.png){width=16} Smite
+
+# ![Healer](https://cdn.discordapp.com/emojis/898011741735235645.png) ![Holy](https://cdn.discordapp.com/emojis/637564323530539019.png){width=16} Holy
+
+# ![Ranged](https://cdn.discordapp.com/emojis/592446395596931072.png)  ![Shadow](https://cdn.discordapp.com/emojis/637564323291725825.png){width=16} Shadow
+
+:::
+# ![Rogue](https://cdn.discordapp.com/emojis/579532030086217748.png){width=16} Rogue
+::: {.panel-tabset}
+
+# ![Melee](https://cdn.discordapp.com/emojis/734439523328720913.png) ![Assassination](https://cdn.discordapp.com/emojis/637564351707873324.png){width=16} Assasination
+
+# ![Melee](https://cdn.discordapp.com/emojis/734439523328720913.png) ![Combat](https://cdn.discordapp.com/emojis/637564352333086720.png){width=16} Combat
+
+# ![Melee](https://cdn.discordapp.com/emojis/734439523328720913.png) ![Subtlety](https://cdn.discordapp.com/emojis/637564352169508892.png){width=16} Subtlety
+
+:::
+# ![Shaman](https://cdn.discordapp.com/emojis/579532030056857600.png){width=16} Shaman
+::: {.panel-tabset}
+
+# ![Ranged](https://cdn.discordapp.com/emojis/592446395596931072.png) ![Elemental](https://cdn.discordapp.com/emojis/637564379595931649.png){width=16} Elemental
+
+# ![Melee](https://cdn.discordapp.com/emojis/734439523328720913.png) ![Enchancement](https://cdn.discordapp.com/emojis/637564379772223489.png){width=16} Enhancement
+
+# ![Tank](https://cdn.discordapp.com/emojis/878310168289505301.png){width=16} ![Enchancement](https://cdn.discordapp.com/emojis/637564379772223489.png){width=16} Enhancement (Tank)
+
+# ![Healer](https://cdn.discordapp.com/emojis/898011741735235645.png) ![Restoration](https://cdn.discordapp.com/emojis/637564379847458846.png){width=16}  Restoration
+
+:::
+# ![Warlock](https://cdn.discordapp.com/emojis/579532029851336716.png){width=16}  Warlock
+
+::: {.panel-tabset}
+
+# ![Ranged](https://cdn.discordapp.com/emojis/592446395596931072.png) ![Affliction](https://cdn.discordapp.com/emojis/637564406984867861.png){width=16}  Affliction
+
+# ![Ranged](https://cdn.discordapp.com/emojis/592446395596931072.png) ![Demonology](https://cdn.discordapp.com/emojis/637564407001513984.png){width=16}  Demonology
+
+# ![Ranged](https://cdn.discordapp.com/emojis/592446395596931072.png) ![Destruction](https://cdn.discordapp.com/emojis/637564406682877964.png){width=16}  Destruction
+
+
+:::
+
+# ![Warrior](https://cdn.discordapp.com/emojis/579532030153588739.png){width=24} Warrior
+
+::: {.panel-tabset}
+
+# ![Melee](https://cdn.discordapp.com/emojis/734439523328720913.png) ![Arms](https://cdn.discordapp.com/emojis/637564445031399474.png){width=16} Arms/![Fury](https://cdn.discordapp.com/emojis/637564445215948810.png){width=16} Fury
+Content for section 1
+
+## Krav
+Content for section 1
+
+## Övrigt
+
+## Extra
+Content for section 2
+
+# ![Tank](https://cdn.discordapp.com/emojis/878310168289505301.png){width=16} ![Protection](https://cdn.discordapp.com/emojis/637564444834136065.png){width=16} Prot/ ![Fury](https://cdn.discordapp.com/emojis/637564445215948810.png){width=16} Furyprot
+Content for section 2
+
+## Krav
+
+## Övrigt
+
+## Extra
+:::

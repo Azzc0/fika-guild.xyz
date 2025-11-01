@@ -1,0 +1,409 @@
+/*-- scss:defaults --*/
+
+// ====================================
+//  World of Warcraft Class Icons
+// ====================================
+$warrior-icon:        "https://cdn.discordapp.com/emojis/579532030153588739.png";
+$druid-icon:          "https://cdn.discordapp.com/emojis/579532029675438081.png";
+$paladin-icon:        "https://cdn.discordapp.com/emojis/579532029906124840.png";
+$rogue-icon:          "https://cdn.discordapp.com/emojis/579532030086217748.png";
+$hunter-icon:         "https://cdn.discordapp.com/emojis/579532029880827924.png";
+$mage-icon:           "https://cdn.discordapp.com/emojis/579532030161977355.png";
+$warlock-icon:        "https://cdn.discordapp.com/emojis/579532029851336716.png";
+$priest-icon:         "https://cdn.discordapp.com/emojis/579532029901799437.png";
+$shaman-icon:         "https://cdn.discordapp.com/emojis/579532030056857600.png";
+$deathknight-icon:    "https://cdn.discordapp.com/emojis/599012538935410701.png";
+$demonhunter-icon:    "https://cdn.discordapp.com/emojis/599012539015364633.png";
+$monk-icon:           "https://cdn.discordapp.com/emojis/599012539556167691.png";
+$evoker-icon:         "https://cdn.discordapp.com/emojis/1013161650184003744.png";
+
+// ====================================
+//  WoW Specialization Icons
+// ====================================
+$frost-icon:          "https://cdn.discordapp.com/emojis/637564231469891594.png";
+$fire-icon:           "https://cdn.discordapp.com/emojis/637564231239073802.png";
+$arcane-icon:         "https://cdn.discordapp.com/emojis/637564231545389056.png";
+$assassination-icon:  "https://cdn.discordapp.com/emojis/637564351707873324.png";
+$combat-icon:         "https://cdn.discordapp.com/emojis/637564352333086720.png";
+$subtlety-icon:       "https://cdn.discordapp.com/emojis/637564352169508892.png";
+$protection-icon:     "https://cdn.discordapp.com/emojis/637564444834136065.png";
+$fury-icon:           "https://cdn.discordapp.com/emojis/637564445215948810.png";
+$arms-icon:           "https://cdn.discordapp.com/emojis/637564445031399474.png";
+$discipline-icon:     "https://cdn.discordapp.com/emojis/637564323442720768.png";
+$holy-icon:           "https://cdn.discordapp.com/emojis/637564323530539019.png";
+$shadow-icon:         "https://cdn.discordapp.com/emojis/637564323291725825.png";
+$affliction-icon:     "https://cdn.discordapp.com/emojis/637564406984867861.png";
+$demonology-icon:     "https://cdn.discordapp.com/emojis/637564407001513984.png";
+$destruction-icon:    "https://cdn.discordapp.com/emojis/637564406682877964.png";
+$beastmastery-icon:   "https://cdn.discordapp.com/emojis/637564202021814277.png";
+$marksman-icon:       "https://cdn.discordapp.com/emojis/637564202084466708.png";
+$survival-icon:       "https://cdn.discordapp.com/emojis/637564202130866186.png";
+$holy1-icon:          "https://cdn.discordapp.com/emojis/637564297622454272.png";
+$retribution-icon:    "https://cdn.discordapp.com/emojis/637564297953673216.png";
+$protection1-icon:    "https://cdn.discordapp.com/emojis/637564297647489034.png";
+$blood-icon:          "https://cdn.discordapp.com/emojis/637564101274632192.png";
+$frost1-icon:         "https://cdn.discordapp.com/emojis/637564101262049280.png";
+$unholy-icon:         "https://cdn.discordapp.com/emojis/637564101329027082.png";
+$havoc-icon:          "https://cdn.discordapp.com/emojis/637564138964516867.png";
+$vengeance-icon:      "https://cdn.discordapp.com/emojis/637564139371233290.png";
+$restoration-icon:    "https://cdn.discordapp.com/emojis/637564172007112723.png";
+$feral-icon:          "https://cdn.discordapp.com/emojis/637564172061900820.png";
+$balance-icon:        "https://cdn.discordapp.com/emojis/637564171994529798.png";
+$guardian-icon:       "https://cdn.discordapp.com/emojis/637564171696734209.png";
+$elemental-icon:      "https://cdn.discordapp.com/emojis/637564379595931649.png";
+$restoration1-icon:   "https://cdn.discordapp.com/emojis/637564379847458846.png";
+$brewmaster-icon:     "https://cdn.discordapp.com/emojis/637564262167871489.png";
+$windwalker-icon:     "https://cdn.discordapp.com/emojis/637564262054625281.png";
+$mistweaver-icon:     "https://cdn.discordapp.com/emojis/637564262289637433.png";
+$enhancement-icon:    "https://cdn.discordapp.com/emojis/637564379772223489.png";
+$outlaw-icon:         "https://cdn.discordapp.com/emojis/794267634497486858.png";
+$smite-icon:          "https://cdn.discordapp.com/emojis/887257034066653184.png";
+$devastation-icon:    "https://cdn.discordapp.com/emojis/1013161648728592444.png";
+$preservation-icon:   "https://cdn.discordapp.com/emojis/1013161651706544158.png";
+$augmentation-icon:   "https://cdn.discordapp.com/emojis/1127164727328510054.png";
+
+// ====================================
+//  Professions
+// ====================================
+$tailoring-icon:      "https://cdn.discordapp.com/emojis/641419370442129429.png";
+$blacksmithing-icon:  "https://cdn.discordapp.com/emojis/641419369678635029.png";
+$engineering-icon:    "https://cdn.discordapp.com/emojis/641419369750069312.png";
+$alchemy-icon:        "https://cdn.discordapp.com/emojis/641419369989275648.png";
+$leatherworking-icon: "https://cdn.discordapp.com/emojis/641419370198990858.png";
+$enchanting-icon:     "https://cdn.discordapp.com/emojis/641419370106716170.png";
+$jewelcrafting-icon:  "https://cdn.discordapp.com/emojis/779033915448885338.png";
+$inscription-icon:    "https://cdn.discordapp.com/emojis/779033915129987082.png";
+$herbalism-icon:      "https://cdn.discordapp.com/emojis/641419370437935104.png";
+$skinning-icon:       "https://cdn.discordapp.com/emojis/641419370802970644.png";
+$mining-icon:         "https://cdn.discordapp.com/emojis/641419370471358477.png";
+$fishing-icon:        "https://cdn.discordapp.com/emojis/779033915284783134.png";
+$cooking-icon:        "https://cdn.discordapp.com/emojis/779034208949370910.png";
+
+// ====================================
+//  Raid Target Icons
+// ====================================
+$skull-icon:    "https://cdn.discordapp.com/emojis/1118218142729130034.png";
+$cross-icon:    "https://cdn.discordapp.com/emojis/1118218134290178098.png";
+$star-icon:     "https://cdn.discordapp.com/emojis/1118218148294950983.png";
+$circle-icon:   "https://cdn.discordapp.com/emojis/1118218132734095482.png";
+$diamond-icon:  "https://cdn.discordapp.com/emojis/1118218138631274566.png";
+$triangle-icon: "https://cdn.discordapp.com/emojis/1118218150392123432.png";
+$square-icon:   "https://cdn.discordapp.com/emojis/1118218145623179284.png";
+$moon-icon:     "https://cdn.discordapp.com/emojis/1118218140946550835.png";
+
+// ====================================
+//  General / Raid Utility Icons
+// ====================================
+$leader-icon:     "https://cdn.discordapp.com/emojis/1124529969926779050.png";
+$signups-icon:    "https://cdn.discordapp.com/emojis/1124529971428339752.png";
+$date-icon:       "https://cdn.discordapp.com/emojis/1124529967611523272.png";
+$time-icon:       "https://cdn.discordapp.com/emojis/1124529972883767398.png";
+$countdown-icon:  "https://cdn.discordapp.com/emojis/1124530049329139772.png";
+$tank-icon:       "https://cdn.discordapp.com/emojis/878310168289505301.png";
+$dps-icon:        "https://cdn.discordapp.com/emojis/592440132129521664.png";
+$melee-icon:      "https://cdn.discordapp.com/emojis/734439523328720913.png";
+$ranged-icon:     "https://cdn.discordapp.com/emojis/592446395596931072.png";
+$healer-icon:     "https://cdn.discordapp.com/emojis/898011741735235645.png";
+$support-icon:    "https://cdn.discordapp.com/emojis/878310168344035338.png";
+$tentative-icon:  "https://cdn.discordapp.com/emojis/676284492754976788.png";
+$absence-icon:    "https://cdn.discordapp.com/emojis/612343589070045200.png";
+$bench-icon:      "https://cdn.discordapp.com/emojis/612373441051361353.png";
+$late-icon:       "https://cdn.discordapp.com/emojis/612373443551297689.png";
+$accepted-icon:   "https://cdn.discordapp.com/emojis/831430831809626142.png";
+$maybe-icon:      "https://cdn.discordapp.com/emojis/831430900113866784.png";
+$declined-icon:   "https://cdn.discordapp.com/emojis/831430856405024798.png";
+
+// ====================================
+//  Colors and Markers
+// ====================================
+$black-icon:      "https://cdn.discordapp.com/emojis/606120236479021062.png";
+$white-icon:      "https://cdn.discordapp.com/emojis/606120236743262238.png";
+$red-icon:        "https://cdn.discordapp.com/emojis/606120236646662154.png";
+$blue-icon:       "https://cdn.discordapp.com/emojis/606120236948783113.png";
+$yellow-icon:     "https://cdn.discordapp.com/emojis/606120437692497930.png";
+$pink-icon:       "https://cdn.discordapp.com/emojis/606120236613369856.png";
+$green-icon:      "https://cdn.discordapp.com/emojis/606120236584009728.png";
+$grey-icon:       "https://cdn.discordapp.com/emojis/606120236311379975.png";
+
+/*-- scss:mixins --*/
+
+@mixin raid-icon-base {
+  content: "";
+  display: inline-block;
+  width: var(--icon-size, 1em);
+  height: var(--icon-size, 1em);
+  margin-right: 0.3em;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+/*-- scss:rules --*/
+
+#quarto-content {
+  background-color: var(--bs-body-bg);
+  background-image: 
+    linear-gradient(rgba(var(--bs-body-bg-rgb), 0.5), rgba(var(--bs-body-bg-rgb), 0.5)),
+    var(--background-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Darken links only in light mode */
+body.quarto-light #quarto-content a {
+  color: rgba(var(--bs-link-color-rgb), 1);
+  filter: brightness(0.4);
+}
+body.quarto-light #quarto-content a:hover {
+  text-decoration: underline;
+  filter: none;
+}
+
+.raid-week {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.raid-day {
+  flex: 1 1 calc(12.28% - 1rem);
+  background: rgba(var(--bs-body-bg-rgb), 0.6);
+  border: 1px solid rgba(var(--bs-border-color-rgb, 255,255,255), 0.15);
+  max-width: 165px;
+  border-radius: 15px;
+  padding: 0.25rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  transition: background 0.2s ease-in-out, transform 0.15s ease-in-out;
+
+  &:hover {
+    background: rgba(var(--bs-body-bg-rgb), 0.8);
+    transform: translateY(-2px);
+  }
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--bs-primary);
+    margin-bottom: 0.5rem;
+  }
+  img {
+    width:100%;
+  }
+}
+
+.raid-card:hover {
+  background: rgba(var(--bs-primary-rgb), 0.2);
+  transform: translateY(-2px);
+}
+
+/* Popovers appear within Quarto's main content area */
+#quarto-document-content {
+  position: relative;
+}
+
+.raid-popover {
+  position: fixed;                /* stays put even if page scrolls */
+  top: 55px;                      /* clears the navbar */
+  z-index: 9999;
+
+  background: var(--quarto-body-bg, #1e1e1e);
+  color: var(--quarto-body-color, #eee);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+
+  width: min(1000px, 95vw);
+  max-height: calc(100vh - 100px); /* never taller than viewport minus navbar */
+  overflow-y: auto;               /* scroll content inside */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+}
+
+/* Close button */
+.popover-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+/* Banner image */
+.raid-popover .raidbanner {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 1rem;
+  border-radius: 0.5rem;
+}
+
+.raid-popover::backdrop {
+  background-color: #0005;
+}
+
+table.raid-info-table{
+    border-spacing: 2.5rem 0.5rem;
+    border-collapse: separate;
+}
+
+.class-groups-container {
+  display: flex;
+  flex-wrap: wrap;              /* allows multiple rows */
+  gap: 1rem;                    /* spacing between groups */
+  justify-content: flex-start;  /* align groups horizontally */
+  align-items: flex-start;      /* top alignment for uneven heights */
+  padding: 1rem 0;
+}
+
+.class-group {
+  flex: 1 1 220px;              /* grow, shrink, base width */
+  display: flex;
+  flex-direction: column;       /* stack group contents vertically */
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  min-width: 180px;
+  max-width: 300px;
+}
+.spec-list {
+  list-style: none;
+  padding-left: 0.3rem;
+}
+
+.class-group[data-class="tank"]      { order: 1; }
+.class-group[data-class="warrior"]   { order: 2; }
+.class-group[data-class="druid"]     { order: 3; }
+.class-group[data-class="paladin"]   { order: 4; }
+.class-group[data-class="rogue"]     { order: 5; }
+.class-group[data-class="hunter"]    { order: 6; }
+.class-group[data-class="mage"]      { order: 7; }
+.class-group[data-class="warlock"]   { order: 8; }
+.class-group[data-class="priest"]    { order: 9; }
+.class-group[data-class="shaman"]    { order: 10; }
+
+span.lead::before {@include raid-icon-base; background-image: url($leader-icon);}
+span.date::before {@include raid-icon-base; background-image: url($date-icon);}
+span.time::before {@include raid-icon-base; background-image: url($time-icon);}
+span.signup::before {@include raid-icon-base; background-image: url($signups-icon);}
+span.melee::before {@include raid-icon-base; background-image: url($melee-icon);}
+span.dps::before {@include raid-icon-base; background-image: url($dps-icon);}
+span.tank::before {@include raid-icon-base; background-image: url($tank-icon);}
+span.tanks::before {@include raid-icon-base; background-image: url($tank-icon);}
+span.ranged::before {@include raid-icon-base; background-image: url($ranged-icon);}
+span.healers::before {@include raid-icon-base; background-image: url($healer-icon);}
+span.tentative::before {@include raid-icon-base; background-image: url($tentative-icon);}
+span.absence::before {@include raid-icon-base; background-image: url($absence-icon);}
+span.bench::before {@include raid-icon-base; background-image: url($bench-icon);}
+span.late::before {@include raid-icon-base; background-image: url($late-icon);}
+
+.class-header.warrior::before {@include raid-icon-base;background-image: url(#{$warrior-icon});}
+.class-header.druid::before {@include raid-icon-base;background-image: url(#{$druid-icon});}
+.class-header.rogue::before {@include raid-icon-base;background-image: url(#{$rogue-icon});}
+.class-header.hunter::before {@include raid-icon-base;background-image: url(#{$hunter-icon});}
+.class-header.mage::before {@include raid-icon-base;background-image: url(#{$mage-icon});}
+.class-header.warlock::before {@include raid-icon-base;background-image: url(#{$warlock-icon});}
+.class-header.priest::before {@include raid-icon-base;background-image: url(#{$priest-icon});}
+.class-header.shaman::before {@include raid-icon-base;background-image: url(#{$shaman-icon});}
+.class-header.paladin::before {@include raid-icon-base;background-image: url(#{$paladin-icon});}
+.class-header.tank::before {@include raid-icon-base;background-image: url(#{$tank-icon});}
+
+/*-- scss:rules --*/
+
+// ====================================
+// WoW Specialization Icons
+// ====================================
+
+span.frost::before         {@include raid-icon-base; background-image: url(#{$frost-icon});}
+span.fire::before          {@include raid-icon-base; background-image: url(#{$fire-icon});}
+span.arcane::before        {@include raid-icon-base; background-image: url(#{$arcane-icon});}
+span.assassination::before {@include raid-icon-base; background-image: url(#{$assassination-icon});}
+span.combat::before        {@include raid-icon-base; background-image: url(#{$combat-icon});}
+span.subtlety::before      {@include raid-icon-base; background-image: url(#{$subtlety-icon});}
+span.protection::before    {@include raid-icon-base; background-image: url(#{$protection-icon});}
+span.fury::before          {@include raid-icon-base; background-image: url(#{$fury-icon});}
+span.arms::before          {@include raid-icon-base; background-image: url(#{$arms-icon});}
+span.discipline::before    {@include raid-icon-base; background-image: url(#{$discipline-icon});}
+span.holy::before          {@include raid-icon-base; background-image: url(#{$holy-icon});}
+span.shadow::before        {@include raid-icon-base; background-image: url(#{$shadow-icon});}
+span.affliction::before    {@include raid-icon-base; background-image: url(#{$affliction-icon});}
+span.demonology::before    {@include raid-icon-base; background-image: url(#{$demonology-icon});}
+span.destruction::before   {@include raid-icon-base; background-image: url(#{$destruction-icon});}
+span.beastmastery::before  {@include raid-icon-base; background-image: url(#{$beastmastery-icon});}
+span.marksmanship::before  {@include raid-icon-base; background-image: url(#{$marksman-icon});}
+span.survival::before      {@include raid-icon-base; background-image: url(#{$survival-icon});}
+span.holy1::before         {@include raid-icon-base; background-image: url(#{$holy1-icon});}
+span.retribution::before   {@include raid-icon-base; background-image: url(#{$retribution-icon});}
+span.protection1::before   {@include raid-icon-base; background-image: url(#{$protection1-icon});}
+span.blood::before         {@include raid-icon-base; background-image: url(#{$blood-icon});}
+span.frost1::before        {@include raid-icon-base; background-image: url(#{$frost1-icon});}
+span.unholy::before        {@include raid-icon-base; background-image: url(#{$unholy-icon});}
+span.havoc::before         {@include raid-icon-base; background-image: url(#{$havoc-icon});}
+span.vengeance::before     {@include raid-icon-base; background-image: url(#{$vengeance-icon});}
+span.restoration::before   {@include raid-icon-base; background-image: url(#{$restoration-icon});}
+span.feral::before         {@include raid-icon-base; background-image: url(#{$feral-icon});}
+span.balance::before       {@include raid-icon-base; background-image: url(#{$balance-icon});}
+span.guardian::before      {@include raid-icon-base; background-image: url(#{$guardian-icon});}
+span.elemental::before     {@include raid-icon-base; background-image: url(#{$elemental-icon});}
+span.restoration1::before  {@include raid-icon-base; background-image: url(#{$restoration1-icon});}
+span.brewmaster::before    {@include raid-icon-base; background-image: url(#{$brewmaster-icon});}
+span.windwalker::before    {@include raid-icon-base; background-image: url(#{$windwalker-icon});}
+span.mistweaver::before    {@include raid-icon-base; background-image: url(#{$mistweaver-icon});}
+span.enhancement::before   {@include raid-icon-base; background-image: url(#{$enhancement-icon});}
+span.outlaw::before        {@include raid-icon-base; background-image: url(#{$outlaw-icon});}
+span.smite::before         {@include raid-icon-base; background-image: url(#{$smite-icon});}
+span.devastation::before   {@include raid-icon-base; background-image: url(#{$devastation-icon});}
+span.preservation::before  {@include raid-icon-base; background-image: url(#{$preservation-icon});}
+span.augmentation::before  {@include raid-icon-base; background-image: url(#{$augmentation-icon});}
+
+
+/* Pure CSS Accordion */
+.accordion {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.accordion input {
+  display: none;
+}
+
+.accordion label {
+  display: block;
+  padding: 1rem 1.5rem;
+  background: #2c3e50;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+  transition: background 0.3s;
+}
+
+.accordion label:hover {
+  background: #34495e;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding: 0 1.5rem;
+}
+
+.accordion input:checked + label + .accordion-content {
+  max-height: 1000px;
+  padding: 1rem 1.5rem;
+}
+
+.accordion input:checked + label {
+  background: #3498db;
+}
+
+details > summary {
+  color: var(--bs-body-color) !important;
+}

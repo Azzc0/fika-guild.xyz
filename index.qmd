@@ -1,0 +1,24 @@
+---
+page-layout: full
+toc: false
+listing:
+  - id: latest-news
+    contents:
+      - news/
+      - veckobladet/
+      - bosses/
+    sort: "date desc"
+    type: grid
+    max-items: 3
+    fields: [image, date, title, description]
+---
+<style>
+  :root {
+    --background-image: url("https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/bgs/mysteries.jpg");
+  }
+</style>
+
+# ![Välkommen](https://res.cloudinary.com/dhmmkvcpy/image/upload/v1761464273/res/valkommen.png)
+Fika är en svensk [Turtle WoW](https://turtle-wow.org) Guild. Vi räder alldeles för ofta för vårat eget bästa men vi är även öppna för den som bara vill vara lite social i spelet.
+
+### Våra senaste inlägg:

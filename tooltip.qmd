@@ -1,0 +1,48 @@
+---
+page-layout: full
+---
+<script src="tooltips.js"></script>
+<!-- Spell -->
+<span class="turtle-link" 
+      data-turtle-tooltip 
+      data-type="spell" 
+      data-id="51302">
+  Hand of Reckoning
+</span>
+
+<span class="turtle-link" 
+      data-turtle-tooltip 
+      data-type="spell" 
+      data-id="21992">
+  Thunderfury (Spell)
+</span>
+
+<span class="turtle-link" 
+      data-turtle-tooltip 
+      data-type="spell" 
+      data-id="51164">
+  Remorseless Strike
+</span>
+
+<span class="turtle-link" 
+      data-turtle-tooltip 
+      data-type="spell" 
+      data-id="20874">
+  Dark Iron Bracers
+</span>
+
+<!-- Item -->
+<span class="turtle-link"
+      data-turtle-tooltip
+      data-type="item"
+      data-id="19019">
+  Thunderfury
+</span>
+
+<!-- NPC -->
+<span class="turtle-link"
+      data-turtle-tooltip
+      data-type="npc"
+      data-id="100">
+  Captain Placeholder
+</span>
