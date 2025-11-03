@@ -10,7 +10,7 @@
 ```{r}
 #| echo: false
 #| results: 'asis'
-cat(sprintf('![](https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/intro/%d.jpg){style="position: absolute; top: 35%%; left: 50%%; transform: translate(-50%%, -50%%); width: 800px; height: auto; z-index: 2"}', current_week))
+cat(sprintf('![](https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/intro/%d-%d){style="position: absolute; top: 35%%; left: 50%%; transform: translate(-50%%, -50%%); width: 800px; height: auto; z-index: 2"}', current_week, current_year))
 ```
 
 <div style="position: absolute; top: 25px; left: 50%; transform: translateX(-50%); width: 400px; height: 200px; background: black; opacity: 0.6; border-radius: 50%; filter: blur(20px); z-index: 1;"></div>

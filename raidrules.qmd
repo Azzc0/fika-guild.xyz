@@ -2,6 +2,12 @@
 page-layout: full
 ---
 
+<style>
+  :root {
+    --background-image: url("https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/bgs/The%20Thalassian%20Council");
+  }
+</style>
+
 # ![Rädregler](https://res.cloudinary.com/dhmmkvcpy/image/upload/v1761464271/res/raidrules.png)
 För att vi ska kunna genomföra en räd på ett effektivt vis har vi ett par förhållningsregler vi rättar oss efter.
 
@@ -19,38 +25,24 @@ För att vi ska kunna genomföra en räd på ett effektivt vis har vi ett par f�
     Vi ställer krav på våra medlemmar när vi rädar. Att du inte är enchantad eller liknande de första gångerna du ansluter till våra räder är sin sak men för ranken "Raider" behöver du göra en mindre ansträngning.
 
 
-## Invites
-
-Comp > Rank > Ordning
-
-Inför en räd tittar klassledare och officers på vilka som skrivit upp sig för räden. De planerar grupperingarna när eventet väl är låst.
-Denna planering kommer så småningom ut i aktuell kanal och inbjudan skickas ut efter det.
-
-Vi behöver fylla de roller vi behöver först och främst, efter det prioriterar vi de som har högre rank och är det många inom samma rank så prioriterar vi de som skrivit upp sig först.
-
-## SR / SR+
-
-I våra räder använder vi ett Soft Reserve system. Du går in i förväg, på länken längst ned i beskrivnignen för aktuell räd och "paxxar" något du är intresserad av. Droppar det så behöver du inte rulla emot de som inte gjort detsamma. SR > MS > OS
-
-Med SR+ får du extra poäng var vecka du lägger samma SR med samma spec i samma räd, normalt +10. Vi kör med en SR lista per event även om vi kör samma räd mer än en dag i veckan. Det innebär att du som lagt samma SR tre veckor i rad (tredje veckan) kan tänkas rulla `/roll 100 --> 46`; vi lägger till 20 poäng och räknar det som din rullning +20 `66`.
-
-För att samla poäng behöver du medverka i räden, vi använder våra combatloggar för att synkronisera detta. Detta innebär att de som har högre rank har störe möjlighet till att få vara med i räden och samla poäng. Skulle du utebli av någon anledning och inte matchas när vi synkar så tar vi bort 10 poäng, lägger du samma SR veckan därpå har du samma poäng som veckan innan.
-
 # ![Rädkrav](https://res.cloudinary.com/dhmmkvcpy/image/upload/v1761464271/res/radkrav.png)
 I våra räder anser vi att alla ska ha lämpliga enchants och förnödenheter oavsett nivå. Vi förlitar oss också på att alla spelare har en del addons.
 
 
 ## Addons
+I våra räder är det dessa addons vi förlitar oss på.
 
-### Krav
-Dessa addons förväntar vi att våra medlemmar i räden använder:
+::: {.panel-tabset}
+# Krav
+Dessa addons ska var medlem i räden ha installerad
 
 - Rinse
 - Threatmeter
 - Bananbar (eller motsvarande)
 
 
-### Kaffekokare
+# Kaffekokare
+
 Dessa addons använder de som sköter räderna:
 
 - TWRA
@@ -58,19 +50,25 @@ Dessa addons använder de som sköter räderna:
 - SuperWoWCombatlogger
 - RABuffs
 
-### Rekommenderat
+# Rekommenderat
+
 Addons som används flitigt men definitivt inget krav i våra räder
 
 - PfQuest
 - Aux
 
+:::
 
-#### Moddar
+
+::: {.details summary="Moddar"}
 Vi kommer aldrig ställa krav på moddar men vi vill ändå uppmärksamma ett par stycken
 
 - SpellVisualizer
 - SuperWoW
 - 
+:::
+
+
 
 
 ## Enchants

@@ -19,3 +19,4 @@ _site/
 *.tmp
 
 /.quarto/
+fika-guild.code-workspace

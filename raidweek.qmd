@@ -3,7 +3,11 @@ title: "Räder kommande vecka"
 page-layout: full
 toc: false
 ---
-
+<style>
+  :root {
+    --background-image: url("https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/bgs/The%20Thalassian%20Council");
+  }
+</style>
 ```{=html}
 <div class="raid-week" id="raidSchedule">
     <!-- Content populated by JavaScript -->
@@ -13,7 +17,19 @@ toc: false
 ```
 Ovan ser du de räder som ligger på schemat för <Fika>.
 
-## Vad händer innan räden
-Strax en timme innan räd tittar klassledare och officers på grupperna, halvtimme innan räden försöker vi vara klara med detta och skicka ut aktuell comp i samma kanal som signupen. Därefter börjar vi med invites.
+## Invites
 
-När klockan är 
+Comp > Rank > Ordning
+
+Inför en räd tittar klassledare och officers på vilka som skrivit upp sig för räden. De planerar grupperingarna när eventet väl är låst.
+Denna planering kommer så småningom ut i aktuell kanal och inbjudan skickas ut efter det.
+
+Vi behöver fylla de roller vi behöver först och främst, efter det prioriterar vi de som har högre rank och är det många inom samma rank så prioriterar vi de som skrivit upp sig först.
+
+## SR / SR+
+
+I våra räder använder vi ett Soft Reserve system. Du går in i förväg, på länken längst ned i beskrivnignen för aktuell räd och "paxxar" något du är intresserad av. Droppar det så behöver du inte rulla emot de som inte gjort detsamma. SR > MS > OS
+
+Med SR+ får du extra poäng var vecka du lägger samma SR med samma spec i samma räd, normalt +10. Vi kör med en SR lista per event även om vi kör samma räd mer än en dag i veckan. Det innebär att du som lagt samma SR tre veckor i rad (tredje veckan) kan tänkas rulla `/roll 100 --> 46`; vi lägger till 20 poäng och räknar det som din rullning +20 `66`.
+
+För att samla poäng behöver du medverka i räden, vi använder våra combatloggar för att synkronisera detta. Detta innebär att de som har högre rank har störe möjlighet till att få vara med i räden och samla poäng. Skulle du utebli av någon anledning och inte matchas när vi synkar så tar vi bort 10 poäng, lägger du samma SR veckan därpå har du samma poäng som veckan innan.

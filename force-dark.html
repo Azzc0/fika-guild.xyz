@@ -1,0 +1,37 @@
+<script>
+(function() {
+  // Force quarto-dark on initial load
+  function forceQuartoDark() {
+    document.body.classList.remove('quarto-light');
+    document.body.classList.add('quarto-dark');
+    document.documentElement.classList.remove('quarto-light');
+    document.documentElement.classList.add('quarto-dark');
+  }
+  
+  // Run immediately
+  forceQuartoDark();
+  
+  // Watch for class changes and override them
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+        if (document.body.classList.contains('quarto-light')) {
+          forceQuartoDark();
+        }
+      }
+    });
+  });
+  
+  // Start observing body for class changes
+  observer.observe(document.body, {
+    attributes: true,
+    attributeFilter: ['class']
+  });
+  
+  // Also observe documentElement
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class']
+  });
+})();
+</script>

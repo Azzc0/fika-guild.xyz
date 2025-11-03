@@ -144,12 +144,14 @@ $grey-icon:       "https://cdn.discordapp.com/emojis/606120236311379975.png";
 #quarto-content {
   background-color: var(--bs-body-bg);
   background-image: 
-    linear-gradient(rgba(var(--bs-body-bg-rgb), 0.5), rgba(var(--bs-body-bg-rgb), 0.5)),
+    linear-gradient(rgba(var(--bs-body-bg-rgb), 0.75), rgba(var(--bs-body-bg-rgb), 0.75)),
     var(--background-image);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
+
 
 /* Darken links only in light mode */
 body.quarto-light #quarto-content a {
@@ -206,6 +208,14 @@ body.quarto-light #quarto-content a:hover {
 #quarto-document-content {
   position: relative;
 }
+
+// #quarto-document-content > * {
+//   background-color: rgba(var(--bs-body-bg-rgb), 0.25);
+//   backdrop-filter: blur(2px);
+//   border-radius: 8px;
+//   padding: 20px;
+//   margin: 20px 0;
+// }
 
 .raid-popover {
   position: fixed;                /* stays put even if page scrolls */
@@ -315,7 +325,9 @@ span.late::before {@include raid-icon-base; background-image: url($late-icon);}
 .class-header.tank::before {@include raid-icon-base;background-image: url(#{$tank-icon});}
 
 /*-- scss:rules --*/
-
+body {
+  @extend .quarto-dark;
+}
 // ====================================
 // WoW Specialization Icons
 // ====================================

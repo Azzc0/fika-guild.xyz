@@ -1,11 +1,235 @@
 ---
-description: "Anomalus gick ned för första gången"
-date: 2025-10-17
-footer: "Veckobladet 43 (2025) - [🏠 Tillbaka till hemsidan](https://your-domain.com)"
+description: "Fullt fokus på Kruul! Många medlemmar förbereder attunement"
+date: 2025-10-22
+image: https://res.cloudinary.com/dhmmkvcpy/image/upload/t_250x100/icons/fika
+footer: "Veckobladet 43 (2025) - [🏠 Tillbaka till hemsidan](https://www.fika-guild.xyz)"
 format: 
   revealjs:
     title-slide: false
     theme: veckobladet.scss
 freeze: true
 ---
-# V.43 2025 {.no-title background-image="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto/f_auto/t_1920x1080/bgs/mysteries" }
+# Veckobladet V.43 2025 {.no-title background-image="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto/f_auto/t_1920x1080/bgs/mysteries" }
+
+```{r}
+library(here)
+here::i_am("veckobladet/V43-2025.qmd")
+
+# Now source your scripts - these should all work
+source(here("scripts", "01_database.R"))
+# source(here("scripts", "02_registry.R")) 
+# source(here("scripts", "03_parser.R"))
+# source(here("scripts", "04_data_entry.R"))
+source(here("scripts", "05_queries.R")) 
+source(here("scripts", "06_presentation.R"))
+
+
+current_week <- 43
+current_year <- 2025
+
+prepare_week_data(current_year, current_week-1)
+kara_session <- get_session_id_cached("Kara", current_year, current_week-1)
+naxx_session <- get_session_id_cached("Naxx", current_year, current_week-1)  
+aq40_session <- get_session_id_cached("AQ40", current_year, current_week-1)
+bwl_session <- get_session_id_cached("BWL", current_year, current_week-1)
+mc_session <- get_session_id_cached("MC", current_year, current_week-1)
+
+kara_text <- "
+
+Full fokus på kruul
+"
+kara_notes <- "
+
+Har asvlutade vi på Chess på torsdagen och tog vid på söndagen. Vi fick till slut ned chess efter att ha brännt samtliga på första försöket. Tre tänker vi ska behövas, en när P3 kommer igång, en längre in i fighten och en när det börjar krisa sig en bit in. Ordning behöver vi säkerställa och en feral på första är önskvärt.
+
+Vi behöver också vara öppna för att köra Knight sist om Tranquillity inte är tillgängligt alls.
+
+Kruul kan det komma att vi ändrar taktik på, specifikt melee, fas 2 och övergången dit.
+"
+
+naxx_text <- "
+
+**19:30** Vi behöver tiden!
+
+Attraktiv räd; Core har invite prio.
+"
+
+naxx_notes <- "
+
+I naxxramas behöver vi hålla ett högt tempo och vi behöver våra 150 minuter. Vi håller inte en plats för någon som är sen mer än tio minuter.
+
+Vi behöver fler som är redo att använda word of thawing, dessa kommer samtliga klassledare åt i guildbanken. Core har tillgång till Frozen Rune.
+
+Precis som i BWL förväntar vi oss att du fått tag i sakerna inför räden och är rode när vi väl kommer fram. Hug en Core om du saknar runor!
+"
+
+aq_text <- "
+
+Bra tempo efter Twins på trash!
+"
+
+aq_notes <- "
+
+Vi kommer fortsätta trycka på med trash, Fallen Star är en trevlig trinket för en del, vi får också fler nycklar och därmed fler sages. Vi hinner med en bra bit till och vi kommer nog fortsätta med ännu mer trash framåt.
+"
+
+bwl_text <- "
+
+
+"
+
+bwl_notes <- "
+BWL ntoes
+"
+
+mc_text <- "
+
+
+"
+
+mc_notes <- "
+mc notes
+"
+```
+
+
+{{< include partials/intro.qmd >}}
+
+::: {.notes}
+Då var det onsdag och dags för veckobladet i vanlig ordning.
+
+Detta var första veckan med schemat vi tänker oss framåt.
+:::
+
+# Changelog {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Library_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+
+::: {.patch-notes .auto-rotator}
+<!-- Ctrl+h remove regular expression </?(ul|div)> Also replace the first <li> with "- " to get the bullets to work properly. -->
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+<li><span style="color:#ffbf40">Mana Attuned</span> is no longer removed from a player after a long‑distance teleport within a battleground.</li>
+<li>The root effect of <span style="color:#ffbf40">Icicles</span> on its caster can no longer trigger negative effects.</li>
+<li><span style="color:#ffbf40">Kel'Thuzad</span>'s <span style="color:#ffbf40">Frostbolt</span>, <span style="color:#ffbf40">Frostbolt Volley</span>, <span style="color:#ffbf40">Frost Blast</span>, <span style="color:#ffbf40">Shadow Fissure</span> and <span style="color:#ffbf40">Mind Control</span> now share a 5‑second global cooldown.</li>
+<li>Fixed the missing money reward for the quest <span style="color:#ffbf40">A Dear Friend</span>.</li>
+<li>Fixed an unintended quest completion for the quest <span style="color:#ffbf40">Storm, Twilight and Hammer</span>.</li>
+<li>Added missing spawn points for <span style="color:#ffbf40">Bookie Herod</span> in Stranglethorn Vale.</li>
+<li>Player‑vs‑Player damage reduction no longer applies when one of the participants is under <span style="color:#ffbf40">Mind Control</span>.</li>
+<li><span style="color:#ffbf40">Searing Infernals</span> are now immune to bleed effects and will no longer occasionally hold weapons.</li>
+<li>Open‑world creatures with <span style="color:#ffbf40">Mind Control</span> abilities will now avoid targeting Hardcore players, preventing griefing.</li>
+<li>Reduced the respawn time of <span style="color:#ffbf40">Saltscale Murlocs</span> in The Vile Reef.</li>
+<li>Illusions can no longer be used inside battlegrounds.</li>
+<li>Corrected the item icons for <span style="color:#ffbf40">Mana Jade</span> and <span style="color:#ffbf40">Mana Agate</span>.</li>
+<li>Mage's <span style="color:#ffbf40">Ignite</span> no longer triggers from non‑Mage spells or abilities, such as grenades.</li>
+<li>Shaman's <span style="color:#ffbf40">Totemic Mastery</span> now correctly affects <span style="color:#ffbf40">Stoneskin Totem</span>.</li>
+<li>Fixed an issue where a tamed <span style="color:#ffbf40">Sewer Beast</span> would not respond to attack commands.</li>
+<li>Increased the chance to obtain an additional <span style="color:#ffbf40">Black Lotus</span> on high‑level herb nodes to 6 %.</li>
+<li>Bloodmage Lynnore’s quests in the Blasted Lands now require six fewer <span style="color:#ffbf40">Basilisk Brains</span> and <span style="color:#ffbf40">Vulture Gizzards</span>.</li>
+<li>Weekly <span style="color:#ffbf40">War Supplies Cache</span> now offers increased material and consumable rewards.</li>
+<li>Weekly <span style="color:#ffbf40">Molten Supplies Cache</span> has been modified and now provides higher rewards.</li>
+
+
+:::
+
+::: {.notes}
+KT har en 5s GCD på sina abilities.
+
+Illussions gor inte att använda i battlegrounds längre.
+
+Fire mage ignite can inte triggas av andra fire effekter såsom granater och traps
+
+Totemic Mastery påverkar Stoneskin totem
+
+Ökad extra Black Lotus chans (som när man plockar dreamfoil)
+
+BL buffarna ifrån Bloodmage Lynnore (INT/SPR) kräver inte lika mycket material
+
+Weekly war supplies cache ger mer. Molten Supplies Cache ger **bättre** saker
+:::
+
+
+# Föregående vecka {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/CoT_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+
+```{r}
+#| echo: false
+#| results: asis
+schedule <- list(
+  list(day = "Onsdag", time = "20:00", title = "Chill MC", img = "mc.png"),
+  list(day = "Torsdag", time = "20:00", title = "⭐Kara40", img = "returntokara.png"),
+  list(day = "Fredag", time = "20:90", title = "BWL", img = "bwl.png"),
+  list(day = "Lördag", time = "20:00", title = "AQ40", img = "aq40.png"),
+  list(day = "Söndag", time = "20:00", title = "⭐Kara40", img = "returntokara.png"),
+  list(day = "Måndag", time = "20:00", title = "Chill ZG", img = "zg.png"),
+  list(day = "Tisdag", time = "19:30", title = "Naxx", img = "naxx.png")
+)
+cat(schedule_presentation(schedule))
+```
+
+::: {.notes}
+Vi behöver lite förstärkning på master looters och combat loggers. Är du intresserad av att hjälpa till med något av detta får du gärna flagga intresse hos rädledaren, förståss innan räden!
+
+Vi saknar loggar för BWL och MC så dessa får ni inte mer information om.
+:::
+
+
+```{r}
+#| echo: false
+#| results: asis
+if (!is.null(kara_session)) {
+  message("Including Kara partial, session: ", kara_session)
+  res <- knitr::knit_child(here("veckobladet", "partials", "kara.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+if (!is.null(naxx_session)) {
+  res <- knitr::knit_child(here("veckobladet", "partials", "naxx.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+if (!is.null(aq40_session)) {
+  res <- knitr::knit_child(here("veckobladet", "partials", "aq.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+if (!is.null(bwl_session)) {
+  res <- knitr::knit_child(here("veckobladet", "partials", "bwl.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+if (!is.null(mc_session)) {
+  res <- knitr::knit_child(here("veckobladet", "partials", "mc.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+```
+
+
+# Kommande vecka {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/ToK_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+
+```{r}
+#| echo: false
+#| results: asis
+schedule <- list(
+  list(day = "Onsdag", time = "20:00", title = "Chill MC", img = "mc.png"),
+  list(day = "Torsdag", time = "20:00", title = "⭐Kara40", img = "returntokara.png"),
+  list(day = "Fredag", time = "20:90", title = "BWL", img = "bwl.png"),
+  list(day = "Lördag", time = "20:00", title = "AQ40", img = "aq40.png"),
+  list(day = "Söndag", time = "20:00", title = "⭐Kara40", img = "returntokara.png"),
+  list(day = "Måndag", time = "20:00", title = "Chill ZG", img = "zg.png"),
+  list(day = "Tisdag", time = "19:30", title = "Naxx", img = "naxx.png")
+)
+cat(schedule_presentation(schedule))
+```
+
+# Avslut {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Nordanaar_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+- Schemat fortsätter med att rädstart 20:00 (förutom naxx 19:30)
+- K40 - Fokus på Kruul, när vi fått ner honom behöver vi dra ned Medivh en gång.
+
+
+::: {.notes}
+
+Glöm inte bort att vi justerat rädtiderna nu. Eventuellt att vi drar någon minut extra efter 22:00 om vi tar en paus vid 21:00 mellan våra elixir. Avvakta med 2h buffar till vi är vid första bossen. ;D
+
+:::

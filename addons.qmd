@@ -1,7 +1,11 @@
 ---
 page-layout: full
 ---
-
+<style>
+  :root {
+    --background-image: url("https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/bgs/Development_Basement_Artwork");
+  }
+</style>
 # ![Addons](https://res.cloudinary.com/dhmmkvcpy/image/upload/v1761464268/res/addons.png)
 
 Samling av lite mer detaljerad information om specifika addons. Kanske rakt av lista på de krav vi ställer här istället för i rädkrav?

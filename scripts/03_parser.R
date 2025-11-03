@@ -104,15 +104,40 @@ ensure_session_part <- function(con, session_id, part_number, part_start, part_e
 # ----------------------------------------------------------
 
 insert_loot_batch <- function(con, part_id, loot_df) {
-  if (nrow(loot_df) == 0) return(invisible())
+  # ── Guard clause ────────────────────────────────────────────────
+  if (is.null(loot_df) || nrow(loot_df) == 0) {
+    cli_alert_info(paste("💤 No loot entries to insert for part", part_id))
+    return(invisible())
+  }
 
-  # 🧹 Deduplicate identical part_id + player + item_id before insert
+  # ── Deduplicate by unique key (part_id, player_name, item_id) ──
   loot_df <- loot_df %>%
-    group_by(player_name, item_id, item_name, item_rarity) %>%
-    summarise(item_quantity = sum(item_quantity, na.rm = TRUE), .groups = "drop")
+    mutate(
+      player_name = trimws(player_name),
+      item_name   = trimws(item_name)
+    ) %>%
+    group_by(player_name, item_id) %>%
+    summarise(
+      item_name     = first(na.omit(item_name)),
+      item_rarity   = first(na.omit(item_rarity)),
+      item_quantity = sum(item_quantity, na.rm = TRUE),
+      .groups = "drop"
+    )
 
+  # ── Sanity check for duplicates ─────────────────────────────────
+  dupes <- loot_df %>%
+    group_by(player_name, item_id) %>%
+    filter(n() > 1)
+  if (nrow(dupes) > 0) {
+    cli_alert_warning("⚠️ Duplicate loot keys detected prior to insert:")
+    print(dupes)
+  }
+
+  # ── Build SQL ───────────────────────────────────────────────────
   sql <- "
-    INSERT INTO loot (part_id, player_name, item_name, item_rarity, item_quantity, item_id)
+    INSERT INTO loot (
+      part_id, player_name, item_name, item_rarity, item_quantity, item_id
+    )
     SELECT UNNEST($1::int[]),
            UNNEST($2::text[]),
            UNNEST($3::text[]),
@@ -120,20 +145,29 @@ insert_loot_batch <- function(con, part_id, loot_df) {
            UNNEST($5::int[]),
            UNNEST($6::int[])
     ON CONFLICT (part_id, player_name, item_id)
-    DO UPDATE SET item_quantity = loot.item_quantity + EXCLUDED.item_quantity;
+    DO UPDATE
+      SET item_quantity = loot.item_quantity + EXCLUDED.item_quantity;
   "
 
-  dbExecute(con, sql, list(
-    to_pg_array(rep(part_id, nrow(loot_df))),
-    to_pg_array(loot_df$player_name),
-    to_pg_array(loot_df$item_name),
-    to_pg_array(loot_df$item_rarity),
-    to_pg_array(loot_df$item_quantity),
-    to_pg_array(loot_df$item_id)
-  ))
-
-  cli_alert_success(paste("💰 Inserted", nrow(loot_df), "unique loot entries for part", part_id))
+  # ── Execute safely ──────────────────────────────────────────────
+  tryCatch({
+    dbExecute(con, sql, list(
+      to_pg_array(rep(part_id, nrow(loot_df))),
+      to_pg_array(loot_df$player_name),
+      to_pg_array(loot_df$item_name),
+      to_pg_array(loot_df$item_rarity),
+      to_pg_array(loot_df$item_quantity),
+      to_pg_array(loot_df$item_id)
+    ))
+    cli_alert_success(paste("💰 Inserted", nrow(loot_df),
+                            "unique loot entries for part", part_id))
+  },
+  error = function(e) {
+    cli_alert_danger(paste("❌ Failed to insert loot for part", part_id, ":", e$message))
+    stop(e)
+  })
 }
+
 
 insert_entity_deaths_batch <- function(con, part_id, deaths_df) {
   if (nrow(deaths_df) == 0) return(invisible())

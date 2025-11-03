@@ -1,0 +1,196 @@
+---
+description: "Kruul gick ned för första gången"
+date: 2025-10-29
+image: https://res.cloudinary.com/dhmmkvcpy/image/upload/t_250x100/thumb/kruul
+footer: "Veckobladet 44 (2025) - [🏠 Tillbaka till hemsidan](https://www.fika-guild.xyz)"
+format: 
+  revealjs:
+    title-slide: false
+    theme: veckobladet.scss
+freeze: true
+---
+# Veckobladet V.44 2025 {.no-title background-image="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto/f_auto/t_1920x1080/bgs/mysteries" }
+
+```{r}
+library(here)
+here::i_am("veckobladet/V43-2025.qmd")
+
+# Now source your scripts - these should all work
+source(here("scripts", "01_database.R"))
+# source(here("scripts", "02_registry.R")) 
+# source(here("scripts", "03_parser.R"))
+# source(here("scripts", "04_data_entry.R"))
+source(here("scripts", "05_queries.R")) 
+source(here("scripts", "06_presentation.R"))
+
+
+current_week <- 44
+current_year <- 2025
+
+prepare_week_data(current_year, current_week-1)
+kara_session <- get_session_id_cached("Kara", current_year, current_week-1)
+naxx_session <- get_session_id_cached("Naxx", current_year, current_week-1)  
+aq40_session <- get_session_id_cached("AQ40", current_year, current_week-1)
+bwl_session <- get_session_id_cached("BWL", current_year, current_week-1)
+mc_session <- get_session_id_cached("MC", current_year, current_week-1)
+
+kara_text <- "
+
+Kruul nere för första gången
+"
+kara_notes <- "
+
+
+"
+
+naxx_text <- "
+
+
+"
+
+naxx_notes <- "
+
+
+"
+
+aq_text <- "
+
+
+"
+
+aq_notes <- "
+
+
+"
+
+bwl_text <- "
+
+
+"
+
+bwl_notes <- "
+BWL ntoes
+"
+
+mc_text <- "
+
+
+"
+
+mc_notes <- "
+mc notes
+"
+```
+
+
+{{< include partials/intro.qmd >}}
+
+::: {.notes}
+Då var det onsdag och dags för veckobladet i vanlig ordning.
+
+Detta var första veckan med schemat vi tänker oss framåt.
+:::
+
+# Changelog {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Library_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+
+::: {.patch-notes .auto-rotator}
+<!-- Ctrl+h remove regular expression </?(ul|div)> Also replace the first <li> with "- " to get the bullets to work properly. -->
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+<li><span style="color:#ffbf40">Blooming Bud</span> healing now correctly avoids consuming resources or triggering other effects.</li>
+<li><span style="color:#ffbf40">Cloak of Flowing Fire</span>, <span style="color:#ffbf40">Tattered Orcish Shawl</span>, <span style="color:#ffbf40">Tattered Crimson Shabrack</span> and <span style="color:#ffbf40">Drape of Groldan</span> can now be enchanted.</li>
+<li>Inventory type corrected for <span style="color:#ffbf40">Shadowblaster</span>.</li>
+<li><span style="color:#ffbf40">Krug Skullsplitter</span> will no longer wound himself with <span style="color:#ffbf40">Mortal Strike</span>.</li>
+<li><span style="color:#ffbf40">Nippsy's Precision Rifle</span>, <span style="color:#ffbf40">Standard Grade Rifle</span>, <span style="color:#ffbf40">Beasthunter's Blunderbuss</span>, <span style="color:#ffbf40">Zan's Leperification Blaster</span>, <span style="color:#ffbf40">Slag Slugger</span> and <span style="color:#ffbf40">Waterlogged Blunderbuss</span> now benefit from ammo pouches.</li>
+<li>Illusions will now be removed upon entering a battleground as well.</li>
+<li>Fixed the position of <span style="color:#ffbf40">Mal'adaris</span> so he no longer clips the cart.</li>
+<li>Fixed mobs being stuck inside <span style="color:#ffbf40">Widow's Nest</span>.</li>
+<li>Fixed several <span style="color:#ffbf40">Corrupted Songflowers</span> that were not functioning properly.</li>
+<li>Leaving the arena queue will no longer cause you to leave all battleground queues.</li>
+<li>A confirmation dialog now appears when changing <span style="color:#ffbf40">blacksmithing</span> specializations.</li>
+<li>New transmog items have been added to the shop and to NPCs <span style="color:#ffbf40">Karlos Fieldings</span>, <span style="color:#ffbf40">Ostantino Villantes</span>, <span style="color:#ffbf40">Rixi Lamour</span>, <span style="color:#ffbf40">Riccarda Thillamore</span>, <span style="color:#ffbf40">Vivi McGoldings</span> and <span style="color:#ffbf40">Stella Verve</span>.</li>
+<li>The cannon used in the quest <span style="color:#ffbf40">Death From Below</span> will no longer kill players during the naga attack phase.</li>
+<li><span style="color:#ffbf40">Dark Harvest</span> no longer affects Affliction spells cast by other Warlocks.</li>
+<li>Pet Command <span style="color:#ffbf40">Take Position</span> can no longer be used while mounted.</li>
+
+
+:::
+
+::: {.notes}
+
+:::
+
+
+# Föregående vecka {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/CoT_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+
+```{r}
+#| echo: false
+#| results: asis
+schedule <- list(
+  list(day = "Onsdag", time = "20:00", title = "Chill MC", img = "mc.png"),
+  list(day = "Torsdag", time = "20:00", title = "⭐Kara40", img = "returntokara.png"),
+  list(day = "Fredag", time = "20:90", title = "BWL", img = "bwl.png"),
+  list(day = "Lördag", time = "20:00", title = "AQ40", img = "aq40.png"),
+  list(day = "Söndag", time = "20:00", title = "⭐Kara40", img = "returntokara.png"),
+  list(day = "Måndag", time = "20:00", title = "Chill ZG", img = "zg.png"),
+  list(day = "Tisdag", time = "19:30", title = "Naxx", img = "naxx.png")
+)
+cat(schedule_presentation(schedule))
+```
+
+::: {.notes}
+
+:::
+
+
+```{r}
+#| echo: false
+#| results: asis
+if (!is.null(kara_session)) {
+  message("Including Kara partial, session: ", kara_session)
+  res <- knitr::knit_child(here("veckobladet", "partials", "kara.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+if (!is.null(naxx_session)) {
+  res <- knitr::knit_child(here("veckobladet", "partials", "naxx.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+if (!is.null(aq40_session)) {
+  res <- knitr::knit_child(here("veckobladet", "partials", "aq.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+if (!is.null(bwl_session)) {
+  res <- knitr::knit_child(here("veckobladet", "partials", "bwl.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+if (!is.null(mc_session)) {
+  res <- knitr::knit_child(here("veckobladet", "partials", "mc.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+```
+
+
+# Kommande vecka {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/ToK_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+
+```{r}
+#| echo: false
+#| results: asis
+schedule <- list(
+  list(day = "Onsdag", time = "20:00", title = "Chill MC", img = "mc.png"),
+  list(day = "Torsdag", time = "20:00", title = "⭐Kara40", img = "returntokara.png"),
+  list(day = "Fredag", time = "20:90", title = "BWL", img = "bwl.png"),
+  list(day = "Lördag", time = "20:00", title = "AQ40", img = "aq40.png"),
+  list(day = "Söndag", time = "20:00", title = "⭐Kara40", img = "returntokara.png"),
+  list(day = "Måndag", time = "20:00", title = "Chill ZG", img = "zg.png"),
+  list(day = "Tisdag", time = "19:30", title = "Naxx", img = "naxx.png")
+)
+cat(schedule_presentation(schedule))
+```

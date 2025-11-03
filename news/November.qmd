@@ -1,0 +1,11 @@
+---
+description: "Fika Nyheter - November"
+date: 2025-11-06
+image: https://res.cloudinary.com/dhmmkvcpy/image/upload/t_250x100/thumb/Ano
+freeze: true
+---
+# 🗞️ November
+
+Här kan vi skriva i lite mer klartext det vi vill förmedla till guilden och länka till det publika protokollet av officermötet. Klassledarmötet har mer direkt information om specifika spelare och är antagligen inte lämpligt att skicka ut publikt; det som behöver förmedlas kan förmedlas  typ här istället eller bakas in lite smidigt i officerprotokollet.
+
+Vi har absolut möjlighet

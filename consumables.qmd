@@ -1,6 +1,11 @@
 ---
 page-layout: full
 ---
+<style>
+  :root {
+    --background-image: url("https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/bgs/Northwind");
+  }
+</style>
 # Förnödenheter
 
 Här listar vi de förnödenheter vi ställer krav på samt lite till.

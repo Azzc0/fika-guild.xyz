@@ -2,14 +2,14 @@
 description: "Schackmatt"
 date: 2025-10-15
 image: https://res.cloudinary.com/dhmmkvcpy/image/upload/t_250x100/thumb/chess
-footer: "Veckobladet 42 (2025) - [🏠 Tillbaka till hemsidan](https://your-domain.com)"
+footer: "Veckobladet 42 (2025) - [🏠 Tillbaka till hemsidan](https://www.fika-guild.xyz)"
 format: 
   revealjs:
     title-slide: false
 freeze: true
 ---
 
-# V.42 2025 {.no-title background-image="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto/f_auto/t_1920x1080/bgs/mysteries" }
+# Veckobladet V.42 2025 {.no-title background-image="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto/f_auto/t_1920x1080/bgs/mysteries" }
 
 ```{r}
 library(here)

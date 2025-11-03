@@ -13,3 +13,8 @@ listing:
   image-height: 120px
   image-placeholder: https://res.cloudinary.com/dhmmkvcpy/image/upload/t_250x100/bgs/mysteries
 ---
+<style>
+  :root {
+    --background-image: url("https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/bgs/Turtle-Wow_Anniversary_Illustration");
+  }
+</style>
