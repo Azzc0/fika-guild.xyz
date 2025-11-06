@@ -1,0 +1,230 @@
+---
+description: "Första blick på Medivh"
+date: 2025-11-05
+image: https://res.cloudinary.com/dhmmkvcpy/image/upload/t_250x100/thumb/kruul
+footer: "Veckobladet 45 (2025) - [🏠 Tillbaka till hemsidan](https://www.fika-guild.xyz)"
+format: 
+  revealjs:
+    title-slide: false
+    theme: veckobladet.scss
+freeze: true
+---
+# Veckobladet V.45 2025 {.no-title background-image="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto/f_auto/t_1920x1080/bgs/mysteries" }
+
+```{r}
+library(here)
+here::i_am("veckobladet/V45-2025.qmd")
+
+# Now source your scripts - these should all work
+source(here("scripts", "01_database.R"))
+# source(here("scripts", "02_registry.R")) 
+# source(here("scripts", "03_parser.R"))
+# source(here("scripts", "04_data_entry.R"))
+source(here("scripts", "05_queries.R")) 
+source(here("scripts", "06_presentation.R"))
+
+
+current_week <- 45
+current_year <- 2025
+
+prepare_week_data(current_year, current_week-1)
+kara_session <- get_session_id_cached("Kara", current_year, current_week-1)
+naxx_session <- get_session_id_cached("Naxx", current_year, current_week-1)  
+aq40_session <- get_session_id_cached("AQ40", current_year, current_week-1)
+bwl_session <- get_session_id_cached("BWL", current_year, current_week-1)
+mc_session <- get_session_id_cached("MC", current_year, current_week-1)
+
+kara_text <- "
+
+Krull nere igen, vi tog också en snabb titt på Medivh,
+"
+kara_notes <- "
+
+
+"
+
+naxx_text <- "
+
+Kanske lite väl många utan Naxx rollen. Vi kunde inte rimligt hålla de som fick hänga med i handen och framöver tar vi höjd för att vi rakt av nekar inträde.
+"
+
+naxx_notes <- "
+En outtalad förutsättning när man får hänga med utan att upfylla kraven är att skapa så lite friktion som möjligt. Inköpslistor, rädguider och liknande har vi länkad i våra signup. Kan du inte slipa till gearet så kan du i alla fall fila på att ha med rätt saker och förståelse för fighterna.
+
+"
+
+aq_text <- "
+
+
+"
+
+aq_notes <- "
+
+
+"
+
+bwl_text <- "
+
+
+"
+
+bwl_notes <- "
+BWL ntoes
+"
+
+mc_text <- "
+
+
+"
+
+mc_notes <- "
+mc notes
+"
+```
+
+
+{{< include partials/intro.qmd >}}
+
+::: {.notes}
+Så då har vi igång veckobladet igen. I början av månaden har vi lite saker vi vill belysa ifrån officermöte.
+:::
+
+# [Changelog](https://forum.turtle-wow.org/viewtopic.php?t=22727) {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Library_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+
+::: {.patch-notes .auto-rotator}
+<!-- Ctrl+h remove regular expression </?(ul|div)> Also replace the first <li> with "- " to get the bullets to work properly. -->
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+<li>Players can no longer learn talents while dead. This resolves intermittent issues where such talents did not work as expected until the player relogged.</li>
+<li>Effects from items such as <span style="color:#ffbf40">Runeblade</span> of <span style="color:#ffbf40">Baron Rivendare</span> now properly reapply after resurrection.</li>
+<li><span style="color:#ffbf40">Totemic Slam</span> no longer triggers unintended effects, such as <span style="color:#ffbf40">Totem of the Corrupted Current</span>.</li>
+<li>Fixed an issue where summoning the <span style="color:#ffbf40">Eye of Kilrogg</span> could cause the warlock’s pet to become lost.</li>
+<li>Abilities and spells that scale with Attack Power now correctly include bonuses against specific creature types.</li>
+<li>Fixed pathing issues near <span style="color:#ffbf40">Hearthglen</span>.</li>
+<li>Fixed pathing issues in the outer areas of <span style="color:#ffbf40">Blackrock Depths</span>.</li>
+<li><span style="color:#ffbf40">The Blazing Pan</span> has been slightly buffed to deal better damage than the easier‑to‑obtain <span style="color:#ffbf40">Half‑Eaten Mutton Chop</span>.</li>
+<li><span style="color:#ffbf40">Serena Bloodfeather</span> will now always drop loot.</li>
+<li><span style="color:#ffbf40">Crossfaction Battlegrounds</span> will start to be active on our PvE realms. This means that you might get sorted into the opposing faction to fight for instead. We will first enable this on Warsong Gulch and enable the other Battlegrounds throughout the week.</li>
+
+:::
+
+::: {.notes}
+En mindre Patch har kommit i veckan och det verkar som att du måste ladda ned den med launchern. Om du inte använder launchern sedan innan bör du kunna dra igång, ladda ner, och återgå till det sätt du startar spelet.
+
+Utöver cross faction PVP är det allmänna buggfixar denna veckan.
+:::
+
+
+# Föregående vecka {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/CoT_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+
+```{r}
+#| echo: false
+#| results: asis
+schedule <- list(
+  list(day = "Onsdag", time = "20:00", title = "Chill MC", img = "mc.png"),
+  list(day = "Torsdag", time = "20:00", title = "⭐Kara40", img = "returntokara.png"),
+  list(day = "Fredag", time = "20:30", title = "BWL", img = "bwl.png"),
+  list(day = "Lördag", time = "20:00", title = "AQ40", img = "aq40.png"),
+  list(day = "Söndag", time = "20:00", title = "⭐Kara40", img = "returntokara.png"),
+  list(day = "Måndag", time = "20:00", title = "Chill ZG", img = "zg.png"),
+  list(day = "Tisdag", time = "19:30", title = "Naxx", img = "naxx.png")
+)
+cat(schedule_presentation(schedule))
+```
+
+::: {.notes}
+Inga konstigheter med rädplaneringen förra veckan.
+:::
+
+
+```{r}
+#| echo: false
+#| results: asis
+if (!is.null(kara_session)) {
+  message("Including Kara partial, session: ", kara_session)
+  res <- knitr::knit_child(here("veckobladet", "partials", "kara.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+if (!is.null(naxx_session)) {
+  res <- knitr::knit_child(here("veckobladet", "partials", "naxx.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+if (!is.null(aq40_session)) {
+  res <- knitr::knit_child(here("veckobladet", "partials", "aq.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+if (!is.null(bwl_session)) {
+  res <- knitr::knit_child(here("veckobladet", "partials", "bwl.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+if (!is.null(mc_session)) {
+  res <- knitr::knit_child(here("veckobladet", "partials", "mc.qmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+```
+
+
+# Kommande vecka {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/ToK_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+
+```{r}
+#| echo: false
+#| results: asis
+schedule <- list(
+  list(day = "Onsdag", time = "20:00", title = "Chill MC", img = "mc.png"),
+  list(day = "Torsdag", time = "20:00", title = "⭐Kara40", img = "returntokara.png"),
+  list(day = "Fredag", time = "20:90", title = "BWL", img = "bwl.png"),
+  list(day = "Lördag", time = "20:00", title = "AQ40", img = "aq40.png"),
+  list(day = "Söndag", time = "20:00", title = "⭐Kara40", img = "returntokara.png"),
+  list(day = "Måndag", time = "19:00", title = "Kara10", img = "kara.png"),
+  list(day = "Måndag", time = "20:00", title = "Chill ZG", img = "zg.png"),
+  list(day = "Tisdag", time = "19:30", title = "Naxx", img = "naxx.png")
+)
+cat(schedule_presentation(schedule))
+```
+
+::: {.notes}
+Vi kommer lägga upp en återkommande Lower Karazhan Halls om måndagarna innan ZG. Ingen utsedd rädledare men med en stående tid kanske lite fikisar ansluter och samlar ihop lite Overcharged Ley Energy som kommer behövas för T3.5, kanske någon fin Legendary drop men också en bra skjuts på vägen för lite nykomlingar.
+
+Fredzy kommer ta över RL hatten i Naxxramas på tisdagarna
+:::
+
+# Officermöte {background-video="https://res.cloudinary.com/dhmmkvcpy/video/upload/f_mp4/video/Nordanaar_bg.mp4" background-video-loop="true" preload="auto" background-video-muted="true" background-opacity="0.5"}
+- Aktiv Tailor söker vi för AR crafts.
+- Aktivt arbete runt sammanställning av guild information pågår.
+
+::: {.patch-notes .auto-rotator style="bottom:1em;height:12em;"}
+<!-- Ctrl+h remove regular expression </?(ul|div)> Also replace the first <li> with "- " to get the bullets to work properly. -->
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+- &nbsp;  <!-- Invisible spacer -->
+- &nbsp;  <!-- Invisible spacer -->  
+<li><span style="color:#ffff00;font-family:'Cinzel',serif;">Stompzilla has been promoted to Klassledare</span></li>
+<li><span style="color:#ffff00;font-family:'Cinzel',serif;">Trdn has been promoted to Klassledare</span></li>
+<li><span style="color:#ffff00;font-family:'Cinzel',serif;">Cliffholger has been promoted to Klassledare</span></li>
+<li><span style="color:#ffff00;font-family:'Cinzel',serif;">Kaviar has been demoted to Core</span></li>
+<li><span style="color:#ffff00;font-family:'Cinzel',serif;">Boonkers has switched to Gomegedon (Mage)</span></li>
+<li><span style="color:#ffff00;font-family:'Cinzel',serif;">SR+ poängen i ToK ändras till +5 (från +10) per event.</span></li>
+<li><span style="color:#ffff00;font-family:'Cinzel',serif;">Wartorn Plate Scraps kommer vi köpa in - Fri OS rullning på T3 tokens. </span></li>
+:::
+
+::: {.notes}
+
+Boonkers kommer vi numera kalla Gnomegedon. Istället för en Core Prospect rank på sin warrior går han Mage istället. Han har visat fina egenskaper och vi försöker få upp honom i nivå så han kan ansluta till Kara40 så snart som möjligt i en roll som vi behöver. Vi kommer rakt ut att särbehandla denna karaktär ett tag.
+
+Kaviar lämnar plats för Ugge i klassledar ranken. Kaviar har inte på något som helst vis missskött sig, Ugge är antagligen mer intresserad av åtagandet som klassledare och förlängning av officers.
+
+Är du intresserad av att hjälpa till lite mer får du gärna flagga intresse hos din klassledare.
+
+I Naxxramas kommer vi inte längre bromsa med OS rullningar på T3 tokens, priserna på plate scraps har rasat och vi köper in efter behov.
+
+I Tower of Karazhan sänker vi SR+ poängen per event till 5. På så vis har vi samma akkumelering av poäng som i andra räder. +10 per vecka. Vi kommer INTE göra några retroaktiva ändringar, har du varit med i progress tidigt och fått extra poäng så grattis.
+
+:::

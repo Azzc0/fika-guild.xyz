@@ -1,0 +1,113 @@
+---
+title: "Tooltip System Test"
+format: html
+---
+<script src="js/tooltips.js"></script>
+# WoW Tooltip System Test
+
+This document demonstrates the tooltip system with various examples.
+
+## Enhanced Syntax Testing
+
+**Display Text Override:**
+- {{spell:133 "FB"}} (custom display text)
+- {{custom.items:free_action_potion "FAP"}} (abbreviated name)
+
+**Flag Testing:**
+- {{spell:133 no-icon}} (no inline icon)
+- {{spell:2136 "Fire Blast" no-icon}} (custom text, no icon)
+- {{custom.items:free_action_potion no-tooltip-icon}} (has inline icon but no tooltip icon)
+- {{spell:116 "Frostbolt" no-icon no-tooltip-icon}} (minimal display)
+
+ENCHANT: {{spell:20034}}
+
+**Mixed Examples:**
+Use {{spell:133 "FB"}} and {{spell:2136 "FB2" no-icon}} in your rotation for maximum DPS.
+
+## Spell Tooltips
+
+**Custom Curated Spells:**
+- {{custom.spells:fireball_r1}} (curated content)
+- {{custom.spells:greater_heal_r1}} (curated healing spell)
+
+**Enchantment Spell:**
+- {{custom.spells:enchant_weapon_crusader}} (enchanting profession spell with reagents)
+
+**Fallback to Database:**
+Basic spell reference: {{spell:133}}
+
+Spell with custom text: Use {{spell:133}} in your rotation.
+
+Multiple spells: Mages should cast {{spell:116}} or {{spell:2136}}.
+
+## Custom Items
+
+Free Action Potion: {{custom.items:free_action_potion}}
+
+With abbreviation: Bring {{custom.items:free_action_potion}} to every BWL raid.
+
+Multiple items: Stack up on {{custom.items:greater_fire_protection_potion}} and {{custom.items:free_action_potion}}.
+
+Crafted item with crafting info: {{custom.items:dark_iron_bracers}} (shows secondary crafting frame)
+
+Legendary: Have you seen {{custom.items:thunderfury}}?
+
+Flask: Pop your {{custom.items:flask_of_supreme_power}} before pull.
+
+## Custom Achievements
+
+Achievement reference: {{custom.achievements:naxx_cleared_2024}}
+
+With custom text: We {{custom.achievements:naxx_cleared_2024}} last month!
+
+Another: Remember our {{custom.achievements:first_onyxia_kill}}?
+
+## Mixed Content
+
+A typical raid preparation guide:
+
+1. Bring {{custom.items:free_action_potion}} x20 for movement impairs
+2. Bring {{custom.items:greater_fire_protection_potion}} x20 for fire damage
+3. Flask users should use {{custom.items:flask_of_supreme_power}}
+4. Mages: Spec into {{spell:11113}} for AoE trash
+5. Warriors: Keep {{spell:2565}} up on bosses
+
+## Testing Fallbacks
+
+Non-existent spell: {{spell:999999}} (should show "Missing entry")
+
+Non-existent custom item: {{custom.items:nonexistent_item}} (should show "Missing entry")
+
+## Inline Text Styling
+
+Notice how items display in different colors based on rarity:
+
+- {{custom.items:free_action_potion}} (common - white)
+- {{custom.items:dark_iron_bracers}} (uncommon - green)  
+- {{custom.items:flask_of_supreme_power}} (epic - purple)
+- {{custom.items:thunderfury}} (legendary - orange)
+
+And achievements in epic purple: {{custom.achievements:naxx_cleared_2024}}
+
+## Complex Example
+
+### Chromaggus Strategy
+
+**Phase 1:**
+- Tank positions boss at north wall
+- Melee stack behind boss
+- Ranged spread 10 yards apart
+- Use {{custom.items:free_action_potion}} when you get {{spell:23170}}
+
+**Phase 2 (Breath Combos):**
+- Fire + Shadow: Pop {{custom.items:greater_fire_protection_potion}}
+- Frost + Nature: Priests use {{spell:10901}} on raid
+- Arcane + Time Lapse: Just heal through it
+
+**Consumables:**
+- Main tank: {{custom.items:flask_of_supreme_power}} + {{custom.items:greater_fire_protection_potion}}
+- Healers: Max mana consumables
+- DPS: {{custom.items:flask_of_supreme_power}} if available
+
+**Achievement:** Clear this for {{custom.achievements:naxx_cleared_2024}}!
+

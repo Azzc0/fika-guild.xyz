@@ -1,0 +1,179 @@
+// tooltips.scss
+// WoW-style tooltip styling for Fika Guild website
+
+// Rarity colors (WoW standard)
+$rarity-poor: #9d9d9d;
+$rarity-common: #ffffff;
+$rarity-uncommon: #1eff00;
+$rarity-rare: #0070dd;
+$rarity-epic: #a335ee;
+$rarity-legendary: #ff8000;
+$spell-color: #FFD700; // Gold for spells
+
+// Base turtle-link styling
+.turtle-link {
+  cursor: pointer;
+  text-decoration: none;
+  border-bottom: 1px dotted currentColor;
+  transition: opacity 0.2s ease;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+  
+  // Spell styling
+  &.spell {
+    color: $spell-color;
+    font-weight: 500;
+  }
+  
+  // Item rarity colors
+  &.item {
+    font-weight: 500;
+    
+    &.poor {
+      color: $rarity-poor;
+    }
+    
+    &.common {
+      color: $rarity-common;
+    }
+    
+    &.uncommon {
+      color: $rarity-uncommon;
+    }
+    
+    &.rare {
+      color: $rarity-rare;
+    }
+    
+    &.epic {
+      color: $rarity-epic;
+    }
+    
+    &.legendary {
+      color: $rarity-legendary;
+    }
+  }
+  
+  // Achievement styling
+  &.achievement {
+    color: $rarity-epic;
+    font-weight: 500;
+  }
+  
+  // Custom type styling (fallback)
+  &.custom {
+    color: $rarity-uncommon;
+    font-weight: 500;
+  }
+}
+
+// Tooltip container (will eventually replace inline styles in JS)
+.turtle-tooltip {
+  position: absolute;
+  background: #1a1a1a;
+  border: 2px solid #8B4513;
+  border-radius: 8px;
+  padding: 12px;
+  color: #FFD700;
+  font-family: 'Times New Roman', serif;
+  font-size: 14px;
+  max-width: 300px;
+  z-index: 10000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+  display: none;
+  pointer-events: none;
+  
+  // Prevent text selection
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  
+  // Smooth appearance
+  &.visible {
+    display: block;
+    animation: tooltipFadeIn 0.15s ease-out;
+  }
+}
+
+// Tooltip icon
+.turtle-tooltip-icon {
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  z-index: 10001;
+  display: none;
+  pointer-events: none;
+  border: 2px solid #8B4513;
+  border-radius: 4px;
+  background: #1a1a1a;
+  padding: 2px;
+  
+  &.visible {
+    display: block;
+    animation: tooltipFadeIn 0.15s ease-out;
+  }
+}
+
+// Fade in animation
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Inline icon support (future enhancement)
+// This would allow icons to appear inline with text using ::before
+.turtle-link {
+  &[data-show-inline-icon="true"] {
+    position: relative;
+    padding-left: 20px;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 2px;
+      // Background image set dynamically via JS: background-image: url(...)
+    }
+  }
+}
+
+// Dark mode adjustments (if your site has dark mode)
+@media (prefers-color-scheme: dark) {
+  .turtle-tooltip {
+    background: #0d0d0d;
+    border-color: #6B3410;
+  }
+  
+  .turtle-tooltip-icon {
+    background: #0d0d0d;
+    border-color: #6B3410;
+  }
+}
+
+// Print styles (hide tooltips when printing)
+@media print {
+  .turtle-tooltip,
+  .turtle-tooltip-icon {
+    display: none !important;
+  }
+  
+  .turtle-link {
+    border-bottom: none;
+    color: inherit;
+  }
+}

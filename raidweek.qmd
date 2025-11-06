@@ -12,8 +12,7 @@ toc: false
 <div class="raid-week" id="raidSchedule">
     <!-- Content populated by JavaScript -->
 </div>
-<script type="module" src="mock-data.js"></script>
-<script type="module" src="raid-schedule.js"></script>
+<script type="module" src="js/raid-schedule.js"></script>
 ```
 Ovan ser du de räder som ligger på schemat för <Fika>.
 

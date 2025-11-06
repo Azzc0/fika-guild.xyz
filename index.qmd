@@ -12,6 +12,7 @@ listing:
     max-items: 3
     fields: [image, date, title, description]
 ---
+<script src="tooltips.js"></script>
 <style>
   :root {
     --background-image: url("https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/bgs/mysteries.jpg");
@@ -20,5 +21,11 @@ listing:
 
 # ![Välkommen](https://res.cloudinary.com/dhmmkvcpy/image/upload/v1761464273/res/valkommen.png)
 Fika är en svensk [Turtle WoW](https://turtle-wow.org) Guild. Vi räder alldeles för ofta för vårat eget bästa men vi är även öppna för den som bara vill vara lite social i spelet.
+
+<<<spell:51302>>>
+
+<<<custom:free_action_potion|FAP>>>
+
+<<<custom:free_action_potion>>>
 
 ### Våra senaste inlägg:

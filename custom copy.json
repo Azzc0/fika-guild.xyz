@@ -1,0 +1,131 @@
+{
+  "spells": {
+    "fireball_r1": {
+      "name": "Fireball",
+      "rank": "Rank 1",
+      "rarity": 1,
+      "icon": "spell_fire_flamebolt",
+      "id": 133,
+      "description": "Hurls a fiery ball that causes 14 to 23 Fire damage and an additional 2 Fire damage over 4 sec.",
+      "cost": "30 mana",
+      "range": "35 yd range",
+      "castTime": "1.5 sec cast",
+      "tooltip_notes": "Essential spell for Mage leveling. Low damage but reliable for pulling mobs."
+    },
+    "greater_heal_r1": {
+      "name": "Greater Heal",
+      "rank": "Rank 1", 
+      "rarity": 1,
+      "icon": "spell_holy_greaterheal",
+      "id": 2060,
+      "description": "A slow casting spell that heals a single target for 924 to 1039.",
+      "cost": "370 mana",
+      "range": "40 yd range", 
+      "castTime": "3.0 sec cast",
+      "tooltip_notes": "High mana cost but excellent healing efficiency. Use when you have time to cast."
+    },
+    "enchant_weapon_crusader": {
+      "name": "Enchant Weapon - Crusader",
+      "rank": "",
+      "rarity": 1,
+      "icon": "spell_holy_greaterheal",
+      "id": 20034,
+      "description": "Permanently enchant a melee weapon so that often when attacking in melee it heals for 75 to 126 and increases Strength by 100 for 15 sec.",
+      "cost": "",
+      "range": "",
+      "castTime": "5.0 sec cast",
+      "reagents": "Large Brilliant Shard (4), Righteous Orb (2)",
+      "tools": "Runed Arcanite Rod",
+      "tooltip_notes": "High-end enchantment requiring expensive reagents. Popular for melee DPS and tanks."
+    }
+  },
+  "items": {
+    "free_action_potion": {
+      "name": "Free Action Potion",
+      "rarity": 1,
+      "icon": "inv_potion_04",
+      "description": "Removes all movement impairing effects and grants immunity to them for 30 sec.",
+      "id": 5634
+    },
+    "greater_fire_protection_potion": {
+      "name": "Greater Fire Protection Potion",
+      "rarity": 1,
+      "icon": "inv_potion_24",
+      "description": "Absorbs 1950 to 3250 fire damage. Lasts 1 hour.",
+      "id": 13457
+    },
+    "dark_iron_bracers": {
+      "name": "Dark Iron Bracers",
+      "rarity": 4,
+      "icon": "inv_bracer_13",
+      "description": "",
+      "id": 11972,
+      "item_type": "Wrist Plate",
+      "armor": "343 Armor",
+      "stats": [
+        "+12 Stamina",
+        "+18 Fire Resistance"
+      ],
+      "durability": "55 / 55",
+      "binding": "Binds when equipped",
+      "level_requirement": "Requires Level 58",
+      "crafting": {
+        "profession": "Blacksmith",
+        "castTime": "60.0 sec cast",
+        "reagents": "Dark Iron Bar (4), Fiery Core (2), Lava Core (2)",
+        "tools": "Blacksmith Hammer"
+      }
+    },
+    "thunderfury": {
+      "name": "Thunderfury, Blessed Blade of the Windseeker",
+      "rarity": 5,
+      "icon": "inv_sword_39",
+      "description": "Chance on hit: Blasts your enemy with lightning, dealing 300 Nature damage and then jumping to additional nearby enemies. Each jump reduces that victim's Nature resistance by 25. Affects 5 targets. Your primary target is also consumed by a cyclone, slowing its attack speed by 20% for 12 sec.",
+      "id": 19019,
+      "item_type": "One-hand Sword",
+      "damage": "44 - 115 Damage",
+      "speed": "Speed 1.90",
+      "dps": "53.9 damage per second",
+      "stats": [
+        "+16 - 30 Nature Damage",
+        "+5 Agility", 
+        "+8 Stamina",
+        "+8 Fire Resistance",
+        "+9 Nature Resistance"
+      ],
+      "durability": "125 / 125",
+      "binding": "Binds when picked up",
+      "unique": true,
+      "tooltip_notes": "Legendary weapon requiring Left and Right Binding of the Windseeker from Molten Core. The proc effect is one of the most powerful in the game."
+    },
+    "flask_of_supreme_power": {
+      "name": "Flask of Supreme Power",
+      "rarity": 4,
+      "icon": "inv_potion_41",
+      "description": "Increases damage done by magical spells and effects by up to 150 for 2 hr. Counts as both a Battle and Guardian elixir. This effect persists through death.",
+      "id": 13512
+    }
+  },
+  "achievements": {
+    "naxx_cleared_2024": {
+      "name": "Naxxramas Conqueror",
+      "rarity": 4,
+      "icon": "achievement_boss_kelthuzad_01",
+      "description": "Defeated Kel'Thuzad and cleared Naxxramas with Fika Guild in 2024."
+    },
+    "first_onyxia_kill": {
+      "name": "Onyxia's Lair",
+      "rarity": 3,
+      "icon": "achievement_boss_onyxia",
+      "description": "First guild kill of Onyxia - January 2024."
+    }
+  },
+  "custom": {
+    "guild_bank": {
+      "name": "Fika Guild Bank",
+      "rarity": 2,
+      "icon": "inv_misc_coin_01",
+      "description": "Community resource for consumables, crafting materials, and raid supplies. Maintained by guild officers."
+    }
+  }
+}
