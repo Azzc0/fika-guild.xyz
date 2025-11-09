@@ -1,0 +1,29 @@
+---
+page-layout: full
+title: "Naxxramas Raid Guide"
+sidebar: naxxramas-sidebar
+---
+<style>
+  :root {
+    --background-image: url("https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/naxx");
+  }
+</style>
+I Naxxramas är målet att få ned Kel'Thuzad. För att komma dit behöver vi ta ner de fyra vingarna för att aktivera teleporten till toppen. Naxxramas var den högsta nivån av raiding i vanilla wow och det förväntas en hel del av deltagarna i räden.
+
+Till vänster (mobil?) finns det länker till specifika vingar och bossar. Du kan läsa på mer om de specfika delarna där. Behöver luska lite i laytouten, är det rimligt att man går igenom hela? Ska vi gå igenom TWRA assignments, vad man förväntas göra i olika situationer som Tank 4 eller liknande?
+
+Det är kanske inte här jag vill lägga ner tiden just nu men jag vill ha med backgrundsbildem (loading screen)
+
+# Specifika krav
+Du som vill ha rollen "naxx" och kunna signa upp utan att bli förvisad till bänken behöver uppfylla en del krav:
+- Tillgång till Zanza buffar
+- Frost Resistance gear (tanks behöver också vara redo)
+- Rimlig nivå på gear, då pratar vi BWl rustad eller bättre.
+
+## Inköpslista
+I Naxxramas använder vi en drös förnödenheter. 
+
+## Comp
+Vi behöver ha med oss flexibla spelare. Vi använder fler healers specifikt på Patchwerk och Four Horsemen, den sistnämnda behöver vi en hel del extra tanks också. Vi 
+
+4+4 tanks, 8+4 healers

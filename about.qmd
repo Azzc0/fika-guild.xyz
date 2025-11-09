@@ -1,0 +1,20 @@
+---
+page-layout: full
+toc: false
+---
+<style>
+  :root {
+    --background-image: url("https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/bgs/mysteries.jpg");
+  }
+</style>
+
+# ![Välkommen](https://res.cloudinary.com/dhmmkvcpy/image/upload/v1761464273/res/valkommen.png)
+Fika är en svensk [Turtle WoW](https://turtle-wow.org) Guild. Vi räder alldeles för ofta för vårat eget bästa men vi är även öppna för den som bara vill vara lite social i spelet.
+
+## Kaffekokare
+
+Lista upp Officers
+
+Lista upp klassledare (eventuellt med klass och spec)
+
+Nåväl, något vi tar efter hand helt enkelt

@@ -1,0 +1,29 @@
+---
+title: "Naxxramas: Anub'Rekhan"
+sidebar: naxxramas-sidebar
+---
+<style>
+  :root {
+    --background-image: url("https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/raid/naxx");
+  }
+</style>
+{{< video https://vimeo.com/1007220764/aed9c7c78f >}}
+
+{{< video https://youtu.be/j9mxtYB6M4g  >}}
+
+# Abilities
+:::: {.panel-tabset}
+
+# Anub'Rekhan
+
+Abilities
+
+# Adds
+Adds ads adds
+
+
+# Spoders
+Någon text om dem här
+
+
+:::

@@ -12,20 +12,37 @@ listing:
     max-items: 3
     fields: [image, date, title, description]
 ---
-<script src="tooltips.js"></script>
 <style>
   :root {
     --background-image: url("https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/bgs/mysteries.jpg");
+    --custom-bg: url("https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/res/church");
   }
 </style>
 
-# ![Välkommen](https://res.cloudinary.com/dhmmkvcpy/image/upload/v1761464273/res/valkommen.png)
-Fika är en svensk [Turtle WoW](https://turtle-wow.org) Guild. Vi räder alldeles för ofta för vårat eget bästa men vi är även öppna för den som bara vill vara lite social i spelet.
+# {.styled-section .custom-bg .no-title style="min-height: 500px;"}
 
-<<<spell:51302>>>
+<div class="section-content">
+  <button>Jag vill raida!</button>
+  <p>Välkommen till vår lilla värld. Här samlas vi under en och samma kaffekopp</p>
+</div>
 
-<<<custom:free_action_potion|FAP>>>
+![](https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/res/front){.image-overlay style="position: absolute; left: 50%; transform: translateX(-50%); bottom: -50px; max-width: 600px; width: auto; height: auto;"}
 
-<<<custom:free_action_potion>>>
+# Veckobrev {.styled-section style="min-height: 500px;"}
 
-### Våra senaste inlägg:
+<div class="section-content">
+  <p>Här kan vi skriva i lite mer kalrtext det vi vill förmedla till guilden och länka till det publika protokollet av officermötet. Klassledarmötet har mer direkt information om specifika spelare och är antagligne inte lämpligt att skicka ut publit; det som beher förmedlas kan förmedlas typ här istället eller bakas in lite smidigt i offiercerprotokollet.</p>
+  <button>Läs mer</button>
+</div>
+
+![](https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/res/desk){.image-overlay style="position: absolute; left: -11rem; top: 1rem; max-width: 65rem; width: auto; height: auto;"}
+
+# Resurser {.styled-section style="min-height: 500px;"}
+
+<div class="section-content">
+  <p>Här kan vi skriva i lite mer kalrtext det vi vill förmedla till guilden och länka till det publika protokollet av officermötet. Klassledarmötet har mer direkt information om specifika spelare och är antagligne inte lämpligt att skicka ut publit; det som beher förmedlas kan förmedlas typ här istället eller bakas in lite smidigt i offiercerprotokollet.</p>
+</div>
+
+![](https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/res/workshop){.image-overlay style="position: absolute; transform: scaleX(-1); right: 0; height: 100%; object-fit: cover; top: 0;"}
+
+# Våra senaste inlägg:
