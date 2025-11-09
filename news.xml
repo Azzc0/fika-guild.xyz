@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Fika</title>
+<link>https://fika-guild.xyz/news.html</link>
+<atom:link href="https://fika-guild.xyz/news.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<generator>quarto-1.7.32</generator>
+<lastBuildDate>Wed, 05 Nov 2025 23:00:00 GMT</lastBuildDate>
+<item>
+  <title></title>
+  <link>https://fika-guild.xyz/news/November.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="november" class="level1">
+<h1>🗞️ November</h1>
+<p>Här kan vi skriva i lite mer klartext det vi vill förmedla till guilden och länka till det publika protokollet av officermötet. Klassledarmötet har mer direkt information om specifika spelare och är antagligen inte lämpligt att skicka ut publikt; det som behöver förmedlas kan förmedlas typ här istället eller bakas in lite smidigt i officerprotokollet.</p>
+<p>Vi har absolut möjlighet</p>
+
+
+</section>
+
+ ]]></description>
+  <guid>https://fika-guild.xyz/news/November.html</guid>
+  <pubDate>Wed, 05 Nov 2025 23:00:00 GMT</pubDate>
+  <media:content url="https://res.cloudinary.com/dhmmkvcpy/image/upload/t_250x100/thumb/Ano" medium="image"/>
+</item>
+</channel>
+</rss>
