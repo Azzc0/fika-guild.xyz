@@ -1,0 +1,30 @@
+[
+  {
+    "listing": "/news.html",
+    "items": [
+      "/news/November.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/bosses/anub.html",
+      "/news/November.html",
+      "/veckobladet/V45-2025.html",
+      "/veckobladet/V44-2025.html",
+      "/veckobladet/V43-2025.html",
+      "/veckobladet/V42-2025.html",
+      "/veckobladet/V41-2025.html"
+    ]
+  },
+  {
+    "listing": "/veckobladet.html",
+    "items": [
+      "/veckobladet/V45-2025.html",
+      "/veckobladet/V44-2025.html",
+      "/veckobladet/V43-2025.html",
+      "/veckobladet/V42-2025.html",
+      "/veckobladet/V41-2025.html"
+    ]
+  }
+]
