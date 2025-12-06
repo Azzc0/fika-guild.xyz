@@ -31,8 +31,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./logo.png" rel="icon" type="image/png">
-<script src="site_libs/cookie-consent/cookie-consent.js"></script>
-<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -44,9 +42,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8e513f5f385745485b1ea9d666ee365f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-15fc1f612371b16eb497f67078fb843c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-8e513f5f385745485b1ea9d666ee365f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c59753ec24037e6ade8699b29714f773.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-044e7e673970e3cb03ac839fb04870fd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-c59753ec24037e6ade8699b29714f773.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -74,24 +72,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-
-<script type="text/javascript" charset="UTF-8">
-document.addEventListener('DOMContentLoaded', function () {
-cookieconsent.run({
-  "notice_banner_type":"simple",
-  "consent_type":"express",
-  "palette":"dark",
-  "language":"en",
-  "page_load_consent_levels":["strictly-necessary"],
-  "notice_banner_reject_button_hide":false,
-  "preferences_center_close_button_hide":false,
-  "website_name":""
-  ,
-"language":"sv"
-  });
-});
-</script> 
-  
 
 
 <meta property="og:title" content="Fika">
@@ -277,7 +257,10 @@ cookieconsent.run({
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/q_auto,f_auto/c_crop,x_16,y_21,w_669,h_264/icons/fika_bw" alt="" class="navbar-logo">
+    <img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/c_crop,x_23,y_87,w_85,h_85/icons/fika.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Fika</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -287,40 +270,17 @@ cookieconsent.run({
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Hem</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./test-tooltips.html"> 
 <span class="menu-text">test</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-räder" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Räder</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-räder">    
-        <li>
-    <a class="dropdown-item" href="./raidweek.html">
- <span class="dropdown-text">Överblick</span></a>
+  <li class="nav-item">
+    <a class="nav-link" href="./raidweek.html"> 
+<span class="menu-text">Räder</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="./raids/mc.html">
- <span class="dropdown-text">Guide - Molten Core</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./raids/bwl.html">
- <span class="dropdown-text">Guide - Blackwing Lair</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./raids/aq40.html">
- <span class="dropdown-text">Guide - Temple of Ahn’Qiraj</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./raids/naxx.html">
- <span class="dropdown-text">Guide - Naxxramas</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./raids/tok.html">
- <span class="dropdown-text">Guide - Tower of Karazhan</span></a>
-  </li>  
-    </ul>
-  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-nyheter" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Nyheter</span>
@@ -351,10 +311,6 @@ cookieconsent.run({
     <a class="dropdown-item" href="./consumables.html">
  <span class="dropdown-text">Förnödenheter</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="./resitance-gear.html">
- <span class="dropdown-text">Reistance Gear</span></a>
-  </li>  
     </ul>
   </li>
 </ul>
@@ -368,11 +324,11 @@ cookieconsent.run({
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-regler">    
         <li>
     <a class="dropdown-item" href="./rules.html">
- <span class="dropdown-text">Regler &amp; Ranker</span></a>
+ <span class="dropdown-text">Fika guild</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./raidrules.html">
- <span class="dropdown-text">Rädregler</span></a>
+ <span class="dropdown-text">Räder</span></a>
   </li>  
     </ul>
   </li>
@@ -862,44 +818,7 @@ cookieconsent.run({
   });
   </script>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
-    <div class="nav-footer-left">
-      &nbsp;
-    </div>   
-    <div class="nav-footer-center">
-
-<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
-    <div class="nav-footer-right">
-      &nbsp;
-    </div>
-  </div>
-</footer>
-<script>
-function checkCookieConsent() {
-    if (window.cookieconsent?.cookieConsentObject?.userConsent?.acceptedLevels?.tracking || 
-        window.cookieconsent?.cookieConsentObject?.userConsent?.acceptedLevels?.functionality) {
-        document.body.classList.add('cookies-accepted');
-    } else {
-        document.body.classList.remove('cookies-accepted');
-    }
-}
-
-// Run on page load
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', checkCookieConsent);
-} else {
-    checkCookieConsent();
-}
-
-// Also check after a short delay to catch async loading
-setTimeout(checkCookieConsent, 500);
-
-// Listen for cookie consent changes
-window.addEventListener('cc_noticeBannerOkOrAgreePressed', checkCookieConsent);
-window.addEventListener('cc_noticeBannerRejectPressed', checkCookieConsent);
-window.addEventListener('cc_preferencesCenterSavePressed', checkCookieConsent);
-</script>
+accordion.html
 
 
 
