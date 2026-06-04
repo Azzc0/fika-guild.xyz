@@ -1,0 +1,92 @@
+<!-- 1. Load the FullCalendar Engine -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
+<!-- 2. The Responsive HTML Canvas Layout Container -->
+<div class="hx:my-6 hx:p-6 hx:bg-neutral-900/40 hx:backdrop-blur hx:rounded-xl hx:border hx:border-neutral-200 hx:dark:border-neutral-800/60 hx:shadow-lg">
+  <div id="guild-calendar" class="hx:text-neutral-950 hx:dark:text-neutral-100"></div>
+</div>
+
+<!-- 3. Theme-Matching Dark Mode CSS Adjustments -->
+<style>
+  .fc { 
+    --fc-border-color: #262626 !important; 
+    --fc-page-bg-color: transparent !important;
+    font-family: inherit;
+  }
+  .fc .fc-toolbar-title { font-size: 1.25rem !important; font-weight: 700; tracking: 0.05em; text-transform: uppercase; }
+  .fc-theme-standard td, .fc-theme-standard th { border-color: #262626 !important; }
+  .fc-theme-standard th { background-color: #0a0a0a; padding: 8px 0 !important; font-size: 0.85rem; text-transform: uppercase; color: #a3a3a3; }
+  .fc-daygrid-day:hover { background-color: rgba(255, 255, 255, 0.015); }
+  
+  /* Style the interactive event chips to look premium */
+  .fc-event { 
+    cursor: pointer; 
+    padding: 4px 6px !important; 
+    font-weight: 600 !important; 
+    border-radius: 6px !important; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    font-size: 0.85rem !important;
+    border: none !important;
+  }
+  .fc-event-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+</style>
+
+<!-- 4. The Rolling Week Logic & Live API Fetch Engine -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('guild-calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'listWeek', 
+      
+      headerToolbar: {
+        left: '',
+        center: 'title',
+        right: ''
+      },
+      
+      titleFormat: { month: 'short', day: 'numeric' },
+      firstDay: new Date().getDay(), // Dynamically forces "Today" to always be column 1
+      
+      // Live Data Engine connecting directly to Raid-Helper
+      events: function(info, successCallback, failureCallback) {
+        fetch('https://raid-helper.dev/api/v2/servers/1509567817870082048/events')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not OK');
+            }
+            return response.json();
+          })
+          .then(data => {
+            // Check if events exist, fallback to an empty array if server returns empty
+            var rawEvents = data.postedEvents || data.events || [];
+            
+            var events = rawEvents.map(event => {
+              return {
+                title: event.title || 'Guild Event',
+                start: new Date(event.startTime * 1000), // Convert Unix timestamp to JavaScript date object
+                end: event.endTime ? new Date(event.endTime * 1000) : new Date((event.startTime + 14400) * 1000), // Fallback to 4 hours long if end time is missing
+                url: 'https://raid-helper.dev/v2/events/' + event.id,
+                backgroundColor: '#ca8a04', // Matches Hextra's amber/gold accent palette
+                textColor: '#000000'
+              };
+            });
+            successCallback(events);
+          })
+          .catch(error => {
+            console.error('Error parsing Raid-Helper dataset:', error);
+            failureCallback(error);
+          });
+      },
+      
+      // Handles smooth new-tab routing when users select a scheduling block
+      eventClick: function(info) {
+        if (info.event.url) {
+          window.open(info.event.url, "_blank");
+          info.jsEvent.preventDefault();
+        }
+      }
+    });
+    
+    calendar.render();
+  });
+</script>

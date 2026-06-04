@@ -1,0 +1,14 @@
+{{ $section := .Get "section" | default "artiklar" }}
+{{ $count := .Get "count" | default 3 }}
+
+<div class="hx-grid hx-grid-cols-1 md:hx-grid-cols-3 hx-gap-6 hx-my-8">
+  {{ range first $count (where .Site.RegularPages "Section" $section) }}
+    {{/* Map the page data to the theme's card parameters */}}
+    {{ partial "shortcodes/card.html" (dict 
+      "link" .RelPermalink 
+      "title" .Title 
+      "subtitle" (.Summary | truncate 100) 
+      "image" .Params.image
+    ) }}
+  {{ end }}
+</div>

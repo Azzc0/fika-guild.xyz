@@ -1,0 +1,95 @@
+baseURL = 'http://localhost:1313/'
+languageCode = 'sv'
+title = 'Fika'
+theme = 'hextra'
+
+# Essential for Hextra's lightning-fast client-side search engine
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+# Navigation Bar Layout (Top Navbar)
+[[menu.main]]
+  name = 'Weekly News'
+  pageRef = '/posts'
+  weight = 10
+
+[[menu.main]]
+  name = 'Guild Rules'
+  pageRef = '/docs/rules'
+  weight = 20
+
+[[menu.main]]
+  name = 'Loot Priority'
+  pageRef = '/docs/loot'
+  weight = 30
+
+[[menu.main]]
+  name = "Discord"
+  url = "https://discord.gg/eqPBBVZSua"  # Replace with your actual invite link
+  weight = 100                                 # Higher weight pushes it to the far right
+  [menu.main.params]
+    icon = "discord"
+
+[[menu.main]]
+  name = "Search"
+  weight = 90             # Placing it at 90 keeps it cleanly left of your new Discord icon button
+  [menu.main.params]
+    type = "search"
+
+[params]
+  # Keeps the homepage clean and centered
+  homepageSidebar = false
+
+  [params.icon]
+      favicon = "logo.png"
+      appleTouch = "logo.png"
+
+  # The main logo next to your site title in the top navbar
+  [params.navbar]
+    disabled = false
+    [params.navbar.logo]
+      link = "/"
+      path = "logo.png"  # Points directly to static/logo.png
+      disabled = false
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[mediaTypes]
+  [mediaTypes."application/javascript"]
+    suffixes = ["js"]
+  [mediaTypes."application/x-javascript"]
+    suffixes = ["js"]
+  [mediaTypes."application/octet-stream"]
+    suffixes = ["js"]
+
+[security]
+  enableInlineShortcodes = false
+
+  [security.exec]
+    allow = ['^(dart-)?sass(-embedded)?$', '^go$', '^git$', '^npx$', '^postcss$', '^tailwindcss$']
+    osEnv = ['(?i)^((HTTPS?|NO)_PROXY|PATH(EXT)?|APPDATA|TE?MP|TERM|GO\w+|(XDG_CONFIG_)?HOME|USERPROFILE|SSH_AUTH_SOCK|DISPLAY|LANG|SYSTEMDRIVE|PROGRAMDATA)$']
+
+  [security.funcs]
+    getenv = ['^HUGO_', '^CI$']
+
+  [security.http]
+    methods = ['GET']
+    urls = [
+      'https://wowgaming.altervista.org/*',
+      'https://cdn.jsdelivr.net/*'
+    ]
+    mediaTypes = [
+      '^text/html$', 
+      '^text/xml$', 
+      '^application/xml$', 
+      '^application/json$', 
+      '^image/', 
+      '^text/plain$', 
+      '^application/javascript.*$', 
+      '^application/x-javascript.*$', 
+      '^text/javascript.*$',
+      '^application/octet-stream.*$'
+    ]

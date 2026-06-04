@@ -1,0 +1,26 @@
+{{- $title := .Get "title" | default "Feature Title" -}}
+{{- $desc := .Get "desc" | default "" -}}
+{{- $link := .Get "link" | default "#" -}}
+{{- $image := .Get "image" -}}
+{{- $alt := .Get "alt" | default $title -}}
+
+<a href="{{ $link }}" class="hx:relative hx:flex hx:flex-col hx:justify-between hx:overflow-hidden hx:rounded-xl hx:border hx:border-neutral-200 hx:dark:border-neutral-800 hx:bg-gray-100 hx:dark:bg-neutral-900/50 hx:text-current hx:no-underline hx:hover:bg-gray-200/50 hx:dark:hover:bg-neutral-900 hx:transition-all hx:duration-200 hx:min-h-[280px] hx:group">
+  
+  <!-- Content Block Area -->
+  <div class="hx:relative hx:w-full hx:p-6 hx:z-10">
+    <h3 class="hx:text-xl hx:font-medium hx:leading-6 hx:mb-2 hx:flex hx:items-center hx:text-neutral-900 hx:dark:text-neutral-100">
+      <span>{{ $title }}</span>
+    </h3>
+    {{ if $desc }}
+      <p class="hx:text-gray-500 hx:dark:text-gray-400 hx:text-sm hx:leading-6 hx:m-0">{{ $desc }}</p>
+    {{ end }}
+  </div>
+
+  <!-- Absolute Positioned Feature Graphic Asset Tray -->
+  {{ if $image }}
+    <img src="{{ $image }}" 
+         class="hx:absolute hx:max-w-none hx:top-[45%] hx:left-[24px] hx:w-[150%] hx:sm:w-[110%] hx:dark:opacity-60 hx:group-hover:scale-[1.02] hx:group-hover:translate-y-[-2px] hx:transition-all hx:duration-300" 
+         alt="{{ $alt }}">
+  {{ end }}
+  
+</a>

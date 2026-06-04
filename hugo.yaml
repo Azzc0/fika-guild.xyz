@@ -1,0 +1,103 @@
+baseURL: 'http://localhost:1313/'
+languageCode: 'sv'
+title: 'Fika'
+theme: 'hextra'
+
+# Essential for Hextra's lightning-fast client-side search engine
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+# Navigation Bar Layout (Top Navbar)
+menu:
+  main:
+    - name: 'Artiklar'
+      pageRef: '/artiklar'
+      weight: 10
+    # - name: 'Guild Rules'
+    #   pageRef: '/docs/rules'
+    #   weight: 20
+    # - name: 'Loot Priority'
+    #   pageRef: '/docs/loot'
+    #   weight: 30
+    - name: 'Search'
+      weight: 90 # Placing it at 90 keeps it cleanly left of your Discord icon button
+      params:
+        type: 'search'
+    - name: 'Discord'
+      url: 'https://discord.gg/eqPBBVZSua'
+      weight: 100 # Higher weight pushes it to the far right
+      params:
+        icon: 'discord'
+
+params:
+  # Keeps the homepage clean and centered
+  homepageSidebar: false
+    
+  footer:
+    enable: true
+    width: "normal" # matching your template layout rules
+    displayPoweredBy: false
+    displayCopyright: false
+
+  navbar:
+    disabled: false
+    logo:
+      link: '/'
+      path: '/favicon.png' # Points directly to static/logo.png
+      disabled: false
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+mediaTypes:
+  application/javascript:
+    suffixes:
+      - js
+  application/x-javascript:
+    suffixes:
+      - js
+  application/octet-stream:
+    suffixes:
+      - js
+
+security:
+  enableInlineShortcodes: false
+
+  exec:
+    allow:
+      - '^(dart-)?sass(-embedded)?$'
+      - '^go$'
+      - '^git$'
+      - '^npx$'
+      - '^postcss$'
+      - '^tailwindcss$'
+    osEnv:
+      - '(?i)^((HTTPS?|NO)_PROXY|PATH(EXT)?|APPDATA|TE?MP|TERM|GO\w+|(XDG_CONFIG_)?HOME|USERPROFILE|SSH_AUTH_SOCK|DISPLAY|LANG|SYSTEMDRIVE|PROGRAMDATA)$'
+
+  funcs:
+    getenv:
+      - '^HUGO_'
+      - '^CI$'
+
+  http:
+    methods:
+      - GET
+    urls:
+      - 'https://wowgaming.altervista.org/*'
+      - 'https://cdn.jsdelivr.net/*'
+    mediaTypes:
+      - '^text/html$'
+      - '^text/xml$'
+      - '^application/xml$'
+      - '^application/json$'
+      - '^image/'
+      - '^text/plain$'
+      - '^application/javascript.*$'
+      - '^application/x-javascript.*$'
+      - '^text/javascript.*$'
+      - '^application/octet-stream.*$'

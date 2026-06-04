@@ -1,0 +1,10 @@
+<div class="hx-grid hx-grid-cols-1 md:hx-grid-cols-3 hx-gap-4 hx-my-6">
+  {{ $count := .Get "count" | default 3 }}
+  {{ range first $count (where .Site.RegularPages "Section" "artiklar") }}
+    <a href="{{ .RelPermalink }}" class="hx-block hx-border hx-border-gray-200 hx-dark:hx-border-neutral-800 hx-rounded-xl hx-p-4 hover:hx-bg-neutral-50 hx-dark:hover:hx-bg-neutral-900 hx-transition">
+      <h3 class="hx-font-semibold">{{ .Title }}</h3>
+      <p class="hx-text-sm hx-text-gray-500 hx-mt-2">{{ .Summary | truncate 80 }}</p>
+      <span class="hx-text-xs hx-text-blue-500 hx-mt-4 hx-block">Läs mer →</span>
+    </a>
+  {{ end }}
+</div>

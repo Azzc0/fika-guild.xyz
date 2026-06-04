@@ -1,0 +1,3 @@
+{{- $id := .Get "id" -}}
+{{- $name := .Get "name" -}}
+<a href="https://wowgaming.altervista.org/aowow/?item={{ $id }}" data-wowhead="item={{ $id }}">{{ if $name }}[{{ $name }}]{{ else }}Item #{{ $id }}{{ end }}</a>

@@ -1,0 +1,45 @@
+{{$name := .Get 0 | lower}}
+{{$id := ""}}
+
+<!-- Raid Target Markers -->
+{{if in (slice "skull" "skalle" "8") $name}}{{$id = "1118218142729130034"}}{{end}}
+{{if in (slice "cross" "kryss" "red" "röd" "7") $name}}{{$id = "1118218134290178098"}}{{end}}
+{{if in (slice "star" "stjärna" "gul" "yellow" "1") $name}}{{$id = "1118218148294950983"}}{{end}}
+{{if in (slice "circle" "cirkel" "orange" "2") $name}}{{$id = "1118218132734095482"}}{{end}}
+{{if in (slice "diamond" "diamant" "lila" "purple" "3") $name}}{{$id = "1118218138631274566"}}{{end}}
+{{if in (slice "triangle" "triangel" "green" "grön" "4") $name}}{{$id = "1118218150392123432"}}{{end}}
+{{if in (slice "square" "fyrkant" "blue" "blå" "6") $name}}{{$id = "1118218145623179284"}}{{end}}
+{{if in (slice "moon" "måne" "vit" "white" "5") $name}}{{$id = "1118218140946550835"}}{{end}}
+
+<!-- Player Classes -->
+{{if in (slice "warrior" "warr") $name}}{{$id = "579532030153588739"}}{{end}}
+{{if in (slice "druid" "dudu" "drulle") $name}}{{$id = "579532029675438081"}}{{end}}
+{{if in (slice "paladin" "pala") $name}}{{$id = "579532029906124840"}}{{end}}
+{{if eq $name "rogue"}}{{$id = "579532030086217748"}}{{end}}
+{{if in (slice "hunter" "huntard") $name}}{{$id = "579532029880827924"}}{{end}}
+{{if eq $name "mage"}}{{$id = "579532030161977355"}}{{end}}
+{{if in (slice "warlock" "lock") $name}}{{$id = "579532029851336716"}}{{end}}
+{{if eq $name "priest"}}{{$id = "579532029901799437"}}{{end}}
+{{if eq $name "shaman"}}{{$id = "579532030056857600"}}{{end}}
+{{if in (slice "deathknight" "dk") $name}}{{$id = "599012538935410701"}}{{end}}
+
+<!-- Primary & Secondary Professions -->
+{{if in (slice "tailoring" "tailor") $name}}{{$id = "641419370442129429"}}{{end}}
+{{if in (slice "blacksmithing" "smith" "bs") $name}}{{$id = "641419369678635029"}}{{end}}
+{{if in (slice "engineering" "engi") $name}}{{$id = "641419369750069312"}}{{end}}
+{{if in (slice "alchemy" "alch") $name}}{{$id = "641419369989275648"}}{{end}}
+{{if in (slice "leatherworking" "lw") $name}}{{$id = "641419370198990858"}}{{end}}
+{{if in (slice "enchanting" "chant" "ench") $name}}{{$id = "641419370106716170"}}{{end}}
+{{if in (slice "jewelcrafting" "jc") $name}}{{$id = "779033915448885338"}}{{end}}
+{{if in (slice "inscription" "scribe") $name}}{{$id = "779033915129987082"}}{{end}}
+{{if eq $name "herbalism"}}{{$id = "641419370437935104"}}{{end}}
+{{if eq $name "skinning"}}{{$id = "641419370802970644"}}{{end}}
+{{if eq $name "mining"}}{{$id = "641419370471358477"}}{{end}}
+{{if eq $name "fishing"}}{{$id = "779033915284783134"}}{{end}}
+{{if eq $name "cooking"}}{{$id = "779034208949370910"}}{{end}}
+
+{{if $id}}
+<img src="https://cdn.discordapp.com/emojis/{{$id}}.png" alt="{{$name}}" style="position: relative; top: 0px; display: inline; height: 1.1em; width: auto; margin: 0 0px; border-radius: 3px;">
+{{else}}
+<strong>[{{$name}}]</strong>
+{{end}}

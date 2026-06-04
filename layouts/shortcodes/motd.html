@@ -1,0 +1,61 @@
+<script>
+  (function () {
+    const motdUrl = "https://fika-api-proxy.robin-askelin.workers.dev/online";
+    const script = document.currentScript;
+    const refreshIntervalMs = 30000;
+
+    if (!script || !script.parentNode) return;
+
+    const getTarget = () => {
+      let node = script.previousSibling;
+
+      while (node && node.nodeType === Node.TEXT_NODE && !node.nodeValue.trim()) {
+        node = node.previousSibling;
+      }
+
+      if (node && node.nodeType === Node.TEXT_NODE) return node;
+
+      const textNode = document.createTextNode("");
+      script.parentNode.insertBefore(textNode, script);
+      return textNode;
+    };
+
+    const target = getTarget();
+
+    const sanitize = (value) => String(value || "")
+      .replace(/`/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    const applyMotd = (value) => {
+      const sanitizedValue = sanitize(value);
+      if (!sanitizedValue) return;
+      target.nodeValue = sanitizedValue;
+    };
+
+    const fetchMotd = async () => {
+      const response = await fetch(motdUrl, { cache: "no-store" });
+      if (!response.ok) throw new Error(`HTTP status ${response.status}`);
+
+      const data = await response.json();
+      return sanitize(data && data.motd);
+    };
+
+    const pollMotd = async () => {
+      if (!target.isConnected) return;
+
+      try {
+        const motd = await fetchMotd();
+        applyMotd(motd);
+      } catch (error) {
+        console.error("Failed to load MOTD shortcode:", error);
+      } finally {
+        if (target.isConnected) {
+          window.setTimeout(pollMotd, refreshIntervalMs);
+        }
+      }
+    };
+
+    pollMotd();
+  })();
+</script>
