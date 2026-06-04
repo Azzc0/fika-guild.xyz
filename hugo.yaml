@@ -1,4 +1,4 @@
-baseURL: 'https://www.fika-guild.xyz'
+baseURL: 'http://localhost:1313/'
 languageCode: 'sv'
 title: 'Fika'
 theme: 'hextra'
