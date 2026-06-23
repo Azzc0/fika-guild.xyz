@@ -33,40 +33,41 @@ Nedan har du en tabell över medlemmar i \<Fika\>. För att se en spelares alter
     .class-11 { color: #FF7D0A; }
     .armory-link { text-decoration: none; font-weight: 700; }
     .armory-link:hover { text-decoration: underline; }
-        .name-cell { display: inline-flex; align-items: center; gap: 0.45rem; white-space: nowrap; }
-        .alt-toggle {
-            width: 1.1rem;
-            height: 1.1rem;
-            border: 1px solid #3f444c;
-            background: #1b1d21;
-            color: #d1d5db;
-            border-radius: 0.25rem;
-            line-height: 1;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-            font-size: 0.8rem;
-            transition: all 120ms ease;
-        }
-        .alt-toggle:hover { background: #2a2f35; color: #fff; }
-        .alt-toggle[data-open="1"] { background: #2a2f35; color: #fff; }
-        .alt-child-wrap {
-            margin: 0.35rem 0 0.5rem 1.8rem;
-            padding: 0.65rem 0.75rem 0.75rem 0.95rem;
-                        border-left: 3px solid #3f444c;
-            border-top: 1px solid #2e3238;
-            border-bottom: 1px solid #2e3238;
-            border-right: 1px solid #2e3238;
-            border-radius: 0.4rem;
-            background: linear-gradient(90deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
-        }
-        .alt-child-table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
-        .alt-child-table th, .alt-child-table td { padding: 0.35rem 0.5rem; text-align: left; border-bottom: 1px solid #2e3238; }
-        .alt-child-table th { color: #9ca3af; font-weight: 600; }
-                .alt-child-table th:first-child { color: #9ca3af; }
+    .name-cell { display: inline-flex; align-items: center; gap: 0.45rem; white-space: nowrap; }
+    .alt-toggle {
+        width: 1.1rem;
+        height: 1.1rem;
+        border: 1px solid #3f444c;
+        background: #1b1d21;
+        color: #d1d5db;
+        border-radius: 0.25rem;
+        line-height: 1;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        font-size: 0.8rem;
+        transition: all 120ms ease;
+    }
+    .alt-toggle:hover { background: #2a2f35; color: #fff; }
+    .alt-toggle[data-open="1"] { background: #2a2f35; color: #fff; }
+    .alt-child-wrap {
+        margin: 0.35rem 0 0.5rem 1.8rem;
+        padding: 0.65rem 0.75rem 0.75rem 0.95rem;
+        border-left: 3px solid #3f444c;
+        border-top: 1px solid #2e3238;
+        border-bottom: 1px solid #2e3238;
+        border-right: 1px solid #2e3238;
+        border-radius: 0.4rem;
+        background: linear-gradient(90deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+    }
+    .alt-child-table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+    .alt-child-table th, .alt-child-table td { padding: 0.35rem 0.5rem; text-align: left; border-bottom: 1px solid #2e3238; }
+    .alt-child-table th { color: #9ca3af; font-weight: 600; }
+    .alt-child-table th:first-child { color: #9ca3af; }
+    .main-row-marker { font-size: 0.75rem; color: #10b981; font-weight: bold; margin-left: 0.5rem; text-transform: uppercase; }
 
     #class-distribution-chart {
         margin-top: 1rem;
@@ -126,13 +127,13 @@ Nedan har du en tabell över medlemmar i \<Fika\>. För att se en spelares alter
         opacity: 0.85;
     }
 
-  .dt-container { color: #a3a3a3 !important; font-family: inherit !important; background-color: #111214 !important; padding: 1.5rem; border-radius: 0.5rem; }
-  .dt-search input, .dt-length select { background-color: #1c1e22 !important; border: 1px solid #2e3238 !important; color: #fff !important; border-radius: 0.375rem !important; }
-  table.dataTable { border-collapse: collapse !important; border: 1px solid #2e3238 !important; margin-top: 1rem !important; }
-  table.dataTable thead th { background-color: #1c1e22 !important; color: #ffffff !important; border-bottom: 2px solid #2e3238 !important; font-weight: 600 !important; padding: 12px 16px !important; position: relative; }
-  table.dataTable tbody tr { background-color: #111214 !important; color: #d1d5db !important; cursor: pointer; }
-  table.dataTable tbody tr:hover { background-color: #1c1e22 !important; }
-  table.dataTable td { border-bottom: 1px solid #2e3238 !important; padding: 14px 16px !important; }
+    .dt-container { color: #a3a3a3 !important; font-family: inherit !important; background-color: #111214 !important; padding: 1.5rem; border-radius: 0.5rem; }
+    .dt-search input, .dt-length select { background-color: #1c1e22 !important; border: 1px solid #2e3238 !important; color: #fff !important; border-radius: 0.375rem !important; }
+    table.dataTable { border-collapse: collapse !important; border: 1px solid #2e3238 !important; margin-top: 1rem !important; }
+    table.dataTable thead th { background-color: #1c1e22 !important; color: #ffffff !important; border-bottom: 2px solid #2e3238 !important; font-weight: 600 !important; padding: 12px 16px !important; position: relative; }
+    table.dataTable tbody tr { background-color: #111214 !important; color: #d1d5db !important; cursor: pointer; }
+    table.dataTable tbody tr:hover { background-color: #1c1e22 !important; }
+    table.dataTable td { border-bottom: 1px solid #2e3238 !important; padding: 14px 16px !important; }
     table.dataTable td.class-cell,
     table.dataTable th.class-cell {
         width: 52px;
@@ -145,32 +146,32 @@ Nedan har du en tabell över medlemmar i \<Fika\>. För att se en spelares alter
         padding: 8px 6px !important;
     }
   
-  .custom-header-menu-btn { background: none; border: none; color: #71717a; cursor: pointer; padding: 2px 6px; font-size: 14px; margin-left: 6px; border-radius: 4px; display: inline-flex; align-items: center; }
-  .custom-header-menu-btn:hover { color: #ffffff; background-color: #2e3238; }
-  .custom-filter-dropdown { display: none; position: absolute; top: 100%; right: 10px; background-color: #1c1e22; border: 1px solid #2e3238; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7); border-radius: 0.5rem; padding: 0.75rem; z-index: 1000; min-width: 200px; font-weight: normal; text-align: left; }
-  .custom-dropdown-action-item { padding: 0.4rem 0.5rem; color: #d1d5db; cursor: pointer; border-radius: 4px; font-size: 13px; }
-  .custom-dropdown-action-item:hover { background-color: #2e3238; color: #fff; }
-  .custom-dropdown-divider { height: 1px; background-color: #2e3238; margin: 0.5rem 0; }
-  .custom-checkbox-filter-container { max-height: 160px; overflow-y: auto; padding-top: 0.25rem; }
-  .custom-checkbox-option { display: flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.5rem; font-size: 13px; color: #d1d5db; cursor: pointer; border-radius: 4px; user-select: none; }
-  .custom-checkbox-option:hover { background-color: #2e3238; color: #fff; }
-  .custom-checkbox-option input[type="checkbox"] { cursor: pointer; accent-color: #10b981; width: 14px; height: 14px; margin: 0; }
-  .custom-filter-dropdown input[type="text"] { background-color: #111214 !important; border: 1px solid #2e3238 !important; color: #fff !important; border-radius: 0.375rem !important; padding: 0.375rem !important; width: 100% !important; box-sizing: border-box; font-size: 13px; }
-  table.dataTable tbody tr.selected { background-color: #24272c !important; color: #ffffff !important; box-shadow: inset 0 0 0 9999px rgba(16, 185, 129, 0.1) !important; }
+    .custom-header-menu-btn { background: none; border: none; color: #71717a; cursor: pointer; padding: 2px 6px; font-size: 14px; margin-left: 6px; border-radius: 4px; display: inline-flex; align-items: center; }
+    .custom-header-menu-btn:hover { color: #ffffff; background-color: #2e3238; }
+    .custom-filter-dropdown { display: none; position: absolute; top: 100%; right: 10px; background-color: #1c1e22; border: 1px solid #2e3238; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7); border-radius: 0.5rem; padding: 0.75rem; z-index: 1000; min-width: 200px; font-weight: normal; text-align: left; }
+    .custom-dropdown-action-item { padding: 0.4rem 0.5rem; color: #d1d5db; cursor: pointer; border-radius: 4px; font-size: 13px; }
+    .custom-dropdown-action-item:hover { background-color: #2e3238; color: #fff; }
+    .custom-dropdown-divider { height: 1px; background-color: #2e3238; margin: 0.5rem 0; }
+    .custom-checkbox-filter-container { max-height: 160px; overflow-y: auto; padding-top: 0.25rem; }
+    .custom-checkbox-option { display: flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0.5rem; font-size: 13px; color: #d1d5db; cursor: pointer; border-radius: 4px; user-select: none; }
+    .custom-checkbox-option:hover { background-color: #2e3238; color: #fff; }
+    .custom-checkbox-option input[type="checkbox"] { cursor: pointer; accent-color: #10b981; width: 14px; height: 14px; margin: 0; }
+    .custom-filter-dropdown input[type="text"] { background-color: #111214 !important; border: 1px solid #2e3238 !important; color: #fff !important; border-radius: 0.375rem !important; padding: 0.375rem !important; width: 100% !important; box-sizing: border-box; font-size: 13px; }
+    table.dataTable tbody tr.selected { background-color: #24272c !important; color: #ffffff !important; box-shadow: inset 0 0 0 9999px rgba(16, 185, 129, 0.1) !important; }
 </style>
 
 <div class="not-prose my-6 w-full">
   <table id="production-roster-datatable" class="display responsive nowrap min-w-full text-sm" style="width:100%">
     <thead>
     <tr>
-                <th class="responsive-cell" title="Detaljer"></th>
-            <th data-priority="1" title="Klass" data-filterable="true"></th>
+        <th class="responsive-cell" title="Detaljer"></th>
+        <th data-priority="1" title="Klass" data-filterable="true"></th>
         <th title="Namn">Namn</th>
-            <th title="Nivå" data-filterable="true">Nivå</th>
-            <th title="Grad" data-filterable="true">Grad</th>
-            <th title="Anteckning">Anteckning</th>
-            <th title="Zon">Zon</th>
-            <th title="Status">Status</th>
+        <th title="Nivå" data-filterable="true">Nivå</th>
+        <th title="Grad" data-filterable="true">Grad</th>
+        <th title="Anteckning">Anteckning</th>
+        <th title="Zon">Zon</th>
+        <th title="Status">Status</th>
     </tr>
     </thead>
     <tbody></tbody>
@@ -253,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         return `%%{init: {'theme':'base','themeVariables':${JSON.stringify(themeVars)}}}%%\n` +
-            `pie title Klassfördelning i raidroster\n` +
+            `pie title Klassfördelning (exkl. alts)\n` +
             lines.join('\n');
     };
 
@@ -322,17 +323,32 @@ document.addEventListener("DOMContentLoaded", () => {
         mermaid.initialize({ startOnLoad: false, securityLevel: 'loose' });
     }
 
-    const renderAltRows = (alts) => {
-        if (!alts || !alts.length) return "";
-        const rows = alts.map(alt => {
-            const safeName = escapeHtml(alt.name);
-            const safeNote = escapeHtml(alt.note || "");
-            const safeZone = escapeHtml(alt.zoneName);
-            const safeStatus = escapeHtml(alt.statusText);
-            const armoryUrl = `https://chromiecraft.com/en/armory/?character/ChromieCraft/${encodeURIComponent(alt.name)}`;
+    const renderAltRows = (mainCharacter, alts) => {
+        // 1. Sort the alts by last active (Online first, then closest lastLogoff time)
+        const sortedAlts = Array.isArray(alts) ? [...alts].sort((a, b) => {
+            if (a.isOnline && !b.isOnline) return -1;
+            if (!a.isOnline && b.isOnline) return 1;
+            // If both are offline, lower lastLogoff value means more recently active
+            return a.lastLogoff - b.lastLogoff;
+        }) : [];
+
+        // 2. Build a cohesive array starting with the Main character pinned to the top
+        const allRowsData = [
+            { ...mainCharacter, isMainRow: true },
+            ...sortedAlts
+        ];
+
+        const rows = allRowsData.map(char => {
+            const safeName = escapeHtml(char.name);
+            const safeNote = escapeHtml(char.note || "");
+            const safeZone = escapeHtml(char.zoneName);
+            const safeStatus = escapeHtml(char.statusText);
+            const armoryUrl = `https://chromiecraft.com/en/armory/?character/ChromieCraft/${encodeURIComponent(char.name)}`;
+            const mainLabel = char.isMainRow ? '<span class="main-row-marker">(Main)</span>' : '';
+            
             return `<tr>
-                <td><a href="${armoryUrl}" target="_blank" rel="noopener noreferrer" class="armory-link class-${alt.classId}">${safeName}</a></td>
-                <td>${alt.level}</td>
+                <td><a href="${armoryUrl}" target="_blank" rel="noopener noreferrer" class="armory-link class-${char.classId}">${safeName}</a>${mainLabel}</td>
+                <td>${char.level}</td>
                 <td>${safeNote}</td>
                 <td>${safeZone}</td>
                 <td>${safeStatus}</td>
@@ -342,7 +358,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return `<div class="alt-child-wrap">
             <table class="alt-child-table">
                 <thead>
-                    <tr><th>Alt</th><th>Nivå</th><th>Anteckning</th><th>Zon</th><th>Status</th></tr>
+                    <tr><th>Karaktär</th><th>Nivå</th><th>Anteckning</th><th>Zon</th><th>Status</th></tr>
                 </thead>
                 <tbody>${rows}</tbody>
             </table>
@@ -371,7 +387,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const className = classMapping[m.classId] || `Class ${m.classId}`;
                 const rankName = rankMapping[m.rank] || `Rank ${m.rank}`;
                 const zoneName = zoneMapping[m.zoneId] || `Zone ${m.zoneId}`;
-                const statusText = m.isOnline ? "Påloggad" : formatLastSeen(Number(m.lastLogoff) || 0);
+                const statusText = m.isOnline ? "Online" : formatLastSeen(Number(m.lastLogoff) || 0);
                 const officerNote = (m.officerNote || "").trim();
                 const mainFromOfficerNote = officerNote ? officerNote.split(/\s+/)[0] : "";
                 const isAltRank = /\balt\b/i.test(rankName);
@@ -393,6 +409,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     zoneName,
                     statusText,
                     isAltRank,
+                    isOnline: m.isOnline,
+                    lastLogoff: Number(m.lastLogoff) || 0,
                     groupLabel: groupKey || m.name
                 });
             });
@@ -409,6 +427,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const alts = group.members.filter(x => x !== main);
 
+                // Determine overall last online within the cluster
+                let globalStatusText = main.statusText;
+                const anyOnline = group.members.some(x => x.isOnline);
+                
+                if (anyOnline) {
+                    globalStatusText = "Online";
+                } else if (group.members.length > 1) {
+                    // Find the lowest lastLogoff value (closest to 0 days ago means most recent)
+                    const internalSorted = [...group.members].sort((a, b) => a.lastLogoff - b.lastLogoff);
+                    globalStatusText = formatLastSeen(internalSorted[0].lastLogoff);
+                }
+
                 tableDataSet.push([
                     '',
                     main.className,
@@ -417,10 +447,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     main.rankName,
                     main.note,
                     main.zoneName,
-                    main.statusText,
+                    globalStatusText,
                     main.classId,
                     alts,
-                    Number.isFinite(main.rankId) ? main.rankId : 999
+                    Number.isFinite(main.rankId) ? main.rankId : 999,
+                    main // pass raw main data structure to target inside row child callback
                 ]);
             });
 
@@ -483,7 +514,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         var header = $(column.header());
                         var isFilterable = header.data('filterable') === true;
                         
-                        // Only add the menu button if the column is filterable
                         if (isFilterable) {
                             var menuBtn = $('<button class="custom-header-menu-btn">☰</button>');
                             var dropdown = $('<div class="custom-filter-dropdown"></div>');
@@ -575,7 +605,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 const hadOpenAlt = tr.find('button.alt-toggle[data-open="1"]').length > 0;
                 if (!hadOpenAlt) return;
 
-                // Run before DataTables click handler so the same click can open responsive details.
                 closeAltRows();
                 resetResponsiveControlState(tr);
             });
@@ -595,6 +624,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const row = table.row(tr);
                 const rowData = row.data();
                 const alts = Array.isArray(rowData[9]) ? rowData[9] : [];
+                const mainCharacter = rowData[11];
                 const isAltOpen = tr.hasClass('alt-open');
 
                 if (isAltOpen && row.child.isShown()) {
@@ -606,9 +636,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else {
                     closeResponsiveRows();
                     closeAltRows();
-                    row.child(renderAltRows(alts)).show();
+                    row.child(renderAltRows(mainCharacter, alts)).show();
                     tr.addClass('alt-open');
-                    // Keep responsive controller visually closed while alt child is shown.
                     resetResponsiveControlState(tr);
                     btn.text('−').attr('data-open', '1');
                 }
