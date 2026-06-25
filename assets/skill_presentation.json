@@ -69120,50 +69120,6 @@
             "inventory_type": 0
           },
           {
-            "spell_id": 26086,
-            "name": "Felcloth Bag",
-            "crafted_name": "Felcloth Bag",
-            "req_skill": 0,
-            "difficulty": [
-              0,
-              0,
-              0,
-              0
-            ],
-            "spell_icon": "inv_misc_bag_felclothbag",
-            "crafted_icon": "inv_misc_bag_felclothbag",
-            "reagents": [
-              {
-                "item_id": 14256,
-                "name": "Felcloth",
-                "count": 12,
-                "icon": "inv_fabric_felrag"
-              },
-              {
-                "item_id": 12810,
-                "name": "Enchanted Leather",
-                "count": 6,
-                "icon": "inv_misc_rune_05"
-              },
-              {
-                "item_id": 20520,
-                "name": "Dark Rune",
-                "count": 2,
-                "icon": "spell_shadow_sealofkings"
-              },
-              {
-                "item_id": 14227,
-                "name": "Ironweb Spider Silk",
-                "count": 4,
-                "icon": "spell_nature_web"
-              }
-            ],
-            "crafted_item_id": 21341,
-            "item_class": 1,
-            "item_subclass": 1,
-            "inventory_type": 18
-          },
-          {
             "spell_id": 26801,
             "name": "Shadoweave Tailoring",
             "crafted_name": "Shadoweave Tailoring",
@@ -69207,184 +69163,6 @@
             "spell_icon": "spell_holy_blessingofprotection",
             "crafted_icon": "spell_holy_blessingofprotection",
             "reagents": []
-          },
-          {
-            "spell_id": 3755,
-            "name": "Linen Bag",
-            "crafted_name": "Linen Bag",
-            "req_skill": 45,
-            "difficulty": [
-              45,
-              70,
-              87,
-              105
-            ],
-            "spell_icon": "inv_misc_bag_01",
-            "crafted_icon": "inv_misc_bag_01",
-            "reagents": [
-              {
-                "item_id": 2996,
-                "name": "Bolt of Linen Cloth",
-                "count": 3,
-                "icon": "inv_fabric_linen_02"
-              },
-              {
-                "item_id": 2320,
-                "name": "Coarse Thread",
-                "count": 3,
-                "icon": "inv_fabric_linen_03"
-              }
-            ],
-            "crafted_item_id": 4238,
-            "item_class": 1,
-            "item_subclass": 0,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 6686,
-            "name": "Red Linen Bag",
-            "crafted_name": "Red Linen Bag",
-            "req_skill": 70,
-            "difficulty": [
-              70,
-              95,
-              112,
-              130
-            ],
-            "spell_icon": "inv_misc_bag_02",
-            "crafted_icon": "inv_misc_bag_02",
-            "reagents": [
-              {
-                "item_id": 2996,
-                "name": "Bolt of Linen Cloth",
-                "count": 4,
-                "icon": "inv_fabric_linen_02"
-              },
-              {
-                "item_id": 2321,
-                "name": "Fine Thread",
-                "count": 1,
-                "icon": "inv_fabric_wool_02"
-              },
-              {
-                "item_id": 2604,
-                "name": "Red Dye",
-                "count": 1,
-                "icon": "inv_potion_11"
-              }
-            ],
-            "crafted_item_id": 5762,
-            "item_class": 1,
-            "item_subclass": 0,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 3757,
-            "name": "Woolen Bag",
-            "crafted_name": "Woolen Bag",
-            "req_skill": 80,
-            "difficulty": [
-              80,
-              105,
-              122,
-              140
-            ],
-            "spell_icon": "inv_misc_bag_10",
-            "crafted_icon": "inv_misc_bag_10",
-            "reagents": [
-              {
-                "item_id": 2997,
-                "name": "Bolt of Woolen Cloth",
-                "count": 3,
-                "icon": "inv_fabric_wool_03"
-              },
-              {
-                "item_id": 2321,
-                "name": "Fine Thread",
-                "count": 1,
-                "icon": "inv_fabric_wool_02"
-              }
-            ],
-            "crafted_item_id": 4240,
-            "item_class": 1,
-            "item_subclass": 0,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 3758,
-            "name": "Green Woolen Bag",
-            "crafted_name": "Green Woolen Bag",
-            "req_skill": 95,
-            "difficulty": [
-              95,
-              120,
-              137,
-              155
-            ],
-            "spell_icon": "inv_misc_bag_10_green",
-            "crafted_icon": "inv_misc_bag_10_green",
-            "reagents": [
-              {
-                "item_id": 2997,
-                "name": "Bolt of Woolen Cloth",
-                "count": 4,
-                "icon": "inv_fabric_wool_03"
-              },
-              {
-                "item_id": 2605,
-                "name": "Green Dye",
-                "count": 1,
-                "icon": "inv_potion_12"
-              },
-              {
-                "item_id": 2321,
-                "name": "Fine Thread",
-                "count": 1,
-                "icon": "inv_fabric_wool_02"
-              }
-            ],
-            "crafted_item_id": 4241,
-            "item_class": 1,
-            "item_subclass": 0,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 6688,
-            "name": "Red Woolen Bag",
-            "crafted_name": "Red Woolen Bag",
-            "req_skill": 115,
-            "difficulty": [
-              115,
-              140,
-              157,
-              175
-            ],
-            "spell_icon": "inv_misc_bag_10_red",
-            "crafted_icon": "inv_misc_bag_10_red",
-            "reagents": [
-              {
-                "item_id": 2997,
-                "name": "Bolt of Woolen Cloth",
-                "count": 4,
-                "icon": "inv_fabric_wool_03"
-              },
-              {
-                "item_id": 2604,
-                "name": "Red Dye",
-                "count": 1,
-                "icon": "inv_potion_11"
-              },
-              {
-                "item_id": 2321,
-                "name": "Fine Thread",
-                "count": 1,
-                "icon": "inv_fabric_wool_02"
-              }
-            ],
-            "crafted_item_id": 5763,
-            "item_class": 1,
-            "item_subclass": 0,
-            "inventory_type": 18
           },
           {
             "spell_id": 3813,
@@ -69507,38 +69285,6 @@
             "inventory_type": 18
           },
           {
-            "spell_id": 12065,
-            "name": "Mageweave Bag",
-            "crafted_name": "Mageweave Bag",
-            "req_skill": 225,
-            "difficulty": [
-              225,
-              240,
-              255,
-              270
-            ],
-            "spell_icon": "inv_misc_bag_10_black",
-            "crafted_icon": "inv_misc_bag_10_black",
-            "reagents": [
-              {
-                "item_id": 4339,
-                "name": "Bolt of Mageweave",
-                "count": 4,
-                "icon": "inv_fabric_mageweave_03"
-              },
-              {
-                "item_id": 4291,
-                "name": "Silken Thread",
-                "count": 2,
-                "icon": "inv_fabric_silk_02"
-              }
-            ],
-            "crafted_item_id": 10050,
-            "item_class": 1,
-            "item_subclass": 0,
-            "inventory_type": 18
-          },
-          {
             "spell_id": 27658,
             "name": "Enchanted Mageweave Pouch",
             "crafted_name": "Enchanted Mageweave Pouch",
@@ -69574,82 +69320,6 @@
             "crafted_item_id": 22246,
             "item_class": 1,
             "item_subclass": 3,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 12079,
-            "name": "Red Mageweave Bag",
-            "crafted_name": "Red Mageweave Bag",
-            "req_skill": 235,
-            "difficulty": [
-              235,
-              250,
-              265,
-              280
-            ],
-            "spell_icon": "inv_misc_bag_10_red",
-            "crafted_icon": "inv_misc_bag_10_red",
-            "reagents": [
-              {
-                "item_id": 4339,
-                "name": "Bolt of Mageweave",
-                "count": 4,
-                "icon": "inv_fabric_mageweave_03"
-              },
-              {
-                "item_id": 2604,
-                "name": "Red Dye",
-                "count": 2,
-                "icon": "inv_potion_11"
-              },
-              {
-                "item_id": 8343,
-                "name": "Heavy Silken Thread",
-                "count": 2,
-                "icon": "inv_fabric_silk_02"
-              }
-            ],
-            "crafted_item_id": 10051,
-            "item_class": 1,
-            "item_subclass": 0,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 18405,
-            "name": "Runecloth Bag",
-            "crafted_name": "Runecloth Bag",
-            "req_skill": 260,
-            "difficulty": [
-              260,
-              275,
-              290,
-              305
-            ],
-            "spell_icon": "inv_misc_bag_19",
-            "crafted_icon": "inv_misc_bag_19",
-            "reagents": [
-              {
-                "item_id": 14048,
-                "name": "Bolt of Runecloth",
-                "count": 5,
-                "icon": "inv_fabric_purplefire_02"
-              },
-              {
-                "item_id": 8170,
-                "name": "Rugged Leather",
-                "count": 2,
-                "icon": "inv_misc_leatherscrap_02"
-              },
-              {
-                "item_id": 14341,
-                "name": "Rune Thread",
-                "count": 1,
-                "icon": "spell_shadow_antimagicshell"
-              }
-            ],
-            "crafted_item_id": 14046,
-            "item_class": 1,
-            "item_subclass": 0,
             "inventory_type": 18
           },
           {
@@ -69694,264 +69364,6 @@
             "crafted_item_id": 21340,
             "item_class": 1,
             "item_subclass": 1,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 27659,
-            "name": "Enchanted Runecloth Bag",
-            "crafted_name": "Enchanted Runecloth Bag",
-            "req_skill": 275,
-            "difficulty": [
-              275,
-              290,
-              305,
-              320
-            ],
-            "spell_icon": "inv_misc_bag_enchantedrunecloth",
-            "crafted_icon": "inv_misc_bag_enchantedrunecloth",
-            "reagents": [
-              {
-                "item_id": 14048,
-                "name": "Bolt of Runecloth",
-                "count": 5,
-                "icon": "inv_fabric_purplefire_02"
-              },
-              {
-                "item_id": 16203,
-                "name": "Greater Eternal Essence",
-                "count": 2,
-                "icon": "inv_enchant_essenceeternallarge"
-              },
-              {
-                "item_id": 14341,
-                "name": "Rune Thread",
-                "count": 2,
-                "icon": "spell_shadow_antimagicshell"
-              }
-            ],
-            "crafted_item_id": 22248,
-            "item_class": 1,
-            "item_subclass": 3,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 27724,
-            "name": "Cenarion Herb Bag",
-            "crafted_name": "Cenarion Herb Bag",
-            "req_skill": 275,
-            "difficulty": [
-              275,
-              290,
-              305,
-              320
-            ],
-            "spell_icon": "inv_misc_bag_cenarionherbbag",
-            "crafted_icon": "inv_misc_bag_cenarionherbbag",
-            "reagents": [
-              {
-                "item_id": 14048,
-                "name": "Bolt of Runecloth",
-                "count": 5,
-                "icon": "inv_fabric_purplefire_02"
-              },
-              {
-                "item_id": 8831,
-                "name": "Purple Lotus",
-                "count": 10,
-                "icon": "inv_misc_herb_17"
-              },
-              {
-                "item_id": 11040,
-                "name": "Morrowgrain",
-                "count": 8,
-                "icon": "inv_misc_herb_05"
-              },
-              {
-                "item_id": 14341,
-                "name": "Rune Thread",
-                "count": 2,
-                "icon": "spell_shadow_antimagicshell"
-              }
-            ],
-            "crafted_item_id": 22251,
-            "item_class": 1,
-            "item_subclass": 2,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 18445,
-            "name": "Mooncloth Bag",
-            "crafted_name": "Mooncloth Bag",
-            "req_skill": 300,
-            "difficulty": [
-              300,
-              315,
-              330,
-              345
-            ],
-            "spell_icon": "inv_misc_bag_14",
-            "crafted_icon": "inv_misc_bag_14",
-            "reagents": [
-              {
-                "item_id": 14048,
-                "name": "Bolt of Runecloth",
-                "count": 4,
-                "icon": "inv_fabric_purplefire_02"
-              },
-              {
-                "item_id": 14342,
-                "name": "Mooncloth",
-                "count": 1,
-                "icon": "inv_fabric_moonrag_01"
-              },
-              {
-                "item_id": 14341,
-                "name": "Rune Thread",
-                "count": 1,
-                "icon": "spell_shadow_antimagicshell"
-              }
-            ],
-            "crafted_item_id": 14155,
-            "item_class": 1,
-            "item_subclass": 0,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 18455,
-            "name": "Bottomless Bag",
-            "crafted_name": "Bottomless Bag",
-            "req_skill": 300,
-            "difficulty": [
-              300,
-              315,
-              330,
-              345
-            ],
-            "spell_icon": "inv_misc_bag_13",
-            "crafted_icon": "inv_misc_bag_13",
-            "reagents": [
-              {
-                "item_id": 14048,
-                "name": "Bolt of Runecloth",
-                "count": 8,
-                "icon": "inv_fabric_purplefire_02"
-              },
-              {
-                "item_id": 14342,
-                "name": "Mooncloth",
-                "count": 12,
-                "icon": "inv_fabric_moonrag_01"
-              },
-              {
-                "item_id": 14344,
-                "name": "Large Brilliant Shard",
-                "count": 2,
-                "icon": "inv_enchant_shardbrilliantlarge"
-              },
-              {
-                "item_id": 17012,
-                "name": "Core Leather",
-                "count": 2,
-                "icon": "inv_ammo_firetar"
-              },
-              {
-                "item_id": 14341,
-                "name": "Rune Thread",
-                "count": 2,
-                "icon": "spell_shadow_antimagicshell"
-              }
-            ],
-            "crafted_item_id": 14156,
-            "item_class": 1,
-            "item_subclass": 0,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 26087,
-            "name": "Core Felcloth Bag",
-            "crafted_name": "Core Felcloth Bag",
-            "req_skill": 300,
-            "difficulty": [
-              300,
-              315,
-              330,
-              345
-            ],
-            "spell_icon": "inv_misc_bag_corefelclothbag",
-            "crafted_icon": "inv_misc_bag_corefelclothbag",
-            "reagents": [
-              {
-                "item_id": 14256,
-                "name": "Felcloth",
-                "count": 20,
-                "icon": "inv_fabric_felrag"
-              },
-              {
-                "item_id": 17012,
-                "name": "Core Leather",
-                "count": 16,
-                "icon": "inv_ammo_firetar"
-              },
-              {
-                "item_id": 7078,
-                "name": "Essence of Fire",
-                "count": 4,
-                "icon": "spell_fire_volcano"
-              },
-              {
-                "item_id": 14227,
-                "name": "Ironweb Spider Silk",
-                "count": 4,
-                "icon": "spell_nature_web"
-              }
-            ],
-            "crafted_item_id": 21342,
-            "item_class": 1,
-            "item_subclass": 1,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 27660,
-            "name": "Big Bag of Enchantment",
-            "crafted_name": "Big Bag of Enchantment",
-            "req_skill": 300,
-            "difficulty": [
-              300,
-              315,
-              330,
-              345
-            ],
-            "spell_icon": "inv_misc_bag_bigbagofenchantments",
-            "crafted_icon": "inv_misc_bag_bigbagofenchantments",
-            "reagents": [
-              {
-                "item_id": 14048,
-                "name": "Bolt of Runecloth",
-                "count": 6,
-                "icon": "inv_fabric_purplefire_02"
-              },
-              {
-                "item_id": 14344,
-                "name": "Large Brilliant Shard",
-                "count": 4,
-                "icon": "inv_enchant_shardbrilliantlarge"
-              },
-              {
-                "item_id": 12810,
-                "name": "Enchanted Leather",
-                "count": 4,
-                "icon": "inv_misc_rune_05"
-              },
-              {
-                "item_id": 14227,
-                "name": "Ironweb Spider Silk",
-                "count": 4,
-                "icon": "spell_nature_web"
-              }
-            ],
-            "crafted_item_id": 22249,
-            "item_class": 1,
-            "item_subclass": 3,
             "inventory_type": 18
           },
           {
@@ -70043,38 +69455,6 @@
             "inventory_type": 0
           },
           {
-            "spell_id": 26746,
-            "name": "Netherweave Bag",
-            "crafted_name": "Netherweave Bag",
-            "req_skill": 315,
-            "difficulty": [
-              315,
-              320,
-              330,
-              340
-            ],
-            "spell_icon": "inv_misc_bag_23_netherweave",
-            "crafted_icon": "inv_misc_bag_23_netherweave",
-            "reagents": [
-              {
-                "item_id": 21840,
-                "name": "Bolt of Netherweave",
-                "count": 4,
-                "icon": "inv_fabric_netherweave_bolt"
-              },
-              {
-                "item_id": 14341,
-                "name": "Rune Thread",
-                "count": 1,
-                "icon": "spell_shadow_antimagicshell"
-              }
-            ],
-            "crafted_item_id": 21841,
-            "item_class": 1,
-            "item_subclass": 0,
-            "inventory_type": 18
-          },
-          {
             "spell_id": 59390,
             "name": "Northern Cloth Scavenging",
             "crafted_name": "Northern Cloth Scavenging",
@@ -70088,210 +69468,6 @@
             "spell_icon": "inv_fabric_soulcloth",
             "crafted_icon": "inv_fabric_soulcloth",
             "reagents": []
-          },
-          {
-            "spell_id": 26749,
-            "name": "Imbued Netherweave Bag",
-            "crafted_name": "Imbued Netherweave Bag",
-            "req_skill": 340,
-            "difficulty": [
-              340,
-              340,
-              340,
-              340
-            ],
-            "spell_icon": "inv_misc_bag_24_netherweave_imbued",
-            "crafted_icon": "inv_misc_bag_24_netherweave_imbued",
-            "reagents": [
-              {
-                "item_id": 21842,
-                "name": "Bolt of Imbued Netherweave",
-                "count": 4,
-                "icon": "inv_fabric_netherweave_bolt_imbued"
-              },
-              {
-                "item_id": 21881,
-                "name": "Netherweb Spider Silk",
-                "count": 2,
-                "icon": "spell_nature_web"
-              },
-              {
-                "item_id": 22446,
-                "name": "Greater Planar Essence",
-                "count": 1,
-                "icon": "inv_enchant_essencearcanelarge"
-              }
-            ],
-            "crafted_item_id": 21843,
-            "item_class": 1,
-            "item_subclass": 0,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 31459,
-            "name": "Bag of Jewels",
-            "crafted_name": "Bag of Jewels",
-            "req_skill": 340,
-            "difficulty": [
-              340,
-              350,
-              355,
-              360
-            ],
-            "spell_icon": "inv_misc_bag_15",
-            "crafted_icon": "inv_misc_bag_15",
-            "reagents": [
-              {
-                "item_id": 21842,
-                "name": "Bolt of Imbued Netherweave",
-                "count": 6,
-                "icon": "inv_fabric_netherweave_bolt_imbued"
-              },
-              {
-                "item_id": 21887,
-                "name": "Knothide Leather",
-                "count": 4,
-                "icon": "inv_misc_leatherscrap_10"
-              }
-            ],
-            "crafted_item_id": 24270,
-            "item_class": 1,
-            "item_subclass": 5,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 26755,
-            "name": "Spellfire Bag",
-            "crafted_name": "Spellfire Bag",
-            "req_skill": 375,
-            "difficulty": [
-              375,
-              385,
-              390,
-              395
-            ],
-            "spell_icon": "inv_misc_bag_26_spellfire",
-            "crafted_icon": "inv_misc_bag_26_spellfire",
-            "reagents": [
-              {
-                "item_id": 24271,
-                "name": "Spellcloth",
-                "count": 6,
-                "icon": "inv_fabric_spellfire"
-              },
-              {
-                "item_id": 22446,
-                "name": "Greater Planar Essence",
-                "count": 4,
-                "icon": "inv_enchant_essencearcanelarge"
-              },
-              {
-                "item_id": 21881,
-                "name": "Netherweb Spider Silk",
-                "count": 4,
-                "icon": "spell_nature_web"
-              }
-            ],
-            "crafted_item_id": 21858,
-            "item_class": 1,
-            "item_subclass": 3,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 26759,
-            "name": "Ebon Shadowbag",
-            "crafted_name": "Ebon Shadowbag",
-            "req_skill": 375,
-            "difficulty": [
-              375,
-              385,
-              390,
-              395
-            ],
-            "spell_icon": "inv_misc_bag_felclothbag",
-            "crafted_icon": "inv_misc_bag_felclothbag",
-            "reagents": [
-              {
-                "item_id": 24272,
-                "name": "Shadowcloth",
-                "count": 6,
-                "icon": "inv_fabric_felcloth_ebon"
-              },
-              {
-                "item_id": 21881,
-                "name": "Netherweb Spider Silk",
-                "count": 4,
-                "icon": "spell_nature_web"
-              }
-            ],
-            "crafted_item_id": 21872,
-            "item_class": 1,
-            "item_subclass": 1,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 26763,
-            "name": "Primal Mooncloth Bag",
-            "crafted_name": "Primal Mooncloth Bag",
-            "req_skill": 375,
-            "difficulty": [
-              375,
-              385,
-              390,
-              395
-            ],
-            "spell_icon": "inv_misc_bag_25_mooncloth",
-            "crafted_icon": "inv_misc_bag_25_mooncloth",
-            "reagents": [
-              {
-                "item_id": 21845,
-                "name": "Primal Mooncloth",
-                "count": 8,
-                "icon": "inv_fabric_moonrag_primal"
-              },
-              {
-                "item_id": 21881,
-                "name": "Netherweb Spider Silk",
-                "count": 4,
-                "icon": "spell_nature_web"
-              }
-            ],
-            "crafted_item_id": 21876,
-            "item_class": 1,
-            "item_subclass": 0,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 50194,
-            "name": "Mycah's Botanical Bag",
-            "crafted_name": "Mycah's Botanical Bag",
-            "req_skill": 375,
-            "difficulty": [
-              375,
-              385,
-              390,
-              395
-            ],
-            "spell_icon": "inv_misc_bag_27",
-            "crafted_icon": "inv_misc_bag_27",
-            "reagents": [
-              {
-                "item_id": 21845,
-                "name": "Primal Mooncloth",
-                "count": 4,
-                "icon": "inv_fabric_moonrag_primal"
-              },
-              {
-                "item_id": 22794,
-                "name": "Fel Lotus",
-                "count": 2,
-                "icon": "inv_misc_herb_fellotus"
-              }
-            ],
-            "crafted_item_id": 38225,
-            "item_class": 1,
-            "item_subclass": 2,
-            "inventory_type": 18
           },
           {
             "spell_id": 56034,
@@ -70336,38 +69512,6 @@
                 "icon": "inv_misc_thread_01"
               }
             ]
-          },
-          {
-            "spell_id": 56007,
-            "name": "Frostweave Bag",
-            "crafted_name": "Frostweave Bag",
-            "req_skill": 410,
-            "difficulty": [
-              410,
-              430,
-              440,
-              450
-            ],
-            "spell_icon": "inv_misc_bag_enchantedmageweave",
-            "crafted_icon": "inv_misc_bag_enchantedmageweave",
-            "reagents": [
-              {
-                "item_id": 41511,
-                "name": "Bolt of Imbued Frostweave",
-                "count": 6,
-                "icon": "inv_fabric_frostweave_imbuedbolt"
-              },
-              {
-                "item_id": 38426,
-                "name": "Eternium Thread",
-                "count": 2,
-                "icon": "inv_misc_thread_01"
-              }
-            ],
-            "crafted_item_id": 41599,
-            "item_class": 1,
-            "item_subclass": 0,
-            "inventory_type": 18
           },
           {
             "spell_id": 55642,
@@ -70546,152 +69690,6 @@
             "item_class": 15,
             "item_subclass": 5,
             "inventory_type": 0
-          },
-          {
-            "spell_id": 56004,
-            "name": "Abyssal Bag",
-            "crafted_name": "Abyssal Bag",
-            "req_skill": 435,
-            "difficulty": [
-              435,
-              440,
-              445,
-              450
-            ],
-            "spell_icon": "inv_misc_bag_corefelclothbag",
-            "crafted_icon": "inv_misc_bag_corefelclothbag",
-            "reagents": [
-              {
-                "item_id": 41593,
-                "name": "Ebonweave",
-                "count": 4,
-                "icon": "inv_fabric_ebonweave"
-              },
-              {
-                "item_id": 41595,
-                "name": "Spellweave",
-                "count": 2,
-                "icon": "inv_fabric_spellweave"
-              },
-              {
-                "item_id": 38426,
-                "name": "Eternium Thread",
-                "count": 1,
-                "icon": "inv_misc_thread_01"
-              }
-            ],
-            "crafted_item_id": 41597,
-            "item_class": 1,
-            "item_subclass": 1,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 63924,
-            "name": "Emerald Bag",
-            "crafted_name": "Emerald Bag",
-            "req_skill": 435,
-            "difficulty": [
-              435,
-              440,
-              445,
-              450
-            ],
-            "spell_icon": "inv_misc_bag_18",
-            "crafted_icon": "inv_misc_bag_18",
-            "reagents": [
-              {
-                "item_id": 41594,
-                "name": "Moonshroud",
-                "count": 4,
-                "icon": "inv_fabric_moonshroud"
-              },
-              {
-                "item_id": 36908,
-                "name": "Frost Lotus",
-                "count": 6,
-                "icon": "inv_misc_herb_frostlotus"
-              }
-            ],
-            "crafted_item_id": 45773,
-            "item_class": 1,
-            "item_subclass": 2,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 56006,
-            "name": "Mysterious Bag",
-            "crafted_name": "Mysterious Bag",
-            "req_skill": 440,
-            "difficulty": [
-              440,
-              445,
-              450,
-              455
-            ],
-            "spell_icon": "inv_misc_bag_17",
-            "crafted_icon": "inv_misc_bag_17",
-            "reagents": [
-              {
-                "item_id": 41595,
-                "name": "Spellweave",
-                "count": 4,
-                "icon": "inv_fabric_spellweave"
-              },
-              {
-                "item_id": 41594,
-                "name": "Moonshroud",
-                "count": 2,
-                "icon": "inv_fabric_moonshroud"
-              },
-              {
-                "item_id": 38426,
-                "name": "Eternium Thread",
-                "count": 1,
-                "icon": "inv_misc_thread_01"
-              }
-            ],
-            "crafted_item_id": 41598,
-            "item_class": 1,
-            "item_subclass": 3,
-            "inventory_type": 18
-          },
-          {
-            "spell_id": 56005,
-            "name": "Glacial Bag",
-            "crafted_name": "Glacial Bag",
-            "req_skill": 445,
-            "difficulty": [
-              445,
-              450,
-              455,
-              460
-            ],
-            "spell_icon": "inv_misc_bag_enchantedrunecloth",
-            "crafted_icon": "inv_misc_bag_enchantedrunecloth",
-            "reagents": [
-              {
-                "item_id": 41594,
-                "name": "Moonshroud",
-                "count": 4,
-                "icon": "inv_fabric_moonshroud"
-              },
-              {
-                "item_id": 41593,
-                "name": "Ebonweave",
-                "count": 4,
-                "icon": "inv_fabric_ebonweave"
-              },
-              {
-                "item_id": 38426,
-                "name": "Eternium Thread",
-                "count": 1,
-                "icon": "inv_misc_thread_01"
-              }
-            ],
-            "crafted_item_id": 41600,
-            "item_class": 1,
-            "item_subclass": 0,
-            "inventory_type": 18
           }
         ]
       },
@@ -72157,6 +71155,1013 @@
             "item_class": 0,
             "item_subclass": 6,
             "inventory_type": 0
+          }
+        ]
+      },
+      "Bags": {
+        "sort_order": 15,
+        "spells": [
+          {
+            "spell_id": 26086,
+            "name": "Felcloth Bag",
+            "crafted_name": "Felcloth Bag",
+            "req_skill": 0,
+            "difficulty": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "spell_icon": "inv_misc_bag_felclothbag",
+            "crafted_icon": "inv_misc_bag_felclothbag",
+            "reagents": [
+              {
+                "item_id": 14256,
+                "name": "Felcloth",
+                "count": 12,
+                "icon": "inv_fabric_felrag"
+              },
+              {
+                "item_id": 12810,
+                "name": "Enchanted Leather",
+                "count": 6,
+                "icon": "inv_misc_rune_05"
+              },
+              {
+                "item_id": 20520,
+                "name": "Dark Rune",
+                "count": 2,
+                "icon": "spell_shadow_sealofkings"
+              },
+              {
+                "item_id": 14227,
+                "name": "Ironweb Spider Silk",
+                "count": 4,
+                "icon": "spell_nature_web"
+              }
+            ],
+            "crafted_item_id": 21341,
+            "item_class": 1,
+            "item_subclass": 1,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 3755,
+            "name": "Linen Bag",
+            "crafted_name": "Linen Bag",
+            "req_skill": 45,
+            "difficulty": [
+              45,
+              70,
+              87,
+              105
+            ],
+            "spell_icon": "inv_misc_bag_01",
+            "crafted_icon": "inv_misc_bag_01",
+            "reagents": [
+              {
+                "item_id": 2996,
+                "name": "Bolt of Linen Cloth",
+                "count": 3,
+                "icon": "inv_fabric_linen_02"
+              },
+              {
+                "item_id": 2320,
+                "name": "Coarse Thread",
+                "count": 3,
+                "icon": "inv_fabric_linen_03"
+              }
+            ],
+            "crafted_item_id": 4238,
+            "item_class": 1,
+            "item_subclass": 0,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 6686,
+            "name": "Red Linen Bag",
+            "crafted_name": "Red Linen Bag",
+            "req_skill": 70,
+            "difficulty": [
+              70,
+              95,
+              112,
+              130
+            ],
+            "spell_icon": "inv_misc_bag_02",
+            "crafted_icon": "inv_misc_bag_02",
+            "reagents": [
+              {
+                "item_id": 2996,
+                "name": "Bolt of Linen Cloth",
+                "count": 4,
+                "icon": "inv_fabric_linen_02"
+              },
+              {
+                "item_id": 2321,
+                "name": "Fine Thread",
+                "count": 1,
+                "icon": "inv_fabric_wool_02"
+              },
+              {
+                "item_id": 2604,
+                "name": "Red Dye",
+                "count": 1,
+                "icon": "inv_potion_11"
+              }
+            ],
+            "crafted_item_id": 5762,
+            "item_class": 1,
+            "item_subclass": 0,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 3757,
+            "name": "Woolen Bag",
+            "crafted_name": "Woolen Bag",
+            "req_skill": 80,
+            "difficulty": [
+              80,
+              105,
+              122,
+              140
+            ],
+            "spell_icon": "inv_misc_bag_10",
+            "crafted_icon": "inv_misc_bag_10",
+            "reagents": [
+              {
+                "item_id": 2997,
+                "name": "Bolt of Woolen Cloth",
+                "count": 3,
+                "icon": "inv_fabric_wool_03"
+              },
+              {
+                "item_id": 2321,
+                "name": "Fine Thread",
+                "count": 1,
+                "icon": "inv_fabric_wool_02"
+              }
+            ],
+            "crafted_item_id": 4240,
+            "item_class": 1,
+            "item_subclass": 0,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 3758,
+            "name": "Green Woolen Bag",
+            "crafted_name": "Green Woolen Bag",
+            "req_skill": 95,
+            "difficulty": [
+              95,
+              120,
+              137,
+              155
+            ],
+            "spell_icon": "inv_misc_bag_10_green",
+            "crafted_icon": "inv_misc_bag_10_green",
+            "reagents": [
+              {
+                "item_id": 2997,
+                "name": "Bolt of Woolen Cloth",
+                "count": 4,
+                "icon": "inv_fabric_wool_03"
+              },
+              {
+                "item_id": 2605,
+                "name": "Green Dye",
+                "count": 1,
+                "icon": "inv_potion_12"
+              },
+              {
+                "item_id": 2321,
+                "name": "Fine Thread",
+                "count": 1,
+                "icon": "inv_fabric_wool_02"
+              }
+            ],
+            "crafted_item_id": 4241,
+            "item_class": 1,
+            "item_subclass": 0,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 6688,
+            "name": "Red Woolen Bag",
+            "crafted_name": "Red Woolen Bag",
+            "req_skill": 115,
+            "difficulty": [
+              115,
+              140,
+              157,
+              175
+            ],
+            "spell_icon": "inv_misc_bag_10_red",
+            "crafted_icon": "inv_misc_bag_10_red",
+            "reagents": [
+              {
+                "item_id": 2997,
+                "name": "Bolt of Woolen Cloth",
+                "count": 4,
+                "icon": "inv_fabric_wool_03"
+              },
+              {
+                "item_id": 2604,
+                "name": "Red Dye",
+                "count": 1,
+                "icon": "inv_potion_11"
+              },
+              {
+                "item_id": 2321,
+                "name": "Fine Thread",
+                "count": 1,
+                "icon": "inv_fabric_wool_02"
+              }
+            ],
+            "crafted_item_id": 5763,
+            "item_class": 1,
+            "item_subclass": 0,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 12065,
+            "name": "Mageweave Bag",
+            "crafted_name": "Mageweave Bag",
+            "req_skill": 225,
+            "difficulty": [
+              225,
+              240,
+              255,
+              270
+            ],
+            "spell_icon": "inv_misc_bag_10_black",
+            "crafted_icon": "inv_misc_bag_10_black",
+            "reagents": [
+              {
+                "item_id": 4339,
+                "name": "Bolt of Mageweave",
+                "count": 4,
+                "icon": "inv_fabric_mageweave_03"
+              },
+              {
+                "item_id": 4291,
+                "name": "Silken Thread",
+                "count": 2,
+                "icon": "inv_fabric_silk_02"
+              }
+            ],
+            "crafted_item_id": 10050,
+            "item_class": 1,
+            "item_subclass": 0,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 12079,
+            "name": "Red Mageweave Bag",
+            "crafted_name": "Red Mageweave Bag",
+            "req_skill": 235,
+            "difficulty": [
+              235,
+              250,
+              265,
+              280
+            ],
+            "spell_icon": "inv_misc_bag_10_red",
+            "crafted_icon": "inv_misc_bag_10_red",
+            "reagents": [
+              {
+                "item_id": 4339,
+                "name": "Bolt of Mageweave",
+                "count": 4,
+                "icon": "inv_fabric_mageweave_03"
+              },
+              {
+                "item_id": 2604,
+                "name": "Red Dye",
+                "count": 2,
+                "icon": "inv_potion_11"
+              },
+              {
+                "item_id": 8343,
+                "name": "Heavy Silken Thread",
+                "count": 2,
+                "icon": "inv_fabric_silk_02"
+              }
+            ],
+            "crafted_item_id": 10051,
+            "item_class": 1,
+            "item_subclass": 0,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 18405,
+            "name": "Runecloth Bag",
+            "crafted_name": "Runecloth Bag",
+            "req_skill": 260,
+            "difficulty": [
+              260,
+              275,
+              290,
+              305
+            ],
+            "spell_icon": "inv_misc_bag_19",
+            "crafted_icon": "inv_misc_bag_19",
+            "reagents": [
+              {
+                "item_id": 14048,
+                "name": "Bolt of Runecloth",
+                "count": 5,
+                "icon": "inv_fabric_purplefire_02"
+              },
+              {
+                "item_id": 8170,
+                "name": "Rugged Leather",
+                "count": 2,
+                "icon": "inv_misc_leatherscrap_02"
+              },
+              {
+                "item_id": 14341,
+                "name": "Rune Thread",
+                "count": 1,
+                "icon": "spell_shadow_antimagicshell"
+              }
+            ],
+            "crafted_item_id": 14046,
+            "item_class": 1,
+            "item_subclass": 0,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 27659,
+            "name": "Enchanted Runecloth Bag",
+            "crafted_name": "Enchanted Runecloth Bag",
+            "req_skill": 275,
+            "difficulty": [
+              275,
+              290,
+              305,
+              320
+            ],
+            "spell_icon": "inv_misc_bag_enchantedrunecloth",
+            "crafted_icon": "inv_misc_bag_enchantedrunecloth",
+            "reagents": [
+              {
+                "item_id": 14048,
+                "name": "Bolt of Runecloth",
+                "count": 5,
+                "icon": "inv_fabric_purplefire_02"
+              },
+              {
+                "item_id": 16203,
+                "name": "Greater Eternal Essence",
+                "count": 2,
+                "icon": "inv_enchant_essenceeternallarge"
+              },
+              {
+                "item_id": 14341,
+                "name": "Rune Thread",
+                "count": 2,
+                "icon": "spell_shadow_antimagicshell"
+              }
+            ],
+            "crafted_item_id": 22248,
+            "item_class": 1,
+            "item_subclass": 3,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 27724,
+            "name": "Cenarion Herb Bag",
+            "crafted_name": "Cenarion Herb Bag",
+            "req_skill": 275,
+            "difficulty": [
+              275,
+              290,
+              305,
+              320
+            ],
+            "spell_icon": "inv_misc_bag_cenarionherbbag",
+            "crafted_icon": "inv_misc_bag_cenarionherbbag",
+            "reagents": [
+              {
+                "item_id": 14048,
+                "name": "Bolt of Runecloth",
+                "count": 5,
+                "icon": "inv_fabric_purplefire_02"
+              },
+              {
+                "item_id": 8831,
+                "name": "Purple Lotus",
+                "count": 10,
+                "icon": "inv_misc_herb_17"
+              },
+              {
+                "item_id": 11040,
+                "name": "Morrowgrain",
+                "count": 8,
+                "icon": "inv_misc_herb_05"
+              },
+              {
+                "item_id": 14341,
+                "name": "Rune Thread",
+                "count": 2,
+                "icon": "spell_shadow_antimagicshell"
+              }
+            ],
+            "crafted_item_id": 22251,
+            "item_class": 1,
+            "item_subclass": 2,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 18445,
+            "name": "Mooncloth Bag",
+            "crafted_name": "Mooncloth Bag",
+            "req_skill": 300,
+            "difficulty": [
+              300,
+              315,
+              330,
+              345
+            ],
+            "spell_icon": "inv_misc_bag_14",
+            "crafted_icon": "inv_misc_bag_14",
+            "reagents": [
+              {
+                "item_id": 14048,
+                "name": "Bolt of Runecloth",
+                "count": 4,
+                "icon": "inv_fabric_purplefire_02"
+              },
+              {
+                "item_id": 14342,
+                "name": "Mooncloth",
+                "count": 1,
+                "icon": "inv_fabric_moonrag_01"
+              },
+              {
+                "item_id": 14341,
+                "name": "Rune Thread",
+                "count": 1,
+                "icon": "spell_shadow_antimagicshell"
+              }
+            ],
+            "crafted_item_id": 14155,
+            "item_class": 1,
+            "item_subclass": 0,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 18455,
+            "name": "Bottomless Bag",
+            "crafted_name": "Bottomless Bag",
+            "req_skill": 300,
+            "difficulty": [
+              300,
+              315,
+              330,
+              345
+            ],
+            "spell_icon": "inv_misc_bag_13",
+            "crafted_icon": "inv_misc_bag_13",
+            "reagents": [
+              {
+                "item_id": 14048,
+                "name": "Bolt of Runecloth",
+                "count": 8,
+                "icon": "inv_fabric_purplefire_02"
+              },
+              {
+                "item_id": 14342,
+                "name": "Mooncloth",
+                "count": 12,
+                "icon": "inv_fabric_moonrag_01"
+              },
+              {
+                "item_id": 14344,
+                "name": "Large Brilliant Shard",
+                "count": 2,
+                "icon": "inv_enchant_shardbrilliantlarge"
+              },
+              {
+                "item_id": 17012,
+                "name": "Core Leather",
+                "count": 2,
+                "icon": "inv_ammo_firetar"
+              },
+              {
+                "item_id": 14341,
+                "name": "Rune Thread",
+                "count": 2,
+                "icon": "spell_shadow_antimagicshell"
+              }
+            ],
+            "crafted_item_id": 14156,
+            "item_class": 1,
+            "item_subclass": 0,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 26087,
+            "name": "Core Felcloth Bag",
+            "crafted_name": "Core Felcloth Bag",
+            "req_skill": 300,
+            "difficulty": [
+              300,
+              315,
+              330,
+              345
+            ],
+            "spell_icon": "inv_misc_bag_corefelclothbag",
+            "crafted_icon": "inv_misc_bag_corefelclothbag",
+            "reagents": [
+              {
+                "item_id": 14256,
+                "name": "Felcloth",
+                "count": 20,
+                "icon": "inv_fabric_felrag"
+              },
+              {
+                "item_id": 17012,
+                "name": "Core Leather",
+                "count": 16,
+                "icon": "inv_ammo_firetar"
+              },
+              {
+                "item_id": 7078,
+                "name": "Essence of Fire",
+                "count": 4,
+                "icon": "spell_fire_volcano"
+              },
+              {
+                "item_id": 14227,
+                "name": "Ironweb Spider Silk",
+                "count": 4,
+                "icon": "spell_nature_web"
+              }
+            ],
+            "crafted_item_id": 21342,
+            "item_class": 1,
+            "item_subclass": 1,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 27660,
+            "name": "Big Bag of Enchantment",
+            "crafted_name": "Big Bag of Enchantment",
+            "req_skill": 300,
+            "difficulty": [
+              300,
+              315,
+              330,
+              345
+            ],
+            "spell_icon": "inv_misc_bag_bigbagofenchantments",
+            "crafted_icon": "inv_misc_bag_bigbagofenchantments",
+            "reagents": [
+              {
+                "item_id": 14048,
+                "name": "Bolt of Runecloth",
+                "count": 6,
+                "icon": "inv_fabric_purplefire_02"
+              },
+              {
+                "item_id": 14344,
+                "name": "Large Brilliant Shard",
+                "count": 4,
+                "icon": "inv_enchant_shardbrilliantlarge"
+              },
+              {
+                "item_id": 12810,
+                "name": "Enchanted Leather",
+                "count": 4,
+                "icon": "inv_misc_rune_05"
+              },
+              {
+                "item_id": 14227,
+                "name": "Ironweb Spider Silk",
+                "count": 4,
+                "icon": "spell_nature_web"
+              }
+            ],
+            "crafted_item_id": 22249,
+            "item_class": 1,
+            "item_subclass": 3,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 26746,
+            "name": "Netherweave Bag",
+            "crafted_name": "Netherweave Bag",
+            "req_skill": 315,
+            "difficulty": [
+              315,
+              320,
+              330,
+              340
+            ],
+            "spell_icon": "inv_misc_bag_23_netherweave",
+            "crafted_icon": "inv_misc_bag_23_netherweave",
+            "reagents": [
+              {
+                "item_id": 21840,
+                "name": "Bolt of Netherweave",
+                "count": 4,
+                "icon": "inv_fabric_netherweave_bolt"
+              },
+              {
+                "item_id": 14341,
+                "name": "Rune Thread",
+                "count": 1,
+                "icon": "spell_shadow_antimagicshell"
+              }
+            ],
+            "crafted_item_id": 21841,
+            "item_class": 1,
+            "item_subclass": 0,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 26749,
+            "name": "Imbued Netherweave Bag",
+            "crafted_name": "Imbued Netherweave Bag",
+            "req_skill": 340,
+            "difficulty": [
+              340,
+              340,
+              340,
+              340
+            ],
+            "spell_icon": "inv_misc_bag_24_netherweave_imbued",
+            "crafted_icon": "inv_misc_bag_24_netherweave_imbued",
+            "reagents": [
+              {
+                "item_id": 21842,
+                "name": "Bolt of Imbued Netherweave",
+                "count": 4,
+                "icon": "inv_fabric_netherweave_bolt_imbued"
+              },
+              {
+                "item_id": 21881,
+                "name": "Netherweb Spider Silk",
+                "count": 2,
+                "icon": "spell_nature_web"
+              },
+              {
+                "item_id": 22446,
+                "name": "Greater Planar Essence",
+                "count": 1,
+                "icon": "inv_enchant_essencearcanelarge"
+              }
+            ],
+            "crafted_item_id": 21843,
+            "item_class": 1,
+            "item_subclass": 0,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 31459,
+            "name": "Bag of Jewels",
+            "crafted_name": "Bag of Jewels",
+            "req_skill": 340,
+            "difficulty": [
+              340,
+              350,
+              355,
+              360
+            ],
+            "spell_icon": "inv_misc_bag_15",
+            "crafted_icon": "inv_misc_bag_15",
+            "reagents": [
+              {
+                "item_id": 21842,
+                "name": "Bolt of Imbued Netherweave",
+                "count": 6,
+                "icon": "inv_fabric_netherweave_bolt_imbued"
+              },
+              {
+                "item_id": 21887,
+                "name": "Knothide Leather",
+                "count": 4,
+                "icon": "inv_misc_leatherscrap_10"
+              }
+            ],
+            "crafted_item_id": 24270,
+            "item_class": 1,
+            "item_subclass": 5,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 26755,
+            "name": "Spellfire Bag",
+            "crafted_name": "Spellfire Bag",
+            "req_skill": 375,
+            "difficulty": [
+              375,
+              385,
+              390,
+              395
+            ],
+            "spell_icon": "inv_misc_bag_26_spellfire",
+            "crafted_icon": "inv_misc_bag_26_spellfire",
+            "reagents": [
+              {
+                "item_id": 24271,
+                "name": "Spellcloth",
+                "count": 6,
+                "icon": "inv_fabric_spellfire"
+              },
+              {
+                "item_id": 22446,
+                "name": "Greater Planar Essence",
+                "count": 4,
+                "icon": "inv_enchant_essencearcanelarge"
+              },
+              {
+                "item_id": 21881,
+                "name": "Netherweb Spider Silk",
+                "count": 4,
+                "icon": "spell_nature_web"
+              }
+            ],
+            "crafted_item_id": 21858,
+            "item_class": 1,
+            "item_subclass": 3,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 26759,
+            "name": "Ebon Shadowbag",
+            "crafted_name": "Ebon Shadowbag",
+            "req_skill": 375,
+            "difficulty": [
+              375,
+              385,
+              390,
+              395
+            ],
+            "spell_icon": "inv_misc_bag_felclothbag",
+            "crafted_icon": "inv_misc_bag_felclothbag",
+            "reagents": [
+              {
+                "item_id": 24272,
+                "name": "Shadowcloth",
+                "count": 6,
+                "icon": "inv_fabric_felcloth_ebon"
+              },
+              {
+                "item_id": 21881,
+                "name": "Netherweb Spider Silk",
+                "count": 4,
+                "icon": "spell_nature_web"
+              }
+            ],
+            "crafted_item_id": 21872,
+            "item_class": 1,
+            "item_subclass": 1,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 26763,
+            "name": "Primal Mooncloth Bag",
+            "crafted_name": "Primal Mooncloth Bag",
+            "req_skill": 375,
+            "difficulty": [
+              375,
+              385,
+              390,
+              395
+            ],
+            "spell_icon": "inv_misc_bag_25_mooncloth",
+            "crafted_icon": "inv_misc_bag_25_mooncloth",
+            "reagents": [
+              {
+                "item_id": 21845,
+                "name": "Primal Mooncloth",
+                "count": 8,
+                "icon": "inv_fabric_moonrag_primal"
+              },
+              {
+                "item_id": 21881,
+                "name": "Netherweb Spider Silk",
+                "count": 4,
+                "icon": "spell_nature_web"
+              }
+            ],
+            "crafted_item_id": 21876,
+            "item_class": 1,
+            "item_subclass": 0,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 50194,
+            "name": "Mycah's Botanical Bag",
+            "crafted_name": "Mycah's Botanical Bag",
+            "req_skill": 375,
+            "difficulty": [
+              375,
+              385,
+              390,
+              395
+            ],
+            "spell_icon": "inv_misc_bag_27",
+            "crafted_icon": "inv_misc_bag_27",
+            "reagents": [
+              {
+                "item_id": 21845,
+                "name": "Primal Mooncloth",
+                "count": 4,
+                "icon": "inv_fabric_moonrag_primal"
+              },
+              {
+                "item_id": 22794,
+                "name": "Fel Lotus",
+                "count": 2,
+                "icon": "inv_misc_herb_fellotus"
+              }
+            ],
+            "crafted_item_id": 38225,
+            "item_class": 1,
+            "item_subclass": 2,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 56007,
+            "name": "Frostweave Bag",
+            "crafted_name": "Frostweave Bag",
+            "req_skill": 410,
+            "difficulty": [
+              410,
+              430,
+              440,
+              450
+            ],
+            "spell_icon": "inv_misc_bag_enchantedmageweave",
+            "crafted_icon": "inv_misc_bag_enchantedmageweave",
+            "reagents": [
+              {
+                "item_id": 41511,
+                "name": "Bolt of Imbued Frostweave",
+                "count": 6,
+                "icon": "inv_fabric_frostweave_imbuedbolt"
+              },
+              {
+                "item_id": 38426,
+                "name": "Eternium Thread",
+                "count": 2,
+                "icon": "inv_misc_thread_01"
+              }
+            ],
+            "crafted_item_id": 41599,
+            "item_class": 1,
+            "item_subclass": 0,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 56004,
+            "name": "Abyssal Bag",
+            "crafted_name": "Abyssal Bag",
+            "req_skill": 435,
+            "difficulty": [
+              435,
+              440,
+              445,
+              450
+            ],
+            "spell_icon": "inv_misc_bag_corefelclothbag",
+            "crafted_icon": "inv_misc_bag_corefelclothbag",
+            "reagents": [
+              {
+                "item_id": 41593,
+                "name": "Ebonweave",
+                "count": 4,
+                "icon": "inv_fabric_ebonweave"
+              },
+              {
+                "item_id": 41595,
+                "name": "Spellweave",
+                "count": 2,
+                "icon": "inv_fabric_spellweave"
+              },
+              {
+                "item_id": 38426,
+                "name": "Eternium Thread",
+                "count": 1,
+                "icon": "inv_misc_thread_01"
+              }
+            ],
+            "crafted_item_id": 41597,
+            "item_class": 1,
+            "item_subclass": 1,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 63924,
+            "name": "Emerald Bag",
+            "crafted_name": "Emerald Bag",
+            "req_skill": 435,
+            "difficulty": [
+              435,
+              440,
+              445,
+              450
+            ],
+            "spell_icon": "inv_misc_bag_18",
+            "crafted_icon": "inv_misc_bag_18",
+            "reagents": [
+              {
+                "item_id": 41594,
+                "name": "Moonshroud",
+                "count": 4,
+                "icon": "inv_fabric_moonshroud"
+              },
+              {
+                "item_id": 36908,
+                "name": "Frost Lotus",
+                "count": 6,
+                "icon": "inv_misc_herb_frostlotus"
+              }
+            ],
+            "crafted_item_id": 45773,
+            "item_class": 1,
+            "item_subclass": 2,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 56006,
+            "name": "Mysterious Bag",
+            "crafted_name": "Mysterious Bag",
+            "req_skill": 440,
+            "difficulty": [
+              440,
+              445,
+              450,
+              455
+            ],
+            "spell_icon": "inv_misc_bag_17",
+            "crafted_icon": "inv_misc_bag_17",
+            "reagents": [
+              {
+                "item_id": 41595,
+                "name": "Spellweave",
+                "count": 4,
+                "icon": "inv_fabric_spellweave"
+              },
+              {
+                "item_id": 41594,
+                "name": "Moonshroud",
+                "count": 2,
+                "icon": "inv_fabric_moonshroud"
+              },
+              {
+                "item_id": 38426,
+                "name": "Eternium Thread",
+                "count": 1,
+                "icon": "inv_misc_thread_01"
+              }
+            ],
+            "crafted_item_id": 41598,
+            "item_class": 1,
+            "item_subclass": 3,
+            "inventory_type": 18
+          },
+          {
+            "spell_id": 56005,
+            "name": "Glacial Bag",
+            "crafted_name": "Glacial Bag",
+            "req_skill": 445,
+            "difficulty": [
+              445,
+              450,
+              455,
+              460
+            ],
+            "spell_icon": "inv_misc_bag_enchantedrunecloth",
+            "crafted_icon": "inv_misc_bag_enchantedrunecloth",
+            "reagents": [
+              {
+                "item_id": 41594,
+                "name": "Moonshroud",
+                "count": 4,
+                "icon": "inv_fabric_moonshroud"
+              },
+              {
+                "item_id": 41593,
+                "name": "Ebonweave",
+                "count": 4,
+                "icon": "inv_fabric_ebonweave"
+              },
+              {
+                "item_id": 38426,
+                "name": "Eternium Thread",
+                "count": 1,
+                "icon": "inv_misc_thread_01"
+              }
+            ],
+            "crafted_item_id": 41600,
+            "item_class": 1,
+            "item_subclass": 0,
+            "inventory_type": 18
           }
         ]
       }
@@ -114074,38 +114079,6 @@
         "sort_order": 11,
         "spells": [
           {
-            "spell_id": 58300,
-            "name": "Glyph of Possessed Strength",
-            "crafted_name": "Glyph of Possessed Strength",
-            "req_skill": 75,
-            "difficulty": [
-              75,
-              80,
-              85,
-              90
-            ],
-            "spell_icon": "inv_glyph_minorhunter",
-            "crafted_icon": "inv_glyph_minorhunter",
-            "reagents": [
-              {
-                "item_id": 39774,
-                "name": "Midnight Ink",
-                "count": 1,
-                "icon": "inv_inscription_inkblack01"
-              },
-              {
-                "item_id": 39354,
-                "name": "Light Parchment",
-                "count": 1,
-                "icon": "inv_inscription_papyrus"
-              }
-            ],
-            "crafted_item_id": 43354,
-            "item_class": 16,
-            "item_subclass": 3,
-            "inventory_type": 0
-          },
-          {
             "spell_id": 57210,
             "name": "Glyph of Bone Shield",
             "crafted_name": "Glyph of Bone Shield",
@@ -114746,38 +114719,6 @@
             "inventory_type": 0
           },
           {
-            "spell_id": 71102,
-            "name": "Glyph of Quick Decay",
-            "crafted_name": "Glyph of Quick Decay",
-            "req_skill": 375,
-            "difficulty": [
-              375,
-              380,
-              382,
-              385
-            ],
-            "spell_icon": "inv_glyph_majorwarlock",
-            "crafted_icon": "inv_glyph_majorwarlock",
-            "reagents": [
-              {
-                "item_id": 43126,
-                "name": "Ink of the Sea",
-                "count": 1,
-                "icon": "inv_inscription_inkpurple01"
-              },
-              {
-                "item_id": 39502,
-                "name": "Resilient Parchment",
-                "count": 1,
-                "icon": "inv_inscription_certificate"
-              }
-            ],
-            "crafted_item_id": 50077,
-            "item_class": 16,
-            "item_subclass": 9,
-            "inventory_type": 0
-          },
-          {
             "spell_id": 57207,
             "name": "Glyph of Anti-Magic Shell",
             "crafted_name": "Glyph of Anti-Magic Shell",
@@ -115130,38 +115071,6 @@
             "inventory_type": 0
           },
           {
-            "spell_id": 64284,
-            "name": "Glyph of Hunger for Blood",
-            "crafted_name": "Glyph of Hunger for Blood",
-            "req_skill": 425,
-            "difficulty": [
-              425,
-              430,
-              435,
-              440
-            ],
-            "spell_icon": "inv_glyph_majorrogue",
-            "crafted_icon": "inv_glyph_majorrogue",
-            "reagents": [
-              {
-                "item_id": 43124,
-                "name": "Ethereal Ink",
-                "count": 1,
-                "icon": "inv_inscription_inkblack02"
-              },
-              {
-                "item_id": 39502,
-                "name": "Resilient Parchment",
-                "count": 1,
-                "icon": "inv_inscription_certificate"
-              }
-            ],
-            "crafted_item_id": 45761,
-            "item_class": 16,
-            "item_subclass": 4,
-            "inventory_type": 0
-          },
-          {
             "spell_id": 64299,
             "name": "Glyph of Unholy Blight",
             "crafted_name": "Glyph of Unholy Blight",
@@ -115230,62 +115139,6 @@
       "Druid": {
         "sort_order": 12,
         "spells": [
-          {
-            "spell_id": 57231,
-            "name": "Death Knight Glyph 25",
-            "crafted_name": "Death Knight Glyph 25",
-            "req_skill": 0,
-            "difficulty": [
-              0,
-              0,
-              0,
-              0
-            ],
-            "spell_icon": "inv_feather_05",
-            "crafted_icon": "inv_feather_05",
-            "reagents": [
-              {
-                "item_id": 39469,
-                "name": "Moonglow Ink",
-                "count": 1,
-                "icon": "inv_inscription_inkwhite02"
-              },
-              {
-                "item_id": 785,
-                "name": "Mageroyal",
-                "count": 1,
-                "icon": "inv_jewelry_talisman_03"
-              },
-              {
-                "item_id": 39354,
-                "name": "Light Parchment",
-                "count": 1,
-                "icon": "inv_inscription_papyrus"
-              },
-              {
-                "item_id": 10648,
-                "name": "Common Parchment",
-                "count": 1,
-                "icon": "inv_inscription_parchment"
-              },
-              {
-                "item_id": 39501,
-                "name": "Heavy Parchment",
-                "count": 1,
-                "icon": "inv_inscription_scroll"
-              },
-              {
-                "item_id": 39502,
-                "name": "Resilient Parchment",
-                "count": 1,
-                "icon": "inv_inscription_certificate"
-              }
-            ],
-            "crafted_item_id": 42897,
-            "item_class": 16,
-            "item_subclass": 3,
-            "inventory_type": 0
-          },
           {
             "spell_id": 58296,
             "name": "Glyph of the Wild",
@@ -115604,70 +115457,6 @@
             "crafted_item_id": 40914,
             "item_class": 16,
             "item_subclass": 11,
-            "inventory_type": 0
-          },
-          {
-            "spell_id": 56997,
-            "name": "Glyph of Mending",
-            "crafted_name": "Glyph of Mending",
-            "req_skill": 115,
-            "difficulty": [
-              115,
-              120,
-              125,
-              130
-            ],
-            "spell_icon": "inv_glyph_majorhunter",
-            "crafted_icon": "inv_glyph_majorhunter",
-            "reagents": [
-              {
-                "item_id": 43116,
-                "name": "Lion's Ink",
-                "count": 1,
-                "icon": "inv_inscription_inkyellow02"
-              },
-              {
-                "item_id": 10648,
-                "name": "Common Parchment",
-                "count": 1,
-                "icon": "inv_inscription_parchment"
-              }
-            ],
-            "crafted_item_id": 42900,
-            "item_class": 16,
-            "item_subclass": 3,
-            "inventory_type": 0
-          },
-          {
-            "spell_id": 56971,
-            "name": "Glyph of Arcane Missiles",
-            "crafted_name": "Glyph of Arcane Missiles",
-            "req_skill": 115,
-            "difficulty": [
-              115,
-              120,
-              125,
-              130
-            ],
-            "spell_icon": "inv_glyph_majormage",
-            "crafted_icon": "inv_glyph_majormage",
-            "reagents": [
-              {
-                "item_id": 43116,
-                "name": "Lion's Ink",
-                "count": 1,
-                "icon": "inv_inscription_inkyellow02"
-              },
-              {
-                "item_id": 10648,
-                "name": "Common Parchment",
-                "count": 1,
-                "icon": "inv_inscription_parchment"
-              }
-            ],
-            "crafted_item_id": 42735,
-            "item_class": 16,
-            "item_subclass": 8,
             "inventory_type": 0
           },
           {
@@ -116476,6 +116265,62 @@
         "sort_order": 13,
         "spells": [
           {
+            "spell_id": 57231,
+            "name": "Death Knight Glyph 25",
+            "crafted_name": "Death Knight Glyph 25",
+            "req_skill": 0,
+            "difficulty": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "spell_icon": "inv_feather_05",
+            "crafted_icon": "inv_feather_05",
+            "reagents": [
+              {
+                "item_id": 39469,
+                "name": "Moonglow Ink",
+                "count": 1,
+                "icon": "inv_inscription_inkwhite02"
+              },
+              {
+                "item_id": 785,
+                "name": "Mageroyal",
+                "count": 1,
+                "icon": "inv_jewelry_talisman_03"
+              },
+              {
+                "item_id": 39354,
+                "name": "Light Parchment",
+                "count": 1,
+                "icon": "inv_inscription_papyrus"
+              },
+              {
+                "item_id": 10648,
+                "name": "Common Parchment",
+                "count": 1,
+                "icon": "inv_inscription_parchment"
+              },
+              {
+                "item_id": 39501,
+                "name": "Heavy Parchment",
+                "count": 1,
+                "icon": "inv_inscription_scroll"
+              },
+              {
+                "item_id": 39502,
+                "name": "Resilient Parchment",
+                "count": 1,
+                "icon": "inv_inscription_certificate"
+              }
+            ],
+            "crafted_item_id": 42897,
+            "item_class": 16,
+            "item_subclass": 3,
+            "inventory_type": 0
+          },
+          {
             "spell_id": 58299,
             "name": "Glyph of Revive Pet",
             "crafted_name": "Glyph of Revive Pet",
@@ -116572,6 +116417,38 @@
             "inventory_type": 0
           },
           {
+            "spell_id": 58300,
+            "name": "Glyph of Possessed Strength",
+            "crafted_name": "Glyph of Possessed Strength",
+            "req_skill": 75,
+            "difficulty": [
+              75,
+              80,
+              85,
+              90
+            ],
+            "spell_icon": "inv_glyph_minorhunter",
+            "crafted_icon": "inv_glyph_minorhunter",
+            "reagents": [
+              {
+                "item_id": 39774,
+                "name": "Midnight Ink",
+                "count": 1,
+                "icon": "inv_inscription_inkblack01"
+              },
+              {
+                "item_id": 39354,
+                "name": "Light Parchment",
+                "count": 1,
+                "icon": "inv_inscription_papyrus"
+              }
+            ],
+            "crafted_item_id": 43354,
+            "item_class": 16,
+            "item_subclass": 3,
+            "inventory_type": 0
+          },
+          {
             "spell_id": 57004,
             "name": "Glyph of Hunter's Mark",
             "crafted_name": "Glyph of Hunter's Mark",
@@ -116604,6 +116481,38 @@
             "inventory_type": 0
           },
           {
+            "spell_id": 57009,
+            "name": "Glyph of Serpent Sting",
+            "crafted_name": "Glyph of Serpent Sting",
+            "req_skill": 90,
+            "difficulty": [
+              90,
+              100,
+              110,
+              120
+            ],
+            "spell_icon": "inv_glyph_majorhunter",
+            "crafted_icon": "inv_glyph_majorhunter",
+            "reagents": [
+              {
+                "item_id": 39774,
+                "name": "Midnight Ink",
+                "count": 1,
+                "icon": "inv_inscription_inkblack01"
+              },
+              {
+                "item_id": 39354,
+                "name": "Light Parchment",
+                "count": 1,
+                "icon": "inv_inscription_papyrus"
+              }
+            ],
+            "crafted_item_id": 42912,
+            "item_class": 16,
+            "item_subclass": 3,
+            "inventory_type": 0
+          },
+          {
             "spell_id": 56995,
             "name": "Glyph of Arcane Shot",
             "crafted_name": "Glyph of Arcane Shot",
@@ -116631,6 +116540,38 @@
               }
             ],
             "crafted_item_id": 42898,
+            "item_class": 16,
+            "item_subclass": 3,
+            "inventory_type": 0
+          },
+          {
+            "spell_id": 56997,
+            "name": "Glyph of Mending",
+            "crafted_name": "Glyph of Mending",
+            "req_skill": 115,
+            "difficulty": [
+              115,
+              120,
+              125,
+              130
+            ],
+            "spell_icon": "inv_glyph_majorhunter",
+            "crafted_icon": "inv_glyph_majorhunter",
+            "reagents": [
+              {
+                "item_id": 43116,
+                "name": "Lion's Ink",
+                "count": 1,
+                "icon": "inv_inscription_inkyellow02"
+              },
+              {
+                "item_id": 10648,
+                "name": "Common Parchment",
+                "count": 1,
+                "icon": "inv_inscription_parchment"
+              }
+            ],
+            "crafted_item_id": 42900,
             "item_class": 16,
             "item_subclass": 3,
             "inventory_type": 0
@@ -116919,6 +116860,38 @@
               }
             ],
             "crafted_item_id": 42911,
+            "item_class": 16,
+            "item_subclass": 3,
+            "inventory_type": 0
+          },
+          {
+            "spell_id": 57003,
+            "name": "Glyph of Frost Trap",
+            "crafted_name": "Glyph of Frost Trap",
+            "req_skill": 350,
+            "difficulty": [
+              350,
+              355,
+              360,
+              365
+            ],
+            "spell_icon": "inv_glyph_majorhunter",
+            "crafted_icon": "inv_glyph_majorhunter",
+            "reagents": [
+              {
+                "item_id": 43124,
+                "name": "Ethereal Ink",
+                "count": 1,
+                "icon": "inv_inscription_inkblack02"
+              },
+              {
+                "item_id": 39502,
+                "name": "Resilient Parchment",
+                "count": 1,
+                "icon": "inv_inscription_certificate"
+              }
+            ],
+            "crafted_item_id": 42906,
             "item_class": 16,
             "item_subclass": 3,
             "inventory_type": 0
@@ -117761,18 +117734,18 @@
             "inventory_type": 0
           },
           {
-            "spell_id": 57238,
-            "name": "Glyph of Fire Nova",
-            "crafted_name": "Glyph of Fire Nova",
-            "req_skill": 110,
+            "spell_id": 56971,
+            "name": "Glyph of Arcane Missiles",
+            "crafted_name": "Glyph of Arcane Missiles",
+            "req_skill": 115,
             "difficulty": [
-              110,
               115,
               120,
-              125
+              125,
+              130
             ],
-            "spell_icon": "inv_glyph_majorshaman",
-            "crafted_icon": "inv_glyph_majorshaman",
+            "spell_icon": "inv_glyph_majormage",
+            "crafted_icon": "inv_glyph_majormage",
             "reagents": [
               {
                 "item_id": 43116,
@@ -117787,9 +117760,9 @@
                 "icon": "inv_inscription_parchment"
               }
             ],
-            "crafted_item_id": 41530,
+            "crafted_item_id": 42735,
             "item_class": 16,
-            "item_subclass": 7,
+            "item_subclass": 8,
             "inventory_type": 0
           },
           {
@@ -118142,38 +118115,6 @@
             "crafted_item_id": 42736,
             "item_class": 16,
             "item_subclass": 8,
-            "inventory_type": 0
-          },
-          {
-            "spell_id": 57003,
-            "name": "Glyph of Frost Trap",
-            "crafted_name": "Glyph of Frost Trap",
-            "req_skill": 350,
-            "difficulty": [
-              350,
-              355,
-              360,
-              365
-            ],
-            "spell_icon": "inv_glyph_majorhunter",
-            "crafted_icon": "inv_glyph_majorhunter",
-            "reagents": [
-              {
-                "item_id": 43124,
-                "name": "Ethereal Ink",
-                "count": 1,
-                "icon": "inv_inscription_inkblack02"
-              },
-              {
-                "item_id": 39502,
-                "name": "Resilient Parchment",
-                "count": 1,
-                "icon": "inv_inscription_certificate"
-              }
-            ],
-            "crafted_item_id": 42906,
-            "item_class": 16,
-            "item_subclass": 3,
             "inventory_type": 0
           },
           {
@@ -118886,38 +118827,6 @@
             "inventory_type": 0
           },
           {
-            "spell_id": 58320,
-            "name": "Glyph of Shackle Undead",
-            "crafted_name": "Glyph of Shackle Undead",
-            "req_skill": 100,
-            "difficulty": [
-              100,
-              105,
-              110,
-              115
-            ],
-            "spell_icon": "inv_glyph_minorpriest",
-            "crafted_icon": "inv_glyph_minorpriest",
-            "reagents": [
-              {
-                "item_id": 43116,
-                "name": "Lion's Ink",
-                "count": 1,
-                "icon": "inv_inscription_inkyellow02"
-              },
-              {
-                "item_id": 39354,
-                "name": "Light Parchment",
-                "count": 1,
-                "icon": "inv_inscription_papyrus"
-              }
-            ],
-            "crafted_item_id": 43373,
-            "item_class": 16,
-            "item_subclass": 5,
-            "inventory_type": 0
-          },
-          {
             "spell_id": 57029,
             "name": "Glyph of Holy Light",
             "crafted_name": "Glyph of Holy Light",
@@ -118977,6 +118886,70 @@
               }
             ],
             "crafted_item_id": 41092,
+            "item_class": 16,
+            "item_subclass": 2,
+            "inventory_type": 0
+          },
+          {
+            "spell_id": 57031,
+            "name": "Glyph of Divinity",
+            "crafted_name": "Glyph of Divinity",
+            "req_skill": 135,
+            "difficulty": [
+              135,
+              140,
+              145,
+              150
+            ],
+            "spell_icon": "inv_glyph_majorpaladin",
+            "crafted_icon": "inv_glyph_majorpaladin",
+            "reagents": [
+              {
+                "item_id": 43116,
+                "name": "Lion's Ink",
+                "count": 1,
+                "icon": "inv_inscription_inkyellow02"
+              },
+              {
+                "item_id": 10648,
+                "name": "Common Parchment",
+                "count": 1,
+                "icon": "inv_inscription_parchment"
+              }
+            ],
+            "crafted_item_id": 41108,
+            "item_class": 16,
+            "item_subclass": 2,
+            "inventory_type": 0
+          },
+          {
+            "spell_id": 58316,
+            "name": "Glyph of the Wise",
+            "crafted_name": "Glyph of the Wise",
+            "req_skill": 150,
+            "difficulty": [
+              150,
+              155,
+              160,
+              165
+            ],
+            "spell_icon": "inv_glyph_minorpaladin",
+            "crafted_icon": "inv_glyph_minorpaladin",
+            "reagents": [
+              {
+                "item_id": 43118,
+                "name": "Jadefire Ink",
+                "count": 1,
+                "icon": "inv_inscription_inkgreen03"
+              },
+              {
+                "item_id": 10648,
+                "name": "Common Parchment",
+                "count": 1,
+                "icon": "inv_inscription_parchment"
+              }
+            ],
+            "crafted_item_id": 43369,
             "item_class": 16,
             "item_subclass": 2,
             "inventory_type": 0
@@ -119142,6 +119115,38 @@
             "inventory_type": 0
           },
           {
+            "spell_id": 57026,
+            "name": "Glyph of Flash of Light",
+            "crafted_name": "Glyph of Flash of Light",
+            "req_skill": 300,
+            "difficulty": [
+              300,
+              305,
+              310,
+              315
+            ],
+            "spell_icon": "inv_glyph_majorpaladin",
+            "crafted_icon": "inv_glyph_majorpaladin",
+            "reagents": [
+              {
+                "item_id": 43124,
+                "name": "Ethereal Ink",
+                "count": 1,
+                "icon": "inv_inscription_inkblack02"
+              },
+              {
+                "item_id": 39501,
+                "name": "Heavy Parchment",
+                "count": 1,
+                "icon": "inv_inscription_scroll"
+              }
+            ],
+            "crafted_item_id": 41105,
+            "item_class": 16,
+            "item_subclass": 2,
+            "inventory_type": 0
+          },
+          {
             "spell_id": 57033,
             "name": "Glyph of Seal of Command",
             "crafted_name": "Glyph of Seal of Command",
@@ -119171,38 +119176,6 @@
             "crafted_item_id": 41094,
             "item_class": 16,
             "item_subclass": 2,
-            "inventory_type": 0
-          },
-          {
-            "spell_id": 57113,
-            "name": "Glyph of Ambush",
-            "crafted_name": "Glyph of Ambush",
-            "req_skill": 340,
-            "difficulty": [
-              340,
-              345,
-              350,
-              355
-            ],
-            "spell_icon": "inv_glyph_majorrogue",
-            "crafted_icon": "inv_glyph_majorrogue",
-            "reagents": [
-              {
-                "item_id": 43124,
-                "name": "Ethereal Ink",
-                "count": 1,
-                "icon": "inv_inscription_inkblack02"
-              },
-              {
-                "item_id": 39502,
-                "name": "Resilient Parchment",
-                "count": 1,
-                "icon": "inv_inscription_certificate"
-              }
-            ],
-            "crafted_item_id": 42955,
-            "item_class": 16,
-            "item_subclass": 4,
             "inventory_type": 0
           },
           {
@@ -119684,6 +119657,38 @@
             "item_class": 16,
             "item_subclass": 2,
             "inventory_type": 0
+          },
+          {
+            "spell_id": 64305,
+            "name": "Glyph of Divine Plea",
+            "crafted_name": "Glyph of Divine Plea",
+            "req_skill": 425,
+            "difficulty": [
+              425,
+              430,
+              435,
+              440
+            ],
+            "spell_icon": "inv_glyph_majorpaladin",
+            "crafted_icon": "inv_glyph_majorpaladin",
+            "reagents": [
+              {
+                "item_id": 43126,
+                "name": "Ink of the Sea",
+                "count": 1,
+                "icon": "inv_inscription_inkpurple01"
+              },
+              {
+                "item_id": 39502,
+                "name": "Resilient Parchment",
+                "count": 1,
+                "icon": "inv_inscription_certificate"
+              }
+            ],
+            "crafted_item_id": 45745,
+            "item_class": 16,
+            "item_subclass": 2,
+            "inventory_type": 0
           }
         ]
       },
@@ -119819,6 +119824,38 @@
             "inventory_type": 0
           },
           {
+            "spell_id": 58320,
+            "name": "Glyph of Shackle Undead",
+            "crafted_name": "Glyph of Shackle Undead",
+            "req_skill": 100,
+            "difficulty": [
+              100,
+              105,
+              110,
+              115
+            ],
+            "spell_icon": "inv_glyph_minorpriest",
+            "crafted_icon": "inv_glyph_minorpriest",
+            "reagents": [
+              {
+                "item_id": 43116,
+                "name": "Lion's Ink",
+                "count": 1,
+                "icon": "inv_inscription_inkyellow02"
+              },
+              {
+                "item_id": 39354,
+                "name": "Light Parchment",
+                "count": 1,
+                "icon": "inv_inscription_papyrus"
+              }
+            ],
+            "crafted_item_id": 43373,
+            "item_class": 16,
+            "item_subclass": 5,
+            "inventory_type": 0
+          },
+          {
             "spell_id": 57184,
             "name": "Glyph of Fade",
             "crafted_name": "Glyph of Fade",
@@ -119883,38 +119920,6 @@
             "inventory_type": 0
           },
           {
-            "spell_id": 57031,
-            "name": "Glyph of Divinity",
-            "crafted_name": "Glyph of Divinity",
-            "req_skill": 135,
-            "difficulty": [
-              135,
-              140,
-              145,
-              150
-            ],
-            "spell_icon": "inv_glyph_majorpaladin",
-            "crafted_icon": "inv_glyph_majorpaladin",
-            "reagents": [
-              {
-                "item_id": 43116,
-                "name": "Lion's Ink",
-                "count": 1,
-                "icon": "inv_inscription_inkyellow02"
-              },
-              {
-                "item_id": 10648,
-                "name": "Common Parchment",
-                "count": 1,
-                "icon": "inv_inscription_parchment"
-              }
-            ],
-            "crafted_item_id": 41108,
-            "item_class": 16,
-            "item_subclass": 2,
-            "inventory_type": 0
-          },
-          {
             "spell_id": 57188,
             "name": "Glyph of Inner Fire",
             "crafted_name": "Glyph of Inner Fire",
@@ -119976,38 +119981,6 @@
             "crafted_item_id": 43372,
             "item_class": 16,
             "item_subclass": 5,
-            "inventory_type": 0
-          },
-          {
-            "spell_id": 58330,
-            "name": "Glyph of Renewed Life",
-            "crafted_name": "Glyph of Renewed Life",
-            "req_skill": 150,
-            "difficulty": [
-              150,
-              155,
-              160,
-              165
-            ],
-            "spell_icon": "inv_glyph_minorshaman",
-            "crafted_icon": "inv_glyph_minorshaman",
-            "reagents": [
-              {
-                "item_id": 43118,
-                "name": "Jadefire Ink",
-                "count": 1,
-                "icon": "inv_inscription_inkgreen03"
-              },
-              {
-                "item_id": 10648,
-                "name": "Common Parchment",
-                "count": 1,
-                "icon": "inv_inscription_parchment"
-              }
-            ],
-            "crafted_item_id": 43385,
-            "item_class": 16,
-            "item_subclass": 7,
             "inventory_type": 0
           },
           {
@@ -120232,38 +120205,6 @@
             "crafted_item_id": 42399,
             "item_class": 16,
             "item_subclass": 5,
-            "inventory_type": 0
-          },
-          {
-            "spell_id": 57026,
-            "name": "Glyph of Flash of Light",
-            "crafted_name": "Glyph of Flash of Light",
-            "req_skill": 300,
-            "difficulty": [
-              300,
-              305,
-              310,
-              315
-            ],
-            "spell_icon": "inv_glyph_majorpaladin",
-            "crafted_icon": "inv_glyph_majorpaladin",
-            "reagents": [
-              {
-                "item_id": 43124,
-                "name": "Ethereal Ink",
-                "count": 1,
-                "icon": "inv_inscription_inkblack02"
-              },
-              {
-                "item_id": 39501,
-                "name": "Heavy Parchment",
-                "count": 1,
-                "icon": "inv_inscription_scroll"
-              }
-            ],
-            "crafted_item_id": 41105,
-            "item_class": 16,
-            "item_subclass": 2,
             "inventory_type": 0
           },
           {
@@ -120747,9 +120688,9 @@
             "inventory_type": 0
           },
           {
-            "spell_id": 64286,
-            "name": "Glyph of Shadow Dance",
-            "crafted_name": "Glyph of Shadow Dance",
+            "spell_id": 64281,
+            "name": "Glyph of Guardian Spirit",
+            "crafted_name": "Glyph of Guardian Spirit",
             "req_skill": 425,
             "difficulty": [
               425,
@@ -120757,8 +120698,8 @@
               435,
               440
             ],
-            "spell_icon": "inv_glyph_majorrogue",
-            "crafted_icon": "inv_glyph_majorrogue",
+            "spell_icon": "inv_glyph_majorpriest",
+            "crafted_icon": "inv_glyph_majorpriest",
             "reagents": [
               {
                 "item_id": 43124,
@@ -120773,9 +120714,41 @@
                 "icon": "inv_inscription_certificate"
               }
             ],
-            "crafted_item_id": 45764,
+            "crafted_item_id": 45755,
             "item_class": 16,
-            "item_subclass": 4,
+            "item_subclass": 5,
+            "inventory_type": 0
+          },
+          {
+            "spell_id": 64280,
+            "name": "Glyph of Dispersion",
+            "crafted_name": "Glyph of Dispersion",
+            "req_skill": 425,
+            "difficulty": [
+              425,
+              430,
+              435,
+              440
+            ],
+            "spell_icon": "inv_glyph_majorpriest",
+            "crafted_icon": "inv_glyph_majorpriest",
+            "reagents": [
+              {
+                "item_id": 43124,
+                "name": "Ethereal Ink",
+                "count": 1,
+                "icon": "inv_inscription_inkblack02"
+              },
+              {
+                "item_id": 39502,
+                "name": "Resilient Parchment",
+                "count": 1,
+                "icon": "inv_inscription_certificate"
+              }
+            ],
+            "crafted_item_id": 45753,
+            "item_class": 16,
+            "item_subclass": 5,
             "inventory_type": 0
           }
         ]
@@ -121005,38 +120978,6 @@
             "crafted_item_id": 42962,
             "item_class": 16,
             "item_subclass": 4,
-            "inventory_type": 0
-          },
-          {
-            "spell_id": 57240,
-            "name": "Glyph of Flametongue Weapon",
-            "crafted_name": "Glyph of Flametongue Weapon",
-            "req_skill": 125,
-            "difficulty": [
-              125,
-              130,
-              135,
-              140
-            ],
-            "spell_icon": "inv_glyph_majorshaman",
-            "crafted_icon": "inv_glyph_majorshaman",
-            "reagents": [
-              {
-                "item_id": 43116,
-                "name": "Lion's Ink",
-                "count": 1,
-                "icon": "inv_inscription_inkyellow02"
-              },
-              {
-                "item_id": 10648,
-                "name": "Common Parchment",
-                "count": 1,
-                "icon": "inv_inscription_parchment"
-              }
-            ],
-            "crafted_item_id": 41532,
-            "item_class": 16,
-            "item_subclass": 7,
             "inventory_type": 0
           },
           {
@@ -121392,6 +121333,38 @@
             "inventory_type": 0
           },
           {
+            "spell_id": 57113,
+            "name": "Glyph of Ambush",
+            "crafted_name": "Glyph of Ambush",
+            "req_skill": 340,
+            "difficulty": [
+              340,
+              345,
+              350,
+              355
+            ],
+            "spell_icon": "inv_glyph_majorrogue",
+            "crafted_icon": "inv_glyph_majorrogue",
+            "reagents": [
+              {
+                "item_id": 43124,
+                "name": "Ethereal Ink",
+                "count": 1,
+                "icon": "inv_inscription_inkblack02"
+              },
+              {
+                "item_id": 39502,
+                "name": "Resilient Parchment",
+                "count": 1,
+                "icon": "inv_inscription_certificate"
+              }
+            ],
+            "crafted_item_id": 42955,
+            "item_class": 16,
+            "item_subclass": 4,
+            "inventory_type": 0
+          },
+          {
             "spell_id": 57130,
             "name": "Glyph of Vigor",
             "crafted_name": "Glyph of Vigor",
@@ -121680,38 +121653,6 @@
             "inventory_type": 0
           },
           {
-            "spell_id": 64316,
-            "name": "Glyph of Hex",
-            "crafted_name": "Glyph of Hex",
-            "req_skill": 425,
-            "difficulty": [
-              425,
-              430,
-              435,
-              440
-            ],
-            "spell_icon": "inv_glyph_majorshaman",
-            "crafted_icon": "inv_glyph_majorshaman",
-            "reagents": [
-              {
-                "item_id": 43126,
-                "name": "Ink of the Sea",
-                "count": 1,
-                "icon": "inv_inscription_inkpurple01"
-              },
-              {
-                "item_id": 39502,
-                "name": "Resilient Parchment",
-                "count": 1,
-                "icon": "inv_inscription_certificate"
-              }
-            ],
-            "crafted_item_id": 45777,
-            "item_class": 16,
-            "item_subclass": 7,
-            "inventory_type": 0
-          },
-          {
             "spell_id": 64315,
             "name": "Glyph of Fan of Knives",
             "crafted_name": "Glyph of Fan of Knives",
@@ -121806,6 +121747,70 @@
             "item_class": 16,
             "item_subclass": 4,
             "inventory_type": 0
+          },
+          {
+            "spell_id": 64284,
+            "name": "Glyph of Hunger for Blood",
+            "crafted_name": "Glyph of Hunger for Blood",
+            "req_skill": 425,
+            "difficulty": [
+              425,
+              430,
+              435,
+              440
+            ],
+            "spell_icon": "inv_glyph_majorrogue",
+            "crafted_icon": "inv_glyph_majorrogue",
+            "reagents": [
+              {
+                "item_id": 43124,
+                "name": "Ethereal Ink",
+                "count": 1,
+                "icon": "inv_inscription_inkblack02"
+              },
+              {
+                "item_id": 39502,
+                "name": "Resilient Parchment",
+                "count": 1,
+                "icon": "inv_inscription_certificate"
+              }
+            ],
+            "crafted_item_id": 45761,
+            "item_class": 16,
+            "item_subclass": 4,
+            "inventory_type": 0
+          },
+          {
+            "spell_id": 64286,
+            "name": "Glyph of Shadow Dance",
+            "crafted_name": "Glyph of Shadow Dance",
+            "req_skill": 425,
+            "difficulty": [
+              425,
+              430,
+              435,
+              440
+            ],
+            "spell_icon": "inv_glyph_majorrogue",
+            "crafted_icon": "inv_glyph_majorrogue",
+            "reagents": [
+              {
+                "item_id": 43124,
+                "name": "Ethereal Ink",
+                "count": 1,
+                "icon": "inv_inscription_inkblack02"
+              },
+              {
+                "item_id": 39502,
+                "name": "Resilient Parchment",
+                "count": 1,
+                "icon": "inv_inscription_certificate"
+              }
+            ],
+            "crafted_item_id": 45764,
+            "item_class": 16,
+            "item_subclass": 4,
+            "inventory_type": 0
           }
         ]
       },
@@ -121874,38 +121879,6 @@
             "crafted_item_id": 41531,
             "item_class": 16,
             "item_subclass": 7,
-            "inventory_type": 0
-          },
-          {
-            "spell_id": 57009,
-            "name": "Glyph of Serpent Sting",
-            "crafted_name": "Glyph of Serpent Sting",
-            "req_skill": 90,
-            "difficulty": [
-              90,
-              100,
-              110,
-              120
-            ],
-            "spell_icon": "inv_glyph_majorhunter",
-            "crafted_icon": "inv_glyph_majorhunter",
-            "reagents": [
-              {
-                "item_id": 39774,
-                "name": "Midnight Ink",
-                "count": 1,
-                "icon": "inv_inscription_inkblack01"
-              },
-              {
-                "item_id": 39354,
-                "name": "Light Parchment",
-                "count": 1,
-                "icon": "inv_inscription_papyrus"
-              }
-            ],
-            "crafted_item_id": 42912,
-            "item_class": 16,
-            "item_subclass": 3,
             "inventory_type": 0
           },
           {
@@ -122005,6 +121978,38 @@
             "inventory_type": 0
           },
           {
+            "spell_id": 57238,
+            "name": "Glyph of Fire Nova",
+            "crafted_name": "Glyph of Fire Nova",
+            "req_skill": 110,
+            "difficulty": [
+              110,
+              115,
+              120,
+              125
+            ],
+            "spell_icon": "inv_glyph_majorshaman",
+            "crafted_icon": "inv_glyph_majorshaman",
+            "reagents": [
+              {
+                "item_id": 43116,
+                "name": "Lion's Ink",
+                "count": 1,
+                "icon": "inv_inscription_inkyellow02"
+              },
+              {
+                "item_id": 10648,
+                "name": "Common Parchment",
+                "count": 1,
+                "icon": "inv_inscription_parchment"
+              }
+            ],
+            "crafted_item_id": 41530,
+            "item_class": 16,
+            "item_subclass": 7,
+            "inventory_type": 0
+          },
+          {
             "spell_id": 58331,
             "name": "Glyph of Water Breathing",
             "crafted_name": "Glyph of Water Breathing",
@@ -122032,6 +122037,38 @@
               }
             ],
             "crafted_item_id": 43344,
+            "item_class": 16,
+            "item_subclass": 7,
+            "inventory_type": 0
+          },
+          {
+            "spell_id": 57240,
+            "name": "Glyph of Flametongue Weapon",
+            "crafted_name": "Glyph of Flametongue Weapon",
+            "req_skill": 125,
+            "difficulty": [
+              125,
+              130,
+              135,
+              140
+            ],
+            "spell_icon": "inv_glyph_majorshaman",
+            "crafted_icon": "inv_glyph_majorshaman",
+            "reagents": [
+              {
+                "item_id": 43116,
+                "name": "Lion's Ink",
+                "count": 1,
+                "icon": "inv_inscription_inkyellow02"
+              },
+              {
+                "item_id": 10648,
+                "name": "Common Parchment",
+                "count": 1,
+                "icon": "inv_inscription_parchment"
+              }
+            ],
+            "crafted_item_id": 41532,
             "item_class": 16,
             "item_subclass": 7,
             "inventory_type": 0
@@ -122128,6 +122165,38 @@
               }
             ],
             "crafted_item_id": 43381,
+            "item_class": 16,
+            "item_subclass": 7,
+            "inventory_type": 0
+          },
+          {
+            "spell_id": 58330,
+            "name": "Glyph of Renewed Life",
+            "crafted_name": "Glyph of Renewed Life",
+            "req_skill": 150,
+            "difficulty": [
+              150,
+              155,
+              160,
+              165
+            ],
+            "spell_icon": "inv_glyph_minorshaman",
+            "crafted_icon": "inv_glyph_minorshaman",
+            "reagents": [
+              {
+                "item_id": 43118,
+                "name": "Jadefire Ink",
+                "count": 1,
+                "icon": "inv_inscription_inkgreen03"
+              },
+              {
+                "item_id": 10648,
+                "name": "Common Parchment",
+                "count": 1,
+                "icon": "inv_inscription_parchment"
+              }
+            ],
+            "crafted_item_id": 43385,
             "item_class": 16,
             "item_subclass": 7,
             "inventory_type": 0
@@ -122805,38 +122874,6 @@
             "inventory_type": 0
           },
           {
-            "spell_id": 64281,
-            "name": "Glyph of Guardian Spirit",
-            "crafted_name": "Glyph of Guardian Spirit",
-            "req_skill": 425,
-            "difficulty": [
-              425,
-              430,
-              435,
-              440
-            ],
-            "spell_icon": "inv_glyph_majorpriest",
-            "crafted_icon": "inv_glyph_majorpriest",
-            "reagents": [
-              {
-                "item_id": 43124,
-                "name": "Ethereal Ink",
-                "count": 1,
-                "icon": "inv_inscription_inkblack02"
-              },
-              {
-                "item_id": 39502,
-                "name": "Resilient Parchment",
-                "count": 1,
-                "icon": "inv_inscription_certificate"
-              }
-            ],
-            "crafted_item_id": 45755,
-            "item_class": 16,
-            "item_subclass": 5,
-            "inventory_type": 0
-          },
-          {
             "spell_id": 64289,
             "name": "Glyph of Riptide",
             "crafted_name": "Glyph of Riptide",
@@ -122869,9 +122906,9 @@
             "inventory_type": 0
           },
           {
-            "spell_id": 64280,
-            "name": "Glyph of Dispersion",
-            "crafted_name": "Glyph of Dispersion",
+            "spell_id": 64287,
+            "name": "Glyph of Thunder",
+            "crafted_name": "Glyph of Thunder",
             "req_skill": 425,
             "difficulty": [
               425,
@@ -122879,8 +122916,8 @@
               435,
               440
             ],
-            "spell_icon": "inv_glyph_majorpriest",
-            "crafted_icon": "inv_glyph_majorpriest",
+            "spell_icon": "inv_glyph_majorshaman",
+            "crafted_icon": "inv_glyph_majorshaman",
             "reagents": [
               {
                 "item_id": 43124,
@@ -122895,9 +122932,41 @@
                 "icon": "inv_inscription_certificate"
               }
             ],
-            "crafted_item_id": 45753,
+            "crafted_item_id": 45770,
             "item_class": 16,
-            "item_subclass": 5,
+            "item_subclass": 7,
+            "inventory_type": 0
+          },
+          {
+            "spell_id": 64316,
+            "name": "Glyph of Hex",
+            "crafted_name": "Glyph of Hex",
+            "req_skill": 425,
+            "difficulty": [
+              425,
+              430,
+              435,
+              440
+            ],
+            "spell_icon": "inv_glyph_majorshaman",
+            "crafted_icon": "inv_glyph_majorshaman",
+            "reagents": [
+              {
+                "item_id": 43126,
+                "name": "Ink of the Sea",
+                "count": 1,
+                "icon": "inv_inscription_inkpurple01"
+              },
+              {
+                "item_id": 39502,
+                "name": "Resilient Parchment",
+                "count": 1,
+                "icon": "inv_inscription_certificate"
+              }
+            ],
+            "crafted_item_id": 45777,
+            "item_class": 16,
+            "item_subclass": 7,
             "inventory_type": 0
           }
         ]
@@ -123226,38 +123295,6 @@
             "inventory_type": 0
           },
           {
-            "spell_id": 58316,
-            "name": "Glyph of the Wise",
-            "crafted_name": "Glyph of the Wise",
-            "req_skill": 150,
-            "difficulty": [
-              150,
-              155,
-              160,
-              165
-            ],
-            "spell_icon": "inv_glyph_minorpaladin",
-            "crafted_icon": "inv_glyph_minorpaladin",
-            "reagents": [
-              {
-                "item_id": 43118,
-                "name": "Jadefire Ink",
-                "count": 1,
-                "icon": "inv_inscription_inkgreen03"
-              },
-              {
-                "item_id": 10648,
-                "name": "Common Parchment",
-                "count": 1,
-                "icon": "inv_inscription_parchment"
-              }
-            ],
-            "crafted_item_id": 43369,
-            "item_class": 16,
-            "item_subclass": 2,
-            "inventory_type": 0
-          },
-          {
             "spell_id": 57271,
             "name": "Glyph of Shadow Bolt",
             "crafted_name": "Glyph of Shadow Bolt",
@@ -123319,38 +123356,6 @@
             "crafted_item_id": 42473,
             "item_class": 16,
             "item_subclass": 9,
-            "inventory_type": 0
-          },
-          {
-            "spell_id": 57165,
-            "name": "Glyph of Revenge",
-            "crafted_name": "Glyph of Revenge",
-            "req_skill": 190,
-            "difficulty": [
-              190,
-              195,
-              200,
-              205
-            ],
-            "spell_icon": "inv_glyph_majorwarrior",
-            "crafted_icon": "inv_glyph_majorwarrior",
-            "reagents": [
-              {
-                "item_id": 43118,
-                "name": "Jadefire Ink",
-                "count": 1,
-                "icon": "inv_inscription_inkgreen03"
-              },
-              {
-                "item_id": 10648,
-                "name": "Common Parchment",
-                "count": 1,
-                "icon": "inv_inscription_parchment"
-              }
-            ],
-            "crafted_item_id": 43424,
-            "item_class": 16,
-            "item_subclass": 1,
             "inventory_type": 0
           },
           {
@@ -123541,6 +123546,38 @@
               }
             ],
             "crafted_item_id": 43394,
+            "item_class": 16,
+            "item_subclass": 9,
+            "inventory_type": 0
+          },
+          {
+            "spell_id": 71102,
+            "name": "Glyph of Quick Decay",
+            "crafted_name": "Glyph of Quick Decay",
+            "req_skill": 375,
+            "difficulty": [
+              375,
+              380,
+              382,
+              385
+            ],
+            "spell_icon": "inv_glyph_majorwarlock",
+            "crafted_icon": "inv_glyph_majorwarlock",
+            "reagents": [
+              {
+                "item_id": 43126,
+                "name": "Ink of the Sea",
+                "count": 1,
+                "icon": "inv_inscription_inkpurple01"
+              },
+              {
+                "item_id": 39502,
+                "name": "Resilient Parchment",
+                "count": 1,
+                "icon": "inv_inscription_certificate"
+              }
+            ],
+            "crafted_item_id": 50077,
             "item_class": 16,
             "item_subclass": 9,
             "inventory_type": 0
@@ -123797,6 +123834,38 @@
               }
             ],
             "crafted_item_id": 42469,
+            "item_class": 16,
+            "item_subclass": 9,
+            "inventory_type": 0
+          },
+          {
+            "spell_id": 57264,
+            "name": "Glyph of Felhunter",
+            "crafted_name": "Glyph of Felhunter",
+            "req_skill": 385,
+            "difficulty": [
+              385,
+              390,
+              397,
+              405
+            ],
+            "spell_icon": "inv_glyph_majorwarlock",
+            "crafted_icon": "inv_glyph_majorwarlock",
+            "reagents": [
+              {
+                "item_id": 43126,
+                "name": "Ink of the Sea",
+                "count": 1,
+                "icon": "inv_inscription_inkpurple01"
+              },
+              {
+                "item_id": 39502,
+                "name": "Resilient Parchment",
+                "count": 1,
+                "icon": "inv_inscription_certificate"
+              }
+            ],
+            "crafted_item_id": 42460,
             "item_class": 16,
             "item_subclass": 9,
             "inventory_type": 0
@@ -124383,6 +124452,38 @@
             "inventory_type": 0
           },
           {
+            "spell_id": 57165,
+            "name": "Glyph of Revenge",
+            "crafted_name": "Glyph of Revenge",
+            "req_skill": 190,
+            "difficulty": [
+              190,
+              195,
+              200,
+              205
+            ],
+            "spell_icon": "inv_glyph_majorwarrior",
+            "crafted_icon": "inv_glyph_majorwarrior",
+            "reagents": [
+              {
+                "item_id": 43118,
+                "name": "Jadefire Ink",
+                "count": 1,
+                "icon": "inv_inscription_inkgreen03"
+              },
+              {
+                "item_id": 10648,
+                "name": "Common Parchment",
+                "count": 1,
+                "icon": "inv_inscription_parchment"
+              }
+            ],
+            "crafted_item_id": 43424,
+            "item_class": 16,
+            "item_subclass": 1,
+            "inventory_type": 0
+          },
+          {
             "spell_id": 57151,
             "name": "Glyph of Barbaric Insults",
             "crafted_name": "Glyph of Barbaric Insults",
@@ -124863,38 +124964,6 @@
             "inventory_type": 0
           },
           {
-            "spell_id": 57264,
-            "name": "Glyph of Felhunter",
-            "crafted_name": "Glyph of Felhunter",
-            "req_skill": 385,
-            "difficulty": [
-              385,
-              390,
-              397,
-              405
-            ],
-            "spell_icon": "inv_glyph_majorwarlock",
-            "crafted_icon": "inv_glyph_majorwarlock",
-            "reagents": [
-              {
-                "item_id": 43126,
-                "name": "Ink of the Sea",
-                "count": 1,
-                "icon": "inv_inscription_inkpurple01"
-              },
-              {
-                "item_id": 39502,
-                "name": "Resilient Parchment",
-                "count": 1,
-                "icon": "inv_inscription_certificate"
-              }
-            ],
-            "crafted_item_id": 42460,
-            "item_class": 16,
-            "item_subclass": 9,
-            "inventory_type": 0
-          },
-          {
             "spell_id": 57164,
             "name": "Glyph of Resonating Power",
             "crafted_name": "Glyph of Resonating Power",
@@ -124924,38 +124993,6 @@
             "crafted_item_id": 43430,
             "item_class": 16,
             "item_subclass": 1,
-            "inventory_type": 0
-          },
-          {
-            "spell_id": 64305,
-            "name": "Glyph of Divine Plea",
-            "crafted_name": "Glyph of Divine Plea",
-            "req_skill": 425,
-            "difficulty": [
-              425,
-              430,
-              435,
-              440
-            ],
-            "spell_icon": "inv_glyph_majorpaladin",
-            "crafted_icon": "inv_glyph_majorpaladin",
-            "reagents": [
-              {
-                "item_id": 43126,
-                "name": "Ink of the Sea",
-                "count": 1,
-                "icon": "inv_inscription_inkpurple01"
-              },
-              {
-                "item_id": 39502,
-                "name": "Resilient Parchment",
-                "count": 1,
-                "icon": "inv_inscription_certificate"
-              }
-            ],
-            "crafted_item_id": 45745,
-            "item_class": 16,
-            "item_subclass": 2,
             "inventory_type": 0
           },
           {
@@ -125148,38 +125185,6 @@
             "crafted_item_id": 45794,
             "item_class": 16,
             "item_subclass": 1,
-            "inventory_type": 0
-          },
-          {
-            "spell_id": 64287,
-            "name": "Glyph of Thunder",
-            "crafted_name": "Glyph of Thunder",
-            "req_skill": 425,
-            "difficulty": [
-              425,
-              430,
-              435,
-              440
-            ],
-            "spell_icon": "inv_glyph_majorshaman",
-            "crafted_icon": "inv_glyph_majorshaman",
-            "reagents": [
-              {
-                "item_id": 43124,
-                "name": "Ethereal Ink",
-                "count": 1,
-                "icon": "inv_inscription_inkblack02"
-              },
-              {
-                "item_id": 39502,
-                "name": "Resilient Parchment",
-                "count": 1,
-                "icon": "inv_inscription_certificate"
-              }
-            ],
-            "crafted_item_id": 45770,
-            "item_class": 16,
-            "item_subclass": 7,
             "inventory_type": 0
           },
           {
