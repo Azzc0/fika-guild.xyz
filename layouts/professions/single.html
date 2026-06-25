@@ -1,0 +1,377 @@
+{{ define "main" }}
+<!-- UI Core Styles -->
+<style type="text/css">
+  .tradeskill-window {
+    display: grid;
+    grid-template-columns: 320px 1fr 340px;
+    gap: 1px;
+    background: #2e2e2e;
+    border: 2px solid #2e2e2e;
+    border-radius: 5px;
+    height: 720px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    overflow: hidden;
+    font-family: sans-serif;
+  }
+  .recipe-sidebar {
+    background: #111111;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    border-right: 1px solid #2e2e2e;
+  }
+  .recipe-tree-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem;
+  }
+  .recipe-group-header {
+    color: #ffd100;
+    font-weight: bold;
+    font-size: 0.85rem;
+    background: #1c1c1c;
+    padding: 0.4rem 0.6rem;
+    margin: 0.5rem 0 0.25rem 0;
+    border-radius: 3px;
+    border-bottom: 1px solid #2b2b2b;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+  }
+  .recipe-group-header:hover {
+    background: #252525;
+  }
+  .recipe-group-header::after {
+    content: '▼';
+    font-size: 0.7rem;
+    color: #888;
+    transition: transform 0.2s;
+  }
+  .recipe-group-block.collapsed .recipe-group-header::after {
+    transform: rotate(-90deg);
+  }
+  .recipe-group-block.collapsed .recipe-group-content {
+    display: none !important;
+  }
+  
+  @media (max-width: 1024px) {
+    .tradeskill-window {
+      grid-template-columns: 1fr;
+      grid-template-rows: 400px 500px 450px;
+      height: auto;
+      overflow: visible;
+    }
+    .recipe-sidebar { border-right: none; border-bottom: 2px solid #2e2e2e; }
+    .shopping-cart-pane { border-left: none !important; border-top: 2px solid #2e2e2e; }
+  }
+</style>
+
+<div class="hextra-custom-container" style="padding: 1rem; max-width: 1400px; margin: 0 auto;">
+  <a href="../" style="color: #888; text-decoration: none; font-size: 0.9rem;">← Tillbaka till översikten</a>
+  
+  {{ $presentation := dict }}
+  {{ with resources.Get "skill_presentation.json" }}
+    {{ $presentation = . | transform.Unmarshal }}
+  {{ end }}
+
+  {{ $currentProfessionName := .Title }}
+  {{ $skillId := "" }}
+  {{ $profData := dict }}
+  
+  {{ range $sId, $data := $presentation }}
+    {{ if eq ($data.profession_name | lower) ($currentProfessionName | lower) }}
+      {{ $skillId = $sId }}
+      {{ $profData = $data }}
+    {{ end }}
+  {{ end }}
+
+  <div class="tradeskill-book-header" style="margin-bottom: 1.5rem; border-bottom: 2px solid #333; padding-bottom: 1rem; margin-top: 1rem;">
+    <h1 style="margin: 0; color: #ffd100; font-family: sans-serif;">{{ .Title }}</h1>
+    <!-- Dynamically Loaded Markdown Prelude Block with Shortcode Support -->
+    {{ $preludeSlug := .Title | lower | replaceRE `\s+` "-" }}
+    {{ $preludePath := printf "profession-preludes/%s.md" $preludeSlug }}
+
+    {{ with resources.Get $preludePath }}
+    <div class="profession-prelude" style="margin-bottom: 2.5rem; color: #e5e7eb; line-height: 1.7;">
+        {{ $.Page.RenderString .Content }}
+    </div>
+    {{ end }}
+
+  </div>
+
+  {{ if $profData }}
+    <div class="tradeskill-window">
+      <!-- LEFT PANEL -->
+      <div class="recipe-sidebar">
+        <div style="padding: 0.75rem; background: #161616; border-bottom: 1px solid #252525; flex-shrink: 0; display: flex; flex-direction: column; gap: 8px;">
+          <input type="text" id="recipe-search" oninput="filterRecipes()" placeholder="Sök recept..." 
+                 style="width: 100%; padding: 0.4rem 0.6rem; background: #0c0c0c; border: 1px solid #3a3a3a; border-radius: 4px; color: #fff; font-size: 0.85rem; outline: none;">
+          <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; color: #aaa; font-size: 0.8rem;">
+            <input type="checkbox" id="show-all-toggle" onchange="filterRecipes()" style="cursor: pointer; accent-color: #ffd100;">
+            Visa recept som ingen i gillet kan
+          </label>
+        </div>
+
+        <div id="recipe-tree-container" class="recipe-tree-scroll">
+          {{/* 1. Extract map items into a flat slice list and preserve their group key names */}}
+          {{ $sortedGroups := slice }}
+          {{ range $groupName, $groupData := $profData.groups }}
+            {{ $groupWithKey := merge $groupData (dict "group_name_key" $groupName) }}
+            {{ $sortedGroups = $sortedGroups | append $groupWithKey }}
+          {{ end }}
+
+          {{/* 2. Sort the array sequentially by the sort_order variable inside the JSON */}}
+          {{ range sort $sortedGroups "sort_order" "asc" }}
+            {{ $groupName := .group_name_key }}
+            <div class="recipe-group-block" id="group-wrapper-{{ md5 $groupName }}">
+              <div class="recipe-group-header" onclick="toggleGroupCollapse(this.parentElement)">{{ $groupName }}</div>
+              <div class="recipe-group-content">
+                {{ range sort .spells "req_skill" "desc" }}
+                  {{ $hasCrafters := false }}
+                  {{ $spellIdStr := string .spell_id }}
+                  {{ range $.Params.entries }}
+                    {{ if isset .profData.learnedSpells $spellIdStr }}{{ $hasCrafters = true }}{{ end }}
+                  {{ end }}
+
+                  <div class="recipe-item" onclick="selectRecipe({{ .spell_id }})" id="recipe-node-{{ .spell_id }}"
+                       data-recipe-name="{{ .name | lower }}" data-has-crafters="{{ if $hasCrafters }}true{{ else }}false{{ end }}"
+                       style="display: flex; align-items: center; justify-content: space-between; padding: 0.4rem 0.5rem; margin-bottom: 2px; border-radius: 4px; cursor: pointer; opacity: {{ if $hasCrafters }}1.0{{ else }}0.4{{ end }};">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                      <img src="https://wowgaming.altervista.org/aowow/static/images/wow/icons/small/{{ .crafted_icon | lower }}.jpg" style="width: 18px; height: 18px; border: 1px solid #333; border-radius: 2px;" data-wowhead="spell={{ .spell_id }}">
+                      <span class="recipe-name" style="font-size: 0.85rem; color: #fff;">{{ .name }}</span>
+                    </div>
+                    <span style="font-size: 0.8rem; font-family: monospace; {{ if gt .req_skill 0 }} color: #ff8000; {{ else }} color: #9d9d9d; {{ end }}">
+                      {{ if gt .req_skill 0 }}{{ .req_skill }}{{ else }}--{{ end }}
+                    </span>
+                  </div>
+                {{ end }}
+              </div>
+            </div>
+          {{ end }}
+        </div>
+      </div>
+
+      <!-- CENTER PANEL -->
+      <div class="recipe-detail-pane" id="detail-pane" style="background: #151515; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #666; height: 100%;">
+        <div style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">📖</div>
+          <p style="font-size: 0.9rem; color: #888;">Välj ett recept i listan för att se material och tillgängliga hantverkare.</p>
+        </div>
+      </div>
+
+      <!-- RIGHT PANEL -->
+      <div class="shopping-cart-pane" style="background: #0f0f0f; border-left: 1px solid #2e2e2e; display: flex; flex-direction: column; height: 100%;">
+        <div style="padding: 0.75rem; background: #161616; border-bottom: 1px solid #252525;">
+          <h3 style="margin: 0; color: #ffd100; font-size: 0.9rem; text-transform: uppercase;">📋 Inköpslista</h3>
+        </div>
+        <div id="cart-items-list" style="flex: 1; overflow-y: auto; padding: 0.5rem; border-bottom: 1px solid #222; min-height: 120px;">
+          <p style="color: #555; text-align: center; font-size: 0.8rem; margin-top: 2rem; font-style: italic;">Inga artiklar valda.</p>
+        </div>
+        <div style="height: 320px; background: #0b0b0b; display: flex; flex-direction: column;">
+          <div style="padding: 0.5rem 0.75rem; background: #121212; border-bottom: 1px solid #1c1c1c;">
+            <h4 style="margin: 0; color: #aaa; font-size: 0.75rem; text-transform: uppercase;">Totalt material</h4>
+          </div>
+          <div id="cart-materials-summary" style="flex: 1; overflow-y: auto; padding: 0.5rem; display: flex; flex-direction: column; gap: 4px;">
+            <p style="color: #444; text-align: center; font-size: 0.8rem; margin-top: 4rem;">Listan är tom.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      const professionDump = {{ $profData | jsonify | safeJS }};
+      const guildEntries = {{ $.Params.entries | jsonify | safeJS }};
+      const recipesIndex = {};
+      
+      if (professionDump && professionDump.groups) {
+        Object.keys(professionDump.groups).forEach(gName => {
+          if (professionDump.groups[gName].spells) {
+            professionDump.groups[gName].spells.forEach(s => { recipesIndex[s.spell_id] = s; });
+          }
+        });
+      }
+
+      const shoppingCart = {};
+      function toggleGroupCollapse(el) { el.classList.toggle('collapsed'); }
+
+      function filterRecipes() {
+        const query = document.getElementById('recipe-search').value.toLowerCase().trim();
+        const showAllUnknown = document.getElementById('show-all-toggle').checked;
+        
+        if (professionDump && professionDump.groups) {
+          Object.keys(professionDump.groups).forEach(gName => {
+            if (professionDump.groups[gName].spells) {
+              professionDump.groups[gName].spells.forEach(s => {
+                const node = document.getElementById(`recipe-node-${s.spell_id}`);
+                if (node) {
+                  const textMatches = s.name.toLowerCase().includes(query);
+                  const crafterStatusMatches = showAllUnknown || node.getAttribute('data-has-crafters') === 'true';
+                  node.style.display = (textMatches && crafterStatusMatches) ? 'flex' : 'none';
+                }
+              });
+            }
+          });
+
+          document.querySelectorAll('[id^="group-wrapper-"]').forEach(block => {
+            const items = block.querySelectorAll('.recipe-item');
+            let visibleMatches = 0;
+            items.forEach(i => { if(i.style.display !== 'none') visibleMatches++; });
+            const head = block.querySelector('.recipe-group-header');
+            if(head) head.style.display = (visibleMatches === 0) ? 'none' : 'flex';
+          });
+        }
+      }
+
+      function updateCartQuantity(spellId, amount) {
+        const recipe = recipesIndex[spellId];
+        if (!recipe) return;
+        if (!shoppingCart[spellId]) { if (amount <= 0) return; shoppingCart[spellId] = { recipe: recipe, qty: 0 }; }
+        shoppingCart[spellId].qty += amount;
+        if (shoppingCart[spellId].qty <= 0) delete shoppingCart[spellId];
+        renderShoppingCartView();
+        
+        const cartInput = document.getElementById(`cart-qty-display-${spellId}`);
+        if (cartInput) cartInput.value = shoppingCart[spellId] ? shoppingCart[spellId].qty : 0;
+        const panelInput = document.getElementById(`panel-qty-input-${spellId}`);
+        if (panelInput) panelInput.value = shoppingCart[spellId] ? shoppingCart[spellId].qty : 0;
+      }
+
+      function renderShoppingCartView() {
+        const listPane = document.getElementById('cart-items-list');
+        const summaryPane = document.getElementById('cart-materials-summary');
+        const activeKeys = Object.keys(shoppingCart);
+        
+        if (activeKeys.length === 0) {
+          listPane.innerHTML = `<p style="color: #555; text-align: center; font-size: 0.8rem; margin-top: 2rem; font-style: italic;">Inga artiklar valda.</p>`;
+          summaryPane.innerHTML = `<p style="color: #444; text-align: center; font-size: 0.8rem; margin-top: 4rem;">Listan är tom.</p>`;
+          return;
+        }
+
+        let listHtml = ''; const materialTotals = {};
+        activeKeys.forEach(sId => {
+          const item = shoppingCart[sId];
+          listHtml += `
+            <div style="display:flex; align-items:center; justify-content:space-between; background:#141414; border:1px solid #222; padding:0.4rem 0.5rem; margin-bottom:4px; border-radius:4px;">
+              <div style="display:flex; align-items:center; gap:0.4rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:160px;">
+                <img src="https://wowgaming.altervista.org/aowow/static/images/wow/icons/small/${item.recipe.crafted_icon.toLowerCase()}.jpg" style="width:16px; height:16px; border:1px solid #333; border-radius:2px;">
+                <span style="color:#fff; font-size:0.8rem;">${item.recipe.name}</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:3px;">
+                <button onclick="updateCartQuantity(${sId}, -1)" style="background:#2a2a2a; border:1px solid #444; color:#fff; width:18px; height:18px; cursor:pointer;">-</button>
+                <input type="text" id="cart-qty-display-${sId}" readonly value="${item.qty}" style="width:24px; text-align:center; background:none; border:none; color:#ffd100; font-size:0.8rem; font-weight:bold;">
+                <button onclick="updateCartQuantity(${sId}, 1)" style="background:#2a2a2a; border:1px solid #444; color:#fff; width:18px; height:18px; cursor:pointer;">+</button>
+              </div>
+            </div>`;
+
+          if (item.recipe.reagents) {
+            item.recipe.reagents.forEach(r => {
+              if (!materialTotals[r.item_id]) materialTotals[r.item_id] = { name: r.name, icon: r.icon, totalCount: 0 };
+              materialTotals[r.item_id].totalCount += (r.count * item.qty);
+            });
+          }
+        });
+        listPane.innerHTML = listHtml;
+
+        let matHtml = '';
+        Object.keys(materialTotals).forEach(mId => {
+          const mat = materialTotals[mId];
+          matHtml += `
+            <a href="https://wowgaming.altervista.org/aowow/?item=${mId}" data-wowhead="item=${mId}" style="text-decoration:none;">
+              <div style="display:flex; align-items:center; justify-content:space-between; background:#111; border:1px solid #1a1a1a; padding:0.35rem 0.5rem; border-radius:4px;">
+                <div style="display:flex; align-items:center; gap:0.4rem;">
+                  <img src="https://wowgaming.altervista.org/aowow/static/images/wow/icons/small/${mat.icon.toLowerCase()}.jpg" style="width:16px; height:16px; border:1px solid #333; border-radius:2px;">
+                  <span style="color:#aaa; font-size:0.75rem;">${mat.name}</span>
+                </div>
+                <span style="color:#fff; font-family:monospace; font-size:0.8rem; background:#222; padding:2px 6px; border-radius:10px;">x${mat.totalCount}</span>
+              </div>
+            </a>`;
+        });
+        summaryPane.innerHTML = matHtml;
+        if (typeof $WowheadPower !== 'undefined' && $WowheadPower.refreshLinks) $WowheadPower.refreshLinks();
+      }
+
+      function selectRecipe(spellId) {
+        const recipe = recipesIndex[spellId];
+        if (!recipe) return;
+
+        document.querySelectorAll('.recipe-item').forEach(el => { el.style.background = 'none'; el.style.borderLeft = 'none'; });
+        const targetNode = document.getElementById(`recipe-node-${spellId}`);
+        if (targetNode) { targetNode.style.background = '#2a2a2a'; targetNode.style.borderLeft = '3px solid #ffd100'; }
+
+        let craftersHtml = '';
+        if (Array.isArray(guildEntries)) {
+          guildEntries.forEach(entry => {
+            if (entry.profData && entry.profData.learnedSpells && entry.profData.learnedSpells[spellId]) {
+              craftersHtml += `
+                <div style="display:flex; justify-content:space-between; align-items:center; background:#1c1c1c; padding:0.5rem 0.75rem; border:1px solid #2d2d2d; border-radius:4px; margin-bottom:4px;">
+                  <span style="color:#1eff00; font-weight:bold; font-size:0.9rem;">${entry.charName}</span>
+                  <span style="color:#aaa; font-size:0.8rem; font-family:monospace;">Färdighet: ${entry.profData.current}/${entry.profData.max}</span>
+                </div>`;
+            }
+          });
+        }
+        if (!craftersHtml) craftersHtml = `<p style="color:#ff3333; font-size:0.85rem; font-style:italic; margin:0;">Ingen aktiv medlem i gillet kan detta recept.</p>`;
+
+        let reagentsHtml = '';
+        if (recipe.reagents && recipe.reagents.length > 0) {
+          recipe.reagents.forEach(r => {
+            reagentsHtml += `
+              <a href="https://wowgaming.altervista.org/aowow/?item=${r.item_id}" data-wowhead="item=${r.item_id}" style="text-decoration: none; display:block;">
+                <div style="display:flex; align-items:center; gap:0.5rem; background:#1a1a1a; padding:0.4rem; border:1px solid #262626; border-radius:4px;">
+                  <img src="https://wowgaming.altervista.org/aowow/static/images/wow/icons/medium/${r.icon.toLowerCase()}.jpg" style="width:24px; height:24px; border:1px solid #444; border-radius:3px;">
+                  <div style="display:flex; flex-direction:column;">
+                    <span style="color:#fff; font-size:0.8rem; font-weight:500;">${r.name}</span>
+                    <span style="color:#888; font-size:0.75rem; font-weight:bold;">Mängd: x${r.count}</span>
+                  </div>
+                </div>
+              </a>`;
+          });
+        } else { reagentsHtml = `<p style="color:#666; font-size:0.8rem; margin:0;">Inga ingredienser krävs.</p>`; }
+
+        const isItemTarget = recipe.crafted_item_id && recipe.crafted_item_id > 0;
+        const detailUrl = isItemTarget ? `https://wowgaming.altervista.org/aowow/?item=${recipe.crafted_item_id}` : `https://wowgaming.altervista.org/aowow/?spell=${recipe.spell_id}`;
+        const detailDataAttr = isItemTarget ? `item=${recipe.crafted_item_id}` : `spell=${recipe.spell_id}`;
+        const currentQtyInCart = shoppingCart[spellId] ? shoppingCart[spellId].qty : 0;
+
+        const pane = document.getElementById('detail-pane');
+        pane.style.justifyContent = 'flex-start'; pane.style.alignItems = 'stretch';
+        pane.innerHTML = `
+          <div style="display:flex; gap:1rem; align-items:center; border-bottom:1px solid #333; padding-bottom:1rem; margin-bottom:1rem; flex-wrap:wrap;">
+            <a href="${detailUrl}" data-wowhead="${detailDataAttr}">
+              <img src="https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/${recipe.crafted_icon.toLowerCase()}.jpg" style="width:56px; height:56px; border:2px solid #ffd100; border-radius:4px;">
+            </a>
+            <div style="flex:1; min-width:180px;">
+              <a href="${detailUrl}" data-wowhead="${detailDataAttr}" style="text-decoration:none; color:inherit;">
+                <h2 style="margin:0; color:#fff; font-size:1.4rem; cursor:pointer;">${recipe.crafted_name || recipe.name}</h2>
+              </a>
+              <div style="font-size:0.8rem; margin-top:0.2rem;">
+                ${recipe.req_skill ? `<span style="color:#aaa;">Kräver yrkesnivå:</span> <strong style="color:#ffd100;">${recipe.req_skill}</strong>` : ''}
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; background:#1c1c1c; border:1px solid #2d2d2d; border-radius:6px; padding:0.4rem 0.6rem; gap:4px; margin-left:auto;">
+              <span style="font-size:0.7rem; color:#aaa; text-transform:uppercase; font-weight:bold;">Lägg till</span>
+              <div style="display:flex; align-items:center; gap:5px;">
+                <button onclick="updateCartQuantity(${spellId}, -1)" style="background:#2a2a2a; border:1px solid #444; color:#fff; width:22px; height:22px; font-weight:bold; border-radius:3px; cursor:pointer;">-</button>
+                <input type="text" id="panel-qty-input-${spellId}" readonly value="${currentQtyInCart}" style="width:30px; text-align:center; background:none; border:none; color:#ffd100; font-size:0.9rem; font-family:monospace; font-weight:bold;">
+                <button onclick="updateCartQuantity(${spellId}, 1)" style="background:#2a2a2a; border:1px solid #444; color:#fff; width:22px; height:22px; font-weight:bold; border-radius:3px; cursor:pointer;">+</button>
+              </div>
+            </div>
+          </div>
+          <h3 style="color:#ffd100; font-size:0.9rem; text-transform:uppercase; margin:0 0 0.5rem 0;">Nödvändiga ingredienser</h3>
+          <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:0.5rem; margin-bottom:1.5rem;">${reagentsHtml}</div>
+          <h3 style="color:#ffd100; font-size:0.9rem; text-transform:uppercase; margin:0 0 0.5rem 0;">Tillgängliga Crafters i gillet</h3>
+          <div style="display:flex; flex-direction:column; gap:2px; max-height:220px; overflow-y:auto; padding-right:4px;">${craftersHtml}</div>`;
+        if (typeof $WowheadPower !== 'undefined' && $WowheadPower.refreshLinks) $WowheadPower.refreshLinks();
+      }
+
+      document.addEventListener("DOMContentLoaded", function() {
+        filterRecipes();
+        if (typeof $WowheadPower !== 'undefined' && $WowheadPower.refreshLinks) $WowheadPower.refreshLinks();
+      });
+    </script>
+  {{ end }}
+</div>
+{{ end }}

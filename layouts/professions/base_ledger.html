@@ -1,0 +1,85 @@
+{{ define "main" }}
+<div class="hextra-custom-container" style="padding: 2rem; max-width: 1200px; margin: 0 auto;">
+  <h1>{{ .Title }}</h1>
+  <p>Automated trade network ledger pulled at build time.</p>
+
+  {{ $url := printf "https://azzco.xyz/data/professions.json?t=%d" now.Unix }}
+  {{ $data := dict }}
+
+  {{ with try (resources.GetRemote $url) }}
+    {{ with .Err }}
+      <div style="color: #ff3333; padding: 1rem; border: 1px solid #ff3333;">
+        <strong>Build Error fetching data:</strong> {{ .Error }}
+      </div>
+    {{ else }}
+      {{ $data = .Value.Content | transform.Unmarshal }}
+    {{ end }}
+  {{ end }}
+
+  {{ if $data }}
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+      
+      <div>
+        <h2>Characters Index</h2>
+        {{ range $charName, $slots := $data }}
+          <div style="margin-bottom: 1.5rem; border-left: 3px solid #71d5ff; padding-left: 1rem;">
+            <h3 style="margin-bottom: 0.5rem;">{{ $charName }}</h3>
+            <ul style="list-style: none; padding-left: 0;">
+              {{ range $slotID, $rawStr := $slots }}
+                {{ if and (ne $rawStr "EMPTY") (ne $rawStr "0:0:Empty") }}
+                  <li style="margin-bottom: 0.25rem;">
+                    <span style="color: #888; font-size: 0.85rem;">Slot {{ $slotID }}:</span> 
+                    <code>{{ $rawStr }}</code>
+                  </li>
+                {{ end }}
+              {{ end }}
+            </ul>
+          </div>
+        {{ end }}
+      </div>
+
+      <div>
+        <h2>Guild Tradeskill Ledger</h2>
+        
+        {{ $allProfessions := dict }}
+        {{ range $charName, $slots := $data }}
+          {{ range $slotID, $rawStr := $slots }}
+            {{ if and (ne $rawStr "EMPTY") (ne $rawStr "0:0:Empty") }}
+              
+              {{ $profName := "" }}
+              {{ if findRE `\[.*?\]` $rawStr }}
+                {{ $profName = index (findRE `\[.*?\]` $rawStr) 0 | replaceRE `\[|\]` "" }}
+              {{ else }}
+                {{ $profName = index (split $rawStr ":") 2 | default "" }}
+              {{ end }}
+
+              {{ if $profName }}
+                {{ $profName = $profName | title }}
+                {{ $currentList := index $allProfessions $profName | default slice }}
+                {{ $charEntry := dict "name" $charName "raw" $rawStr }}
+                {{ $allProfessions = merge $allProfessions (dict $profName ($currentList | append $charEntry)) }}
+              {{ end }}
+
+            {{ end }}
+          {{ end }}
+        {{ end }}
+
+        {{ range $profName, $chars := $allProfessions }}
+          <div style="margin-bottom: 1.5rem; border-left: 3px solid #1eff00; padding-left: 1rem;">
+            <h3 style="margin-bottom: 0.5rem;">{{ $profName }}</h3>
+            <ul>
+              {{ range $chars }}
+                <li><strong>{{ .name }}</strong>: <code>{{ .raw }}</code></li>
+              {{ end }}
+            </ul>
+          </div>
+        {{ end }}
+
+      </div>
+
+    </div>
+  {{ else }}
+    <p style="color: yellow;">No data was found or parsed from the resource string endpoint.</p>
+  {{ end }}
+</div>
+{{ end }}

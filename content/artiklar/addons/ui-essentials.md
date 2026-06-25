@@ -29,25 +29,31 @@ To make sure our UI performance is clean during progressive phases, players need
 When you mouse over any of those links, the server will fetch the data on the fly!
 
 # Azzco's First Aid Recipe Audit
-**Current Skill Level:** 437/450  
-**Known Recipes:** 14 / 22
+**Current Skill Level:** 443/450  
+**Known Recipes:** 12 / 23  
 
 | Status | Bit Index | Spell ID | Live Tooltip Hook |
 | :---: | :--- | :--- | :--- |
-| ❌ | 0 | 3275 | {{< wow type="spell" id="3275" >}} |
-| ❌ | 1 | 3276 | {{< wow type="spell" id="3276" >}} |
-| ❌ | 2 | 3277 | {{< wow type="spell" id="3277" >}} |
-| ✅ | 3 | 3278 | {{< wow type="spell" id="3278" >}} |
-| ❌ | 4 | 7928 | {{< wow type="spell" id="7928" >}} |
-| ❌ | 5 | 7929 | {{< wow type="spell" id="7929" >}} |
-| ✅ | 6 | 7934 | {{< wow type="spell" id="7934" >}} |
-| ✅ | 7 | 7935 | {{< wow type="spell" id="7935" >}} |
-| ✅ | 8 | 10840 | {{< wow type="spell" id="10840" >}} |
-| ✅ | 9 | 10841 | {{< wow type="spell" id="10841" >}} |
-| ❌ | 10 | 18629 | {{< wow type="spell" id="18629" >}} |
-| ✅ | 11 | 18630 | {{< wow type="spell" id="18630" >}} |
-| ✅ | 12 | 23787 | {{< wow type="spell" id="23787" >}} |
-| ✅ | 13 | 27032 | {{< wow type="spell" id="27032" >}} |
-| ❌ | 14 | 27033 | {{< wow type="spell" id="27033" >}} |
-| ❌ | 15 | 45545 | {{< wow type="spell" id="45545" >}} |
-| ✅ | 16 | 45546 | {{< wow type="spell" id="45546" >}} |
+| ❌ | 0 | 3273 | {{< wow type="spell" id="3273" >}} |
+| ❌ | 1 | 3274 | {{< wow type="spell" id="3274" >}} |
+| ✅ | 2 | 3276 | {{< wow type="spell" id="3276" >}} |
+| ✅ | 3 | 3277 | {{< wow type="spell" id="3277" >}} |
+| ✅ | 4 | 3278 | {{< wow type="spell" id="3278" >}} |
+| ✅ | 5 | 7928 | {{< wow type="spell" id="7928" >}} |
+| ✅ | 6 | 7929 | {{< wow type="spell" id="7929" >}} |
+| ❌ | 7 | 7924 | {{< wow type="spell" id="7924" >}} |
+| ✅ | 8 | 7934 | {{< wow type="spell" id="7934" >}} |
+| ❌ | 9 | 7935 | {{< wow type="spell" id="7935" >}} |
+| ❌ | 10 | 10846 | {{< wow type="spell" id="10846" >}} |
+| ✅ | 11 | 10840 | {{< wow type="spell" id="10840" >}} |
+| ✅ | 12 | 10841 | {{< wow type="spell" id="10841" >}} |
+| ❌ | 13 | 18629 | {{< wow type="spell" id="18629" >}} |
+| ❌ | 14 | 18630 | {{< wow type="spell" id="18630" >}} |
+| ✅ | 15 | 23787 | {{< wow type="spell" id="23787" >}} |
+| ❌ | 16 | 27028 | {{< wow type="spell" id="27028" >}} |
+| ✅ | 17 | 27032 | {{< wow type="spell" id="27032" >}} |
+| ✅ | 18 | 27033 | {{< wow type="spell" id="27033" >}} |
+| ❌ | 19 | 45545 | {{< wow type="spell" id="45545" >}} |
+| ✅ | 20 | 45546 | {{< wow type="spell" id="45546" >}} |
+| ❌ | 21 | 45542 | {{< wow type="spell" id="45542" >}} |
+| ❌ | 22 | 10846 | {{< wow type="spell" id="10846" >}} |

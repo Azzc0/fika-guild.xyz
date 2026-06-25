@@ -1,0 +1,90 @@
+{{- $type := .type | default "item" -}}
+{{- $id := .id -}}
+{{- $name_override := .name -}}
+{{- $domain := "wowgaming.altervista.org/aowow" -}}
+
+{{- $apiType := $type -}}
+{{- if or (eq $type "talent") (eq $type "buff") (eq $type "aura") -}}
+  {{- $apiType = "spell" -}}
+{{- end -}}
+
+{{- $apiUrl := printf "https://%s/?%s=%s&power&v=5" $domain $apiType $id -}}
+
+{{- $name := $name_override | default (printf "%s #%s" ($type | title) $id) -}}
+{{- $quality := -1 -}}
+{{- $iconCode := "inv_misc_questionmark" -}}
+
+{{- with resources.GetRemote $apiUrl -}}
+  {{- $raw := .Content -}}
+  
+  {{- $prefix := printf "$WowheadPower.register%s(%s, 0, " ($apiType | title) $id -}}
+  {{- $clean := replace $raw $prefix "" -}}
+  {{- $clean = replace $clean ");" "" -}}
+  
+  {{- $data := unmarshal $clean -}}
+  
+  {{- if $data -}}
+    {{/* CRITICAL SAFE FIX: If data is an array/slice instead of a map, extract its first inner row element map */}}
+    {{- if reflect.IsSlice $data -}}
+      {{- if gt (len $data) 0 -}}
+        {{- $firstRow := index $data 0 -}}
+        {{- if reflect.IsSlice $firstRow -}}
+          {{/* If multi-dimensional array row, find the map element */}}
+          {{- range $firstRow -}}
+            {{- if reflect.IsMap . -}}
+              {{- $name = $name_override | default (index . "name_enus") | default (index . "name") | default $name -}}
+              {{- $quality = index . "quality" | default $quality -}}
+              {{- $iconCode = index . "icon" | default $iconCode -}}
+            {{- end -}}
+          {{- end -}}
+        {{- else if reflect.IsMap $firstRow -}}
+          {{- $name = $name_override | default (index $firstRow "name_enus") | default (index $firstRow "name") | default $name -}}
+          {{- $quality = index $firstRow "quality" | default $quality -}}
+          {{- $iconCode = index $firstRow "icon" | default $iconCode -}}
+        {{- end -}}
+      {{- end -}}
+    {{- else if reflect.IsMap $data -}}
+      {{/* Standard structural execution path matching your original shortcode block */}}
+      {{- $name = $name_override | default (index $data "name_enus") | default (index $data "name") -}}
+      {{- $quality = index $data "quality" | default -1 -}}
+      {{- $iconCode = index $data "icon" | default "inv_misc_questionmark" -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $color := "#ffd100" -}}
+{{- if eq $type "item" -}}
+  {{- if eq (int $quality) 0 -}}{{- $color = "#9d9d9d" -}}{{- end -}}
+  {{- if eq (int $quality) 1 -}}{{- $color = "#ffffff" -}}{{- end -}}
+  {{- if eq (int $quality) 2 -}}{{- $color = "#1eff00" -}}{{- end -}}
+  {{- if eq (int $quality) 3 -}}{{- $color = "#0070dd" -}}{{- end -}}
+  {{- if eq (int $quality) 4 -}}{{- $color = "#a335ee" -}}{{- end -}}
+  {{- if eq (int $quality) 5 -}}{{- $color = "#ff8000" -}}{{- end -}}
+  {{- if eq (int $quality) 7 -}}{{- $color = "#e6cc80" -}}{{- end -}}
+{{- else if eq $type "spell" -}}
+  {{- $color = "#71d5ff" -}}
+{{- else if or (eq $type "buff") (eq $type "aura") -}}
+  {{- $color = "#ffd61a" -}}
+{{- else if eq $type "talent" -}}
+  {{- $color = "#0070dd" -}}
+{{- else if eq $type "achievement" -}}
+  {{- $color = "#1eff00" -}}
+{{- end -}}
+
+{{- $wowheadQuery := printf "%s=%s" $type $id -}}
+{{- if eq $type "aura" -}}
+  {{- $wowheadQuery = printf "buff=%s" $id -}}
+{{- end -}}
+
+<a href="https://{{ $domain }}/?{{ $apiType }}={{ $id }}" 
+   data-wowhead="{{ $wowheadQuery }}" 
+   style="color: {{ $color }} !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;"
+   class="wow-link">
+   
+   <img src="https://{{ $domain }}/static/images/wow/icons/large/{{ lower $iconCode }}.jpg" 
+        onerror="this.src='https://{{ $domain }}/static/images/wow/icons/large/inv_misc_questionmark.jpg';"
+        alt="" 
+        style="width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;" />
+        
+   <span style="vertical-align: middle;">[{{ $name }}]</span>
+</a>

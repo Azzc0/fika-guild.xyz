@@ -65,6 +65,14 @@ mediaTypes:
     suffixes:
       - js
 
+caches:
+  getresource:
+    resourceDir: :cacheDir/getresource
+    maxAge: '14h' # Default cache time for standard assets
+    rules:
+      - pattern: 'https://azzco\.xyz/data/.*'
+        maxAge: 0s # NEVER cache your professions data
+
 security:
   enableInlineShortcodes: false
 
@@ -90,6 +98,7 @@ security:
     urls:
       - 'https://wowgaming.altervista.org/*'
       - 'https://cdn.jsdelivr.net/*'
+      - 'https://azzco.xyz/*'
     mediaTypes:
       - '^text/html$'
       - '^text/xml$'

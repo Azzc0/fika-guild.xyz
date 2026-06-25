@@ -1,0 +1,143 @@
+{{ define "main" }}
+<div class="hextra-custom-container" style="padding: 2rem 1rem; max-width: 1200px; margin: 0 auto; font-family: sans-serif;">
+  
+  <!-- Header Section -->
+  <div style="border-bottom: 2px solid #333; padding-bottom: 1.5rem; margin-bottom: 2.5rem;">
+    <h1 style="margin: 0; color: #ffd100; font-size: 2.5rem;">Yrkesdatabaser</h1>
+    <p style="margin: 0.5rem 0 0 0; color: #888; font-size: 1.1rem;">Välj ett yrke nedan för att se recept, tillgängliga hantverkare och materialkrav.</p>
+  </div>
+
+  {{/* 1. Fetch data presentation asset */}}
+  {{ $presentation := dict }}
+  {{ with resources.Get "skill_presentation.json" }}
+    {{ $presentation = . | transform.Unmarshal }}
+  {{ end }}
+
+  {{/* 2. Fetch the raw professions JSON to manually compute gatherer limits */}}
+  {{ $rawUrl := printf "https://azzco.xyz/data/professions.json?t=%d" now.Unix }}
+  {{ $rawProfessions := dict }}
+  {{ with try (resources.GetRemote $rawUrl) }}
+    {{ with .Err }}{{ else }}{{ $rawProfessions = .Value.Content | transform.Unmarshal }}{{ end }}
+  {{ end }}
+
+  {{/* 3. Definiera den exakta sorteringsordningen */}}
+  {{ $order := slice "tailoring" "leatherworking" "blacksmithing" "enchanting" "alchemy" "engineering" "inscription" "jewelcrafting" "first aid" "cooking" "mining" "herbalism" "skinning" }}
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;">
+    
+    {{ range $order }}
+      {{ $targetProf := . }}
+      {{ $isGathering := in (slice "mining" "herbalism" "skinning") $targetProf }}
+      
+      {{/* Find data for crafting professions */}}
+      {{ $data := dict }}
+      {{ range $skillId, $profBlock := $presentation }}
+        {{ if eq ($profBlock.profession_name | lower) $targetProf }}
+          {{ $data = $profBlock }}
+        {{ end }}
+      {{ end }}
+
+      {{/* Determine title and icon filenames */}}
+      {{ $profTitle := title $targetProf }}
+      {{ if $data }}{{ $profTitle = $data.profession_name }}{{ end }}
+
+      {{ $iconName := "inv_misc_book_09" }}
+      {{ if eq $targetProf "alchemy" }}{{ $iconName = "trade_alchemy" }}
+      {{ else if eq $targetProf "blacksmithing" }}{{ $iconName = "trade_blacksmithing" }}
+      {{ else if eq $targetProf "enchanting" }}{{ $iconName = "trade_engraving" }}
+      {{ else if eq $targetProf "engineering" }}{{ $iconName = "trade_engineering" }}
+      {{ else if eq $targetProf "first aid" }}{{ $iconName = "spell_holy_sealofsacrifice" }}
+      {{ else if eq $targetProf "cooking" }}{{ $iconName = "inv_misc_food_15" }}
+      {{ else if eq $targetProf "leatherworking" }}{{ $iconName = "trade_leatherworking" }}
+      {{ else if eq $targetProf "tailoring" }}{{ $iconName = "trade_tailoring" }}
+      {{ else if eq $targetProf "jewelcrafting" }}{{ $iconName = "inv_misc_gem_01" }}
+      {{ else if eq $targetProf "inscription" }}{{ $iconName = "inv_inscription_tradeskill01" }}
+      {{ else if eq $targetProf "mining" }}{{ $iconName = "trade_mining" }}
+      {{ else if eq $targetProf "herbalism" }}{{ $iconName = "spell_nature_naturetouchgrow" }}
+      {{ else if eq $targetProf "skinning" }}{{ $iconName = "inv_misc_pelt_wolf_01" }}
+      {{ end }}
+
+      {{/* Processing Counters */}}
+      {{ $totalRecipes := 0 }}
+      {{ $knownGuildRecipes := 0 }}
+      {{ $craftersCount := 0 }}
+
+      {{ if $isGathering }}
+        {{/* Loop over raw JSON profile blocks to parse plain gathering strings */}}
+        {{ range $charName, $slots := $rawProfessions }}
+          {{ range $slotId, $rawVal := $slots }}
+            {{ if findRE (printf "(?i):%s" $targetProf) $rawVal }}
+              {{ $craftersCount = add $craftersCount 1 }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ else }}
+        {{/* Calculate unique crafter lists from page structure metrics */}}
+        {{ $tempCrafters := slice }}
+        {{ range $gName, $group := $data.groups }}
+          {{ range $group.spells }}
+            {{ $totalRecipes = add $totalRecipes 1 }}
+            {{ $spellIdStr := string .spell_id }}
+            {{ $recipeIsKnownBySomeone := false }}
+            {{ range $.Pages }}
+              {{ range .Params.entries }}
+                {{ if isset .profData.learnedSpells $spellIdStr }}
+                  {{ $recipeIsKnownBySomeone = true }}
+                  {{ if not (in $tempCrafters .charName) }}
+                    {{ $tempCrafters = $tempCrafters | append .charName }}
+                  {{ end }}
+                {{ end }}
+              {{ end }}
+            {{ end }}
+            {{ if $recipeIsKnownBySomeone }}{{ $knownGuildRecipes = add $knownGuildRecipes 1 }}{{ end }}
+          {{ end }}
+        {{ end }}
+        {{ $craftersCount = len $tempCrafters }}
+      {{ end }}
+
+      <!-- Card Container Layout -->
+      <div style="background: #151515; border: 1px solid #2a2a2a; border-radius: 6px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; height: 100%; box-sizing: border-box;">
+        
+        <div>
+          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+            <img src="https://wowgaming.altervista.org/aowow/static/images/wow/icons/medium/{{ $iconName }}.jpg" 
+                 style="width: 36px; height: 36px; border: 1px solid #333; border-radius: 4px;" alt="">
+            <h2 style="margin: 0; font-size: 1.3rem; color: #fff; font-weight: 600;">{{ $profTitle }}</h2>
+          </div>
+
+          <div style="font-size: 0.85rem; color: #aaa; display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.25rem;">
+            <div>Tillgängliga utövare: <strong style="color: #1eff00;">{{ $craftersCount }} st</strong></div>
+            {{ if not $isGathering }}
+              <div>Kända recept: <strong style="color: #ffd100;">{{ $knownGuildRecipes }} / {{ $totalRecipes }}</strong></div>
+            {{ end }}
+          </div>
+        </div>
+
+        <!-- Dynamic Footer Navigation/Shortcode Action Block -->
+        <div style="margin-top: auto; padding-top: 0.5rem; border-top: 1px solid #222;">
+          {{ if not $isGathering }}
+            <a href="{{ $targetProf | urlize }}/" style="text-decoration: none; font-size: 0.85rem; color: #ffd100; font-weight: bold; display: flex; align-items: center; gap: 4px;">
+              Visa recept <span>→</span>
+            </a>
+          {{ else }}
+            <div style="font-size: 0.8rem; display: flex; flex-direction: column; gap: 4px;">
+              <span style="color: #666; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; letter-spacing: 0.3px;">Bonusförmåga:</span>
+              <div class="gathering-shortcode-wrapper" style="color: #fff;">
+                {{ if eq $targetProf "mining" }}
+                  {{ $.Page.RenderString "{{< wow type=\"spell\" id=\"53040\" >}}" }}
+                {{ else if eq $targetProf "skinning" }}
+                  {{ $.Page.RenderString "{{< wow type=\"spell\" id=\"53666\" >}}" }}
+                {{ else if eq $targetProf "herbalism" }}
+                  {{ $.Page.RenderString "{{< wow type=\"spell\" id=\"55503\" >}}" }}
+                {{ end }}
+              </div>
+            </div>
+          {{ end }}
+        </div>
+
+      </div>
+    {{ end }}
+
+  </div>
+</div>
+{{ end }}

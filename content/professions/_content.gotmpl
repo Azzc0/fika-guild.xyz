@@ -1,0 +1,149 @@
+{{ $url := printf "https://azzco.xyz/data/professions.json?update=%d" now.Unix }}
+
+{{/* 1. Map Hyperlink Spell IDs to DBC SkillLine IDs */}}
+{{/* 1. Complete Map of all Hyperlink Tier Spell IDs to DBC SkillLine IDs */}}
+{{ $tradeSpellToSkill := dict }}
+
+{{/* Alchemy */}}
+{{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "2259" "171" "3101" "171" "3464" "171" "11611" "171" "28596" "171" "51304" "171") }}
+
+{{/* Blacksmithing */}}
+{{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "2018" "164" "3100" "164" "3538" "164" "9785" "164"  "29844" "164" "51300" "164") }}
+
+{{/* Enchanting */}}
+{{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "7411" "333" "7412" "333" "7413" "333" "13920" "333" "28029" "333" "51313" "333") }}
+
+{{/* Engineering */}}
+{{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "4036" "202" "4037" "202" "4038" "202" "12656" "202" "30350" "202" "51306" "202") }}
+
+{{/* Jewelcrafting */}}
+{{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "25229" "755" "28894" "755" "28895" "755" "28897" "755" "51311" "755") }}
+
+{{/* Leatherworking */}}
+{{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "2108" "165" "3104" "165" "3811" "165" "10662" "165" "32549" "165" "51302" "165") }}
+
+{{/* Tailoring */}}
+{{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "3908" "197" "3909" "197" "3910" "197" "12180" "197" "26790" "197" "51309" "197") }}
+
+{{/* Cooking */}}
+{{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "2550" "185" "3102" "185" "3413" "185" "18260" "185" "33359" "185" "51296" "185") }}
+
+{{/* First Aid */}}
+{{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "3273" "129" "3274" "129" "7924" "129" "10846" "129" "27028" "129" "45542" "129") }}
+
+{{/* Inscription */}}
+{{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "45357" "773" "45363" "773") }}
+
+{{/* 2. Map Base64 Alpha Lookup String Table */}}
+{{ $b64Alpha := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" }}
+{{ $b64Map := dict }}
+{{ range $index, $char := split $b64Alpha "" }}
+  {{ $b64Map = merge $b64Map (dict $char $index) }}
+{{ end }}
+
+{{/* 3. Read the Skill Map file from your assets directory */}}
+{{ $skillMap := dict }}
+{{ with resources.Get "skill_map.json" }}
+  {{ $skillMap = . | transform.Unmarshal }}
+{{ end }}
+
+{{ with try (resources.GetRemote $url) }}
+  {{ with .Err }}
+    {{ errorf "Failed to load professions array: %s" .Error }}
+  {{ else }}
+    {{ $json := .Value.Content | transform.Unmarshal }}
+    {{ $allLedgers := dict }}
+
+    {{ range $charName, $slots := $json }}
+      {{ $charProfessions := slice }}
+
+      {{ range $slotID, $rawString := $slots }}
+        {{ if and (ne $rawString "EMPTY") (findRE `\|Htrade:` $rawString) }}
+          
+          {{/* Robust Regex pattern that handles any characters, spacing, and trailing color formatting tags safely */}}
+          {{ $match := findRESubmatch `\|Htrade:(\d+):(\d+):(\d+):[^:]+:([^|]+)\|h\[([^\]]+)\]` $rawString }}
+          {{ if eq (len $match) 1 }}
+            {{ $parts := index $match 0 }}
+            {{ $tradeSpell := index $parts 1 }}
+            {{ $currentLevel := index $parts 2 }}
+            {{ $maxLevel := index $parts 3 }}
+            {{ $bitmaskStr := index $parts 4 }}
+            {{ $profName := index $parts 5 }}
+
+            {{/* Find corresponding Skill Line array safely with string keys */}}
+            {{ $skillLineId := index $tradeSpellToSkill (string $tradeSpell) }}
+            {{ $orderedSpells := slice }}
+            
+            {{ if $skillLineId }}
+              {{ $orderedSpells = index $skillMap (string $skillLineId) | default slice }}
+            {{ end }}
+
+            {{/* DECODE BASE64 BITMASK */}}
+            {{ $learnedSpells := dict }}
+            {{ if gt (len $orderedSpells) 0 }}
+              {{ $charSlice := split $bitmaskStr "" }}
+              
+              {{ range $charIdx, $char := $charSlice }}
+                {{ if isset $b64Map $char }}
+                  {{ $val := index $b64Map $char }}
+                  
+                  {{ range $bitOffset := seq 0 5 }}
+                    {{ $globalBitIndex := add (mul $charIdx 6) $bitOffset }}
+                    
+                    {{ if lt $globalBitIndex (len $orderedSpells) }}
+                      {{ $divisor := pow 2 $bitOffset }}
+                      {{ $isSet := eq (mod (div $val $divisor) 2) 1 }}
+                      
+                      {{ if $isSet }}
+                        {{ $spellId := index $orderedSpells $globalBitIndex }}
+                        {{ $learnedSpells = merge $learnedSpells (dict (string $spellId) true) }}
+                      {{ end }}
+                    {{ end }}
+                  {{ end }}
+                {{ end }}
+              {{ end }}
+            {{ end }}
+
+            {{/* Package context data if spells exist */}}
+            {{ if gt (len $orderedSpells) 0 }}
+              {{ $numKnown := len $learnedSpells }}
+              {{ $numTotal := len $orderedSpells }}
+
+              {{ $profData := dict 
+                "name" $profName 
+                "current" $currentLevel 
+                "max" $maxLevel 
+                "numKnown" $numKnown 
+                "numTotal" $numTotal 
+                "orderedSpells" $orderedSpells 
+                "learnedSpells" $learnedSpells 
+              }}
+              {{ $charProfessions = $charProfessions | append $profData }}
+
+              {{/* Track global matrix inverse ledger */}}
+              {{ $slug := $profName | lower | replaceRE `\s+` "-" }}
+              {{ $currentLedgerList := index $allLedgers $slug | default slice }}
+              {{ $ledgerEntry := dict "charName" $charName "profData" $profData }}
+              {{ $allLedgers = merge $allLedgers (dict $slug ($currentLedgerList | append $ledgerEntry)) }}
+            {{ end }}
+
+          {{ end }}
+        {{ end }}
+      {{ end }}
+
+      {{/* Build Character Pages */}}
+      {{ if gt (len $charProfessions) 0 }}
+        {{ $params := dict "page_type" "character" "professions" $charProfessions }}
+        {{ $.AddPage (dict "title" $charName "path" ($charName | lower) "params" $params) }}
+      {{ end }}
+    {{ end }}
+
+    {{/* Build Global Ledger Pages */}}
+    {{ range $slug, $entries := $allLedgers }}
+      {{ $title := $slug | replaceRE "-" " " | title }}
+      {{ $params := dict "page_type" "ledger" "entries" $entries }}
+      {{ $.AddPage (dict "title" $title "path" $slug "params" $params) }}
+    {{ end }}
+
+  {{ end }}
+{{ end }}
