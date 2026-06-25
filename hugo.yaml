@@ -33,6 +33,8 @@ menu:
         icon: 'discord'
 
 params:
+  theme:
+    default: "dark"
   # Keeps the homepage clean and centered
   homepageSidebar: false
     

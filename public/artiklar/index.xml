@@ -5,7 +5,7 @@
     <description>Recent content on Fika</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>sv</language>
-    <lastBuildDate>Thu, 25 Jun 2026 06:45:00 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jun 2026 00:00:00 +0000</lastBuildDate>
     
 	  <atom:link href="http://localhost:1313/artiklar/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,45 +14,6 @@
         
       
     
-    
-    <item>
-      <title>Bakom kulisserna: Vår dynamiska hantverksdatabas</title>
-      <link>http://localhost:1313/artiklar/nyheter/tradeskills/</link>
-      <pubDate>Thu, 25 Jun 2026 06:45:00 +0200</pubDate>
-      
-      <guid>http://localhost:1313/artiklar/nyheter/tradeskills/</guid>
-      <description>
-        
-        
-        &lt;p&gt;För att göra det så enkelt som möjligt att koordinera inför kommande raids har vi byggt en helt skräddarsydd hantverksdatabas (Ledger). Istället för manuell handpåläggning fokuserar det här verktyget helt på &lt;strong&gt;gillets gemensamma kunskap&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Målet är enkelt: Att snabbt besvara frågan &lt;em&gt;&amp;ldquo;Can our guild craft this right now, and if so, who do I send the materials to?&amp;rdquo;&lt;/em&gt; Även om synkroniseringen till hemsidan inte sker på sekunden, så håller vi allt uppdaterat helt automatiskt med hjälp av vårt egna addon!&lt;/p&gt;
-&lt;h2&gt;Vad databasen gör&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;vad-databasen-gör&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#vad-databasen-g%c3%b6r&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;När du besöker &lt;code&gt;/professions/&lt;/code&gt; på webbplatsen möts du av en levande hantverksmatris över hela gillet.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Sökbart receptfokus:&lt;/strong&gt; Istället för att klicka dig in på en specifik karaktär och gissa dig till vad den kan, söker du direkt på det specifika receptet du behöver – till exempel &lt;strong&gt;Runed Bloodstone&lt;/strong&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Kollektiv översikt:&lt;/strong&gt; Sökningen visar omedelbart en lista över samtliga aktiva hantverkare i gillet som behärskar receptet (både Azzco och Ronal dyker till exempel upp som tillgängliga juvelerare).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Progressionsverktyg:&lt;/strong&gt; Det ger gilleledningen och raidgruppen en direkt indikation på vilka sällsynta formler eller mönster vi fortfarande saknar inför kommande innehållsblock.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2&gt;Hur det fungerar (Det tekniska flödet)&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;hur-det-fungerar-det-tekniska-flödet&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#hur-det-fungerar-det-tekniska-fl%c3%b6det&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Hela processen sker via tre sammanlänkade komponenter: vårt in-game addon, vår chattbot och static site-generatorn Hugo.&lt;/p&gt;
-&lt;h3&gt;1. Datainsamling med &amp;ldquo;Fika - Professions&amp;rdquo;&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;1-datainsamling-med-fika---professions&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#1-datainsamling-med-fika---professions&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Allt börjar inuti World of Warcraft med vårt skräddarsydda addon &lt;strong&gt;Fika - Professions&lt;/strong&gt;. Det tillåter officerare att smidigt läsa av och bifoga yrkeslänkar till karaktärer i gillet.&lt;/p&gt;
-&lt;p&gt;Blizzard sparar inte recept som vanliga textlistor, utan komprimerar informationen till en &lt;strong&gt;Base64-bitmask&lt;/strong&gt; inuti en hyperlänk (de välkända &lt;code&gt;|Htrade:...&lt;/code&gt; länkarna). Den här strängen innehåller information om yrkeskategori, färdighetsnivå samt en krypterad block-kod (t.ex. &lt;code&gt;8/7Vu+MtJ...&lt;/code&gt;) som representerar exakt vilka formler karaktären har lärt sig.&lt;/p&gt;
-&lt;h3&gt;2. Kyparen agerar mellanhand&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;2-kyparen-agerar-mellanhand&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#2-kyparen-agerar-mellanhand&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;När en uppdatering görs in-game blir vår wowchat-bot &lt;strong&gt;Kyparen&lt;/strong&gt; omedelbart notifierad. Kyparen tar emot datan och sparar ner länkarna i en extern fil (&lt;code&gt;professions.json&lt;/code&gt;) på vår lagringsserver.&lt;/p&gt;
-&lt;p&gt;Detta gör att Kyparen även kan läsa direkt från denna fil i realtid in-game! Om du använder addonet och begär information om en karaktär (till exempel genom att klicka på deras namn i guildmember-fönstret), kan Kyparen svara direkt i spelet baserat på den sparade datan.&lt;/p&gt;
-&lt;h3&gt;3. Matrisbyggandet i Hugo (Timmarsbygger på webbplatsen)&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;3-matrisbyggandet-i-hugo-timmarsbygger-på-webbplatsen&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#3-matrisbyggandet-i-hugo-timmarsbygger-p%c3%a5-webbplatsen&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;En gång i timmen vaknar vårt automatiserade tidsschema på GitHub. Hemsidans motor (Hugo) gör då ett anrop till Kyparens externa fil för att uppdatera webbplatsen:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Regex-parsing:&lt;/strong&gt; Hugo skannar filen med hjälp av reguljära uttryck för att extrahera ut relevanta datafält och isolera bitmasken.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Base64-dekstruktion:&lt;/strong&gt; Hugo dekonstruerar Base64-strängen tecken för tecken och omvandlar den till sekventiella binära bitar (0 och 1). Dessa matchas och utvärderas mot en hårdkodad lista över spelets alla tillgängliga recept, som vi har genererat direkt från spelets egna datafiler (&lt;code&gt;skill_map.json&lt;/code&gt;).&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Omvänd indexering:&lt;/strong&gt; Istället för att tilldela recepten till karaktärens egen sida, vänder vi på strukturen. Receptet blir huvudnoden, och karaktären sorteras in under det receptet i en global matris.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Hugo publicerar sedan de uppdaterade hantverkslistorna live på hemsidan. Det innebär att så fort en officer har registrerat en uppdatering via addonet, är det bara en tidsfråga innan det syns för hela världen på webbplatsen!&lt;/p&gt;
-
-      </description>
-    </item>
     
     <item>
       <title>Addons</title>
@@ -1592,6 +1553,43 @@
     </item>
     
     <item>
+      <title>Bakom kulisserna: Vår dynamiska hantverksdatabas</title>
+      <link>http://localhost:1313/artiklar/nyheter/tradeskills/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/artiklar/nyheter/tradeskills/</guid>
+      <description>
+        
+        
+        &lt;p&gt;För att göra det så enkelt som möjligt att koordinera har vi byggt en helt skräddarsydd hantverksdatabas. Istället för att fokusera på enskilda individers personliga profiler, fokuserar det här verktyget helt på &lt;strong&gt;gillets gemensamma kunskap&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Målet är enkelt: Att snabbt besvara frågan &lt;em&gt;&amp;ldquo;Kan gillet tillverka det här föremålet just nu, och vem ska jag skicka materialet till?&amp;rdquo;&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;Vad databasen gör&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;vad-databasen-gör&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#vad-databasen-g%c3%b6r&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;När du besöker &lt;code&gt;/professions/&lt;/code&gt; på webbplatsen möts du inte av en statisk lista över spelare, utan av en levande hantverksmatris över hela gillet.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Sökbart receptfokus:&lt;/strong&gt; Istället för att klicka dig in på &amp;ldquo;Azzco&amp;rdquo; för att gissa dig till vad han kan, söker du direkt på det specifika receptet du behöver – till exempel &lt;strong&gt;Runed Bloodstone&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Kollektiv översikt:&lt;/strong&gt; Sökningen visar omedelbart en lista över samtliga aktiva hantverkare i gillet som behärskar receptet (i ursprungsläge skulle både Azzco och Ronal dyka upp som tillgängliga juvelerare).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Progressionsverktyg:&lt;/strong&gt; Det ger gilleledningen och raidgruppen en direkt indikation på vilka sällsynta formler eller mönster vi fortfarande saknar inför kommande innehållsblock.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;Hur det fungerar (Det tekniska flödet)&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;hur-det-fungerar-det-tekniska-flödet&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#hur-det-fungerar-det-tekniska-fl%c3%b6det&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Hela processen sker helt automatiskt utan manuell handpåläggning via tre sammanlänkade komponenter:&lt;/p&gt;
+&lt;h3&gt;1. In-game datainsamling via Bitmasker&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;1-in-game-datainsamling-via-bitmasker&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#1-in-game-datainsamling-via-bitmasker&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;När spelets yrkesböcker läses av via vårt addon sparas inte data som långa textsträngar. Blizzard komprimerar informationen till en &lt;strong&gt;Base64-bitmask&lt;/strong&gt; inuti en hyperlänk (de välkända &lt;code&gt;|Htrade:...&lt;/code&gt; länkarna). Den här strängen innehåller information om yrkeskategori, nuvarande färdighetsnivå samt en krypterad block-kod (t.ex. &lt;code&gt;8/7Vu+MtJ...&lt;/code&gt;) som representerar exakt vilka formler karaktären har lärt sig.&lt;/p&gt;
+&lt;h3&gt;2. Centraliserad JSON-payload&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;2-centraliserad-json-payload&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#2-centraliserad-json-payload&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Dessa strängar sparas i en central JSON-fil på vår lagringsserver (&lt;code&gt;azzco.xyz&lt;/code&gt;). Varje gång en medlem uppdaterar sin data sparas deras råa länksträngar under deras karaktärsnamn i filen.&lt;/p&gt;
+&lt;h3&gt;3. Matrisbyggandet i Hugo (Magin på webbplatsen)&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;3-matrisbyggandet-i-hugo-magin-på-webbplatsen&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#3-matrisbyggandet-i-hugo-magin-p%c3%a5-webbplatsen&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Det är här systemet skiljer sig från traditionella databaser. Webbplatsen bygger på en static site-generator (Hugo). Istället för att göra tunga databasuppslag varje gång en användare laddar en sida, körs hela avkodningsprocessen i minnet när webbplatsen kompileras:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Regex-parsing:&lt;/strong&gt; Hugo skannar JSON-filen med hjälp av reguljära uttryck för att extrahera ut relevanta datafält och isolera bitmasken.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Base64 till Binär-dekstruktion:&lt;/strong&gt; Hugo dekonstruerar Base64-strängen tecken för tecken och omvandlar den till sekventiella binära bitar (0 och 1). Dessa matchas mot vår kompletta master-lista över spelets alla tillgängliga recept (&lt;code&gt;skill_map.json&lt;/code&gt;). Om bit nummer 42 är en &lt;code&gt;1:a&lt;/code&gt;, betyder det att karaktären kan det specifika hantverket.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Omvänd indexering (The Matrix Twist):&lt;/strong&gt; Istället för att tilldela recepten till karaktärens egen sida, vänder vi på strukturen. Receptet blir huvudnoden, och karaktären sorteras in under det receptet i en global gällande matris.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Genom att lägga till ett automatiserat tidsschema i vår GitHub-pipeline byggs hela webbplatsen om automatiskt vid varje timslag. Hugo drar då ner den färska JSON-filen från vår MyCloud-server, utvärderar bitmaskerna på nytt och publicerar de uppdaterade hantverkslistorna helt live!&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
       <title>Guider</title>
       <link>http://localhost:1313/artiklar/guider/professions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -1731,6 +1729,409 @@ Jewelcrafting och enchanting (än så länge 170 ish) var okej men alchemy är i
 &lt;p&gt;When you mouse over any of those links, the server will fetch the data on the fly!&lt;/p&gt;
 &lt;h1&gt;Azzco&amp;rsquo;s First Aid Recipe Audit&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;Current Skill Level:&lt;/strong&gt; 443/450&lt;br&gt;
 &lt;strong&gt;Known Recipes:&lt;/strong&gt; 12 / 23&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;Status&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Bit Index&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Spell ID&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Live Tooltip Hook&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;❌&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;0&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;3273&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=3273&#34; 
+   data-wowhead=&#34;spell=3273&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_holy_sealofsacrifice.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[First Aid]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;❌&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;1&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;3274&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=3274&#34; 
+   data-wowhead=&#34;spell=3274&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_holy_sealofsacrifice.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[First Aid]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;✅&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;2&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;3276&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=3276&#34; 
+   data-wowhead=&#34;spell=3276&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_shadow_sealofkings.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[Heavy Linen Bandage]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;✅&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;3&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;3277&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=3277&#34; 
+   data-wowhead=&#34;spell=3277&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_shadow_sealofkings.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[Wool Bandage]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;✅&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;4&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;3278&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=3278&#34; 
+   data-wowhead=&#34;spell=3278&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_shadow_sealofkings.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[Heavy Wool Bandage]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;✅&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;5&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;7928&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=7928&#34; 
+   data-wowhead=&#34;spell=7928&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_shadow_sealofkings.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[Silk Bandage]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;✅&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;6&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;7929&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=7929&#34; 
+   data-wowhead=&#34;spell=7929&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_shadow_sealofkings.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[Heavy Silk Bandage]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;❌&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;7&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;7924&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=7924&#34; 
+   data-wowhead=&#34;spell=7924&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_holy_sealofsacrifice.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[First Aid]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;✅&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;8&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;7934&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=7934&#34; 
+   data-wowhead=&#34;spell=7934&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_shadow_sealofkings.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[Anti-Venom]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;❌&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;9&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;7935&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=7935&#34; 
+   data-wowhead=&#34;spell=7935&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_shadow_sealofkings.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[Strong Anti-Venom]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;❌&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;10&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;10846&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=10846&#34; 
+   data-wowhead=&#34;spell=10846&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_holy_sealofsacrifice.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[First Aid]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;✅&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;11&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;10840&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=10840&#34; 
+   data-wowhead=&#34;spell=10840&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_shadow_sealofkings.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[Mageweave Bandage]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;✅&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;12&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;10841&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=10841&#34; 
+   data-wowhead=&#34;spell=10841&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_shadow_sealofkings.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[Heavy Mageweave Bandage]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;❌&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;13&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;18629&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=18629&#34; 
+   data-wowhead=&#34;spell=18629&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_shadow_sealofkings.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[Runecloth Bandage]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;❌&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;14&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;18630&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=18630&#34; 
+   data-wowhead=&#34;spell=18630&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_shadow_sealofkings.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[Heavy Runecloth Bandage]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;✅&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;15&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;23787&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=23787&#34; 
+   data-wowhead=&#34;spell=23787&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_shadow_sealofkings.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[Powerful Anti-Venom]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;❌&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;16&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;27028&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=27028&#34; 
+   data-wowhead=&#34;spell=27028&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_holy_sealofsacrifice.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[First Aid]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;✅&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;17&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;27032&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=27032&#34; 
+   data-wowhead=&#34;spell=27032&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_shadow_sealofkings.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[Netherweave Bandage]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;✅&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;18&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;27033&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=27033&#34; 
+   data-wowhead=&#34;spell=27033&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_shadow_sealofkings.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[Heavy Netherweave Bandage]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;❌&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;19&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;45545&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=45545&#34; 
+   data-wowhead=&#34;spell=45545&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/inv_misc_bandage_05.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[Frostweave Bandage]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;✅&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;20&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;45546&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=45546&#34; 
+   data-wowhead=&#34;spell=45546&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/inv_misc_bandage_04.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[Heavy Frostweave Bandage]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;❌&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;21&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;45542&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=45542&#34; 
+   data-wowhead=&#34;spell=45542&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_holy_sealofsacrifice.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[First Aid]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;❌&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;22&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;10846&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;a href=&#34;https://wowgaming.altervista.org/aowow/?spell=10846&#34; 
+   data-wowhead=&#34;spell=10846&#34; 
+   style=&#34;color: #71d5ff !important; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; vertical-align: middle;&#34;
+   class=&#34;wow-link&#34;&gt;
+   
+   &lt;img src=&#34;https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/spell_holy_sealofsacrifice.jpg&#34; 
+        onerror=&#34;this.src=&#39;https://wowgaming.altervista.org\/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg&#39;;&#34;
+        alt=&#34;&#34; 
+        style=&#34;width: 16px; height: 16px; border: 1px solid #333; border-radius: 2px; display: inline-block; vertical-align: middle; margin: 0;&#34; /&gt;
+        
+   &lt;span style=&#34;vertical-align: middle;&#34;&gt;[First Aid]&lt;/span&gt;
+&lt;/a&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
       </description>
     </item>
