@@ -1,6 +1,7 @@
 ---
 title: "Bakom kulisserna: Vår dynamiska hantverksdatabas"
 summary: "En teknisk genomgång av hur vi förvandlar råa bitmasker från World of Warcraft till en kollektiv och sökbar receptdatabas för hela gillet."
+draft: true
 ---
 
 För att göra det så enkelt som möjligt att koordinera har vi byggt en helt skräddarsydd hantverksdatabas. Istället för att fokusera på enskilda individers personliga profiler, fokuserar det här verktyget helt på **gillets gemensamma kunskap**. 

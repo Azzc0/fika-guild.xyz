@@ -35,11 +35,9 @@
 {{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "45357" "773" "45363" "773") }}
 
 {{/* 2. Map Base64 Alpha Lookup String Table */}}
-{{ $b64Alpha := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" }}
-{{ $b64Map := dict }}
-{{ range $index, $char := split $b64Alpha "" }}
-  {{ $b64Map = merge $b64Map (dict $char $index) }}
-{{ end }}
+{{ $b64Upper := dict "A" 0 "B" 1 "C" 2 "D" 3 "E" 4 "F" 5 "G" 6 "H" 7 "I" 8 "J" 9 "K" 10 "L" 11 "M" 12 "N" 13 "O" 14 "P" 15 "Q" 16 "R" 17 "S" 18 "T" 19 "U" 20 "V" 21 "W" 22 "X" 23 "Y" 24 "Z" 25 }}
+{{ $b64Lower := dict "a" 26 "b" 27 "c" 28 "d" 29 "e" 30 "f" 31 "g" 32 "h" 33 "i" 34 "j" 35 "k" 36 "l" 37 "m" 38 "n" 39 "o" 40 "p" 41 "q" 42 "r" 43 "s" 44 "t" 45 "u" 46 "v" 47 "w" 48 "x" 49 "y" 50 "z" 51 }}
+{{ $b64Digit := dict "0" 52 "1" 53 "2" 54 "3" 55 "4" 56 "5" 57 "6" 58 "7" 59 "8" 60 "9" 61 }}
 
 {{/* 3. Read the Skill Map file from your assets directory */}}
 {{ $skillMap := dict }}
@@ -60,15 +58,23 @@
       {{ range $slotID, $rawString := $slots }}
         {{ if and (ne $rawString "EMPTY") (findRE `\|Htrade:` $rawString) }}
           
-          {{/* Robust Regex pattern that handles any characters, spacing, and trailing color formatting tags safely */}}
-          {{ $match := findRESubmatch `\|Htrade:(\d+):(\d+):(\d+):[^:]+:([^|]+)\|h\[([^\]]+)\]` $rawString }}
-          {{ if eq (len $match) 1 }}
-            {{ $parts := index $match 0 }}
-            {{ $tradeSpell := index $parts 1 }}
-            {{ $currentLevel := index $parts 2 }}
-            {{ $maxLevel := index $parts 3 }}
-            {{ $bitmaskStr := index $parts 4 }}
-            {{ $profName := index $parts 5 }}
+          {{/* Robust, flexible parsing for all profession hyperlinks */}}
+          {{ $headerMatch := findRESubmatch `\|Htrade:(\d+):(\d+):(\d+):` $rawString }}
+          {{ $tailMatch := findRESubmatch `\|Htrade(?::[^:]+){4}:([^|:]+)\|h\[([^\]]+)\]` $rawString }}
+          {{ warnf "TAIL raw=%v match=%v" $rawString $tailMatch }}
+          
+
+          {{ if and (gt (len $headerMatch) 0) (gt (len $tailMatch) 0) }}
+            {{ $headerParts := index $headerMatch 0 }}
+            {{ $tailParts := index $tailMatch 0 }}
+            
+            {{ $tradeSpell := index $headerParts 1 }}
+            {{ $currentLevel := index $headerParts 2 }}
+            {{ $maxLevel := index $headerParts 3 }}
+            
+            {{ $bitmaskStr := index $tailParts 1 }}
+            {{ warnf "BITMASK len=%d val=%s" (len $bitmaskStr) $bitmaskStr }}
+            {{ $profName := index $tailParts 2 }}
 
             {{/* Find corresponding Skill Line array safely with string keys */}}
             {{ $skillLineId := index $tradeSpellToSkill (string $tradeSpell) }}
@@ -79,45 +85,53 @@
             {{ end }}
 
             {{/* DECODE BASE64 BITMASK */}}
-            {{ $learnedSpells := dict }}
+            {{ $spellsScratch := newScratch }}
             {{ if gt (len $orderedSpells) 0 }}
               {{ $charSlice := split $bitmaskStr "" }}
-              
-              {{ range $charIdx, $char := $charSlice }}
-                {{ if isset $b64Map $char }}
-                  {{ $val := index $b64Map $char }}
-                  
-                  {{ range $bitOffset := seq 0 5 }}
-                    {{ $globalBitIndex := add (mul $charIdx 6) $bitOffset }}
-                    
-                    {{ if lt $globalBitIndex (len $orderedSpells) }}
+              {{ warnf "SPLIT len=%d" (len $charSlice) }}
+              {{ $bitIdx := newScratch }}
+              {{ $bitIdx.Set "i" 0 }}
+
+              {{ range $char := $charSlice }}
+                {{ $val := -1 }}
+                {{ if isset $b64Upper $char }}{{ $val = index $b64Upper $char }}
+                {{ else if isset $b64Lower $char }}{{ $val = index $b64Lower $char }}
+                {{ else if isset $b64Digit $char }}{{ $val = index $b64Digit $char }}
+                {{ else if eq $char "+" }}{{ $val = 62 }}
+                {{ else if eq $char "/" }}{{ $val = 63 }}
+                {{ end }}
+                {{ if ge $val 0 }}
+                  {{ range $bitOffset := seq 0 1 5 }}
+                    {{ $i := $bitIdx.Get "i" }}
+                    {{ if lt $i (len $orderedSpells) }}
                       {{ $divisor := pow 2 $bitOffset }}
-                      {{ $isSet := eq (mod (div $val $divisor) 2) 1 }}
-                      
+                      {{ $isSet := eq (mod (int (div $val $divisor)) 2) 1 }}
                       {{ if $isSet }}
-                        {{ $spellId := index $orderedSpells $globalBitIndex }}
-                        {{ $learnedSpells = merge $learnedSpells (dict (string $spellId) true) }}
+                        {{ $spellId := index $orderedSpells $i }}
+                        {{ $spellKey := printf "%d" (int $spellId) }}
+                        {{ $spellsScratch.SetInMap "learned" $spellKey true }}
+                        {{ if or (eq $spellKey "56205") (eq $spellKey "56206") (eq $spellKey "56208") }}
+                          {{ warnf "✅ [SET] char=%s spell=%s bitIdx=%d" $charName $spellKey $i }}
+                        {{ end }}
                       {{ end }}
                     {{ end }}
+                    {{ $bitIdx.Set "i" (add ($bitIdx.Get "i") 1) }}
                   {{ end }}
+                {{ else }}
+                  {{ $bitIdx.Set "i" (add ($bitIdx.Get "i") 6) }}
                 {{ end }}
               {{ end }}
+
             {{ end }}
 
             {{/* Package context data if spells exist */}}
             {{ if gt (len $orderedSpells) 0 }}
+              {{/* CORE FIX: Retrieve the map map context directly so the keys are preserved */}}
+              {{ $learnedSpells := $spellsScratch.Get "learned" | default dict }}
               {{ $numKnown := len $learnedSpells }}
               {{ $numTotal := len $orderedSpells }}
 
-              {{ $profData := dict 
-                "name" $profName 
-                "current" $currentLevel 
-                "max" $maxLevel 
-                "numKnown" $numKnown 
-                "numTotal" $numTotal 
-                "orderedSpells" $orderedSpells 
-                "learnedSpells" $learnedSpells 
-              }}
+              {{ $profData := dict "name" $profName "current" $currentLevel "max" $maxLevel "numKnown" $numKnown "numTotal" $numTotal "orderedSpells" $orderedSpells "learnedSpells" $learnedSpells }}
               {{ $charProfessions = $charProfessions | append $profData }}
 
               {{/* Track global matrix inverse ledger */}}

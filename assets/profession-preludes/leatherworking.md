@@ -1,6 +1,3 @@
-Leatherworkers tillverkar rustningar och de viktiga **Leg Armor**-förtrollningarna till gillet, samt trummor för utility. Deras personliga fördel är otroligt billiga och starka förtrollningar på sina egna bracers.
+**Tillhandahåller:** Utrustning leather/mail, leg enchants {{< wow type="item" id="38373" >}}, {{< wow type="item" id="38374" >}}; samt trummor om det saknas paladin eller druid {{< wow type="item" id="49633" >}}, {{< wow type="item" id="49634" >}}
 
-Läderarbetaren själv kan förstärka sina bracers med:
-- {{< wow type="spell" id="57683" >}} (Fur Lining - Attack Power)
-- {{< wow type="spell" id="57691" >}} (Fur Lining - Spell Power)
-- {{< wow type="spell" id="57693" >}} (Fur Lining - Stamina)
+**Fördel för utövaren:** Bracer enchants såsom {{< wow type="spell" id="57683" >}}, {{< wow type="spell" id="57691" >}}

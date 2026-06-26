@@ -1,6 +1,3 @@
-Enchanters kan förtrolla sina egna ringar med unika stats som inte går att få på något annat sätt, utöver de vanliga vapen- och rustningsförtrollningarna de erbjuder gillet.
+**Tillhandahåller:** Enchants för Chest, Cloak, Bracer, Gloves, Feet, Weapon.
 
-Enchantern själv kan förtrolla sina egna ringar med:
-- {{< wow type="spell" id="59636" >}}
-- {{< wow type="spell" id="59639" >}}
-- {{< wow type="spell" id="59640" >}}
+**Fördel som utövare:** Tillgång till ring enchants såsom {{< wow type="spell" id="44636" >}}, {{< wow type="spell" id="44645" >}}

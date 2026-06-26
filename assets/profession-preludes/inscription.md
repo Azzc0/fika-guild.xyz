@@ -1,6 +1,3 @@
-Inscribers tillverkar Glyphs till hela gillet, men deras unika fördel är att de slipper den långa reputation-grinden för axel-förtrollningar (Sons of Hodir), då de kan rista in mycket starkare versioner själva.
+**Tillhandahåller:** Scrolls, Vellums, Darkmoon Card och Glyphs, {{< wow type="item" id="43145" >}}, {{< wow type="spell" id="59504" >}} och om präst saknas {{< wow type="item" id="49632" >}}.
 
-Skrivaren själv kan rista in axel-förtrollningar med:
-- {{< wow type="spell" id="61117" >}} (Master's Inscription of the Axe)
-- {{< wow type="spell" id="61120" >}} (Master's Inscription of the Crag)
-- {{< wow type="spell" id="61118" >}} (Master's Inscription of the Pinnacle)
+**Fördel som utövare:** Shoulder enchants såsom {{< wow type="spell" id="61117" >}}, {{< wow type="spell" id="61120" >}}

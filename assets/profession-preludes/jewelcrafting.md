@@ -1,6 +1,5 @@
-Jewelcrafters förser gillet med episka och sällsynta ädelstenar. Den unika personliga fördelen är tillgången till speciella "Dragon's Eye"-stenar som ger betydligt högre stats än vanliga ädelstenar.
+**Tillhandahåller:** Främst gems av olika kulörer men även halsband och ringar till vis del. {{< wow type="item" id="39996" >}}, {{< wow type="item" id="40111" >}}[^1].
 
-Juveleraren själv kan använda upp till tre episka Dragon's Eye-stenar:
-- {{< wow type="spell" id="61411" >}} (Bold Dragon's Eye - +34 Strength)
-- {{< wow type="spell" id="61417" >}} (Runed Dragon's Eye - +39 Spell Power)
-- {{< wow type="spell" id="61419" >}} (Bright Dragon's Eye - +68 Attack Power)
+[^1]: Epic gems kommer först med Trial of the Crusader.
+
+**Fördel för utövaren:** Tillgång till Dragon's Eye gems. Upp till 3 stycken samtidigt, {{< wow type="item" id="42142" >}}, {{< wow type="item" id="42144" >}}

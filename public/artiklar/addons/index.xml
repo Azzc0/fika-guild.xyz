@@ -1,13 +1,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fika – </title>
-    <link>http://localhost:1313/artiklar/addons/</link>
+    <link>http://localhost:33715/artiklar/addons/</link>
     <description>Recent content on Fika</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>sv</language>
     <lastBuildDate>Wed, 03 Jun 2026 00:00:00 +0000</lastBuildDate>
     
-	  <atom:link href="http://localhost:1313/artiklar/addons/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="http://localhost:33715/artiklar/addons/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -17,10 +17,10 @@
     
     <item>
       <title>Addons</title>
-      <link>http://localhost:1313/artiklar/addons/addons/</link>
+      <link>http://localhost:33715/artiklar/addons/addons/</link>
       <pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/artiklar/addons/addons/</guid>
+      <guid>http://localhost:33715/artiklar/addons/addons/</guid>
       <description>
         
         
@@ -70,10 +70,10 @@
     
     <item>
       <title>Profession Audit: Azzco</title>
-      <link>http://localhost:1313/artiklar/addons/test/</link>
+      <link>http://localhost:33715/artiklar/addons/test/</link>
       <pubDate>Tue, 02 Jun 2026 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/artiklar/addons/test/</guid>
+      <guid>http://localhost:33715/artiklar/addons/test/</guid>
       <description>
         
         
@@ -1425,10 +1425,10 @@
     
     <item>
       <title></title>
-      <link>http://localhost:1313/artiklar/addons/hantering/</link>
+      <link>http://localhost:33715/artiklar/addons/hantering/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/artiklar/addons/hantering/</guid>
+      <guid>http://localhost:33715/artiklar/addons/hantering/</guid>
       <description>
         
         
@@ -1439,10 +1439,10 @@
     
     <item>
       <title>Klanens Addons och Förberedelser</title>
-      <link>http://localhost:1313/artiklar/addons/ui-essentials/</link>
+      <link>http://localhost:33715/artiklar/addons/ui-essentials/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/artiklar/addons/ui-essentials/</guid>
+      <guid>http://localhost:33715/artiklar/addons/ui-essentials/</guid>
       <description>
         
         

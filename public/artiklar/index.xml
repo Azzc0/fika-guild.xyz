@@ -1,13 +1,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fika – </title>
-    <link>http://localhost:1313/artiklar/</link>
+    <link>http://localhost:33715/artiklar/</link>
     <description>Recent content on Fika</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>sv</language>
     <lastBuildDate>Wed, 03 Jun 2026 00:00:00 +0000</lastBuildDate>
     
-	  <atom:link href="http://localhost:1313/artiklar/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="http://localhost:33715/artiklar/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -17,10 +17,10 @@
     
     <item>
       <title>Addons</title>
-      <link>http://localhost:1313/artiklar/addons/addons/</link>
+      <link>http://localhost:33715/artiklar/addons/addons/</link>
       <pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/artiklar/addons/addons/</guid>
+      <guid>http://localhost:33715/artiklar/addons/addons/</guid>
       <description>
         
         
@@ -70,10 +70,10 @@
     
     <item>
       <title>Ny start!</title>
-      <link>http://localhost:1313/artiklar/nyheter/nystart/</link>
+      <link>http://localhost:33715/artiklar/nyheter/nystart/</link>
       <pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/artiklar/nyheter/nystart/</guid>
+      <guid>http://localhost:33715/artiklar/nyheter/nystart/</guid>
       <description>
         
         
@@ -99,10 +99,10 @@
     
     <item>
       <title>Warrior macron</title>
-      <link>http://localhost:1313/artiklar/macros/warrior-macro/</link>
+      <link>http://localhost:33715/artiklar/macros/warrior-macro/</link>
       <pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/artiklar/macros/warrior-macro/</guid>
+      <guid>http://localhost:33715/artiklar/macros/warrior-macro/</guid>
       <description>
         
         
@@ -185,10 +185,10 @@
     
     <item>
       <title>Profession Audit: Azzco</title>
-      <link>http://localhost:1313/artiklar/addons/test/</link>
+      <link>http://localhost:33715/artiklar/addons/test/</link>
       <pubDate>Tue, 02 Jun 2026 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/artiklar/addons/test/</guid>
+      <guid>http://localhost:33715/artiklar/addons/test/</guid>
       <description>
         
         
@@ -1540,10 +1540,10 @@
     
     <item>
       <title></title>
-      <link>http://localhost:1313/artiklar/addons/hantering/</link>
+      <link>http://localhost:33715/artiklar/addons/hantering/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/artiklar/addons/hantering/</guid>
+      <guid>http://localhost:33715/artiklar/addons/hantering/</guid>
       <description>
         
         
@@ -1553,11 +1553,24 @@
     </item>
     
     <item>
-      <title>Bakom kulisserna: Vår dynamiska hantverksdatabas</title>
-      <link>http://localhost:1313/artiklar/nyheter/tradeskills/</link>
+      <title></title>
+      <link>http://localhost:33715/artiklar/nyheter/tankar/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/artiklar/nyheter/tradeskills/</guid>
+      <guid>http://localhost:33715/artiklar/nyheter/tankar/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Bakom kulisserna: Vår dynamiska hantverksdatabas</title>
+      <link>http://localhost:33715/artiklar/nyheter/tradeskills/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:33715/artiklar/nyheter/tradeskills/</guid>
       <description>
         
         
@@ -1591,10 +1604,10 @@
     
     <item>
       <title>Guider</title>
-      <link>http://localhost:1313/artiklar/guider/professions/</link>
+      <link>http://localhost:33715/artiklar/guider/professions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/artiklar/guider/professions/</guid>
+      <guid>http://localhost:33715/artiklar/guider/professions/</guid>
       <description>
         
         
@@ -1608,10 +1621,10 @@ Jewelcrafting och enchanting (än så länge 170 ish) var okej men alchemy är i
     
     <item>
       <title>Klanens Addons och Förberedelser</title>
-      <link>http://localhost:1313/artiklar/addons/ui-essentials/</link>
+      <link>http://localhost:33715/artiklar/addons/ui-essentials/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/artiklar/addons/ui-essentials/</guid>
+      <guid>http://localhost:33715/artiklar/addons/ui-essentials/</guid>
       <description>
         
         

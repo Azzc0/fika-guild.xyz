@@ -1,6 +1,3 @@
-Ingenjörer tillför enorm utility till gillet med Jeeves och MOLL-E, men har också de mest unika, aktiva utility-förtrollningarna i spelet på sina egna rustningar.
+**Tillhandahåller:** {{< wow type="item" id="44413">}}/{{< wow type="item" id="41508">}}, {{< wow type="item" id="49040">}}, {{< wow type="item" id="40768">}}
 
-Ingenjören själv kan modifiera sitt gear med:
-- {{< wow type="spell" id="54999" >}} (Extrem hastighets-boost på boots)
-- {{< wow type="spell" id="54758" >}} (Haste-förtrollning på handskar)
-- {{< wow type="spell" id="67438" >}} (Fallskärm och Spell Power på cloak)
+**Fördel som utövare:** Specifika enchants såsom {{< wow type="spell" id="54999" >}}, {{< wow type="spell" id="54758" >}}, {{< wow type="spell" id="67438" >}}

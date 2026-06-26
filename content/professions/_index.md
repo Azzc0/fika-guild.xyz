@@ -1,5 +1,5 @@
 ---
-title: "Professions Ledger"
+title: "Yrkesdatabas"
 ---
 
 {{ define "main" }}

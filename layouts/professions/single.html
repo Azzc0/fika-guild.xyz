@@ -1,5 +1,4 @@
 {{ define "main" }}
-<!-- UI Core Styles -->
 <style type="text/css">
   .tradeskill-window {
     display: grid;
@@ -90,7 +89,6 @@
 
   <div class="tradeskill-book-header" style="margin-bottom: 1.5rem; border-bottom: 2px solid #333; padding-bottom: 1rem; margin-top: 1rem;">
     <h1 style="margin: 0; color: #ffd100; font-family: sans-serif;">{{ .Title }}</h1>
-    <!-- Dynamically Loaded Markdown Prelude Block with Shortcode Support -->
     {{ $preludeSlug := .Title | lower | replaceRE `\s+` "-" }}
     {{ $preludePath := printf "profession-preludes/%s.md" $preludeSlug }}
 
@@ -104,7 +102,6 @@
 
   {{ if $profData }}
     <div class="tradeskill-window">
-      <!-- LEFT PANEL -->
       <div class="recipe-sidebar">
         <div style="padding: 0.75rem; background: #161616; border-bottom: 1px solid #252525; flex-shrink: 0; display: flex; flex-direction: column; gap: 8px;">
           <input type="text" id="recipe-search" oninput="filterRecipes()" placeholder="Sök recept..." 
@@ -130,15 +127,30 @@
               <div class="recipe-group-header" onclick="toggleGroupCollapse(this.parentElement)">{{ $groupName }}</div>
               <div class="recipe-group-content">
                 {{ range sort .spells "req_skill" "desc" }}
-                  {{ $hasCrafters := false }}
-                  {{ $spellIdStr := string .spell_id }}
+                  {{/* Track the current iteration context cleanly before entering the nested entries loop */}}
+                  {{ $spellIdRaw := .spell_id }}
+                  {{ $spellScratch := newScratch }}
+                  {{ $spellIdStr := string $spellIdRaw }}
+                    {{ if or (eq $spellIdStr "25868") (eq $spellIdStr "18602") }}
+                    {{ warnf "📁 [FRONTEND LOOKUP] UI is trying to find recipe ID: %s (Raw context: %v)" $spellIdStr . }}
+                    {{ end }}
+                  {{ $spellScratch.Set "hasCrafters" false }}
+                  
                   {{ range $.Params.entries }}
-                    {{ if isset .profData.learnedSpells $spellIdStr }}{{ $hasCrafters = true }}{{ end }}
+                    {{ if .profData.learnedSpells }}
+                    {{ if or (eq $spellIdStr "56205") (eq $spellIdStr "56206") (eq $spellIdStr "56208") }}
+                    {{ warnf "🔍 [FRONTEND] Checking spell %s, learnedSpells dump: %v" $spellIdStr .profData.learnedSpells }}
+                    {{ end }}
+                      {{/* Bulletproof type evaluation: checks both strict string and dynamic format strings */}}
+                      {{ if or (index .profData.learnedSpells (string $spellIdRaw)) (index .profData.learnedSpells (printf "%v" $spellIdRaw)) }}
+                        {{ $spellScratch.Set "hasCrafters" true }}
+                      {{ end }}
+                    {{ end }}
                   {{ end }}
 
                   <div class="recipe-item" onclick="selectRecipe({{ .spell_id }})" id="recipe-node-{{ .spell_id }}"
-                       data-recipe-name="{{ .name | lower }}" data-has-crafters="{{ if $hasCrafters }}true{{ else }}false{{ end }}"
-                       style="display: flex; align-items: center; justify-content: space-between; padding: 0.4rem 0.5rem; margin-bottom: 2px; border-radius: 4px; cursor: pointer; opacity: {{ if $hasCrafters }}1.0{{ else }}0.4{{ end }};">
+                       data-recipe-name="{{ .name | lower }}" data-has-crafters="{{ if $spellScratch.Get "hasCrafters" }}true{{ else }}false{{ end }}"
+                       style="display: flex; align-items: center; justify-content: space-between; padding: 0.4rem 0.5rem; margin-bottom: 2px; border-radius: 4px; cursor: pointer; opacity: {{ if $spellScratch.Get "hasCrafters" }}1.0{{ else }}0.4{{ end }};">
                     <div style="display: flex; align-items: center; gap: 0.5rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
                       <img src="https://wowgaming.altervista.org/aowow/static/images/wow/icons/small/{{ .crafted_icon | lower }}.jpg" style="width: 18px; height: 18px; border: 1px solid #333; border-radius: 2px;" data-wowhead="spell={{ .spell_id }}">
                       <span class="recipe-name" style="font-size: 0.85rem; color: #fff;">{{ .name }}</span>
@@ -154,7 +166,6 @@
         </div>
       </div>
 
-      <!-- CENTER PANEL -->
       <div class="recipe-detail-pane" id="detail-pane" style="background: #151515; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #666; height: 100%;">
         <div style="text-align: center;">
           <div style="font-size: 3rem; margin-bottom: 0.5rem;">📖</div>
@@ -162,7 +173,6 @@
         </div>
       </div>
 
-      <!-- RIGHT PANEL -->
       <div class="shopping-cart-pane" style="background: #0f0f0f; border-left: 1px solid #2e2e2e; display: flex; flex-direction: column; height: 100%;">
         <div style="padding: 0.75rem; background: #161616; border-bottom: 1px solid #252525;">
           <h3 style="margin: 0; color: #ffd100; font-size: 0.9rem; text-transform: uppercase;">📋 Inköpslista</h3>
@@ -304,12 +314,18 @@
         let craftersHtml = '';
         if (Array.isArray(guildEntries)) {
           guildEntries.forEach(entry => {
-            if (entry.profData && entry.profData.learnedSpells && entry.profData.learnedSpells[spellId]) {
-              craftersHtml += `
-                <div style="display:flex; justify-content:space-between; align-items:center; background:#1c1c1c; padding:0.5rem 0.75rem; border:1px solid #2d2d2d; border-radius:4px; margin-bottom:4px;">
-                  <span style="color:#1eff00; font-weight:bold; font-size:0.9rem;">${entry.charName}</span>
-                  <span style="color:#aaa; font-size:0.8rem; font-family:monospace;">Färdighet: ${entry.profData.current}/${entry.profData.max}</span>
-                </div>`;
+            if (entry.profData && entry.profData.learnedSpells) {
+              // Check directly for map/dictionary truthiness of the spellId key
+              const hasSpell = entry.profData.learnedSpells && 
+                               (entry.profData.learnedSpells[String(spellId)] === true || entry.profData.learnedSpells[Number(spellId)] === true);
+              
+              if (hasSpell) {
+                craftersHtml += `
+                  <div style="display:flex; justify-content:space-between; align-items:center; background:#1c1c1c; padding:0.5rem 0.75rem; border:1px solid #2d2d2d; border-radius:4px; margin-bottom:4px;">
+                    <span style="color:#1eff00; font-weight:bold; font-size:0.9rem;">${entry.charName}</span>
+                    <span style="color:#aaa; font-size:0.8rem; font-family:monospace;">Färdighet: ${entry.profData.current}/${entry.profData.max}</span>
+                  </div>`;
+              }
             }
           });
         }

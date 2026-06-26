@@ -2,96 +2,96 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>http://localhost:33715/</loc>
     <lastmod>2026-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/artiklar/</loc>
+    <loc>http://localhost:33715/artiklar/</loc>
     <lastmod>2026-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/artiklar/addons/</loc>
+    <loc>http://localhost:33715/artiklar/addons/</loc>
     <lastmod>2026-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/artiklar/addons/addons/</loc>
+    <loc>http://localhost:33715/artiklar/addons/addons/</loc>
     <lastmod>2026-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/artiklar/macros/</loc>
+    <loc>http://localhost:33715/artiklar/macros/</loc>
     <lastmod>2026-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/artiklar/nyheter/nystart/</loc>
+    <loc>http://localhost:33715/artiklar/nyheter/nystart/</loc>
     <lastmod>2026-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/artiklar/macros/warrior-macro/</loc>
+    <loc>http://localhost:33715/artiklar/macros/warrior-macro/</loc>
     <lastmod>2026-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/artiklar/addons/test/</loc>
+    <loc>http://localhost:33715/artiklar/addons/test/</loc>
     <lastmod>2026-06-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/artiklar/addons/hantering/</loc>
+    <loc>http://localhost:33715/artiklar/addons/hantering/</loc>
   </url><url>
-    <loc>http://localhost:1313/professions/alchemy/</loc>
+    <loc>http://localhost:33715/professions/alchemy/</loc>
     <priority>0</priority>
   </url><url>
-    <loc>http://localhost:1313/professions/azzco/</loc>
+    <loc>http://localhost:33715/professions/azzco/</loc>
     <priority>0</priority>
   </url><url>
-    <loc>http://localhost:1313/artiklar/nyheter/tradeskills/</loc>
+    <loc>http://localhost:33715/artiklar/nyheter/tradeskills/</loc>
   </url><url>
-    <loc>http://localhost:1313/professions/blacksmithing/</loc>
+    <loc>http://localhost:33715/professions/blacksmithing/</loc>
     <priority>0</priority>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>http://localhost:33715/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/professions/coazz/</loc>
+    <loc>http://localhost:33715/professions/coazz/</loc>
     <priority>0</priority>
   </url><url>
-    <loc>http://localhost:1313/professions/cooking/</loc>
+    <loc>http://localhost:33715/professions/cooking/</loc>
     <priority>0</priority>
   </url><url>
-    <loc>http://localhost:1313/professions/cozzalisa/</loc>
+    <loc>http://localhost:33715/professions/cozzalisa/</loc>
     <priority>0</priority>
   </url><url>
-    <loc>http://localhost:1313/professions/enchanting/</loc>
+    <loc>http://localhost:33715/professions/enchanting/</loc>
     <priority>0</priority>
   </url><url>
-    <loc>http://localhost:1313/professions/first-aid/</loc>
+    <loc>http://localhost:33715/professions/first-aid/</loc>
     <priority>0</priority>
   </url><url>
-    <loc>http://localhost:1313/artiklar/guider/professions/</loc>
+    <loc>http://localhost:33715/artiklar/guider/professions/</loc>
   </url><url>
-    <loc>http://localhost:1313/professions/inscription/</loc>
+    <loc>http://localhost:33715/professions/inscription/</loc>
     <priority>0</priority>
   </url><url>
-    <loc>http://localhost:1313/professions/jewelcrafting/</loc>
+    <loc>http://localhost:33715/professions/jewelcrafting/</loc>
     <priority>0</priority>
   </url><url>
-    <loc>http://localhost:1313/artiklar/addons/ui-essentials/</loc>
+    <loc>http://localhost:33715/artiklar/addons/ui-essentials/</loc>
   </url><url>
-    <loc>http://localhost:1313/schema/</loc>
+    <loc>http://localhost:33715/schema/</loc>
   </url><url>
-    <loc>http://localhost:1313/professions/leatherworking/</loc>
+    <loc>http://localhost:33715/professions/leatherworking/</loc>
     <priority>0</priority>
   </url><url>
-    <loc>http://localhost:1313/medlemslista/</loc>
+    <loc>http://localhost:33715/medlemslista/</loc>
   </url><url>
-    <loc>http://localhost:1313/professions/oczza/</loc>
+    <loc>http://localhost:33715/professions/oczza/</loc>
     <priority>0</priority>
   </url><url>
-    <loc>http://localhost:1313/professions/</loc>
-  </url><url>
-    <loc>http://localhost:1313/professions/ronal/</loc>
+    <loc>http://localhost:33715/professions/ronal/</loc>
     <priority>0</priority>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>http://localhost:33715/tags/</loc>
   </url><url>
-    <loc>http://localhost:1313/professions/tailoring/</loc>
+    <loc>http://localhost:33715/professions/tailoring/</loc>
     <priority>0</priority>
   </url><url>
-    <loc>http://localhost:1313/hej/</loc>
+    <loc>http://localhost:33715/hej/</loc>
   </url><url>
-    <loc>http://localhost:1313/professions/zcoza/</loc>
+    <loc>http://localhost:33715/professions/</loc>
+  </url><url>
+    <loc>http://localhost:33715/professions/zcoza/</loc>
     <priority>0</priority>
   </url><url>
-    <loc>http://localhost:1313/professions/zocaz/</loc>
+    <loc>http://localhost:33715/professions/zocaz/</loc>
     <priority>0</priority>
   </url>
 </urlset>
