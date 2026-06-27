@@ -77,7 +77,7 @@
         {{ range $gName, $group := $data.groups }}
           {{ range $group.spells }}
             {{ $totalRecipes = add $totalRecipes 1 }}
-            {{ $spellIdStr := string .spell_id }}
+            {{ $spellIdStr := printf "%d" (int .spell_id) }}
             {{ $recipeIsKnownBySomeone := false }}
             {{ range $.Pages }}
               {{ range .Params.entries }}
