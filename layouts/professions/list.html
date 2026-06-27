@@ -7,20 +7,169 @@
     <p style="margin: 0.5rem 0 0 0; color: #888; font-size: 1.1rem;">Välj ett yrke nedan för att se recept, tillgängliga hantverkare och materialkrav.</p>
   </div>
 
-  {{/* 1. Fetch data presentation asset */}}
+  {{/* 1. Fetch skill_presentation.json */}}
   {{ $presentation := dict }}
   {{ with resources.Get "skill_presentation.json" }}
     {{ $presentation = . | transform.Unmarshal }}
   {{ end }}
 
-  {{/* 2. Fetch the raw professions JSON to manually compute gatherer limits */}}
+  {{/* 2. Fetch skill_map.json */}}
+  {{ $skillMap := dict }}
+  {{ with resources.Get "skill_map.json" }}
+    {{ $skillMap = . | transform.Unmarshal }}
+  {{ end }}
+
+  {{/* 3. Fetch raw professions JSON */}}
   {{ $rawUrl := printf "https://azzco.xyz/data/professions.json?t=%d" now.Unix }}
   {{ $rawProfessions := dict }}
   {{ with try (resources.GetRemote $rawUrl) }}
     {{ with .Err }}{{ else }}{{ $rawProfessions = .Value.Content | transform.Unmarshal }}{{ end }}
   {{ end }}
 
-  {{/* 3. Definiera den exakta sorteringsordningen */}}
+  {{/* 4. Trade spell -> skill line ID map (same as _content.gotmpl) */}}
+  {{ $tradeSpellToSkill := dict }}
+  {{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "2259" "171" "3101" "171" "3464" "171" "11611" "171" "28596" "171" "51304" "171") }}
+  {{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "2018" "164" "3100" "164" "3538" "164" "9785" "164" "29844" "164" "51300" "164") }}
+  {{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "7411" "333" "7412" "333" "7413" "333" "13920" "333" "28029" "333" "51313" "333") }}
+  {{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "4036" "202" "4037" "202" "4038" "202" "12656" "202" "30350" "202" "51306" "202") }}
+  {{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "25229" "755" "28894" "755" "28895" "755" "28897" "755" "51311" "755") }}
+  {{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "2108" "165" "3104" "165" "3811" "165" "10662" "165" "32549" "165" "51302" "165") }}
+  {{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "3908" "197" "3909" "197" "3910" "197" "12180" "197" "26790" "197" "51309" "197") }}
+  {{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "2550" "185" "3102" "185" "3413" "185" "18260" "185" "33359" "185" "51296" "185") }}
+  {{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "3273" "129" "3274" "129" "7924" "129" "10846" "129" "27028" "129" "45542" "129") }}
+  {{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "45357" "773" "45363" "773") }}
+
+  {{/* 5. Base64 character lookup dicts (avoids / as dict key bug) */}}
+  {{ $b64Upper := dict "A" 0 "B" 1 "C" 2 "D" 3 "E" 4 "F" 5 "G" 6 "H" 7 "I" 8 "J" 9 "K" 10 "L" 11 "M" 12 "N" 13 "O" 14 "P" 15 "Q" 16 "R" 17 "S" 18 "T" 19 "U" 20 "V" 21 "W" 22 "X" 23 "Y" 24 "Z" 25 }}
+  {{ $b64Lower := dict "a" 26 "b" 27 "c" 28 "d" 29 "e" 30 "f" 31 "g" 32 "h" 33 "i" 34 "j" 35 "k" 36 "l" 37 "m" 38 "n" 39 "o" 40 "p" 41 "q" 42 "r" 43 "s" 44 "t" 45 "u" 46 "v" 47 "w" 48 "x" 49 "y" 50 "z" 51 }}
+  {{ $b64Digit := dict "0" 52 "1" 53 "2" 54 "3" 55 "4" 56 "5" 57 "6" 58 "7" 59 "8" 60 "9" 61 }}
+
+  {{/* 6. Decode all characters' bitmasks into a global learnedSpells set */}}
+  {{/* Result: $allLearnedSpells is a dict of spellKey -> true */}}
+  {{ $allLearnedSpells := dict }}
+
+  {{ range $charName, $slots := $rawProfessions }}
+    {{ range $slotID, $rawString := $slots }}
+      {{ if and (ne $rawString "EMPTY") (findRE `\|Htrade:` $rawString) }}
+
+        {{ $headerMatch := findRESubmatch `\|Htrade:(\d+):(\d+):(\d+):` $rawString }}
+        {{ $tailMatch := findRESubmatch `\|Htrade(?::[^:]+){4}:([^|:]+)\|h\[([^\]]+)\]` $rawString }}
+
+        {{ if and (gt (len $headerMatch) 0) (gt (len $tailMatch) 0) }}
+          {{ $headerParts := index $headerMatch 0 }}
+          {{ $tailParts := index $tailMatch 0 }}
+          {{ $tradeSpell := index $headerParts 1 }}
+          {{ $bitmaskStr := index $tailParts 1 }}
+
+          {{ $skillLineId := index $tradeSpellToSkill (string $tradeSpell) }}
+          {{ $orderedSpells := slice }}
+          {{ if $skillLineId }}
+            {{ $orderedSpells = index $skillMap (string $skillLineId) | default slice }}
+          {{ end }}
+
+          {{ if gt (len $orderedSpells) 0 }}
+            {{ $charSlice := split $bitmaskStr "" }}
+            {{ $bitIdx := newScratch }}
+            {{ $bitIdx.Set "i" 0 }}
+
+            {{ range $char := $charSlice }}
+              {{ $val := -1 }}
+              {{ if isset $b64Upper $char }}{{ $val = index $b64Upper $char }}
+              {{ else if isset $b64Lower $char }}{{ $val = index $b64Lower $char }}
+              {{ else if isset $b64Digit $char }}{{ $val = index $b64Digit $char }}
+              {{ else if eq $char "+" }}{{ $val = 62 }}
+              {{ else if eq $char "/" }}{{ $val = 63 }}
+              {{ end }}
+
+              {{ if ge $val 0 }}
+                {{ range $bitOffset := seq 0 1 5 }}
+                  {{ $i := $bitIdx.Get "i" }}
+                  {{ if lt $i (len $orderedSpells) }}
+                    {{ $divisor := pow 2 $bitOffset }}
+                    {{ $isSet := eq (mod (int (div $val $divisor)) 2) 1 }}
+                    {{ if $isSet }}
+                      {{ $spellId := index $orderedSpells $i }}
+                      {{ $spellKey := printf "%d" (int $spellId) }}
+                      {{ $allLearnedSpells = merge $allLearnedSpells (dict $spellKey true) }}
+                    {{ end }}
+                  {{ end }}
+                  {{ $bitIdx.Set "i" (add ($bitIdx.Get "i") 1) }}
+                {{ end }}
+              {{ else }}
+                {{ $bitIdx.Set "i" (add ($bitIdx.Get "i") 6) }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{/* 7. Also build a per-character learnedSpells map for crafter counting */}}
+  {{/* $craftersBySpell: spellKey -> slice of charNames */}}
+  {{ $craftersBySpell := newScratch }}
+
+  {{ range $charName, $slots := $rawProfessions }}
+    {{ range $slotID, $rawString := $slots }}
+      {{ if and (ne $rawString "EMPTY") (findRE `\|Htrade:` $rawString) }}
+
+        {{ $headerMatch := findRESubmatch `\|Htrade:(\d+):(\d+):(\d+):` $rawString }}
+        {{ $tailMatch := findRESubmatch `\|Htrade(?::[^:]+){4}:([^|:]+)\|h\[([^\]]+)\]` $rawString }}
+
+        {{ if and (gt (len $headerMatch) 0) (gt (len $tailMatch) 0) }}
+          {{ $headerParts := index $headerMatch 0 }}
+          {{ $tailParts := index $tailMatch 0 }}
+          {{ $tradeSpell := index $headerParts 1 }}
+          {{ $bitmaskStr := index $tailParts 1 }}
+
+          {{ $skillLineId := index $tradeSpellToSkill (string $tradeSpell) }}
+          {{ $orderedSpells := slice }}
+          {{ if $skillLineId }}
+            {{ $orderedSpells = index $skillMap (string $skillLineId) | default slice }}
+          {{ end }}
+
+          {{ if gt (len $orderedSpells) 0 }}
+            {{ $charSlice := split $bitmaskStr "" }}
+            {{ $bitIdx := newScratch }}
+            {{ $bitIdx.Set "i" 0 }}
+
+            {{ range $char := $charSlice }}
+              {{ $val := -1 }}
+              {{ if isset $b64Upper $char }}{{ $val = index $b64Upper $char }}
+              {{ else if isset $b64Lower $char }}{{ $val = index $b64Lower $char }}
+              {{ else if isset $b64Digit $char }}{{ $val = index $b64Digit $char }}
+              {{ else if eq $char "+" }}{{ $val = 62 }}
+              {{ else if eq $char "/" }}{{ $val = 63 }}
+              {{ end }}
+
+              {{ if ge $val 0 }}
+                {{ range $bitOffset := seq 0 1 5 }}
+                  {{ $i := $bitIdx.Get "i" }}
+                  {{ if lt $i (len $orderedSpells) }}
+                    {{ $divisor := pow 2 $bitOffset }}
+                    {{ $isSet := eq (mod (int (div $val $divisor)) 2) 1 }}
+                    {{ if $isSet }}
+                      {{ $spellId := index $orderedSpells $i }}
+                      {{ $spellKey := printf "%d" (int $spellId) }}
+                      {{ $existing := $craftersBySpell.Get $spellKey | default slice }}
+                      {{ if not (in $existing $charName) }}
+                        {{ $craftersBySpell.Set $spellKey ($existing | append $charName) }}
+                      {{ end }}
+                    {{ end }}
+                  {{ end }}
+                  {{ $bitIdx.Set "i" (add ($bitIdx.Get "i") 1) }}
+                {{ end }}
+              {{ else }}
+                {{ $bitIdx.Set "i" (add ($bitIdx.Get "i") 6) }}
+              {{ end }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{/* 8. Render profession cards */}}
   {{ $order := slice "tailoring" "leatherworking" "blacksmithing" "enchanting" "alchemy" "engineering" "inscription" "jewelcrafting" "first aid" "cooking" "mining" "herbalism" "skinning" }}
 
   <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;">
@@ -28,8 +177,7 @@
     {{ range $order }}
       {{ $targetProf := . }}
       {{ $isGathering := in (slice "mining" "herbalism" "skinning") $targetProf }}
-      
-      {{/* Find data for crafting professions */}}
+
       {{ $data := dict }}
       {{ range $skillId, $profBlock := $presentation }}
         {{ if eq ($profBlock.profession_name | lower) $targetProf }}
@@ -37,7 +185,6 @@
         {{ end }}
       {{ end }}
 
-      {{/* Determine title and icon filenames */}}
       {{ $profTitle := title $targetProf }}
       {{ if $data }}{{ $profTitle = $data.profession_name }}{{ end }}
 
@@ -57,13 +204,11 @@
       {{ else if eq $targetProf "skinning" }}{{ $iconName = "inv_misc_pelt_wolf_01" }}
       {{ end }}
 
-      {{/* Processing Counters */}}
       {{ $totalRecipes := 0 }}
       {{ $knownGuildRecipes := 0 }}
       {{ $craftersCount := 0 }}
 
       {{ if $isGathering }}
-        {{/* Loop over raw JSON profile blocks to parse plain gathering strings */}}
         {{ range $charName, $slots := $rawProfessions }}
           {{ range $slotId, $rawVal := $slots }}
             {{ if findRE (printf "(?i):%s" $targetProf) $rawVal }}
@@ -72,32 +217,26 @@
           {{ end }}
         {{ end }}
       {{ else }}
-        {{/* Calculate unique crafter lists from page structure metrics */}}
         {{ $tempCrafters := slice }}
         {{ range $gName, $group := $data.groups }}
           {{ range $group.spells }}
             {{ $totalRecipes = add $totalRecipes 1 }}
-            {{ $spellIdStr := printf "%d" (int .spell_id) }}
-            {{ $recipeIsKnownBySomeone := false }}
-            {{ range where site.RegularPages "Section" "professions" }}
-              {{ range .Params.entries }}
-                {{ if isset .profData.learnedSpells $spellIdStr }}
-                  {{ $recipeIsKnownBySomeone = true }}
-                  {{ if not (in $tempCrafters .charName) }}
-                    {{ $tempCrafters = $tempCrafters | append .charName }}
-                  {{ end }}
+            {{ $spellKey := printf "%d" (int .spell_id) }}
+            {{ $craftersForSpell := $craftersBySpell.Get $spellKey | default slice }}
+            {{ if gt (len $craftersForSpell) 0 }}
+              {{ $knownGuildRecipes = add $knownGuildRecipes 1 }}
+              {{ range $craftersForSpell }}
+                {{ if not (in $tempCrafters .) }}
+                  {{ $tempCrafters = $tempCrafters | append . }}
                 {{ end }}
               {{ end }}
             {{ end }}
-            {{ if $recipeIsKnownBySomeone }}{{ $knownGuildRecipes = add $knownGuildRecipes 1 }}{{ end }}
           {{ end }}
         {{ end }}
         {{ $craftersCount = len $tempCrafters }}
       {{ end }}
 
-      <!-- Card Container Layout -->
       <div style="background: #151515; border: 1px solid #2a2a2a; border-radius: 6px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; height: 100%; box-sizing: border-box;">
-        
         <div>
           <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
             <img src="https://wowgaming.altervista.org/aowow/static/images/wow/icons/medium/{{ $iconName }}.jpg" 
@@ -113,7 +252,6 @@
           </div>
         </div>
 
-        <!-- Dynamic Footer Navigation/Shortcode Action Block -->
         <div style="margin-top: auto; padding-top: 0.5rem; border-top: 1px solid #222;">
           {{ if not $isGathering }}
             <a href="{{ $targetProf | urlize }}/" style="text-decoration: none; font-size: 0.85rem; color: #ffd100; font-weight: bold; display: flex; align-items: center; gap: 4px;">
@@ -134,11 +272,9 @@
             </div>
           {{ end }}
         </div>
-
       </div>
     {{ end }}
 
   </div>
 </div>
-{{ warnf "LIST pages=%d" (len $.Pages) }}
 {{ end }}
