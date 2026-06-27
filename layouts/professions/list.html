@@ -79,7 +79,7 @@
             {{ $totalRecipes = add $totalRecipes 1 }}
             {{ $spellIdStr := printf "%d" (int .spell_id) }}
             {{ $recipeIsKnownBySomeone := false }}
-            {{ range $.Pages }}
+            {{ range where site.RegularPages "Section" "professions" }}
               {{ range .Params.entries }}
                 {{ if isset .profData.learnedSpells $spellIdStr }}
                   {{ $recipeIsKnownBySomeone = true }}
@@ -140,4 +140,5 @@
 
   </div>
 </div>
+{{ warnf "LIST pages=%d" (len $.Pages) }}
 {{ end }}
