@@ -1,0 +1,260 @@
+{{- $count := .Get "count" | default 6 -}}
+
+<div id="achievements-container" 
+     data-count="{{ $count }}"
+     style="display: flex; flex-direction: column; gap: 0.5rem; font-family: sans-serif;">
+  
+  {{- $ledger := dict -}}
+  {{- with resources.Get "data/achievement-mirrors.json" -}}
+    {{- $ledger = unmarshal .Content -}}
+  {{- end -}}
+  <script id="mirror-ledger-data" type="application/json">
+    {{ $ledger | jsonify | safeJS }}
+  </script>
+  
+  <div id="achievements-loading-placeholder" style="color: #666; font-size: 0.9rem; padding: 0.5rem;">
+    Laddar senaste bedrifter...
+  </div>
+</div>
+
+<script type="text/javascript">
+(function() {
+    const container = document.getElementById('achievements-container');
+    const ledgerEl = document.getElementById('mirror-ledger-data');
+    if (!container) return;
+
+    const maxCount = parseInt(container.getAttribute('data-count') || '6', 10);
+    const factionMirrors = ledgerEl ? JSON.parse(ledgerEl.textContent) : {};
+
+    window.$WowheadPower = window.$WowheadPower || {};
+    let realRegisterFunc = window.$WowheadPower.registerAchievement;
+
+    Object.defineProperty(window.$WowheadPower, 'registerAchievement', {
+        get() {
+            return function (id, type, data) {
+                hydrateCardUI(id, data);
+                if (typeof realRegisterFunc === 'function') {
+                    realRegisterFunc.call(this, id, type, data);
+                }
+            };
+        },
+        set(newFunc) { realRegisterFunc = newFunc; },
+        configurable: true
+    });
+
+    // Appending Date.now() ensures soft refreshes always fetch the absolute newest live data file
+    fetch("https://azzco.xyz/data/achievements.json?_t=" + Date.now())
+        .then(response => response.json())
+        .then(rawData => {
+            const groupedMap = new Map();
+
+            rawData.forEach(entry => {
+                let cleanedDate = "Okänt datum";
+                if (entry.timestamp) {
+                    const dateObj = new Date(entry.timestamp * 1000);
+                    cleanedDate = dateObj.toISOString().split('T')[0];
+                }
+
+                let canonicalId = entry.achievementId;
+                
+                // Group strictly by achievement ID mapping matrix (maps 1707 -> 1693, etc.)
+                if (factionMirrors[canonicalId]) {
+                    canonicalId = factionMirrors[canonicalId];
+                }
+
+                if (!groupedMap.has(canonicalId)) {
+                    groupedMap.set(canonicalId, {
+                        achievementId: entry.achievementId,
+                        canonicalId: canonicalId,
+                        earners: [],
+                        allIds: [entry.achievementId]
+                    });
+                }
+                
+                const currentGroup = groupedMap.get(canonicalId);
+                
+                const alreadyEarned = currentGroup.earners.some(e => e.player === entry.player);
+                if (!alreadyEarned) {
+                    currentGroup.earners.push({
+                        player: entry.player,
+                        date: cleanedDate
+                    });
+                }
+                
+                if (!currentGroup.allIds.includes(entry.achievementId)) {
+                    currentGroup.allIds.push(entry.achievementId);
+                }
+            });
+
+            const uniqueGroups = Array.from(groupedMap.values()).slice(0, maxCount);
+
+            const placeholder = document.getElementById('achievements-loading-placeholder');
+            if (placeholder) placeholder.remove();
+
+            uniqueGroups.forEach(group => {
+                const displayId = group.allIds[Math.floor(Math.random() * group.allIds.length)];
+                
+                let rightSideDisplay = "";
+
+                if (group.earners.length > 1) {
+                    const listItems = group.earners
+                        .map(e => `<div style="white-space: nowrap; border-bottom: 1px solid #333; padding: 4px 0; font-size: 0.8rem;"><span style="color:#fff; font-weight:bold;">${e.player}</span> <span style="color:#888; font-size:0.75rem; margin-left:8px;">${e.date}</span></div>`)
+                        .join('');
+
+                    rightSideDisplay = `
+                        <div class="ach-tooltip-wrapper" style="position: relative; display: inline-block;">
+                            <span class="ach-trigger-btn" 
+                                style="color: #00ff00; cursor: help; font-weight: bold; border-bottom: 1px dotted #00ff00; user-select: none;-webkit-user-select: none;">
+                                ${group.earners.length} medlemmar
+                            </span>
+                            <div class="ach-popup-window" 
+                                style="display: none; position: absolute; bottom: 125%; right: 0; background: #111; border: 1px solid #444; border-radius: 4px; padding: 8px 12px; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.8); min-width: 180px; text-align: left;">
+                                <div style="font-size: 0.75rem; color: #aaa; font-weight: bold; padding-bottom: 4px; border-bottom: 1px solid #555; margin-bottom: 4px;">Erhållen av:</div>
+                                ${listItems}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    const soloEarners = group.earners[0];
+                    rightSideDisplay = `
+                        <span style="color: #aaa; font-weight: bold;">${soloEarners.player}</span>
+                        <div style="font-size: 0.75rem; color: #888; margin-top: 2px;">${soloEarners.date}</div>
+                    `;
+                }
+
+                const rowHtml = `
+                <div class="ach-row-frame" 
+                    id="ach-${group.canonicalId}" 
+                    data-ach-id="${displayId}"
+                    data-canonical-id="${group.canonicalId}"
+                    style="display: grid; grid-template-columns: 44px 1fr auto; align-items: center; background: #1a1a1a; padding: 0.25rem 0.5rem; border: 1px solid #333; border-radius: 4px; gap: 0.75rem; line-height: 1.2;">
+                    
+                    <div class="ach-icon-slot" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
+                        <a href="https://wowgaming.altervista.org/aowow/?achievement=${displayId}" rel="achievement=${displayId}" target="_blank" style="display: block; width: 44px; height: 44px;">
+                            <div style="width: 44px; height: 44px; background: #222; border: 1px solid #444; border-radius: 4px;"></div>
+                        </a>
+                    </div>
+                    
+                    <div class="ach-info-slot" style="display: flex; flex-direction: column; justify-content: center; min-width: 0; padding: 2px 0;">
+                        <a href="https://wowgaming.altervista.org/aowow/?achievement=${displayId}" 
+                            rel="achievement=${displayId}"
+                            target="_blank"
+                            class="ach-title" 
+                            style="color: #ffd100; font-weight: bold; font-size: 0.9rem; text-decoration: none; display: inline-block; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 0; padding: 0;">
+                            Laddar titel...
+                        </a>
+                        <div class="ach-desc" style="font-size: 0.8rem; color: #555; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0;">
+                            Hämtar beskrivning...
+                        </div>
+                    </div>
+                    
+                    <div class="ach-meta-slot" style="text-align: right; font-size: 0.8rem; padding-right: 0.25rem; white-space: nowrap; display: flex; flex-direction: column; justify-content: center;">
+                        ${rightSideDisplay}
+                    </div>
+                </div>
+                `;
+                container.insertAdjacentHTML('beforeend', rowHtml);
+            });
+
+            if (!document.getElementById('ach-tooltip-styles')) {
+                const styleEl = document.createElement('style');
+                styleEl.id = 'ach-tooltip-styles';
+                styleEl.textContent = `
+                    @media (min-width: 769px) {
+                        .ach-tooltip-wrapper:hover .ach-popup-window {
+                            display: block !important;
+                        }
+                    }
+                    @media (max-width: 480px) {
+                        .ach-row-frame {
+                            grid-template-columns: 44px 1fr !important;
+                        }
+                        .ach-meta-slot {
+                            display: none !important;
+                        }
+                    }
+                `;
+                document.head.appendChild(styleEl);
+            }
+
+            document.removeEventListener('click', window._achTooltipHandler);
+            window._achTooltipHandler = function(e) {
+                const activeTrigger = e.target.closest('.ach-trigger-btn');
+                const insidePopup = e.target.closest('.ach-popup-window');
+                
+                if (!activeTrigger && !insidePopup) {
+                    document.querySelectorAll('.ach-popup-window').forEach(pop => pop.style.display = 'none');
+                    return;
+                }
+
+                if (activeTrigger) {
+                    const currentPopup = activeTrigger.nextElementSibling;
+                    const isCurrentlyOpen = currentPopup.style.display === 'block';
+                    
+                    document.querySelectorAll('.ach-popup-window').forEach(pop => pop.style.display = 'none');
+                    
+                    currentPopup.style.display = isCurrentlyOpen ? 'none' : 'block';
+                    e.preventDefault();
+                }
+            };
+            document.addEventListener('click', window._achTooltipHandler);
+
+            uniqueGroups.forEach(group => {
+                const displayId = document.querySelector(`.ach-row-frame[data-canonical-id="${group.canonicalId}"]`).getAttribute('data-ach-id');
+                const script = document.createElement('script');
+                script.src = `https://wowgaming.altervista.org/aowow/?achievement=${displayId}&power`;
+                script.async = true;
+                document.head.appendChild(script);
+            });
+        })
+        .catch(err => {
+            console.error("Failed to load achievements dynamically:", err);
+            const placeholder = document.getElementById('achievements-loading-placeholder');
+            if (placeholder) placeholder.innerText = "Kunde inte hämta senaste bedrifter.";
+        });
+
+    function hydrateCardUI(id, data) {
+        const frames = document.querySelectorAll(`.ach-row-frame[data-ach-id="${id}"], .ach-row-frame[data-canonical-id="${id}"]`);
+        if (!frames.length) return;
+
+        const title = data.name_enus;
+        const iconName = data.icon ? data.icon.toLowerCase() : 'inv_misc_questionmark';
+        const rawTooltip = data.tooltip_enus || '';
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(rawTooltip, 'text/html');
+        let description = "";
+        
+        const cells = doc.querySelectorAll('td');
+        if (cells.length > 1) {
+            const cleanText = cells[1].textContent || '';
+            description = cleanText.split('Criteria:')[0].replace(/^[\s\r\n·•-]+/, '').trim();
+        } else if (cells.length === 1) {
+            description = cells[0].textContent.trim();
+        }
+        
+        if (!description || description === title) {
+            description = "Achievement completed successfully.";
+        }
+
+        frames.forEach(frame => {
+            const imgLink = frame.querySelector('.ach-icon-slot a');
+            if (imgLink) {
+                imgLink.innerHTML = `
+                    <img src="https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/${iconName}.jpg" 
+                         style="width: 42px; height: 42px; border: 1px solid #555; border-radius: 4px; display: block; margin: 0 auto;" 
+                         onerror="this.src='https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg';"
+                         alt="${title}">
+                `;
+            }
+            const titleEl = frame.querySelector('.ach-title');
+            if (titleEl) titleEl.innerText = title;
+            const descEl = frame.querySelector('.ach-desc');
+            if (descEl) {
+                descEl.innerText = description;
+                descEl.style.color = "#bbb";
+            }
+        });
+    }
+})();
+</script>

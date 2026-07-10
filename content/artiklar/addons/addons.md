@@ -38,3 +38,11 @@ Addons är något som visa ratar och andra inte kan spela utan. Här är lite ti
 - [Questie](https://github.com/Aldori15/Questie?ref=warperia)
 - [ElvUI 7](https://github.com/Crumdidlyumshis/ElvUI)
 - [ElvUI-Extras (Awesomewotlk)](https://github.com/noname08662/ElvUI_Extras)
+
+# Azzco använder
+https://github.com/noname08662/ElvUI_Extras
+
+https://github.com/Crumdidlyumshis/ElvUI
+
+https://github.com/noname08662/awesome_wotlk
+

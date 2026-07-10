@@ -161,6 +161,9 @@ Nedan har du en tabell över medlemmar i \<Fika\>. För att se en spelares alter
 </style>
 
 <div class="not-prose my-6 w-full">
+  <!-- Hidden by default, will show up if data is > 24 hours old -->
+  <div id="roster-staleness-warning" style="display: none; font-size: 0.85rem; color: #f59e0b; background-color: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.25); padding: 0.5rem 0.75rem; margin-bottom: 0.75rem; border-radius: 0.375rem; font-style: italic;"></div>
+  
   <table id="production-roster-datatable" class="display responsive nowrap min-w-full text-sm" style="width:100%">
     <thead>
     <tr>
@@ -184,7 +187,7 @@ Nedan har du en tabell över medlemmar i \<Fika\>. För att se en spelares alter
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const apiEndpoint = "https://fika-api-proxy.robin-askelin.workers.dev/roster";
+    const apiEndpoint = "https://www.azzco.xyz/data/roster.json";
     const translationsEndpoint = "/utils/guild-translations.json";
     const classMapping = { 1: "Warrior", 2: "Paladin", 3: "Hunter", 4: "Rogue", 5: "Priest", 6: "Death Knight", 7: "Shaman", 8: "Mage", 9: "Warlock", 11: "Druid" };
     const classEmojiIds = { 1: "579532030153588739", 2: "579532029906124840", 3: "579532029880827924", 4: "579532030086217748", 5: "579532029901799437", 6: "599012538935410701", 7: "579532030056857600", 8: "579532030161977355", 9: "579532029851336716", 11: "579532029675438081" };
@@ -376,8 +379,32 @@ document.addEventListener("DOMContentLoaded", () => {
             const rankMapping = translations.ranks || {};
             const zoneMapping = translations.zones || {};
 
+            let fileAgeInDays = 0;
+
             return fetch(apiEndpoint)
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) throw new Error(`Network status ${res.status}`);
+                
+                const lastModifiedHeader = res.headers.get("Last-Modified");
+                if (lastModifiedHeader) {
+                    const fileModifiedTime = new Date(lastModifiedHeader).getTime();
+                    const currentTime = Date.now();
+                    const fileAgeInMs = currentTime - fileModifiedTime;
+                    
+                    fileAgeInDays = fileAgeInMs / (1000 * 60 * 60 * 24);
+
+                    // If the data is more than 24 hours (1 day) old, display the banner
+                    if (fileAgeInDays >= 1) {
+                        const warningEl = document.getElementById("roster-staleness-warning");
+                        if (warningEl) {
+                            warningEl.textContent = `Obs: Medlemslistans data uppdaterades senast ${lastModifiedHeader} och kan vara inaktuell.`;
+                            warningEl.style.display = "block";
+                        }
+                    }
+                }
+                
+                return res.json();
+            })
             .then(data => {
             const groupedMembers = new Map();
 
@@ -387,7 +414,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 const className = classMapping[m.classId] || `Class ${m.classId}`;
                 const rankName = rankMapping[m.rank] || `Rank ${m.rank}`;
                 const zoneName = zoneMapping[m.zoneId] || `Zone ${m.zoneId}`;
-                const statusText = m.isOnline ? "Online" : formatLastSeen(Number(m.lastLogoff) || 0);
+                
+                // Add the file age offset directly to the historical offline duration
+                const historicalOfflineDays = Number(m.lastLogoff) || 0;
+                const trueOfflineDays = historicalOfflineDays + fileAgeInDays;
+
+                const statusText = m.isOnline ? "Online" : formatLastSeen(trueOfflineDays);
                 const officerNote = (m.officerNote || "").trim();
                 const mainFromOfficerNote = officerNote ? officerNote.split(/\s+/)[0] : "";
                 const isAltRank = /\balt\b/i.test(rankName);

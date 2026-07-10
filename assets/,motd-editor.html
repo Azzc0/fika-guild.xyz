@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fika — MOTD Config Editor</title>
+<style>
+  :root {
+    --bg: #0e0e12;
+    --surface: #16161c;
+    --surface2: #1e1e28;
+    --border: #2a2a38;
+    --border-hover: #44445a;
+    --gold: #ffd100;
+    --gold-dim: #a88b00;
+    --green: #1eff00;
+    --red: #ff4444;
+    --text: #d4d4d8;
+    --text-dim: #6b6b7a;
+    --text-label: #9898aa;
+    --accent: #7b5ea7;
+    --accent-light: #a07fd4;
+    --radius: 6px;
+    --mono: 'Courier New', Courier, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .logo-cup { font-size: 20px; }
+  .header-actions { display: flex; gap: 10px; align-items: center; }
+
+  /* ── Buttons ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .btn:hover { border-color: var(--border-hover); background: #28283a; }
+  .btn-primary { background: var(--gold); color: #0e0e12; border-color: var(--gold); font-weight: 700; }
+  .btn-primary:hover { background: #ffe640; border-color: #ffe640; }
+  .btn-danger { border-color: #5a2020; color: var(--red); }
+  .btn-danger:hover { background: #2a1010; border-color: #5a1010; }
+  .btn-ghost { background: transparent; border-color: transparent; color: var(--text-dim); }
+  .btn-ghost:hover { background: var(--surface2); border-color: var(--border); color: var(--text); }
+  .btn-add { border-color: #2a3a2a; color: var(--green); }
+  .btn-add:hover { background: #0a1a0a; border-color: var(--green); }
+  .btn-sm { padding: 4px 10px; font-size: 12px; }
+
+  /* ── Layout ── */
+  .layout { display: grid; grid-template-columns: 220px 1fr; min-height: calc(100vh - 52px); }
+
+  /* ── Sidebar ── */
+  aside {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 16px 0;
+    position: sticky;
+    top: 52px;
+    height: calc(100vh - 52px);
+    overflow-y: auto;
+  }
+  .nav-section-label {
+    padding: 6px 16px 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    color: var(--text-dim);
+    font-size: 13px;
+    border-left: 2px solid transparent;
+    transition: all 0.12s;
+  }
+  .nav-item:hover { background: var(--surface2); color: var(--text); }
+  .nav-item.active { color: var(--gold); border-left-color: var(--gold); background: rgba(255,209,0,0.05); }
+  .nav-item .icon { width: 16px; text-align: center; }
+  .nav-badge {
+    margin-left: auto;
+    font-size: 10px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1px 6px;
+    color: var(--text-dim);
+  }
+  .nav-divider { height: 1px; background: var(--border); margin: 10px 0; }
+
+  /* ── Main ── */
+  main { padding: 24px; overflow-y: auto; }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .page-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .page-subtitle { color: var(--text-dim); font-size: 13px; margin-bottom: 24px; }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+  }
+  .card-header {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-body { padding: 16px; }
+
+  /* ── Form controls ── */
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-label);
+    margin-bottom: 5px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  input[type="text"], input[type="time"], input[type="date"], textarea, select {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    padding: 8px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    transition: border-color 0.15s;
+    outline: none;
+  }
+  input[type="text"]:focus, input[type="time"]:focus, input[type="date"]:focus, textarea:focus, select:focus {
+    border-color: var(--accent-light);
+  }
+  textarea { resize: vertical; min-height: 80px; font-family: var(--mono); font-size: 12px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .form-group { margin-bottom: 14px; }
+
+  /* ── Char counter ── */
+  .char-counter {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-align: right;
+    margin-top: 3px;
+    font-family: var(--mono);
+  }
+  .char-counter.warn { color: #f0a020; }
+  .char-counter.over { color: var(--red); }
+
+  /* ── Weight slider ── */
+  .weight-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .weight-row input[type="range"] {
+    flex: 1;
+    accent-color: var(--accent-light);
+    height: 4px;
+    background: var(--surface2);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  .weight-val {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--gold);
+    width: 32px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* ── Message list ── */
+  .message-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .message-item:last-child { border-bottom: none; }
+  .message-input-wrap { flex: 1; position: relative; }
+  .message-input-wrap textarea {
+    width: 100%;
+    min-height: 54px;
+    font-size: 12px;
+    padding-right: 40px;
+    resize: vertical;
+  }
+  .msg-char {
+    position: absolute;
+    bottom: 6px;
+    right: 8px;
+    font-size: 10px;
+    font-family: var(--mono);
+    color: var(--text-dim);
+    pointer-events: none;
+  }
+  .msg-char.warn { color: #f0a020; }
+  .msg-char.over { color: var(--red); }
+  .drag-handle {
+    color: var(--text-dim);
+    cursor: grab;
+    padding: 10px 2px;
+    font-size: 16px;
+    line-height: 1;
+    user-select: none;
+  }
+  .drag-handle:active { cursor: grabbing; }
+
+  /* ── Range / dates table ── */
+  .range-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 1fr 1fr auto;
+    gap: 8px;
+    align-items: end;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .range-row:last-child { border-bottom: none; }
+  .dates-row {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 8px;
+    align-items: end;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .dates-row:last-child { border-bottom: none; }
+
+  /* ── Toast ── */
+  #toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 18px;
+    font-size: 13px;
+    display: none;
+    z-index: 999;
+    min-width: 220px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  #toast.show { display: flex; align-items: center; gap: 8px; }
+  #toast.success { border-color: #1a5a1a; color: var(--green); }
+  #toast.error { border-color: #5a1a1a; color: var(--red); }
+
+  /* ── JSON preview ── */
+  .json-preview {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    overflow-x: auto;
+    white-space: pre;
+    max-height: 400px;
+    overflow-y: auto;
+    line-height: 1.6;
+  }
+
+  /* ── Empty state ── */
+  .empty-state {
+    text-align: center;
+    padding: 32px 16px;
+    color: var(--text-dim);
+  }
+  .empty-state .icon { font-size: 32px; margin-bottom: 8px; }
+  .empty-state p { font-size: 13px; }
+
+  /* ── Tag ── */
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .tag-recurring { background: rgba(123,94,167,0.2); color: var(--accent-light); border: 1px solid rgba(123,94,167,0.4); }
+  .tag-oneoff { background: rgba(30,140,200,0.15); color: #5bc4f0; border: 1px solid rgba(30,140,200,0.3); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span class="logo-cup">☕</span>
+    Fika — MOTD Editor
+  </div>
+  <div class="header-actions">
+    <label class="btn" style="cursor:pointer; margin:0;">
+      📂 Load JSON
+      <input type="file" accept=".json" id="fileInput" style="display:none">
+    </label>
+    <button class="btn btn-primary" onclick="downloadJson()">💾 Save JSON</button>
+  </div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="nav-section-label">Settings</div>
+    <div class="nav-item active" data-section="general" onclick="showSection(this)">
+      <span class="icon">⚙️</span> General
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-section-label">Core Pools</div>
+    <div class="nav-item" data-section="pool-default" onclick="showSection(this)">
+      <span class="icon">📋</span> Default
+      <span class="nav-badge" id="badge-default">0</span>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-section-label">Week Days</div>
+    <div class="nav-item" data-section="pool-monday" onclick="showSection(this)">
+      <span class="icon">🥱</span> Monday
+      <span class="nav-badge" id="badge-monday">0</span>
+    </div>
+    <div class="nav-item" data-section="pool-tuesday" onclick="showSection(this)">
+      <span class="icon">🌮</span> Tuesday
+      <span class="nav-badge" id="badge-tuesday">0</span>
+    </div>
+    <div class="nav-item" data-section="pool-wednesday" onclick="showSection(this)">
+      <span class="icon">🐫</span> Wednesday
+      <span class="nav-badge" id="badge-wednesday">0</span>
+    </div>
+    <div class="nav-item" data-section="pool-thursday" onclick="showSection(this)">
+      <span class="icon">🥞</span> Thursday
+      <span class="nav-badge" id="badge-thursday">0</span>
+    </div>
+    <div class="nav-item" data-section="pool-friday" onclick="showSection(this)">
+      <span class="icon">🎉</span> Friday
+      <span class="nav-badge" id="badge-friday">0</span>
+    </div>
+    <div class="nav-item" data-section="pool-saturday" onclick="showSection(this)">
+      <span class="icon">🍕</span> Saturday
+      <span class="nav-badge" id="badge-saturday">0</span>
+    </div>
+    <div class="nav-item" data-section="pool-sunday" onclick="showSection(this)">
+      <span class="icon">🔋</span> Sunday
+      <span class="nav-badge" id="badge-sunday">0</span>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-section-label">Custom Pools</div>
+    <div id="custom-pool-nav"></div>
+    <div style="padding: 8px 12px;">
+      <button class="btn btn-add btn-sm" style="width:100%" onclick="addCustomPool()">+ Add Pool</button>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-section-label">Schedule</div>
+    <div class="nav-item" data-section="ranges" onclick="showSection(this)">
+      <span class="icon">📅</span> Date Ranges
+      <span class="nav-badge" id="badge-ranges">0</span>
+    </div>
+    <div class="nav-item" data-section="dates" onclick="showSection(this)">
+      <span class="icon">📌</span> Specific Dates
+      <span class="nav-badge" id="badge-dates">0</span>
+    </div>
+    <div class="nav-divider"></div>
+    <div class="nav-item" data-section="preview" onclick="showSection(this)">
+      <span class="icon">👁️</span> JSON Preview
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- GENERAL -->
+    <div class="section active" id="section-general">
+      <div class="page-title">General Settings</div>
+      <div class="page-subtitle">Global bot behaviour for MOTD rotation.</div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">🕐 Daily Fire Time</div></div>
+        <div class="card-body">
+          <div class="form-group">
+            <label>Fire time (server local time)</label>
+            <input type="time" id="fireTime" value="06:00" style="max-width:140px">
+            <div style="margin-top:6px; font-size:12px; color:var(--text-dim)">
+              The bot sends the MOTD once per day at this time. Changing this takes effect on the next scheduling cycle — no restart needed if the new time is still in the future today.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">📊 Priority Order</div></div>
+        <div class="card-body" style="font-size:13px; line-height:1.8; color:var(--text-dim)">
+          The bot checks these in order and stops at the first match:<br>
+          <span style="color:var(--text)">1.</span> <strong style="color:var(--gold)">Specific date</strong> — exact MM-DD match in the Specific Dates tab. Always wins.<br>
+          <span style="color:var(--text)">2.</span> <strong style="color:var(--accent-light)">Date range</strong> — first matching range from the Date Ranges tab. Blends with Default by weight.<br>
+          <span style="color:var(--text)">3.</span> <strong style="color:#5bc4f0">Week Days</strong> — maps directly to named pools based on the current day, if no range matched. Blends with Default by weight.<br>
+          <span style="color:var(--text)">4.</span> <strong style="color:var(--text)">Default pool</strong> — fallback for all other days.
+        </div>
+      </div>
+    </div>
+
+    <!-- DEFAULT POOL -->
+    <div class="section" id="section-pool-default">
+      <div class="page-title">Default Pool</div>
+      <div class="page-subtitle">Used on regular weekdays when no range or specific date applies. Also blends into themed pools via weight.</div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">⚖️ Weight</div>
+        </div>
+        <div class="card-body">
+          <div class="weight-row">
+            <input type="range" min="0" max="5" step="0.1" value="1.0" id="weight-default" oninput="syncWeight('default')">
+            <div class="weight-val" id="wval-default">1.0</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">💬 Messages <span id="count-default" style="color:var(--text-dim);font-weight:400;margin-left:4px;font-size:12px"></span></div>
+          <button class="btn btn-add btn-sm" onclick="addMessage('default')">+ Add message</button>
+        </div>
+        <div class="card-body" id="msgs-default"></div>
+      </div>
+    </div>
+
+    <!-- WEEK DAY POOLS -->
+    <div class="section" id="section-pool-monday">
+      <div class="page-title">Monday Pool</div>
+      <div class="page-subtitle">Active automatically on Mondays unless a date range overrides it.</div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">⚖️ Weight</div></div>
+        <div class="card-body">
+          <div class="weight-row">
+            <input type="range" min="0" max="5" step="0.1" value="1.0" id="weight-monday" oninput="syncWeight('monday')">
+            <div class="weight-val" id="wval-monday">1.0</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">💬 Messages <span id="count-monday" style="color:var(--text-dim);font-weight:400;margin-left:4px;font-size:12px"></span></div>
+          <button class="btn btn-add btn-sm" onclick="addMessage('monday')">+ Add message</button>
+        </div>
+        <div class="card-body" id="msgs-monday"></div>
+      </div>
+    </div>
+
+    <div class="section" id="section-pool-tuesday">
+      <div class="page-title">Tuesday Pool</div>
+      <div class="page-subtitle">Active automatically on Tuesdays unless a date range overrides it.</div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">⚖️ Weight</div></div>
+        <div class="card-body">
+          <div class="weight-row">
+            <input type="range" min="0" max="5" step="0.1" value="1.0" id="weight-tuesday" oninput="syncWeight('tuesday')">
+            <div class="weight-val" id="wval-tuesday">1.0</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">💬 Messages <span id="count-tuesday" style="color:var(--text-dim);font-weight:400;margin-left:4px;font-size:12px"></span></div>
+          <button class="btn btn-add btn-sm" onclick="addMessage('tuesday')">+ Add message</button>
+        </div>
+        <div class="card-body" id="msgs-tuesday"></div>
+      </div>
+    </div>
+
+    <div class="section" id="section-pool-wednesday">
+      <div class="page-title">Wednesday Pool</div>
+      <div class="page-subtitle">Active automatically on Wednesdays unless a date range overrides it.</div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">⚖️ Weight</div></div>
+        <div class="card-body">
+          <div class="weight-row">
+            <input type="range" min="0" max="5" step="0.1" value="1.0" id="weight-wednesday" oninput="syncWeight('wednesday')">
+            <div class="weight-val" id="wval-wednesday">1.0</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">💬 Messages <span id="count-wednesday" style="color:var(--text-dim);font-weight:400;margin-left:4px;font-size:12px"></span></div>
+          <button class="btn btn-add btn-sm" onclick="addMessage('wednesday')">+ Add message</button>
+        </div>
+        <div class="card-body" id="msgs-wednesday"></div>
+      </div>
+    </div>
+
+    <div class="section" id="section-pool-thursday">
+      <div class="page-title">Thursday Pool</div>
+      <div class="page-subtitle">Active automatically on Thursdays unless a date range overrides it.</div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">⚖️ Weight</div></div>
+        <div class="card-body">
+          <div class="weight-row">
+            <input type="range" min="0" max="5" step="0.1" value="1.0" id="weight-thursday" oninput="syncWeight('thursday')">
+            <div class="weight-val" id="wval-thursday">1.0</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">💬 Messages <span id="count-thursday" style="color:var(--text-dim);font-weight:400;margin-left:4px;font-size:12px"></span></div>
+          <button class="btn btn-add btn-sm" onclick="addMessage('thursday')">+ Add message</button>
+        </div>
+        <div class="card-body" id="msgs-thursday"></div>
+      </div>
+    </div>
+
+    <div class="section" id="section-pool-friday">
+      <div class="page-title">Friday Pool</div>
+      <div class="page-subtitle">Active automatically on Fridays unless a date range overrides it.</div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">⚖️ Weight</div></div>
+        <div class="card-body">
+          <div class="weight-row">
+            <input type="range" min="0" max="5" step="0.1" value="1.0" id="weight-friday" oninput="syncWeight('friday')">
+            <div class="weight-val" id="wval-friday">1.0</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">💬 Messages <span id="count-friday" style="color:var(--text-dim);font-weight:400;margin-left:4px;font-size:12px"></span></div>
+          <button class="btn btn-add btn-sm" onclick="addMessage('friday')">+ Add message</button>
+        </div>
+        <div class="card-body" id="msgs-friday"></div>
+      </div>
+    </div>
+
+    <div class="section" id="section-pool-saturday">
+      <div class="page-title">Saturday Pool</div>
+      <div class="page-subtitle">Active automatically on Saturdays unless a date range overrides it.</div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">⚖️ Weight</div></div>
+        <div class="card-body">
+          <div class="weight-row">
+            <input type="range" min="0" max="5" step="0.1" value="1.0" id="weight-saturday" oninput="syncWeight('saturday')">
+            <div class="weight-val" id="wval-saturday">1.0</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">💬 Messages <span id="count-saturday" style="color:var(--text-dim);font-weight:400;margin-left:4px;font-size:12px"></span></div>
+          <button class="btn btn-add btn-sm" onclick="addMessage('saturday')">+ Add message</button>
+        </div>
+        <div class="card-body" id="msgs-saturday"></div>
+      </div>
+    </div>
+
+    <div class="section" id="section-pool-sunday">
+      <div class="page-title">Sunday Pool</div>
+      <div class="page-subtitle">Active automatically on Sundays unless a date range overrides it.</div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">⚖️ Weight</div></div>
+        <div class="card-body">
+          <div class="weight-row">
+            <input type="range" min="0" max="5" step="0.1" value="1.0" id="weight-sunday" oninput="syncWeight('sunday')">
+            <div class="weight-val" id="wval-sunday">1.0</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">💬 Messages <span id="count-sunday" style="color:var(--text-dim);font-weight:400;margin-left:4px;font-size:12px"></span></div>
+          <button class="btn btn-add btn-sm" onclick="addMessage('sunday')">+ Add message</button>
+        </div>
+        <div class="card-body" id="msgs-sunday"></div>
+      </div>
+    </div>
+
+    <!-- CUSTOM POOLS (rendered dynamically) -->
+    <div id="custom-pool-sections"></div>
+
+    <!-- DATE RANGES -->
+    <div class="section" id="section-ranges">
+      <div class="page-title">Date Ranges</div>
+      <div class="page-subtitle">Activate a named pool for a period. First matching range wins. Use MM-DD for yearly recurring, YYYY-MM-DD for one-off dates like Easter.</div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📅 Configured Ranges</div>
+          <button class="btn btn-add btn-sm" onclick="addRange()">+ Add range</button>
+        </div>
+        <div class="card-body" id="ranges-body">
+          <div style="display:grid; grid-template-columns:130px 1fr 1fr 1fr auto; gap:8px; padding-bottom:8px; border-bottom:1px solid var(--border); margin-bottom:4px;">
+            <label style="margin:0">Pool name</label>
+            <label style="margin:0">Start date</label>
+            <label style="margin:0">End date</label>
+            <label style="margin:0">Type</label>
+            <div></div>
+          </div>
+          <div id="ranges-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPECIFIC DATES -->
+    <div class="section" id="section-dates">
+      <div class="page-title">Specific Dates</div>
+      <div class="page-subtitle">Override with an exact message on a specific day every year. Highest priority — beats everything else.</div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📌 Date overrides</div>
+          <button class="btn btn-add btn-sm" onclick="addDate()">+ Add date</button>
+        </div>
+        <div class="card-body" id="dates-body">
+          <div style="display:grid; grid-template-columns:90px 1fr auto; gap:8px; padding-bottom:8px; border-bottom:1px solid var(--border); margin-bottom:4px;">
+            <label style="margin:0">MM-DD</label>
+            <label style="margin:0">Message (max 128 chars)</label>
+            <div></div>
+          </div>
+          <div id="dates-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JSON PREVIEW -->
+    <div class="section" id="section-preview">
+      <div class="page-title">JSON Preview</div>
+      <div class="page-subtitle">Read-only view of the current config. Use Save JSON to download the file.</div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📄 motd_config.json</div>
+          <button class="btn btn-sm" onclick="refreshPreview()">↻ Refresh</button>
+        </div>
+        <div class="card-body">
+          <pre class="json-preview" id="json-preview">Click "Refresh" to generate preview.</pre>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ── State ──────────────────────────────────────────────
+const MAX_CHARS = 128;
+const CORE_POOLS = ['default', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
+let state = {
+  fireTime: '06:00',
+  pools: {
+    default: { weight: 1.0, messages: [] },
+    monday: { weight: 1.0, messages: [] },
+    tuesday: { weight: 1.0, messages: [] },
+    wednesday: { weight: 1.0, messages: [] },
+    thursday: { weight: 1.0, messages: [] },
+    friday: { weight: 1.0, messages: [] },
+    saturday: { weight: 1.0, messages: [] },
+    sunday: { weight: 1.0, messages: [] }
+  },
+  days: {
+    monday: 'monday',
+    tuesday: 'tuesday',
+    wednesday: 'wednesday',
+    thursday: 'thursday',
+    friday: 'friday',
+    saturday: 'saturday',
+    sunday: 'sunday'
+  },
+  ranges: [],
+  dates: {}
+};
+
+// ── Nav ────────────────────────────────────────────────
+function showSection(el) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  const sec = document.getElementById('section-' + el.dataset.section);
+  if (sec) sec.classList.add('active');
+  if (el.dataset.section === 'preview') refreshPreview();
+}
+
+// ── File I/O ───────────────────────────────────────────
+document.getElementById('fileInput').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const parsed = JSON.parse(ev.target.result);
+      loadFromJson(parsed);
+      toast('✅ Loaded ' + file.name, 'success');
+    } catch (err) {
+      toast('❌ Invalid JSON: ' + err.message, 'error');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+
+function loadFromJson(json) {
+  state.fireTime = json.fireTime || '06:00';
+  document.getElementById('fireTime').value = state.fireTime;
+
+  state.pools = {};
+  const rawPools = json.pools || {};
+
+  for (const name of [...CORE_POOLS, ...Object.keys(rawPools)]) {
+    if (name === 'weekend') continue;
+    const p = rawPools[name] || { weight: 1.0, messages: [] };
+    state.pools[name] = {
+      weight: parseFloat(p.weight) || 1.0,
+      messages: (p.messages || []).map(String)
+    };
+  }
+
+  if (rawPools.weekend && rawPools.weekend.messages?.length) {
+    state.pools.saturday.messages = [...new Set([...state.pools.saturday.messages, ...rawPools.weekend.messages])];
+    state.pools.sunday.messages = [...new Set([...state.pools.sunday.messages, ...rawPools.weekend.messages])];
+    toast('ℹ️ Migrated legacy weekend pool to Saturday & Sunday', 'success');
+  }
+
+  state.days = json.days || {
+    monday: 'monday',
+    tuesday: 'tuesday',
+    wednesday: 'wednesday',
+    thursday: 'thursday',
+    friday: 'friday',
+    saturday: 'saturday',
+    sunday: 'sunday'
+  };
+
+  state.ranges = (json.ranges || []).map(r => ({ name: r.name, start: r.start, end: r.end }));
+  state.dates = {};
+  for (const [k, v] of Object.entries(json.dates || {})) {
+    state.dates[k] = String(v);
+  }
+
+  rebuildAll();
+}
+
+function downloadJson() {
+  collectAll();
+  const json = buildJson();
+  const blob = new Blob([json], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'motd_config.json';
+  a.click();
+  toast('💾 Saved motd_config.json', 'success');
+}
+
+function buildJson() {
+  collectAll();
+  const out = {
+    fireTime: state.fireTime,
+    pools: {},
+    days: state.days,
+    ranges: state.ranges,
+    dates: state.dates
+  };
+  for (const [name, pool] of Object.entries(state.pools)) {
+    if (pool.messages.length > 0 || CORE_POOLS.includes(name)) {
+      out.pools[name] = { weight: pool.weight, messages: pool.messages };
+    }
+  }
+  return JSON.stringify(out, null, 2);
+}
+
+// ── Collect current DOM values into state ──────────────
+function collectAll() {
+  state.fireTime = document.getElementById('fireTime').value || '06:00';
+
+  for (const name of Object.keys(state.pools)) {
+    const weightEl = document.getElementById('weight-' + name);
+    if (weightEl) state.pools[name].weight = parseFloat(weightEl.value);
+
+    const msgs = [];
+    document.querySelectorAll(`[data-pool="${name}"] textarea`).forEach(ta => {
+      const v = ta.value.trim();
+      if (v) msgs.push(v);
+    });
+    state.pools[name].messages = msgs;
+  }
+
+  state.ranges = [];
+  document.querySelectorAll('.range-entry').forEach(row => {
+    const name = row.querySelector('.range-pool').value.trim();
+    const start = row.querySelector('.range-start').value.trim();
+    const end = row.querySelector('.range-end').value.trim();
+    if (name && start && end) state.ranges.push({ name, start, end });
+  });
+
+  state.dates = {};
+  document.querySelectorAll('.date-entry').forEach(row => {
+    const key = row.querySelector('.date-key').value.trim();
+    const val = row.querySelector('.date-val').value.trim();
+    if (key && val) state.dates[key] = val;
+  });
+}
+
+// ── Rebuild all UI from state ──────────────────────────
+function rebuildAll() {
+  CORE_POOLS.forEach(name => {
+    syncWeight(name);
+    renderMessages(name);
+  });
+
+  rebuildCustomPoolNav();
+  rebuildCustomPoolSections();
+
+  renderRanges();
+  renderDates();
+  updateBadges();
+}
+
+// ── Weight slider ──────────────────────────────────────
+function syncWeight(name) {
+  const slider = document.getElementById('weight-' + name);
+  const val = document.getElementById('wval-' + name);
+  if (!slider || !val) return;
+  const v = parseFloat(slider.value).toFixed(1);
+  val.textContent = v;
+  if (state.pools[name]) state.pools[name].weight = parseFloat(v);
+}
+
+function setWeightUI(name, weight) {
+  const slider = document.getElementById('weight-' + name);
+  if (slider) { slider.value = weight; syncWeight(name); }
+}
+
+// ── Messages ───────────────────────────────────────────
+function renderMessages(poolName) {
+  const container = document.getElementById('msgs-' + poolName);
+  if (!container) return;
+  const msgs = state.pools[poolName]?.messages || [];
+  container.innerHTML = '';
+
+  if (msgs.length === 0) {
+    container.innerHTML = '<div class="empty-state"><div class="icon">💬</div><p>No messages yet. Add one above.</p></div>';
+    updateCount(poolName, 0);
+    return;
+  }
+
+  msgs.forEach((msg, i) => {
+    const div = document.createElement('div');
+    div.className = 'message-item';
+    div.setAttribute('data-pool', poolName);
+    div.innerHTML = `
+      <div class="drag-handle" title="Drag to reorder">⋮⋮</div>
+      <div class="message-input-wrap">
+        <textarea maxlength="${MAX_CHARS}" oninput="updateMsgChar(this)">${escHtml(msg)}</textarea>
+        <div class="msg-char">${msg.length}/${MAX_CHARS}</div>
+      </div>
+      <button class="btn btn-danger btn-sm" onclick="removeMessage(this, '${poolName}')" title="Remove">✕</button>
+    `;
+    container.appendChild(div);
+  });
+
+  updateCount(poolName, msgs.length);
+  updateBadges();
+}
+
+function addMessage(poolName) {
+  if (!state.pools[poolName]) state.pools[poolName] = { weight: 1.0, messages: [] };
+  state.pools[poolName].messages.push('');
+  renderMessages(poolName);
+  const container = document.getElementById('msgs-' + poolName);
+  const last = container.querySelectorAll('textarea');
+  if (last.length) last[last.length - 1].focus();
+}
+
+function removeMessage(btn, poolName) {
+  const item = btn.closest('.message-item');
+  collectAll();
+  const idx = Array.from(item.parentNode.children).indexOf(item);
+  state.pools[poolName].messages.splice(idx, 1);
+  renderMessages(poolName);
+}
+
+function updateMsgChar(ta) {
+  const counter = ta.closest('.message-input-wrap').querySelector('.msg-char');
+  const len = ta.value.length;
+  counter.textContent = `${len}/${MAX_CHARS}`;
+  counter.className = 'msg-char' + (len >= MAX_CHARS ? ' over' : len >= MAX_CHARS * 0.85 ? ' warn' : '');
+}
+
+function updateCount(poolName, count) {
+  const el = document.getElementById('count-' + poolName);
+  if (el) el.textContent = count + ' message' + (count !== 1 ? 's' : '');
+}
+
+// ── Custom pools ───────────────────────────────────────
+function addCustomPool() {
+  const name = prompt('Pool name (lowercase, no spaces):');
+  if (!name) return;
+  const clean = name.toLowerCase().replace(/[^a-z0-9_]/g, '_');
+  if (state.pools[clean]) { toast('Pool "' + clean + '" already exists', 'error'); return; }
+  state.pools[clean] = { weight: 1.0, messages: [] };
+  rebuildCustomPoolNav();
+  rebuildCustomPoolSections();
+  const nav = document.querySelector(`[data-section="pool-${clean}"]`);
+  if (nav) showSection(nav);
+}
+
+function removeCustomPool(name) {
+  if (!confirm(`Remove pool "${name}" and all its messages?`)) return;
+  delete state.pools[name];
+  rebuildCustomPoolNav();
+  rebuildCustomPoolSections();
+  showSection(document.querySelector('[data-section="pool-default"]'));
+}
+
+// ── Ranges ─────────────────────────────────────────────
+function renderRanges() {
+  const list = document.getElementById('ranges-list');
+  list.innerHTML = '';
+
+  if (state.ranges.length === 0) {
+    list.innerHTML = '<div class="empty-state"><div class="icon">📅</div><p>No ranges configured.</p></div>';
+    updateBadge('ranges', 0);
+    return;
+  }
+
+  state.ranges.forEach((r, i) => {
+    const isAbsolute = r.start.length > 5 || r.end.length > 5;
+    const row = document.createElement('div');
+    row.className = 'range-row range-entry';
+    row.innerHTML = `
+      <input class="range-pool" type="text" value="${escHtml(r.name)}" placeholder="pool name" list="pool-names">
+      <input class="range-start" type="text" value="${escHtml(r.start)}" placeholder="10-15 or 2026-04-02" oninput="detectRangeType(this.closest('.range-entry'))">
+      <input class="range-end" type="text" value="${escHtml(r.end)}" placeholder="11-01 or 2026-04-17" oninput="detectRangeType(this.closest('.range-entry'))">
+      <div style="display:flex;align-items:center;height:34px">
+        <span class="tag ${isAbsolute ? 'tag-oneoff' : 'tag-recurring'}" id="range-type-${i}">${isAbsolute ? 'YYYY-MM-DD' : 'MM-DD'}</span>
+      </div>
+      <button class="btn btn-danger btn-sm" onclick="removeRange(this)">✕</button>
+    `;
+    list.appendChild(row);
+  });
+
+  updateBadge('ranges', state.ranges.length);
+  renderPoolNameDatalist();
+}
+
+function detectRangeType(row) {
+  const start = row.querySelector('.range-start').value.trim();
+  const isAbsolute = start.length > 5;
+  const tag = row.querySelector('.tag');
+  if (tag) {
+    tag.className = 'tag ' + (isAbsolute ? 'tag-oneoff' : 'tag-recurring');
+    tag.textContent = isAbsolute ? 'YYYY-MM-DD' : 'MM-DD';
+  }
+}
+
+function addRange() {
+  state.ranges.push({ name: '', start: '', end: '' });
+  renderRanges();
+  const rows = document.querySelectorAll('.range-entry');
+  if (rows.length) rows[rows.length - 1].querySelector('.range-pool').focus();
+}
+
+function removeRange(btn) {
+  const row = btn.closest('.range-entry');
+  const idx = Array.from(row.parentNode.children).indexOf(row);
+  state.ranges.splice(idx, 1);
+  renderRanges();
+}
+
+function renderPoolNameDatalist() {
+  let dl = document.getElementById('pool-names');
+  if (!dl) { dl = document.createElement('datalist'); dl.id = 'pool-names'; document.body.appendChild(dl); }
+  dl.innerHTML = Object.keys(state.pools).map(n => `<option value="${n}">`).join('');
+}
+
+// ── Specific dates ─────────────────────────────────────
+function renderDates() {
+  const list = document.getElementById('dates-list');
+  list.innerHTML = '';
+  const entries = Object.entries(state.dates);
+
+  if (entries.length === 0) {
+    list.innerHTML = '<div class="empty-state"><div class="icon">📌</div><p>No date overrides configured.</p></div>';
+    updateBadge('dates', 0);
+    return;
+  }
+
+  entries.sort(([a], [b]) => a.localeCompare(b)).forEach(([key, val]) => {
+    const row = document.createElement('div');
+    row.className = 'dates-row date-entry';
+    const len = val.length;
+    const warnClass = len >= MAX_CHARS ? 'over' : len >= MAX_CHARS * 0.85 ? 'warn' : '';
+    row.innerHTML = `
+      <input class="date-key" type="text" value="${escHtml(key)}" placeholder="01-01" maxlength="10" style="font-family:var(--mono)">
+      <div style="position:relative">
+        <input class="date-val" type="text" value="${escHtml(val)}" placeholder="Message text (max ${MAX_CHARS} chars)" maxlength="${MAX_CHARS}" oninput="updateDateChar(this)">
+        <div class="char-counter ${warnClass}" id="datechr-${key}" style="margin-top:2px">${len}/${MAX_CHARS}</div>
+      </div>
+      <button class="btn btn-danger btn-sm" onclick="removeDate(this)">✕</button>
+    `;
+    list.appendChild(row);
+  });
+
+  updateBadge('dates', entries.length);
+}
+
+function updateDateChar(input) {
+  const len = input.value.length;
+  const counter = input.closest('div').querySelector('.char-counter');
+  if (counter) {
+    counter.textContent = `${len}/${MAX_CHARS}`;
+    counter.className = 'char-counter' + (len >= MAX_CHARS ? ' over' : len >= MAX_CHARS * 0.85 ? ' warn' : '');
+  }
+}
+
+function addDate() {
+  state.dates['01-01'] = '';
+  renderDates();
+  const inputs = document.querySelectorAll('.date-key');
+  if (inputs.length) inputs[inputs.length - 1].select();
+}
+
+function removeDate(btn) {
+  const row = btn.closest('.date-entry');
+  const key = row.querySelector('.date-key').value;
+  delete state.dates[key];
+  collectAll();
+  renderDates();
+}
+
+function rebuildCustomPoolNav() {
+  const nav = document.getElementById('custom-pool-nav');
+  nav.innerHTML = '';
+  for (const name of Object.keys(state.pools)) {
+    if (CORE_POOLS.includes(name)) continue;
+    const div = document.createElement('div');
+    div.className = 'nav-item';
+    div.dataset.section = 'pool-' + name;
+    div.onclick = function() { showSection(this); };
+    div.innerHTML = `<span class="icon">🎨</span> ${name}<span class="nav-badge" id="badge-${name}">${state.pools[name].messages.length}</span>`;
+    nav.appendChild(div);
+  }
+}
+
+function rebuildCustomPoolSections() {
+  const container = document.getElementById('custom-pool-sections');
+  container.innerHTML = '';
+  for (const name of Object.keys(state.pools)) {
+    if (CORE_POOLS.includes(name)) continue;
+    const sec = document.createElement('div');
+    sec.className = 'section';
+    sec.id = 'section-pool-' + name;
+    sec.innerHTML = `
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+        <div class="page-title">${name} Pool</div>
+        <button class="btn btn-danger btn-sm" onclick="removeCustomPool('${name}')">Remove pool</button>
+      </div>
+      <div class="page-subtitle">Custom themed pool. Reference it from a Date Range by this exact name: <code>${name}</code></div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">⚖️ Weight</div></div>
+        <div class="card-body">
+          <div class="weight-row">
+            <input type="range" min="0" max="5" step="0.1" value="${state.pools[name].weight}" id="weight-${name}" oninput="syncWeight('${name}')">
+            <div class="weight-val" id="wval-${name}">${state.pools[name].weight.toFixed(1)}</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">💬 Messages <span id="count-${name}" style="color:var(--text-dim);font-weight:400;margin-left:4px;font-size:12px"></span></div>
+          <button class="btn btn-add btn-sm" onclick="addMessage('${name}')">+ Add message</button>
+        </div>
+        <div class="card-body" id="msgs-${name}"></div>
+      </div>
+    `;
+    container.appendChild(sec);
+    renderMessages(name);
+    setWeightUI(name, state.pools[name].weight);
+  }
+}
+
+// ── Badges ─────────────────────────────────────────────
+function updateBadges() {
+  CORE_POOLS.forEach(name => {
+    updateBadge(name, state.pools[name]?.messages.length || 0);
+  });
+  for (const name of Object.keys(state.pools)) {
+    if (!CORE_POOLS.includes(name)) {
+      updateBadge(name, state.pools[name].messages.length);
+    }
+  }
+  updateBadge('ranges', state.ranges.length);
+  updateBadge('dates', Object.keys(state.dates).length);
+}
+
+function updateBadge(name, count) {
+  const el = document.getElementById('badge-' + name);
+  if (el) el.textContent = count;
+}
+
+// ── JSON preview ───────────────────────────────────────
+function refreshPreview() {
+  collectAll();
+  document.getElementById('json-preview').textContent = buildJson();
+}
+
+// ── Toast ──────────────────────────────────────────────
+let toastTimeout;
+function toast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'show ' + type;
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => { t.className = ''; }, 3000);
+}
+
+// ── Utilities ──────────────────────────────────────────
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Init ───────────────────────────────────────────────
+CORE_POOLS.forEach(name => setWeightUI(name, 1.0));
+rebuildAll();
+</script>
+</body>
+</html>

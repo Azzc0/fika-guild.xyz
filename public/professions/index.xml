@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fika – Yrkesdatabas</title>
-    <link>http://localhost:33715/professions/</link>
+    <link>http://localhost:1313/professions/</link>
     <description>Recent content in Yrkesdatabas on Fika</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>sv</language>
     
-	  <atom:link href="http://localhost:33715/professions/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="http://localhost:1313/professions/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -16,10 +16,10 @@
     
     <item>
       <title>Alchemy</title>
-      <link>http://localhost:33715/professions/alchemy/</link>
+      <link>http://localhost:1313/professions/alchemy/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/professions/alchemy/</guid>
+      <guid>http://localhost:1313/professions/alchemy/</guid>
       <description>
         
         
@@ -29,10 +29,10 @@
     
     <item>
       <title>Azzco</title>
-      <link>http://localhost:33715/professions/azzco/</link>
+      <link>http://localhost:1313/professions/azzco/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/professions/azzco/</guid>
+      <guid>http://localhost:1313/professions/azzco/</guid>
       <description>
         
         
@@ -42,10 +42,10 @@
     
     <item>
       <title>Blacksmithing</title>
-      <link>http://localhost:33715/professions/blacksmithing/</link>
+      <link>http://localhost:1313/professions/blacksmithing/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/professions/blacksmithing/</guid>
+      <guid>http://localhost:1313/professions/blacksmithing/</guid>
       <description>
         
         
@@ -55,10 +55,10 @@
     
     <item>
       <title>Coazz</title>
-      <link>http://localhost:33715/professions/coazz/</link>
+      <link>http://localhost:1313/professions/coazz/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/professions/coazz/</guid>
+      <guid>http://localhost:1313/professions/coazz/</guid>
       <description>
         
         
@@ -68,10 +68,10 @@
     
     <item>
       <title>Cooking</title>
-      <link>http://localhost:33715/professions/cooking/</link>
+      <link>http://localhost:1313/professions/cooking/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/professions/cooking/</guid>
+      <guid>http://localhost:1313/professions/cooking/</guid>
       <description>
         
         
@@ -81,10 +81,10 @@
     
     <item>
       <title>Cozzalisa</title>
-      <link>http://localhost:33715/professions/cozzalisa/</link>
+      <link>http://localhost:1313/professions/cozzalisa/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/professions/cozzalisa/</guid>
+      <guid>http://localhost:1313/professions/cozzalisa/</guid>
       <description>
         
         
@@ -94,10 +94,23 @@
     
     <item>
       <title>Enchanting</title>
-      <link>http://localhost:33715/professions/enchanting/</link>
+      <link>http://localhost:1313/professions/enchanting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/professions/enchanting/</guid>
+      <guid>http://localhost:1313/professions/enchanting/</guid>
+      <description>
+        
+        
+        
+      </description>
+    </item>
+    
+    <item>
+      <title>Engineering</title>
+      <link>http://localhost:1313/professions/engineering/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/professions/engineering/</guid>
       <description>
         
         
@@ -107,10 +120,10 @@
     
     <item>
       <title>First Aid</title>
-      <link>http://localhost:33715/professions/first-aid/</link>
+      <link>http://localhost:1313/professions/first-aid/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/professions/first-aid/</guid>
+      <guid>http://localhost:1313/professions/first-aid/</guid>
       <description>
         
         
@@ -120,10 +133,10 @@
     
     <item>
       <title>Inscription</title>
-      <link>http://localhost:33715/professions/inscription/</link>
+      <link>http://localhost:1313/professions/inscription/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/professions/inscription/</guid>
+      <guid>http://localhost:1313/professions/inscription/</guid>
       <description>
         
         
@@ -133,10 +146,10 @@
     
     <item>
       <title>Jewelcrafting</title>
-      <link>http://localhost:33715/professions/jewelcrafting/</link>
+      <link>http://localhost:1313/professions/jewelcrafting/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/professions/jewelcrafting/</guid>
+      <guid>http://localhost:1313/professions/jewelcrafting/</guid>
       <description>
         
         
@@ -146,10 +159,10 @@
     
     <item>
       <title>Leatherworking</title>
-      <link>http://localhost:33715/professions/leatherworking/</link>
+      <link>http://localhost:1313/professions/leatherworking/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/professions/leatherworking/</guid>
+      <guid>http://localhost:1313/professions/leatherworking/</guid>
       <description>
         
         
@@ -159,10 +172,10 @@
     
     <item>
       <title>Oczza</title>
-      <link>http://localhost:33715/professions/oczza/</link>
+      <link>http://localhost:1313/professions/oczza/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/professions/oczza/</guid>
+      <guid>http://localhost:1313/professions/oczza/</guid>
       <description>
         
         
@@ -172,10 +185,10 @@
     
     <item>
       <title>Ronal</title>
-      <link>http://localhost:33715/professions/ronal/</link>
+      <link>http://localhost:1313/professions/ronal/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/professions/ronal/</guid>
+      <guid>http://localhost:1313/professions/ronal/</guid>
       <description>
         
         
@@ -185,10 +198,10 @@
     
     <item>
       <title>Tailoring</title>
-      <link>http://localhost:33715/professions/tailoring/</link>
+      <link>http://localhost:1313/professions/tailoring/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/professions/tailoring/</guid>
+      <guid>http://localhost:1313/professions/tailoring/</guid>
       <description>
         
         
@@ -198,10 +211,10 @@
     
     <item>
       <title>Zcoza</title>
-      <link>http://localhost:33715/professions/zcoza/</link>
+      <link>http://localhost:1313/professions/zcoza/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/professions/zcoza/</guid>
+      <guid>http://localhost:1313/professions/zcoza/</guid>
       <description>
         
         
@@ -211,10 +224,10 @@
     
     <item>
       <title>Zocaz</title>
-      <link>http://localhost:33715/professions/zocaz/</link>
+      <link>http://localhost:1313/professions/zocaz/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/professions/zocaz/</guid>
+      <guid>http://localhost:1313/professions/zocaz/</guid>
       <description>
         
         

@@ -1,0 +1,150 @@
+<guild-online-widget></guild-online-widget>
+
+<script>
+if (!customElements.get('guild-online-widget')) {
+  class GuildOnlineWidget extends HTMLElement {
+    constructor() {
+      super();
+      this.rosterUrl = 'https://www.azzco.xyz/data/roster.json';
+      this.translationsUrl = '/utils/guild-translations.json';
+      this.classEmojiIds = { 1: '579532030153588739', 2: '579532029906124840', 3: '579532029880827924', 4: '579532030086217748', 5: '579532029901799437', 6: '599012538935410701', 7: '579532030056857600', 8: '579532030161977355', 9: '579532029851336716', 11: '579532029675438081' };
+    }
+
+    connectedCallback() {
+      this.innerHTML = `
+        <div class="online-widget-card" style="border: 1px solid var(--border-color, #2e3238); background: var(--bg-color, rgba(255,255,255,0.02)); padding: 1rem; border-radius: 0.5rem; max-width: 320px; width: 100%; box-sizing: border-box;">
+          <h4 style="margin: 0 0 0.25rem 0; font-size: 1rem; font-weight: 600;">Online just nu</h4>
+          <div class="widget-timestamp" style="font-size: 0.75rem; color: #f59e0b; font-style: italic; margin-bottom: 0.75rem; display: none;"></div>
+          <ul class="widget-list" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; max-height: 300px; overflow-y: auto;"></ul>
+        </div>
+        <style>
+            .online-widget-card {
+                border: 1px solid var(--border-color, #2e3238);
+                background: var(--bg-color, rgba(255,255,255,0.02));
+                padding: 0.85rem 1rem;
+                border-radius: 0.5rem;
+                max-width: 280px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .online-widget-card .online-item {
+                display: flex;
+                align-items: center;
+                gap: 0.45rem;
+                padding: 0.2rem 0;
+                width: 100%;
+            }
+            .online-widget-card .online-icon {
+                width: 14px;
+                height: 14px;
+                object-fit: contain;
+                flex-shrink: 0;
+            }
+            .online-widget-card .name-cluster {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.35rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                min-width: 0;
+                flex: 1; /* Allows the name area to grow organically and push level to the right */
+            }
+            .online-widget-card .online-name {
+                font-weight: 600;
+                text-decoration: none;
+                white-space: nowrap;
+            }
+            .online-widget-card .online-name:hover {
+                text-decoration: underline;
+            }
+            .online-widget-card .online-main {
+                color: #71717a;
+                font-size: 0.8rem;
+                white-space: nowrap;
+            }
+            .online-widget-card .online-level {
+                font-size: 0.85rem;
+                color: #71717a;
+                font-variant-numeric: tabular-nums;
+                flex-shrink: 0;
+                margin-left: auto; /* Locks the level text explicitly to the right margin border */
+            }
+            
+            /* Class Colors */
+            .online-widget-card .class-1 { color: #C79C6E; } .online-widget-card .class-2 { color: #F58CBA; }
+            .online-widget-card .class-3 { color: #ABD473; } .online-widget-card .class-4 { color: #FFF569; }
+            .online-widget-card .class-5 { color: #FFFFFF; } .online-widget-card .class-6 { color: #C41F3B; }
+            .online-widget-card .class-7 { color: #0070DE; } .online-widget-card .class-8 { color: #69CCF0; }
+            .online-widget-card .class-9 { color: #9482C9; } .online-widget-card .class-11 { color: #FF7D0A; }
+        </style>
+      `;
+      this.runCycle();
+    }
+
+    async runCycle() {
+      try {
+        const transRes = await fetch(this.translationsUrl).catch(() => null);
+        const translations = transRes && transRes.ok ? await transRes.json() : {};
+        const rankMap = translations.ranks || {};
+
+        const rosterRes = await fetch(this.rosterUrl, { cache: 'no-store' });
+        if (!rosterRes.ok) throw new Error();
+
+        const tsEl = this.querySelector('.widget-timestamp');
+        const lastModified = rosterRes.headers.get("Last-Modified");
+
+        if (lastModified && tsEl) {
+          const fileTime = new Date(lastModified).getTime();
+          const timeDifferenceMs = Date.now() - fileTime;
+
+          // Only display time text if file is older than 2 minutes (120,000 ms)
+          if (timeDifferenceMs > 120000) {
+            tsEl.textContent = `Fördröjd data: Sparad ${lastModified}`;
+            tsEl.style.display = 'block';
+          } else {
+            tsEl.style.display = 'none'; // Keep hidden during normal rapid updates
+          }
+        }
+
+        const data = await rosterRes.json();
+        const onlineMembers = (data.members || []).filter(m => m && m.isOnline && m.name !== "Kyparen");
+        const listEl = this.querySelector('.widget-list');
+
+        if (!onlineMembers.length) {
+          listEl.innerHTML = '<li style="font-size: 0.85rem; opacity: 0.6;">Ingen online just nu.</li>';
+          return;
+        }
+
+        onlineMembers.sort((a, b) => Number(a.rank) - Number(b.rank) || Number(b.level) - Number(a.level) || String(a.name).localeCompare(b.name, 'sv'));
+
+        listEl.innerHTML = onlineMembers.map(m => {
+        const emojiId = this.classEmojiIds[m.classId];
+        const icon = emojiId ? `<img class="online-icon" src="https://cdn.discordapp.com/emojis/${emojiId}.png">` : '';
+        const suffix = /\balt\b/i.test(rankMap[m.rank]) && m.officerNote ? `<span class="online-main">(${m.officerNote.split(/\s+/)[0]})</span>` : '';
+        
+        return `
+            <li class="online-item">
+            ${icon}
+            <span class="name-cluster">
+                <a class="online-name class-${m.classId}" href="https://chromiecraft.com/en/armory/?character/ChromieCraft/${encodeURIComponent(m.name)}" target="_blank" rel="noopener">${m.name}</a>
+                ${suffix}
+            </span>
+            <span class="online-level">${m.level}</span>
+            </li>`;
+        }).join('');
+
+      } catch (e) {
+        const tsEl = this.querySelector('.widget-timestamp');
+        if (tsEl) {
+          tsEl.textContent = 'Kunde inte hämta data.';
+          tsEl.style.display = 'block';
+        }
+      } finally {
+        setTimeout(() => this.runCycle(), 45000 + Math.random() * 10000);
+      }
+    }
+  }
+  customElements.define('guild-online-widget', GuildOnlineWidget);
+}
+</script>

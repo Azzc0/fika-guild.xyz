@@ -1,13 +1,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fika – </title>
-    <link>http://localhost:33715/artiklar/</link>
+    <link>http://localhost:1313/artiklar/</link>
     <description>Recent content on Fika</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>sv</language>
     <lastBuildDate>Wed, 03 Jun 2026 00:00:00 +0000</lastBuildDate>
     
-	  <atom:link href="http://localhost:33715/artiklar/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="http://localhost:1313/artiklar/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -17,10 +17,10 @@
     
     <item>
       <title>Addons</title>
-      <link>http://localhost:33715/artiklar/addons/addons/</link>
+      <link>http://localhost:1313/artiklar/addons/addons/</link>
       <pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/artiklar/addons/addons/</guid>
+      <guid>http://localhost:1313/artiklar/addons/addons/</guid>
       <description>
         
         
@@ -64,16 +64,22 @@
 &lt;li&gt;&lt;a
     href=&#34;https://github.com/noname08662/ElvUI_Extras&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ElvUI-Extras (Awesomewotlk)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h1&gt;Azzco använder&lt;/h1&gt;&lt;p&gt;&lt;a
+    href=&#34;https://github.com/noname08662/ElvUI_Extras&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/noname08662/ElvUI_Extras&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a
+    href=&#34;https://github.com/Crumdidlyumshis/ElvUI&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/Crumdidlyumshis/ElvUI&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a
+    href=&#34;https://github.com/noname08662/awesome_wotlk&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/noname08662/awesome_wotlk&lt;/a&gt;&lt;/p&gt;
 
       </description>
     </item>
     
     <item>
       <title>Ny start!</title>
-      <link>http://localhost:33715/artiklar/nyheter/nystart/</link>
+      <link>http://localhost:1313/artiklar/nyheter/nystart/</link>
       <pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/artiklar/nyheter/nystart/</guid>
+      <guid>http://localhost:1313/artiklar/nyheter/nystart/</guid>
       <description>
         
         
@@ -99,10 +105,10 @@
     
     <item>
       <title>Warrior macron</title>
-      <link>http://localhost:33715/artiklar/macros/warrior-macro/</link>
+      <link>http://localhost:1313/artiklar/macros/warrior-macro/</link>
       <pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/artiklar/macros/warrior-macro/</guid>
+      <guid>http://localhost:1313/artiklar/macros/warrior-macro/</guid>
       <description>
         
         
@@ -185,10 +191,10 @@
     
     <item>
       <title>Profession Audit: Azzco</title>
-      <link>http://localhost:33715/artiklar/addons/test/</link>
+      <link>http://localhost:1313/artiklar/addons/test/</link>
       <pubDate>Tue, 02 Jun 2026 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/artiklar/addons/test/</guid>
+      <guid>http://localhost:1313/artiklar/addons/test/</guid>
       <description>
         
         
@@ -1540,10 +1546,10 @@
     
     <item>
       <title></title>
-      <link>http://localhost:33715/artiklar/addons/hantering/</link>
+      <link>http://localhost:1313/artiklar/addons/hantering/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/artiklar/addons/hantering/</guid>
+      <guid>http://localhost:1313/artiklar/addons/hantering/</guid>
       <description>
         
         
@@ -1554,15 +1560,14 @@
     
     <item>
       <title>Bakom kulisserna: Vår dynamiska hantverksdatabas</title>
-      <link>http://localhost:33715/artiklar/nyheter/tradeskills/</link>
+      <link>http://localhost:1313/artiklar/nyheter/tradeskills/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/artiklar/nyheter/tradeskills/</guid>
+      <guid>http://localhost:1313/artiklar/nyheter/tradeskills/</guid>
       <description>
         
         
-        &lt;h2&gt;t: true&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;t-true&#34;&gt;&lt;/span&gt;
-    &lt;a href=&#34;#t-true&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;För att göra det så enkelt som möjligt att koordinera har vi byggt en helt skräddarsydd hantverksdatabas. Istället för att fokusera på enskilda individers personliga profiler, fokuserar det här verktyget helt på &lt;strong&gt;gillets gemensamma kunskap&lt;/strong&gt;.&lt;/p&gt;
+        &lt;p&gt;För att göra det så enkelt som möjligt att koordinera har vi byggt en helt skräddarsydd hantverksdatabas. Istället för att fokusera på enskilda individers personliga profiler, fokuserar det här verktyget helt på &lt;strong&gt;gillets gemensamma kunskap&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Målet är enkelt: Att snabbt besvara frågan &lt;em&gt;&amp;ldquo;Kan gillet tillverka det här föremålet just nu, och vem ska jag skicka materialet till?&amp;rdquo;&lt;/em&gt;&lt;/p&gt;
 &lt;h2&gt;Vad databasen gör&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;vad-databasen-gör&#34;&gt;&lt;/span&gt;
     &lt;a href=&#34;#vad-databasen-g%c3%b6r&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;När du besöker &lt;code&gt;/professions/&lt;/code&gt; på webbplatsen möts du inte av en statisk lista över spelare, utan av en levande hantverksmatris över hela gillet.&lt;/p&gt;
@@ -1585,17 +1590,47 @@
 &lt;li&gt;&lt;strong&gt;Base64 till Binär-dekstruktion:&lt;/strong&gt; Hugo dekonstruerar Base64-strängen tecken för tecken och omvandlar den till sekventiella binära bitar (0 och 1). Dessa matchas mot vår kompletta master-lista över spelets alla tillgängliga recept (&lt;code&gt;skill_map.json&lt;/code&gt;). Om bit nummer 42 är en &lt;code&gt;1:a&lt;/code&gt;, betyder det att karaktären kan det specifika hantverket.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Omvänd indexering (The Matrix Twist):&lt;/strong&gt; Istället för att tilldela recepten till karaktärens egen sida, vänder vi på strukturen. Receptet blir huvudnoden, och karaktären sorteras in under det receptet i en global gällande matris.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Genom att lägga till ett automatiserat tidsschema i vår GitHub-pipeline byggs hela webbplatsen om automatiskt vid varje timslag. Hugo drar då ner den färska JSON-filen från vår MyCloud-server, utvärderar bitmaskerna på nytt och publicerar de uppdaterade hantverkslistorn&lt;/p&gt;
+&lt;p&gt;Genom att lägga till ett automatiserat tidsschema i vår GitHub-pipeline byggs hela webbplatsen om automatiskt vid varje timslag. Hugo drar då ner den färska JSON-filen från vår MyCloud-server, utvärderar bitmaskerna på nytt och publicerar de uppdaterade hantverkslistorna helt live!&lt;/p&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Förbättringar hemsidan</title>
+      <link>http://localhost:1313/artiklar/nyheter/tankar/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/artiklar/nyheter/tankar/</guid>
+      <description>
+        
+        
+        &lt;p&gt;Lite tankr och idéer att implementera på hemsidan&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Roster&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Vem är online&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Professionledger
+Behöver fortfarande en hel del kärlek, lite buggar och formattering kvarstår.
+Borttag av personer som lämnat guilden är inte på plats ännu.&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Guildbank översikt
+Kräver en hel del eftertanke för att inte spamma allt för mycket information samtidigt, enchants på gear lär aldrig synas
+Delvis manuell hantering av informationstext och ikoner för flikarna. Format som fungerar på mobil behöver tänkas över.&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Senaste achievements på förstasidan
+Kortare historik över achievements som nyligen erövrats av guildmedlemmar&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Rankmatris
+Vem som har behörigheter till att göra vad, manuell uppdatering&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; EP/GP integration?
+Mycket tankar om implementering av EP/GP behöver mogna om det ens är det vi vill köra på.&lt;/li&gt;
+&lt;/ul&gt;
 
       </description>
     </item>
     
     <item>
       <title>Guider</title>
-      <link>http://localhost:33715/artiklar/guider/professions/</link>
+      <link>http://localhost:1313/artiklar/guider/professions/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/artiklar/guider/professions/</guid>
+      <guid>http://localhost:1313/artiklar/guider/professions/</guid>
       <description>
         
         
@@ -1609,10 +1644,10 @@ Jewelcrafting och enchanting (än så länge 170 ish) var okej men alchemy är i
     
     <item>
       <title>Klanens Addons och Förberedelser</title>
-      <link>http://localhost:33715/artiklar/addons/ui-essentials/</link>
+      <link>http://localhost:1313/artiklar/addons/ui-essentials/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:33715/artiklar/addons/ui-essentials/</guid>
+      <guid>http://localhost:1313/artiklar/addons/ui-essentials/</guid>
       <description>
         
         

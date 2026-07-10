@@ -1,0 +1,297 @@
+<script id="gb-notes-data" type="application/json">
+{
+  {{- $availableTabs := seq 1 6 -}}
+  {{- $first := true -}}
+  {{- range $id := $availableTabs -}}
+    {{- $path := printf "data/guildbank-tab%d.txt" $id -}}
+    {{- with resources.Get $path -}}
+      {{- if not $first -}},{{- end -}}
+      "{{ $id }}": {{ .Content | jsonify }}
+      {{- $first = false -}}
+    {{- end -}}
+  {{- end -}}
+}
+</script>
+
+<div id="guildbank-app" style="font-family: sans-serif; background: #111; border: 1px solid #333; border-radius: 6px; padding: 1rem; color: #fff; max-width: 760px; margin: 0 auto; box-sizing: border-box;">
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #222; padding-bottom: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+        <h3 id="gb-main-title" style="margin: 0; color: #ffd100;">Gillesbank</h3>
+        <div id="gb-gold-balance" style="font-weight: bold; font-size: 0.95rem; display: flex; gap: 0.5rem; align-items: center;">
+            Laddar guld...
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+        <div id="gb-tabs-nav" style="display: flex; flex-wrap: wrap; gap: 0.5rem;"></div>
+        
+        <div style="position: relative; flex: 1; max-width: 250px; min-width: 160px;">
+            <input type="text" id="gb-search-input" placeholder="Sök föremål..." 
+                   style="width: 100%; background: #1a1a1a; border: 1px solid #444; color: #fff; padding: 0.4rem 0.75rem; font-size: 0.85rem; border-radius: 4px; box-sizing: border-box; outline: none; transition: border-color 0.2s;">
+        </div>
+    </div>
+
+    <div id="gb-grid-view" style="background: #181818; border: 1px solid #2a2a2a; border-radius: 4px; padding: 6px; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch;">
+        <div id="gb-slots-grid" style="display: grid; grid-template-rows: repeat(7, 42px); grid-template-columns: repeat(14, 44px); grid-auto-flow: column; gap: 6px; background: #0c0c0c; padding: 6px; border: 2px solid #000; border-radius: 4px; width: max-content; margin: 0 auto;"></div>
+    </div>
+    
+    <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem;">
+        <div id="gb-tab-notes-panel" style="font-size: 0.9rem; color: #ddd; line-height: 1.5; background: #151515; padding: 0.75rem 1rem; border-radius: 4px; border: 1px solid #222; display: none;"></div>
+        <div id="gb-scan-time" style="font-size: 0.75rem; color: #555; text-align: right;"></div>
+    </div>
+</div>
+
+<style>
+.gb-tab-btn {
+    display: flex; align-items: center; justify-content: center; background: #1e1e1e; border: 1px solid #333; 
+    padding: 0; border-radius: 4px; cursor: pointer; transition: all 0.2s; user-select: none; width: 42px; height: 42px;
+    box-sizing: border-box;
+}
+.gb-tab-btn:hover { background: #2a2a2a; border-color: #555; }
+.gb-tab-btn.active { background: #ffd100; border-color: #fff; box-shadow: 0 0 6px rgba(255,209,0,0.4); }
+
+.gb-item-slot {
+    width: 42px; height: 42px; background: #151515; border: 1px solid #2d2d2d; box-shadow: inset 0 0 4px #000;
+    border-radius: 4px; position: relative; display: flex; align-items: center; justify-content: center;
+    box-sizing: border-box; transition: opacity 0.15s ease;
+}
+.gb-item-slot a { display: flex; width: 40px; height: 40px; align-items: center; justify-content: center; position: relative; box-sizing: border-box; }
+.gb-item-slot img { width: 40px; height: 40px; border-radius: 3px; display: block; object-fit: cover; margin: 0 auto; box-sizing: border-box; }
+
+/* Inactive dimming filter rule context states */
+.gb-item-slot.dimmed { opacity: 0.15; }
+
+.gb-item-count {
+    position: absolute; bottom: 1px; right: 2px; color: #fff; font-size: 0.75rem; font-weight: bold;
+    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 0 1px 0 #000, 0 -1px 0 #000;
+    pointer-events: none; z-index: 10;
+}
+#gb-search-input:focus { border-color: #ffd100; }
+</style>
+
+<script type="text/javascript">
+(function() {
+    const CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const notesEl = document.getElementById('gb-notes-data');
+    const tabNotesConfig = notesEl ? JSON.parse(notesEl.textContent) : {};
+    
+    let currentActiveTabObj = null;
+    let itemNamesCache = {}; // Global key-map link registry directory for instant filter lookups
+
+    function fromBase36(str) {
+        let num = 0;
+        for (let i = 0; i < str.length; i++) {
+            num = (num * 36) + CHARS.indexOf(str[i]);
+        }
+        return num;
+    }
+
+    function formatGold(totalCopper) {
+        const gold = Math.floor(totalCopper / 10000);
+        const silver = Math.floor((totalCopper % 10000) / 100);
+        const copper = totalCopper % 100;
+        return `<span style="color:#e6cc80;">${gold}g</span> <span style="color:#aad3e6;">${silver}s</span> <span style="color:#c79c6e;">${copper}c</span>`;
+    }
+
+    // Intercept AoWoW translations to fetch real item string values for searching
+    window.$WowheadPower = window.$WowheadPower || {};
+    let realRegisterFunc = window.$WowheadPower.registerItem;
+
+    Object.defineProperty(window.$WowheadPower, 'registerItem', {
+        get() {
+            return function (id, type, data) {
+                const targets = document.querySelectorAll(`.gb-slot-anchor[data-item-id="${id}"] img`);
+                if (targets.length && data.icon) {
+                    targets.forEach(img => {
+                        img.src = `https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/${data.icon.toLowerCase()}.jpg`;
+                    });
+                }
+                
+                // Cache item names safely into our dictionary
+                if (data.name_enus) {
+                    itemNamesCache[id] = data.name_enus.toLowerCase();
+                }
+
+                if (typeof realRegisterFunc === 'function') {
+                    realRegisterFunc.call(this, id, type, data);
+                }
+                
+                // Trigger an on-the-fly execution loop to handle searching if input is currently filled
+                evaluateSearchFilter();
+            };
+        },
+        set(newFunc) { realRegisterFunc = newFunc; },
+        configurable: true
+    });
+
+    fetch("https://azzco.xyz/data/guildbank.json?_t=" + Date.now())
+        .then(res => res.json())
+        .then(rawData => {
+            const parsedData = { goldBalance: 0, tabs: {} };
+
+            for (const [key, value] of Object.entries(rawData)) {
+                if (key === "0") {
+                    parsedData.goldBalance = parseInt(value, 10) || 0;
+                    continue;
+                }
+
+                const numericKey = parseInt(key, 10);
+                const tabId = Math.floor(numericKey / 10);
+                const isMetadata = numericKey % 10 === 0;
+
+                if (!parsedData.tabs[tabId]) {
+                    parsedData.tabs[tabId] = { id: tabId, name: "", icon: "", scanTime: 0, items: {} };
+                }
+
+                if (isMetadata) {
+                    const [name, icon, timestamp] = value.split(':');
+                    parsedData.tabs[tabId].name = name;
+                    parsedData.tabs[tabId].icon = icon ? icon.toLowerCase() : "inv_misc_questionmark";
+                    parsedData.tabs[tabId].scanTime = parseInt(timestamp, 10) * 1000;
+                } else {
+                    if (value === "EMPTY") continue;
+                    
+                    for (let i = 0; i < value.length; i += 8) {
+                        const chunk = value.slice(i, i + 8);
+                        if (chunk.length < 8) continue;
+
+                        const slot = fromBase36(chunk.slice(0, 2));
+                        const itemId = fromBase36(chunk.slice(2, 6));
+                        const count = fromBase36(chunk.slice(6, 8));
+
+                        if (itemId > 0) {
+                            parsedData.tabs[tabId].items[slot] = { itemId, count };
+                        }
+                    }
+                }
+            }
+
+            document.getElementById('gb-gold-balance').innerHTML = formatGold(parsedData.goldBalance);
+
+            const tabsNav = document.getElementById('gb-tabs-nav');
+            const validTabIds = Object.keys(parsedData.tabs).sort((a, b) => a - b);
+
+            validTabIds.forEach((tabId, idx) => {
+                const tab = parsedData.tabs[tabId];
+                const btn = document.createElement('button');
+                btn.className = `gb-tab-btn ${idx === 0 ? 'active' : ''}`;
+                btn.title = tab.name;
+                btn.innerHTML = `
+                    <img src="https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/${tab.icon}.jpg" 
+                         style="width:28px; height:28px; border-radius:3px;"
+                         onerror="this.src='https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg';">
+                `;
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.gb-tab-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderGrid(tab);
+                });
+                tabsNav.appendChild(btn);
+            });
+
+            if (validTabIds.length > 0) {
+                renderGrid(parsedData.tabs[validTabIds[0]]);
+            }
+
+            function renderGrid(tab) {
+                currentActiveTabObj = tab;
+                document.getElementById('gb-main-title').innerText = `Gillesbank - ${tab.name}`;
+
+                // Parse literal \n segments into authentic paragraph break tags
+                const notesPanel = document.getElementById('gb-tab-notes-panel');
+                let infoText = tabNotesConfig[tab.id];
+
+                if (infoText) {
+                    // 1. Clean the string: remove surrounding quotes, then handle newlines
+                    infoText = infoText.replace(/^"|"$/g, '').replace(/\\n/g, '\n').trim();
+                    
+                    // 2. Inject the label and the formatted content
+                    notesPanel.innerHTML = `
+                        <div style="font-weight: bold; color: #ffd100; margin-bottom: 0.25rem;">Info</div>
+                        <div>${infoText.replace(/\n/g, '<br>')}</div>
+                    `;
+                    notesPanel.style.display = 'block';
+                } else {
+                    notesPanel.style.display = 'none';
+                }
+
+                const gridContainer = document.getElementById('gb-slots-grid');
+                gridContainer.innerHTML = '';
+
+                for (let slotIdx = 1; slotIdx <= 98; slotIdx++) {
+                    const slotWrapper = document.createElement('div');
+                    slotWrapper.className = 'gb-item-slot';
+                    slotWrapper.setAttribute('data-slot-id', slotIdx);
+
+                    const item = tab.items[slotIdx];
+                    if (item) {
+                        slotWrapper.setAttribute('data-item-ref', item.itemId);
+                        slotWrapper.innerHTML = `
+                            <a href="https://wowgaming.altervista.org/aowow/?item=${item.itemId}" 
+                               class="gb-slot-anchor"
+                               data-item-id="${item.itemId}"
+                               target="_blank">
+                                <img src="https://wowgaming.altervista.org/aowow/static/images/wow/icons/large/inv_misc_questionmark.jpg">
+                                ${item.count > 1 ? `<span class="gb-item-count">${item.count}</span>` : ''}
+                            </a>
+                        `;
+                    }
+                    gridContainer.appendChild(slotWrapper);
+                }
+
+                const dateOpts = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+                const localizedTime = new Date(tab.scanTime).toLocaleDateString('sv-SE', dateOpts);
+                document.getElementById('gb-scan-time').innerText = `Senast skannad: ${localizedTime}`;
+
+                tab.items && Object.values(tab.items).forEach(item => {
+                    const script = document.createElement('script');
+                    script.src = `https://wowgaming.altervista.org/aowow/?item=${item.itemId}&power`;
+                    script.async = true;
+                    document.head.appendChild(script);
+                });
+
+                if (window.$WowheadPower && typeof window.$WowheadPower.refreshLinks === 'function') {
+                    window.$WowheadPower.refreshLinks();
+                }
+                
+                evaluateSearchFilter();
+                if (typeof WH !== 'undefined' && typeof WH.power !== 'undefined') {
+                    WH.power.refreshLinks();
+                } else if (window.$WowheadPower && typeof window.$WowheadPower.refreshLinks === 'function') {
+                    window.$WowheadPower.refreshLinks();
+                }
+            }
+        })
+        .catch(err => {
+            console.error("Failed to parse guildbank content stream:", err);
+            document.getElementById('gb-gold-balance').innerText = "Kunde inte ansluta.";
+        });
+
+    // Real-Time Sorting Execution Evaluation Framework Engine Handler
+    function evaluateSearchFilter() {
+        const query = document.getElementById('gb-search-input').value.trim().toLowerCase();
+        const slots = document.querySelectorAll('.gb-item-slot');
+        
+        slots.forEach(slot => {
+            const itemId = slot.getAttribute('data-item-ref');
+            if (!query) {
+                slot.classList.remove('dimmed');
+                return;
+            }
+            if (!itemId) {
+                slot.classList.add('dimmed');
+                return;
+            }
+            
+            const cachedName = itemNamesCache[itemId];
+            if (cachedName && cachedName.includes(query)) {
+                slot.classList.remove('dimmed');
+            } else {
+                slot.classList.add('dimmed');
+            }
+        });
+    }
+
+    document.getElementById('gb-search-input').addEventListener('input', evaluateSearchFilter);
+})();
+</script>

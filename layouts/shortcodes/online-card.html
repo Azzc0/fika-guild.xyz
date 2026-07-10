@@ -1,0 +1,75 @@
+{{- $link := .Get "link" | default "/medlemslista" -}}
+{{- $title := .Get "title" | default "Medlemslista" -}}
+{{- $subtitle := .Get "subtitle" | default "Se alla medlemmar i guilden grupperade med sina alts." -}}
+{{- $randId := delimit (shuffle (seq 1 9)) "" -}}
+
+<a href="{{ $link }}" class="hx:card hx:group hx:block hx:relative hx:rounded-xl hx:border hx:border-gray-200 hx:bg-gray-100 hx:text-current hx:no-underline hx:transition-all hx:duration-200 hx:hover:border-gray-300 hx:hover:bg-gray-100/50 hx:dark:border-neutral-800 hx:dark:bg-neutral-900 hx:dark:hover:border-neutral-700 hx:dark:hover:bg-neutral-800/50" style="display: flex; flex-direction: column; overflow: hidden; height: 100%;">
+  
+  <div class="hx:relative hx:w-full hx:overflow-hidden hx:dark:bg-neutral-950/40" style="height: 180px; background: rgba(0,0,0,0.06); border-bottom: 1px solid rgba(128,128,128,0.15);">
+    <div id="card-widget-{{ $randId }}" style="height: 100%; width: 100%;"></div>
+  </div>
+
+  <div class="hx:p-4" style="display: flex; flex-direction: column; flex-grow: 1; justify-content: flex-start; padding: 1.25rem;">
+    <h3 class="hx:font-semibold hx:tracking-tight hx:text-gray-900 hx:dark:text-gray-100 hx:transition-colors hx:group-hover:text-primary-600" style="margin: 0 0 0.25rem 0; font-size: 1.2rem; line-height: 1.5rem;">
+      {{ $title }}
+    </h3>
+    <p class="hx:text-sm hx:text-gray-500 hx:dark:text-gray-400" style="margin: 0; font-size: 0.875rem; line-height: 1.35rem;">
+      {{ $subtitle }}
+    </p>
+  </div>
+</a>
+
+<script>
+(function() {
+  const container = document.getElementById('card-widget-{{ $randId }}');
+  if (!container) return;
+
+  // Internal Logic
+  const rosterUrl = 'https://www.azzco.xyz/data/roster.json';
+  const translationsUrl = '/utils/guild-translations.json';
+  const classEmojiIds = { 1: '579532030153588739', 2: '579532029906124840', 3: '579532029880827924', 4: '579532030086217748', 5: '579532029901799437', 6: '599012538935410701', 7: '579532030056857600', 8: '579532030161977355', 9: '579532029851336716', 11: '579532029675438081' };
+
+  container.innerHTML = `
+    <div style="padding: 0.75rem 1.25rem; width: 100%; box-sizing: border-box;">
+      <h4 style="margin: 0 0 0.4rem 0; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; opacity: 0.5;">Online just nu</h4>
+      <ul class="list-{{ $randId }}" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.45rem; max-height: 125px; overflow-y: auto;"></ul>
+    </div>
+  `;
+
+  const listEl = container.querySelector('.list-{{ $randId }}');
+
+  async function update() {
+    try {
+      const [rosterRes, transRes] = await Promise.all([
+        fetch(rosterUrl, { cache: 'no-store' }),
+        fetch(translationsUrl).catch(() => ({ ok: false }))
+      ]);
+      const data = await rosterRes.json();
+      const trans = transRes.ok ? await transRes.json() : {};
+      const rankMap = trans.ranks || {};
+      
+      const online = (data.members || []).filter(m => m.isOnline && m.name !== "Kyparen");
+      
+      if (!online.length) {
+        listEl.innerHTML = '<li style="font-size: 0.85rem; opacity: 0.5;">Ingen online just nu</li>';
+        return;
+      }
+
+      listEl.innerHTML = online.sort((a,b) => a.rank - b.rank).map(m => `
+        <li style="display:flex; align-items:center; gap:0.4rem; font-size:0.85rem;">
+          ${classEmojiIds[m.classId] ? `<img src="https://cdn.discordapp.com/emojis/${classEmojiIds[m.classId]}.png" style="width:13px;height:13px;">` : ''}
+          <a href="https://chromiecraft.com/en/armory/?character/ChromieCraft/${encodeURIComponent(m.name)}" 
+             style="text-decoration:none; font-weight:600; color:inherit; pointer-events:auto;"
+             onclick="event.stopPropagation()">
+             ${m.name}
+          </a>
+          <span style="margin-left:auto; color:#71717a;">${m.level}</span>
+        </li>
+      `).join('');
+    } catch(e) { listEl.innerHTML = '<li style="font-size:0.85rem; opacity:0.5;">Data saknas</li>'; }
+  }
+
+  update();
+  setInterval(update, 60000);
+})();
+</script>
