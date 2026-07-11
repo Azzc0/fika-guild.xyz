@@ -1,0 +1,256 @@
+/* ── Class colours ─────────────────────────────────────────────────── */
+.class-1  { color: #C79C6E; }
+.class-2  { color: #F58CBA; }
+.class-3  { color: #ABD473; }
+.class-4  { color: #FFF569; }
+.class-5  { color: #FFFFFF; }
+.class-6  { color: #C41F3B; }
+.class-7  { color: #0070DE; }
+.class-8  { color: #69CCF0; }
+.class-9  { color: #9482C9; }
+.class-11 { color: #FF7D0A; }
+
+/* ── Staleness banner ───────────────────────────────────────────────── */
+.roster-staleness-warning {
+    font-size: 0.85rem;
+    color: #f59e0b;
+    background-color: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.75rem;
+    border-radius: 0.375rem;
+    font-style: italic;
+}
+
+/* ── Name cell ──────────────────────────────────────────────────────── */
+.armory-link {
+    text-decoration: none;
+    font-weight: 700;
+}
+.armory-link:hover { text-decoration: underline; }
+
+.name-cell {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    white-space: nowrap;
+}
+
+
+/* ── Alt child panel ────────────────────────────────────────────────── */
+.alt-child-wrap {
+    margin: 0.35rem 0 0.5rem 1.8rem;
+    padding: 0.65rem 0.75rem 0.75rem 0.95rem;
+    border-left: 3px solid #3f444c;
+    border-top: 1px solid #2e3238;
+    border-bottom: 1px solid #2e3238;
+    border-right: 1px solid #2e3238;
+    border-radius: 0.4rem;
+    background: linear-gradient(90deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015));
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+
+.alt-child-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.86rem;
+}
+.alt-child-table th,
+.alt-child-table td {
+    padding: 0.35rem 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid #2e3238;
+}
+.alt-child-table th { color: #9ca3af; font-weight: 600; }
+
+/* ── DataTables container & chrome ─────────────────────────────────── */
+.dt-container {
+    color: #a3a3a3 !important;
+    font-family: inherit !important;
+    background-color: #111214 !important;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.dt-search input,
+.dt-length select {
+    background-color: #1c1e22 !important;
+    border: 1px solid #2e3238 !important;
+    color: #fff !important;
+    border-radius: 0.375rem !important;
+}
+
+/* ── DataTables table ───────────────────────────────────────────────── */
+table.dataTable {
+    border-collapse: collapse !important;
+    border: 1px solid #2e3238 !important;
+    margin-top: 1rem !important;
+}
+
+table.dataTable thead th {
+    background-color: #1c1e22 !important;
+    color: #ffffff !important;
+    border-bottom: 2px solid #2e3238 !important;
+    font-weight: 600 !important;
+    padding: 12px 16px !important;
+    position: relative;
+}
+
+table.dataTable tbody tr {
+    background-color: #111214 !important;
+    color: #d1d5db !important;
+    cursor: pointer;
+}
+table.dataTable tbody tr:hover { background-color: #1c1e22 !important; }
+table.dataTable tbody tr.alt-open { background-color: #181b1f !important; border-left: 2px solid #3f444c; }
+
+table.dataTable td {
+    border-bottom: 1px solid #2e3238 !important;
+    padding: 14px 16px !important;
+}
+
+table.dataTable tbody tr.selected {
+    background-color: #24272c !important;
+    color: #ffffff !important;
+    box-shadow: inset 0 0 0 9999px rgba(16, 185, 129, 0.1) !important;
+}
+
+/* ── Class icon cell ────────────────────────────────────────────────── */
+table.dataTable td.class-cell,
+table.dataTable th.class-cell {
+    width: 52px;
+    min-width: 52px;
+    max-width: 52px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px 6px !important;
+}
+
+/* ── Responsive control cell ────────────────────────────────────────── */
+table.dataTable td.responsive-cell,
+table.dataTable th.responsive-cell {
+    width: 30px;
+    min-width: 30px;
+    max-width: 30px;
+    padding-left: 14px;
+    padding-right: 2px;
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: center;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control,
+table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control {
+    padding-left: 22px !important;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control:before {
+    top: 50%;
+    transform: translateY(-50%);
+    left: 4px;
+    width: 11px;
+    height: 11px;
+    line-height: 11px;
+    border: 1px solid #3f444c;
+    border-radius: 2px;
+    background: #1b1d21;
+    box-shadow: none;
+    color: #8f97a6;
+    opacity: 0.65;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td.dtr-control:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th.dtr-control:before {
+    color: #c5ccd8;
+    border-color: #596273;
+    opacity: 0.85;
+}
+
+/* ── Column filter dropdown ─────────────────────────────────────────── */
+.custom-header-menu-btn {
+    background: none;
+    border: none;
+    color: #71717a;
+    cursor: pointer;
+    padding: 2px 6px;
+    font-size: 14px;
+    margin-left: 6px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+}
+.custom-header-menu-btn:hover { color: #ffffff; background-color: #2e3238; }
+
+.custom-filter-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 10px;
+    background-color: #1c1e22;
+    border: 1px solid #2e3238;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    z-index: 1000;
+    min-width: 200px;
+    font-weight: normal;
+    text-align: left;
+}
+
+.custom-dropdown-action-item {
+    padding: 0.4rem 0.5rem;
+    color: #d1d5db;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 13px;
+}
+.custom-dropdown-action-item:hover { background-color: #2e3238; color: #fff; }
+
+.custom-dropdown-divider {
+    height: 1px;
+    background-color: #2e3238;
+    margin: 0.5rem 0;
+}
+
+.custom-checkbox-filter-container {
+    max-height: 160px;
+    overflow-y: auto;
+    padding-top: 0.25rem;
+}
+
+.custom-checkbox-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.5rem;
+    font-size: 13px;
+    color: #d1d5db;
+    cursor: pointer;
+    border-radius: 4px;
+    user-select: none;
+}
+.custom-checkbox-option:hover { background-color: #2e3238; color: #fff; }
+
+.custom-checkbox-option input[type="checkbox"] {
+    cursor: pointer;
+    accent-color: #10b981;
+    width: 14px;
+    height: 14px;
+    margin: 0;
+}
+
+.custom-filter-dropdown input[type="text"] {
+    background-color: #111214 !important;
+    border: 1px solid #2e3238 !important;
+    color: #fff !important;
+    border-radius: 0.375rem !important;
+    padding: 0.375rem !important;
+    width: 100% !important;
+    box-sizing: border-box;
+    font-size: 13px;
+}

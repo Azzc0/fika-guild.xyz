@@ -7,3 +7,34 @@
   };
 </script>
 <script src="https://wowgaming.altervista.org/aowow/static/widgets/power.js"></script>
+
+{{/* Inject Evenemang CSS & JS only on the schedule page or home page */}}
+{{ if or (eq .Section "evenemang") (.IsHome) }}
+  {{- with resources.Get "css/evenemang.css" -}}
+    {{- $css := . | resources.Minify | resources.Fingerprint -}}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{- end -}}
+  
+  {{- with resources.Get "js/evenemang.js" -}}
+    {{- $js := . | resources.Minify | resources.Fingerprint -}}
+    <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+  {{- end -}}
+{{ end }}
+
+{{ if eq .Section "medlemslista" }}
+  {{- with resources.Get "css/roster.css" -}}
+    {{- $css := . | resources.Minify | resources.Fingerprint -}}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{- end -}}
+  {{- with resources.Get "js/roster.js" -}}
+    {{- $js := . | resources.Minify | resources.Fingerprint -}}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+  {{- end -}}
+{{ end }}
+
+{{ if .IsHome }}
+  {{- with resources.Get "js/online-widget.js" -}}
+    {{- $widgetJs := . | resources.Minify | resources.Fingerprint -}}
+    <script src="{{ $widgetJs.RelPermalink }}" integrity="{{ $widgetJs.Data.Integrity }}" defer></script>
+  {{- end -}}
+{{ end }}

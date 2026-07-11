@@ -1,4 +1,4 @@
-{{ $url := printf "https://azzco.xyz/data/professions.json?update=%d" now.Unix }}
+{{ $url := printf "https://azzco.xyz/data/characters.json?update=%d" now.Unix }}
 
 {{/* 1. Map Hyperlink Spell IDs to DBC SkillLine IDs */}}
 {{/* 1. Complete Map of all Hyperlink Tier Spell IDs to DBC SkillLine IDs */}}
@@ -55,7 +55,7 @@
     {{ range $charName, $slots := $json }}
       {{ $charProfessions := slice }}
 
-      {{ range $slotID, $rawString := $slots }}
+      {{ range $slotID, $rawString := $slots.professions }}
         {{ if and (ne $rawString "EMPTY") (findRE `\|Htrade:` $rawString) }}
           
           {{/* Robust, flexible parsing for all profession hyperlinks */}}

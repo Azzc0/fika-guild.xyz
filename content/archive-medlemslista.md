@@ -2,6 +2,8 @@
 title: "Medlemslista"
 description: "Fika medlemmar i enlista."
 type: "page"
+layout: "full-width"
+draft: true
 sidebar:
   hide: true
 toc:

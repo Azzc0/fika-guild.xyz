@@ -1,0 +1,33 @@
+{{ define "main" }}
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.dataTables.min.css">
+
+<div class="prose dark:prose-invert max-w-none mb-6">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+</div>
+
+<div id="roster-staleness-warning" style="display:none;" class="roster-staleness-warning"></div>
+
+<div class="not-prose my-6 w-full">
+  <table id="roster-table" class="display responsive nowrap" style="width:100%">
+    <thead>
+      <tr>
+        <th class="responsive-cell" title="Detaljer"></th>
+        <th title="Klass" data-filterable="true"></th>
+        <th title="Namn">Namn</th>
+        <th title="Nivå" data-filterable="true">Nivå</th>
+        <th title="Grad" data-filterable="true">Grad</th>
+        <th title="Anteckning">Anteckning</th>
+        <th title="Zon">Zon</th>
+        <th title="Status">Status</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.min.js"></script>
+{{ end }}

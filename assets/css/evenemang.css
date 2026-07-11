@@ -1,0 +1,195 @@
+/* The main layout engine wrapper */
+.weekly-schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .weekly-schedule-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .weekly-schedule-grid { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+}
+
+.weekly-schedule-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  background-color: rgba(243, 244, 246, 0.3);
+  align-self: start;
+}
+
+html[class~="dark"] .weekly-schedule-col {
+  border-color: #262626; 
+  background-color: rgba(38, 38, 38, 0.2);
+}
+
+.schedule-day-header {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.15rem;
+}
+
+.dynamic-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  background-color: #ffffff;
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+html[class~="dark"] .dynamic-card {
+  border-color: #262626;
+  background-color: #111111;
+}
+
+.dynamic-card:hover { background-color: rgba(243, 244, 246, 0.6); }
+html[class~="dark"] .dynamic-card:hover { background-color: rgba(38, 38, 38, 0.4); }
+
+.dynamic-card-header {
+  position: relative;
+  width: 100%;
+}
+
+.dynamic-card-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 4 / 1;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Absolute overlay containers mapping over banner zones */
+.card-anchor-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 20;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+}
+
+.card-anchor-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.forum-tags-stack {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.consolidated-time-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.card-anchor-right {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* --- Homepage Card Absolute Badges Framework --- */
+.home-card-bubbles {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 30;
+  pointer-events: none; /* Allows natural card clicks through empty spacer space */
+}
+
+.home-card-left-anchor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+}
+
+.home-card-right-anchor {
+  display: flex;
+  align-items: flex-start;
+}
+
+.badge-home-forum, .badge-home-time, .badge-home-size, .badge-home-leader {
+  pointer-events: auto; /* Restores bubble interaction states if hovered */
+}
+
+/* Base Body Framework layout elements */
+.dynamic-card-body {
+  padding: 0.75rem;
+  display: block;
+  min-height: 120px;
+  overflow: hidden;
+}
+
+.dynamic-card-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.dynamic-card-description {
+  font-size: 0.85rem;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.badges-container {
+  float: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  margin-left: 0.75rem;
+  margin-bottom: 0.5rem;
+  z-index: 10;
+}
+
+.badge-size::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 0.25rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'%3E%3Cpath d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'%3E%3C/path%3E%3Ccircle cx='9' cy='7' r='4'%3E%3C/circle%3E%3Cpath d='M23 21v-2a4 4 0 0 0-3-3.87'%3E%3C/path%3E%3Cpath d='M16 3.13a4 4 0 0 1 0 7.75'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Ensure card images stay contained properly on index layouts */
+.home-raid-cover-img {
+  width: 100%;
+  object-fit: cover;
+}
