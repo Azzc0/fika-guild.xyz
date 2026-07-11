@@ -1,5 +1,7 @@
 ---
 title: "Profession Audit: Azzco"
+draft: true
+type: docs
 date: 2026-06-02
 character: "Azzco"
 profession: "Jewelcrafting"

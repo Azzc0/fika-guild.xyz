@@ -1,1 +1,0 @@
-Lite om hur man installerar addons och liknande här.

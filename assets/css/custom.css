@@ -1,15 +1,18 @@
-/* Find the empty card image container */
-.hx:card a[href="/medlemslista"] .hx:card-image-container {
-    position: relative;
-    height: 180px; /* Force the height of the missing image */
+/* ==========================================================================
+   Dark Mode Lockdown & Theme Switcher Removal
+   ========================================================================== */
+
+/* 1. Force dark mode color scheme rendering properties on root element */
+html {
+  color-scheme: dark !important;
 }
 
-/* Position our custom widget to fill that specific container */
-.hx:card a[href="/medlemslista"] .hx:card-image-container::after {
-    content: ""; /* Or use JavaScript to inject the widget here */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+/* 2. Target and hide Hextra's built-in theme toggle buttons completely */
+.hextra-theme-toggle,
+button[title*="theme" i],
+button[aria-label*="theme" i],
+.hx\:theme-toggle {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }

@@ -35,6 +35,7 @@ menu:
 params:
   theme:
     default: "dark"
+    displayToggle: false
   # Keeps the homepage clean and centered
   homepageSidebar: false
     

@@ -1,0 +1,57 @@
+{{- $path := .Get "path" -}}
+{{- $standalone := .Get "standalone" | default false -}}
+{{- $page := .Site.GetPage $path -}}
+
+{{- if $page -}}
+  {{- $title := $page.Title -}}
+  {{- $summary := $page.Params.summary | default $page.Summary -}}
+  {{- $link := $page.RelPermalink -}}
+  {{- $download := $page.Params.download | default "" -}}
+  
+  {{- $image := "" -}}
+  {{- $localImage := $page.Resources.GetMatch "*{gui,addon,fika,featured}*.{png,jpg,webp}" -}}
+  
+  {{- if $localImage -}}
+    {{- $image = $localImage.RelPermalink -}}
+  {{- else if $page.Params.image -}}
+    {{- $image = $page.Params.image | relURL -}}
+  {{- end -}}
+
+  <div class="hextra-card not-prose hx:group hx:flex hx:flex-col hx:justify-between hx:overflow-hidden hx:rounded-xl hx:border hx:border-gray-200 hx:bg-gray-100 hx:text-current hx:dark:border-neutral-800 hx:dark:bg-neutral-900 hx:transition-colors hx:duration-200 hx:hover:border-gray-300 hx:hover:bg-gray-200 hx:dark:hover:border-neutral-700 hx:dark:hover:bg-neutral-800 hx:h-full hx:w-full" 
+       style="{{ if $standalone }}max-width: 384px; margin-top: 1rem; margin-bottom: 1rem;{{ end }}">{{- "" -}}
+    
+    <a href="{{ $link }}" class="hx:no-underline hx:text-current hx:group">
+      {{- if $image -}}
+      <div class="hx:relative hx:w-full hx:h-48 hx:overflow-hidden hx:rounded-t-xl hx:flex-shrink-0">
+        <img src="{{ $image }}" alt="{{ $title }}" class="hx:w-full hx:h-full hx:object-cover hx:transition-transform hx:duration-200 hx:group-hover:scale-105" loading="lazy">
+      </div>
+      {{- end -}}
+
+      <div class="hx:p-4 hx:pb-2">
+        <span class="hx:flex hx:font-semibold text-gray-900 hx:dark:text-gray-100 hx:items-center hx:gap-2">
+          {{ $title }}
+        </span>
+        {{ if $summary }}
+        <p class="hx:mt-1 hx:text-sm hx:text-gray-500 hx:dark:text-gray-400">
+          {{ $summary }}
+        </p>
+        {{ end }}
+      </div>
+    </a>
+
+    {{- if $download -}}
+    <div class="hx:px-4 hx:pb-7 hx:mt-auto" style="margin-bottom: 12px;">
+      <a href="{{ $download }}" target="_blank" rel="noopener noreferrer" 
+         class="hx:pt-3 hx:border-t hx:border-gray-200 hx:dark:border-neutral-800 hx:flex hx:items-center hx:no-underline hx:text-primary-600 hx:dark:text-primary-400 hx:group/download">
+        <span class="hx:inline-flex hx:items-center hx:gap-1.5 hx:text-sm hx:font-medium group-hover/download:hx:underline">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="hx:w-4 hx:h-4" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
+          Ladda ned
+        </span>
+      </a>
+    </div>
+    {{- end -}}
+
+  </div>
+{{- else -}}
+  {{- errorf "page-card shortcode could not find page at path: %s" $path -}}
+{{- end -}}

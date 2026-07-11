@@ -1,0 +1,17 @@
+{{- $cols := .Get "cols" | default "3" -}}
+
+{{- $gridClass := "hx:mt-4 hx:grid hx:gap-4 hx:w-full" -}}
+{{- if eq (string $cols) "1" -}}
+  {{- $gridClass = printf "%s hx:grid-cols-1" $gridClass -}}
+{{- else if eq (string $cols) "2" -}}
+  {{- $gridClass = printf "%s hx:sm:grid-cols-2" $gridClass -}}
+{{- else if eq (string $cols) "4" -}}
+  {{- $gridClass = printf "%s hx:sm:grid-cols-2 hx:lg:grid-cols-4" $gridClass -}}
+{{- else -}}
+  {{- /* Default to 3 columns using Hextra's exact prefix nesting */ -}}
+  {{- $gridClass = printf "%s hx:sm:grid-cols-2 hx:lg:grid-cols-3" $gridClass -}}
+{{- end -}}
+
+<div class="{{ $gridClass }} not-prose">
+  {{- .Inner -}}
+</div>
