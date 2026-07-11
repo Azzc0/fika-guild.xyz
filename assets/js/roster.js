@@ -739,9 +739,9 @@ document.addEventListener("DOMContentLoaded", () => {
     buildToolbar();
 
     Promise.all([
-        fetch(TRANSLATIONS_URL).then(r => r.ok ? r.json() : {}).catch(() => ({})),
-        fetch(CHARACTERS_URL).then(r => r.ok ? r.json() : {}).catch(() => ({})),
-        fetch(ROSTER_URL).then(r => {
+        fetch(TRANSLATIONS_URL, {cache:"no-cache"}).then(r => r.ok ? r.json() : {}).catch(() => ({})),
+        fetch(CHARACTERS_URL,   {cache:"no-cache"}).then(r => r.ok ? r.json() : {}).catch(() => ({})),
+        fetch(ROSTER_URL,       {cache:"no-cache"}).then(r => {
             if (!r.ok) throw new Error(`roster.json: ${r.status}`);
             const lm = r.headers.get("Last-Modified");
             if (lm && Date.now() - new Date(lm) > 86400000) {
