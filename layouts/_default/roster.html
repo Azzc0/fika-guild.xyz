@@ -1,27 +1,45 @@
 {{ define "main" }}
-<div class="prose dark:prose-invert max-w-none mb-4">
-  <h1>{{ .Title }}</h1>
-  {{ .Content }}
+
+<div class="roster-page">
+
+    <div class="prose dark:prose-invert max-w-none roster-intro">
+        <h1>{{ .Title }}</h1>
+        {{ .Content }}
+    </div>
+
+    <div id="roster-detail-backdrop" class="detail-backdrop"></div>
+
+    <div class="roster-layout">
+
+        <section class="roster-left">
+
+            <div id="roster-staleness-warning"
+                 class="roster-staleness-warning"
+                 style="display:none;"></div>
+
+            <div id="r-toolbar" class="r-toolbar"></div>
+
+            <div class="r-table-wrap">
+                <table id="r-table">
+                    <thead id="r-thead"></thead>
+                    <tbody id="r-tbody"></tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <aside class="roster-right">
+
+            <div id="roster-detail" class="detail-panel">
+                <div class="detail-empty">
+                    Välj en spelare för att se detaljer.
+                </div>
+            </div>
+
+        </aside>
+
+    </div>
+
 </div>
 
-<div class="not-prose roster-layout">
-
-  <div class="roster-left">
-    <div id="roster-staleness-warning" style="display:none;" class="roster-staleness-warning"></div>
-    <div id="r-toolbar" class="r-toolbar"></div>
-    <div class="r-table-wrap">
-      <table id="r-table">
-        <thead id="r-thead"></thead>
-        <tbody id="r-tbody"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="roster-right">
-    <div id="roster-detail" class="detail-panel">
-      <div class="detail-empty">Välj en spelare för att se detaljer.</div>
-    </div>
-  </div>
-
-</div>
 {{ end }}

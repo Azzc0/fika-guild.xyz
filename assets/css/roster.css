@@ -4,43 +4,49 @@
 .class-7  {color:#0070DE;} .class-8  {color:#69CCF0;} .class-9  {color:#9482C9;}
 .class-11 {color:#FF7D0A;}
 
-/* ── Page layout ─────────────────────────────────────────────────────── */
-.roster-layout {
-    display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: 1.25rem;
-    align-items: flex-start;
-    width: 100%;
+/* ------------------------------------------------ */
+/* Page                                              */
+/* ------------------------------------------------ */
+
+.roster-page {
+    max-width: 1500px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+    padding-bottom: 2rem;
 }
 
-.roster-left  { min-width: 0; }
+.roster-intro {
+    margin-bottom: 1.5rem;
+}
+
+/* ------------------------------------------------ */
+/* Layout                                            */
+/* ------------------------------------------------ */
+
+.roster-layout {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        clamp(320px, 24vw, 380px);
+
+    gap: 2rem;
+
+    align-items: start;
+}
+
+.roster-left {
+    min-width: 0;
+}
 
 .roster-right {
+
     position: sticky;
-    top: 1rem;
-    /* Ensure detail panel is always a real presence */
-    align-self: flex-start;
-}
 
-/* Detail panel always occupies space, placeholder shown when empty */
-.detail-panel {
-    background: #111214;
-    border: 1px solid #2e3238;
-    border-radius: .5rem;
-    min-height: 240px;
-    padding: .9rem;
-    font-size: .875rem;
-    color: #d1d5db;
-}
+    top: calc(var(--hextra-navbar-height) + 1rem);
 
-@media (max-width: 900px) {
-    .roster-layout {
-        grid-template-columns: 1fr;
-    }
-    .roster-right {
-        position: static;
-        width: 100%;
-    }
+    align-self: start;
 }
 
 /* ── Staleness ───────────────────────────────────────────────────────── */
@@ -99,7 +105,6 @@
 #r-table {
     width:100%; border-collapse:collapse;
     border:1px solid #2e3238; font-size:.875rem;
-    table-layout:fixed;
 }
 
 /* Header */
@@ -139,7 +144,41 @@
     vertical-align:middle; white-space:nowrap; overflow:hidden;
 }
 .r-td-chevron, .r-td-class, .r-td-role1, .r-td-role2 {
-    text-align:center!important; padding:5px 3px!important; overflow:visible!important;
+    text-align:center!important; padding:4px 2px!important; overflow:visible!important;
+}
+/* Chevron cell is the expand-only tap target — make it obvious */
+.r-td-chevron { cursor: default; }
+.r-chevron    { cursor: pointer; padding: 4px 6px; }
+
+/* ── Context menu ─────────────────────────────────────────────────────────── */
+.r-ctx-menu {
+    position: fixed;
+    background: #1c1e22; border: 1px solid #2e3238; border-radius: .4rem;
+    padding: .35rem; z-index: 1000; min-width: 165px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.65); font-size: .82rem;
+}
+.r-ctx-item {
+    display: flex; align-items: center; gap: .4rem;
+    padding: .3rem .5rem; border-radius: .25rem;
+    cursor: pointer; color: #d1d5db; user-select: none;
+}
+.r-ctx-item:hover { background: #2e3238; }
+.r-ctx-check {
+    width: .9rem; flex-shrink: 0; text-align: center;
+    color: #3b82f6; font-weight: 700;
+}
+.r-ctx-sep { height: 1px; background: #2e3238; margin: .25rem 0; }
+
+/* Active-filter indicator dot in column header */
+.r-filter-dot {
+    display: inline-block; width: 5px; height: 5px;
+    background: #3b82f6; border-radius: 50%;
+    margin-left: 3px; vertical-align: middle;
+}
+/* Filterable-but-inactive indicator */
+.r-filter-icon {
+    font-size: .65rem; color: #374151; margin-left: 2px;
+    vertical-align: middle; pointer-events: none;
 }
 
 .r-name  { font-weight:600; }
@@ -150,6 +189,32 @@
     transition:transform 150ms ease, color 150ms ease; user-select:none;
 }
 .r-chevron.open { transform:rotate(90deg); color:#9ca3af; }
+
+/* ── Detail panel close button (hidden on desktop, shown in drawer) ──────── */
+.dp-close-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 2rem; height: 2rem;
+    background: #1c1e22; border: 1px solid #2e3238; border-radius: 50%;
+    color: #9ca3af; font-size: 1rem; line-height: 1;
+    cursor: pointer; flex-shrink: 0;
+    transition: background 80ms, color 80ms;
+}
+.dp-close-btn:hover { background: #24282e; color: #fff; }
+
+/* ── Backdrop (hidden on desktop, shown in drawer breakpoint) ────────────── */
+.detail-backdrop {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0, 0, 0, .55);
+    z-index: 199;
+    cursor: pointer;
+}
+
+/* ── Inline detail row — not used but kept for future experiments ────────── */
+.r-detail-row { display: none; }
+.r-detail-td  { white-space: normal; }
 
 .detail-empty { color:#4b5563; font-style:italic; text-align:center; padding:2rem 0; }
 
@@ -207,4 +272,103 @@
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
     font-size:.65rem; font-weight:700; color:#e5e7eb;
     text-shadow:0 0 4px rgba(0,0,0,.95); letter-spacing:.03em; pointer-events:none;
+}
+
+/* ========================================================================
+   RESPONSIVE
+   ======================================================================== */
+
+/* ------------------------------------------------------------------------
+   Tablet + Phone  ≤1200px — slide-in drawer
+   ------------------------------------------------------------------------ */
+
+@media (max-width: 1200px) {
+
+    .roster-page {
+        padding-inline: 1rem;
+    }
+
+    /* Table takes full width; right panel leaves the grid flow */
+    .roster-layout {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    /* Drawer: fixed panel slides in from the right */
+    .roster-right {
+        position: fixed;
+        top: 0; right: 0;
+        height: 100dvh;          /* 100dvh avoids mobile address-bar jump */
+        width: min(380px, 92vw);
+        z-index: 200;
+        overflow-y: auto;
+        background: #111214;
+        border-left: 1px solid #2e3238;
+        padding: 1.25rem 1rem;
+        transform: translateX(110%);
+        transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .roster-right.dp-open {
+        transform: translateX(0);
+    }
+
+    .detail-backdrop.dp-open {
+        display: block;
+    }
+
+    .dp-close-btn {
+        display: flex;
+    }
+}
+
+/* ------------------------------------------------------------------------
+   Phone only  ≤700px
+   ------------------------------------------------------------------------ */
+
+@media (max-width: 700px) {
+
+    .roster-page {
+        padding-inline: .75rem;
+    }
+
+    .roster-intro {
+        margin-bottom: 1rem;
+    }
+
+    .r-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: .75rem;
+    }
+
+    .r-toolbar-left,
+    .r-toolbar-right {
+        width: 100%;
+    }
+
+    .r-toolbar-right {
+        justify-content: space-between;
+    }
+
+    .r-search-wrap {
+        max-width: none;
+    }
+
+    .r-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #r-table {
+        min-width: 480px;
+    }
+
+    /* Drawer full-width on narrow phones */
+    .roster-right {
+        width: 100vw;
+        border-left: none;
+        border-top: 1px solid #2e3238;
+    }
+
 }

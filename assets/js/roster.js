@@ -5,10 +5,7 @@ const ROSTER_URL       = "https://www.azzco.xyz/data/roster.json";
 const CHARACTERS_URL   = "https://www.azzco.xyz/data/characters.json";
 const TRANSLATIONS_URL = "/utils/guild-translations.json";
 
-// ── Config ────────────────────────────────────────────────────────────────────
-const SHOW_OFFICER_NOTE = false; // toggle to surface officer note in detail panel
-
-const LS_KEY_COLS  = "fika_roster_cols";
+// ── Config ────────────────────────────────────────────────────────────────────const LS_KEY_COLS  = "fika_roster_cols";
 const LS_KEY_SORT  = "fika_roster_sort";
 
 // ── Class data ────────────────────────────────────────────────────────────────
@@ -86,27 +83,28 @@ const SPECS = {
 // ── Column definitions ────────────────────────────────────────────────────────
 // order here = default display order
 const COLUMN_DEFS = [
-    { key:"chevron",  label:"",       sortable:false, toggleable:false, width:"28px",  align:"center" },
-    { key:"class",    label:"Klass",  sortable:true,  toggleable:false, width:"36px",  align:"center" },
-    { key:"role1",    label:"Roll 1", sortable:false, toggleable:true,  width:"36px",  align:"center" },
-    { key:"role2",    label:"Roll 2", sortable:false, toggleable:true,  width:"36px",  align:"center" },
-    { key:"name",     label:"Namn",   sortable:true,  toggleable:false, width:"130px", align:"left"   },
-    { key:"level",    label:"Nivå",   sortable:true,  toggleable:true,  width:"44px",  align:"right"  },
-    { key:"rank",     label:"Grad",   sortable:true,  toggleable:false, width:"120px", align:"left"   },
-    { key:"status",   label:"Status", sortable:true,  toggleable:true,  width:"100px", align:"left"   },
+    { key:"chevron",  label:"",      sortable:false, toggleable:false, filterable:false, width:"28px",  align:"center" },
+    { key:"class",    label:"",      sortable:true,  toggleable:false, filterable:true,  width:"32px",  align:"center" },
+    { key:"role1",    label:"Main Spec", sortable:true,  toggleable:true,  filterable:true,  width:"30px",  align:"center" },
+    { key:"role2",    label:"Off Spec",  sortable:true,  toggleable:true,  filterable:true,  width:"30px",  align:"center" },
+    { key:"name",     label:"Namn",  sortable:true,  toggleable:false, filterable:false, width:"110px", align:"left"   },
+    { key:"level",    label:"Nivå",  sortable:true,  toggleable:true,  filterable:false, width:"40px",  align:"right"  },
+    { key:"rank",     label:"Grad",  sortable:true,  toggleable:true,  filterable:true,  width:"100px", align:"left"   },
+    { key:"status",   label:"Status",sortable:true,  toggleable:true,  filterable:true,  width:"100px", align:"left"   },
 ];
 
 // ── State ─────────────────────────────────────────────────────────────────────
 const state = {
-    groups:       [],   // processed + grouped members
-    characters:   {},   // raw characters.json
-    filteredRows: [],   // after search filter, before sort
-    sortedRows:   [],   // final render order (main groups only)
+    groups:       [],
+    characters:   {},
+    filteredRows: [],
+    sortedRows:   [],
     sort:         { col:"rank", dir:"asc", secondary:"name" },
     search:       "",
-    expandedKey:  null, // mainKey of expanded group
-    selectedName: null, // name of character in detail panel
-    cols:         {},   // { key: visible bool }
+    expandedKey:  null,
+    selectedName: null,
+    cols:         {},
+    filters:      { classIds: new Set(), rankIds: new Set(), onlineOnly: null, roles: new Set() },
 };
 
 // ── Persistence ───────────────────────────────────────────────────────────────
@@ -241,19 +239,33 @@ const sortValue = (group, col) => {
     const m = group.main;
     switch(col) {
         case "name":   return normalizeKey(m.name);
-        case "level":  return -m.level; // desc by default feels better for level
+        case "level":  return -m.level;
         case "rank":   return m.rankId;
         case "status": return group.clusterOnline ? -1 : m.lastLogoff;
         case "class":  return m.classId;
+        case "role1":  { const order={tank:0,heal:1,dps:2}; return order[normalizeRole(m.spec1)] ?? 9; }
+        case "role2":  { const order={tank:0,heal:1,dps:2}; return order[normalizeRole(m.spec2)] ?? 9; }
         default:       return 0;
     }
 };
 
 const applyFilterAndSort = () => {
     const q = state.search.toLowerCase().trim();
-    const filtered = q
-        ? state.groups.filter(g => g.allNames.includes(q) || g.main.rankName.toLowerCase().includes(q))
-        : [...state.groups];
+    const { classIds, rankIds, onlineOnly, roles } = state.filters;
+
+    const filtered = state.groups.filter(g => {
+        if (classIds.size  && !classIds.has(g.main.classId))  return false;
+        if (rankIds.size   && !rankIds.has(g.main.rankId))    return false;
+        if (onlineOnly !== null && g.clusterOnline !== onlineOnly) return false;
+        if (roles.size) {
+            const memberRoles = new Set(
+                [normalizeRole(g.main.spec1), normalizeRole(g.main.spec2)].filter(Boolean)
+            );
+            if (![...roles].some(r => memberRoles.has(r))) return false;
+        }
+        if (q && !g.allNames.includes(q) && !g.main.rankName.toLowerCase().includes(q)) return false;
+        return true;
+    });
 
     const { col, dir, secondary } = state.sort;
     filtered.sort((a, b) => {
@@ -302,17 +314,30 @@ const renderCell = (col, group, isAlt=false, altMember=null) => {
 // ── Table renderer ────────────────────────────────────────────────────────────
 const visibleCols = () => COLUMN_DEFS.filter(c => state.cols[c.key] !== false);
 
+const isFilterActive = (key) => {
+    if (key === 'class')  return state.filters.classIds.size > 0;
+    if (key === 'rank')   return state.filters.rankIds.size  > 0;
+    if (key === 'status') return state.filters.onlineOnly !== null;
+    if (key === 'role1' || key === 'role2') return state.filters.roles.size > 0;
+    return false;
+};
+
+const FILTERABLE_ICON = `<span class="r-filter-icon" title="Högerklicka för att filtrera">⊟</span>`;
+
 const renderHeader = () => {
     const { col:sc, dir:sd } = state.sort;
     return visibleCols().map(c => {
         const isSort   = c.sortable && c.key === sc;
         const arrow    = isSort ? (sd === "asc" ? "↑" : "↓") : (c.sortable ? "↕" : "");
         const arrowCls = isSort ? "r-sort-arrow active" : "r-sort-arrow";
-        const isIconCol = c.key === "chevron" || c.key === "class" || c.key === "role1" || c.key === "role2";
-        const label = isIconCol ? "" : esc(c.label);
+        const isIconOnly = c.key === "chevron" || c.key === "class" || c.key === "role1" || c.key === "role2";
+        const label = isIconOnly ? "" : esc(c.label);
         const sortAttr = c.sortable ? ` data-sort="${c.key}"` : "";
+        const filterIndicator = isFilterActive(c.key)
+            ? `<span class="r-filter-dot"></span>`
+            : c.filterable ? FILTERABLE_ICON : '';
         return `<th class="r-th r-th-${c.key}"${sortAttr} style="text-align:${c.align};width:${c.width};${c.sortable?"cursor:pointer;":""}">` +
-            `${label}${arrow ? `<span class="${arrowCls}">${arrow}</span>` : ""}` +
+            `${label}${arrow ? `<span class="${arrowCls}">${arrow}</span>` : ""}${filterIndicator}` +
             `</th>`;
     }).join("");
 };
@@ -355,9 +380,7 @@ const renderTable = () => {
 };
 
 // ── Detail panel ──────────────────────────────────────────────────────────────
-const renderDetail = (member) => {
-    const panel = document.getElementById("roster-detail");
-    if (!panel) return;
+const buildDetailHTML = (member, showClose = false) => {
     const ce = state.characters[member.name] || null;
 
     const specs = [member.spec1, member.spec2]
@@ -382,19 +405,24 @@ const renderDetail = (member) => {
         </div>`;
     }).join("");
 
-    const officerNoteHtml = SHOW_OFFICER_NOTE && member.officerNote
+    const officerNoteHtml = member.officerNote
         ? `<div class="dp-section-title">Officersanteckning</div><div class="dp-text">${esc(member.officerNote)}</div>`
         : "";
 
-    panel.innerHTML = `
+    const closeBtn = showClose
+        ? `<button class="dp-close-btn" data-action="close-detail" aria-label="Stäng">✕</button>`
+        : "";
+
+    return `
         <div class="dp-header">
             <div>${classImg(member.classId, "2.8em")}</div>
-            <div class="dp-header-text">
+            <div class="dp-header-text" style="flex:1;min-width:0;">
                 <a href="${armoryUrl(member.name)}" target="_blank" rel="noopener noreferrer"
                    class="dp-name class-${member.classId}">${esc(member.name)}</a>
-                <div class="dp-rank">${esc(member.rankName)}</div>
+                <div class="dp-rank">${esc(member.rankName)} &middot; Nivå ${member.level}</div>
                 <div class="dp-status${member.isOnline?" online":""}">${esc(member.statusText)}</div>
             </div>
+            ${closeBtn}
         </div>
         ${specs ? `<div class="dp-specs">${specs}</div>` : ""}
         <div class="dp-body">
@@ -404,6 +432,25 @@ const renderDetail = (member) => {
             ${profs.length       ? `<div class="dp-section-title">Yrken</div>${profHtml}` : ""}
         </div>
         <div class="dp-armory"><a href="${armoryUrl(member.name)}" target="_blank" rel="noopener noreferrer">Visa på Armory ↗</a></div>`;
+};
+
+const renderDetail = (member) => {
+    const panel = document.getElementById("roster-detail");
+    if (!panel) return;
+    panel.innerHTML = buildDetailHTML(member, true);
+};
+
+// ── Drawer helpers ────────────────────────────────────────────────────────────
+const openDetailDrawer = () => {
+    document.querySelector(".roster-right")?.classList.add("dp-open");
+    document.getElementById("roster-detail-backdrop")?.classList.add("dp-open");
+};
+const closeDetailDrawer = () => {
+    document.querySelector(".roster-right")?.classList.remove("dp-open");
+    document.getElementById("roster-detail-backdrop")?.classList.remove("dp-open");
+    state.selectedName = null;
+    applyFilterAndSort();
+    renderTable();
 };
 
 // ── Column picker ─────────────────────────────────────────────────────────────
@@ -416,6 +463,98 @@ const renderColPicker = () => {
             ${esc(c.label)}
         </label>`
     ).join("");
+};
+
+// ── Column filter context menu ────────────────────────────────────────────────
+let _ctxMenu = null;
+let _longPressTimer = null;
+
+const closeCtxMenu = () => { _ctxMenu?.remove(); _ctxMenu = null; };
+
+const buildMenuItems = (colKey) => {
+    const { classIds, rankIds, onlineOnly, roles } = state.filters;
+    const items = [];
+
+    if (colKey === 'class') {
+        const classes = [...new Set(state.groups.map(g => g.main.classId))].sort((a,b)=>a-b);
+        classes.forEach(cid => items.push({
+            html: `${classImg(cid,'1.1em')} <span class="class-${cid}">${esc(CLASS_NAMES[cid]||String(cid))}</span>`,
+            active: classIds.has(cid),
+            action: () => { classIds.has(cid) ? classIds.delete(cid) : classIds.add(cid); },
+        }));
+        if (classIds.size) {
+            items.push({ sep: true });
+            items.push({ html: 'Rensa filter', active: false, action: () => classIds.clear() });
+        }
+    } else if (colKey === 'rank') {
+        const ranks = [...new Map(state.groups.map(g => [g.main.rankId, g.main.rankName])).entries()]
+            .sort((a,b)=>a[0]-b[0]);
+        ranks.forEach(([rid, rname]) => items.push({
+            html: esc(rname),
+            active: rankIds.has(rid),
+            action: () => { rankIds.has(rid) ? rankIds.delete(rid) : rankIds.add(rid); },
+        }));
+        if (rankIds.size) {
+            items.push({ sep: true });
+            items.push({ html: 'Rensa filter', active: false, action: () => rankIds.clear() });
+        }
+    } else if (colKey === 'status') {
+        [{ label:'🟢 Online', val:true }, { label:'⬜ Offline', val:false }, { label:'Alla', val:null }]
+            .forEach(o => items.push({
+                html: o.label,
+                active: onlineOnly === o.val,
+                action: () => { state.filters.onlineOnly = o.val; },
+            }));
+    } else if (colKey === 'role1' || colKey === 'role2') {
+        [['tank','Tank'], ['heal','Heal'], ['dps','DPS']].forEach(([role, label]) => items.push({
+            html: `${roleImg(role + ':x', '1.1em')} ${label}`,
+            active: roles.has(role),
+            action: () => { roles.has(role) ? roles.delete(role) : roles.add(role); },
+        }));
+        if (roles.size) {
+            items.push({ sep: true });
+            items.push({ html: 'Rensa filter', active: false, action: () => roles.clear() });
+        }
+    }
+    return items;
+};
+
+const openCtxMenu = (colKey, x, y) => {
+    closeCtxMenu();
+    const initialItems = buildMenuItems(colKey);
+    if (!initialItems.length) return;
+
+    const menu = document.createElement('div');
+    menu.className = 'r-ctx-menu';
+    document.body.appendChild(menu);
+    _ctxMenu = menu;
+
+    const refresh = () => {
+        const items = buildMenuItems(colKey);
+        menu.innerHTML = items.map((it, i) =>
+            it.sep
+                ? `<div class="r-ctx-sep"></div>`
+                : `<div class="r-ctx-item" data-idx="${i}">` +
+                  `<span class="r-ctx-check">${it.active ? '✓' : ''}</span>${it.html}</div>`
+        ).join('');
+        menu.onclick = e => {
+            const el = e.target.closest('[data-idx]');
+            if (!el) return;
+            items[+el.dataset.idx].action?.();
+            applyFilterAndSort();
+            renderTable();
+            refresh();
+        };
+    };
+    refresh();
+
+    menu.style.left = x + 'px';
+    menu.style.top  = y + 'px';
+    requestAnimationFrame(() => {
+        const r = menu.getBoundingClientRect();
+        if (r.right  > window.innerWidth)  menu.style.left = Math.max(0, x - r.width)  + 'px';
+        if (r.bottom > window.innerHeight) menu.style.top  = Math.max(0, y - r.height) + 'px';
+    });
 };
 
 // ── Event handling ────────────────────────────────────────────────────────────
@@ -468,13 +607,20 @@ const bindEvents = () => {
             const group = findGroupByKey(key);
             if (!group) return;
 
-            // Toggle expansion
-            if (group.alts.length) {
-                state.expandedKey = state.expandedKey === key ? null : key;
+            // Chevron cell tapped → toggle alts only, no drawer
+            if (e.target.closest(".r-td-chevron")) {
+                if (group.alts.length) {
+                    state.expandedKey = state.expandedKey === key ? null : key;
+                    applyFilterAndSort();
+                    renderTable();
+                }
+                return;
             }
-            // Select main for detail
+
+            // Any other cell → open detail drawer only, no expansion change
             state.selectedName = group.main.name;
             renderDetail(group.main);
+            openDetailDrawer();
             applyFilterAndSort();
             renderTable();
         } else if (altRow) {
@@ -483,6 +629,7 @@ const bindEvents = () => {
             if (!member) return;
             state.selectedName = name;
             renderDetail(member);
+            openDetailDrawer();
             // Re-render just to update selected highlight
             applyFilterAndSort();
             renderTable();
@@ -517,6 +664,44 @@ const bindEvents = () => {
         saveColPrefs();
         applyFilterAndSort();
         renderTable();
+    });
+
+    // Column header right-click → filter context menu
+    thead.addEventListener('contextmenu', e => {
+        e.preventDefault();
+        const th = e.target.closest('th.r-th');
+        if (!th) return;
+        const m = th.className.match(/\br-th-(\w+)\b/);
+        if (m) openCtxMenu(m[1], e.clientX, e.clientY);
+    });
+
+    // Column header long-press (touch) → filter context menu
+    thead.addEventListener('touchstart', e => {
+        const th = e.target.closest('th.r-th');
+        if (!th) return;
+        const touch = e.touches[0];
+        _longPressTimer = setTimeout(() => {
+            const m = th.className.match(/\br-th-(\w+)\b/);
+            if (m) openCtxMenu(m[1], touch.clientX, touch.clientY);
+        }, 500);
+    }, { passive: true });
+    thead.addEventListener('touchend',  () => clearTimeout(_longPressTimer));
+    thead.addEventListener('touchmove', () => clearTimeout(_longPressTimer));
+
+    // Close context menu on outside click or Escape
+    document.addEventListener('click', e => {
+        if (_ctxMenu && !_ctxMenu.contains(e.target)) closeCtxMenu();
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeCtxMenu();
+    });
+
+    // Close drawer (✕ button or backdrop click)
+    document.addEventListener("click", e => {
+        if (e.target.closest("[data-action='close-detail']") ||
+            e.target.id === "roster-detail-backdrop") {
+            closeDetailDrawer();
+        }
     });
 
     // Close picker on outside click
