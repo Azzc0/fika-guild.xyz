@@ -3,7 +3,7 @@ title: "Komma igång"
 images:
  - "https://res.cloudinary.com/dhmmkvcpy/image/upload/v1783858945/adventure-start_bcoii5.png"
 description: "Matnyttig information för dig som vill komma igång på servern/i gillet."
-weight: 2
+weight: 1
 type: "docs"
 prev: /artiklar/guild/regler
 next: /artiklar/start/klientmod

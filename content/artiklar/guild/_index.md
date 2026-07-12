@@ -1,6 +1,6 @@
 ---
 title: "Gillet"
-weight: 1
+weight: 2
 type: "docs"
 prev: /artiklar/
 next: /artiklar/guild/regler
