@@ -3,6 +3,8 @@ title: "Questie"
 download: "https://github.com/Aldori15/Questie/archive/refs/heads/335.zip"
 image: "https://warperia.com/?wimg_token=eyJ1cmwiOiJodHRwczpcL1wvd2FycGVyaWEuY29tXC93cC1jb250ZW50XC91cGxvYWRzXC8yMDI0XC8xMlwvYWRkb24tbG9nby0zMzAzLTY3NTgxNDIyMjM1MjkucG5nIiwiZXhwIjoxNzgzODAxNTM4LCJpcCI6Ijk0LjIzNC42OS41OCIsInVhIjoiTW96aWxsYVwvNS4wIChYMTE7IExpbnV4IHg4Nl82NDsgcnY6MTUxLjApIEdlY2tvXC8yMDEwMDEwMSBGaXJlZm94XC8xNTEuMCIsInMiOiI4OGY1MjJmN2EwMmZlMzIyOGQ4MjZhZDE0ZjA4YmZiNiIsInQiOiJhZGRvbmltZyJ9fDNjOGJlNzAxNTY3MGIwNzg2ZTBjNDU4MWM4N2EwMzIzYjhlN2IwMTc4ODI0Yjc2OTI2MDQwZGRmMjRmZWYyYmQ"
 summary: "Quest hjälpare för wrath"
+sidebar:
+  exclude: true
 ---
 
 https://warperia.com/addon-wotlk/questie/

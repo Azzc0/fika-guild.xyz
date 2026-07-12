@@ -1,6 +1,8 @@
-
 ---
 toc: false
+type: "docs"
+prev: /artiklar/guild/
+next: /artiklar/start
 ---
 
 <img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/v1762523345/icons/fika_bw.png" alt="Fika Guild Logo" loading="lazy" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">

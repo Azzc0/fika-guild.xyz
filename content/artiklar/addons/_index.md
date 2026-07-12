@@ -2,6 +2,10 @@
 title: "Addons"
 image: "/img/cards/addon.webp"
 summary: "Addon översikt"
+type: "docs"
+weight: 4
+prev: /artiklar/guider/
+next: /artiklar/macros/
 ---
 
 Addons, några använder dem knappt medan andra knappt kan spela utan.

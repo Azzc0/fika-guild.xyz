@@ -1,6 +1,8 @@
 ---
 title: "Klient Moddar"
-type: docs
+type: "docs"
+prev: /artiklar/start/
+next: /artiklar/start/bugs
 ---
 
 # LAA - Large Adress Awereness

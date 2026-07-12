@@ -1,6 +1,8 @@
 ---
 title: "Support & bugtracker"
 type: "docs"
+prev: /artiklar/guild/klientmod
+next: /artiklar/guider
 ---
 
 Servern är baserad på Azeroth Core och är väldigt nära besläktat med det projektet. De använder inte spelets "ticket" funktion något vidare, istället förlitar de sig på [github issues](https://github.com/chromiecraft/chromiecraft/issues) för bugtracking och [Chromeicrafts discord](https://discord.com/invite/jUdJRhmT3J) `# 🆘 | support-ticket` kanal för direkt assistans.
