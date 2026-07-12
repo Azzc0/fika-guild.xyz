@@ -1,10 +1,10 @@
 ---
-title: "Hemsidan börjar ta form"
+title: "Hemsidan börjar ta form test2"
 images:
   - "https://res.cloudinary.com/dhmmkvcpy/image/upload/news_ldt7rb.png"
-date: 2026-07-12T10:00:00+02:00
+date: 2026-07-12T11:00:00+02:00
 type: blog
-description: "En snabb sammanfattning av vad som nyligen hänt på hemsidan."
+description: "En snabb sammanfattning av vad som nyligen hänt pasdå hemsidan."
 ---
 
 {{< discord-content >}}
