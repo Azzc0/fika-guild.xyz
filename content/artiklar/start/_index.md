@@ -1,5 +1,7 @@
 ---
 title: "Komma igång"
+image: "/img/adventure-start.png"
+description: "Matnyttig information för dig som vill komma igång på servern/i gillet."
 weight: 2
 type: "docs"
 prev: /artiklar/guild/regler

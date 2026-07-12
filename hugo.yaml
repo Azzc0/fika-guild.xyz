@@ -34,7 +34,7 @@ menu:
 
 params:
   title: "Fika"
-  description: "Fika, en svensk World of Warcraft guild op Chromiecraft."
+  description: "Fika, en svensk World of Warcraft guild på Chromiecraft."
   images:
   - https://res.cloudinary.com/dhmmkvcpy/image/upload/banner_lbze4h.png
   theme:
