@@ -1,0 +1,2 @@
+{{- $inner := trim .Inner "\n" -}}
+{{- .Page.Store.Set "discord" $inner -}}

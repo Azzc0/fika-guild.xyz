@@ -13,6 +13,9 @@ outputs:
 # Navigation Bar Layout (Top Navbar)
 menu:
   main:
+    - name: 'Nyheter'
+      pageRef: '/nyheter'
+      weight: 5
     - name: 'Artiklar'
       pageRef: '/artiklar'
       weight: 10
@@ -42,7 +45,11 @@ params:
     displayToggle: false
   # Keeps the homepage clean and centered
   homepageSidebar: false
-    
+
+  archives:
+    section: nyheter
+    dateFormat: "Jan 02"
+
   footer:
     enable: true
     width: "normal" # matching your template layout rules
@@ -55,6 +62,11 @@ params:
       link: '/'
       path: '/favicon.png' # Points directly to static/logo.png
       disabled: false
+
+cascade:
+  - target:
+      path: /nyheter/**
+    type: blog
 
 markup:
   goldmark:

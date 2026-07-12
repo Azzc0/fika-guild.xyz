@@ -1,6 +1,6 @@
 ---
-image: "/img/card/banner.png"
-summary: "Samllingsplats för Chromiecraft Fikisar. Här kan du se kommande räder, vem som kan crafta vad, vad vi har i guildbank med mera."
+summary: "Samlingsplats för Chromiecraft Fikisar. Här kan du se kommande räder, vem som kan crafta vad, vad vi har i guildbank med mera."
+description: "Samlingsplats för Chromiecraft Fikisar. Här kan du se kommande räder, vem som kan crafta vad, vad vi har i guildbank med mera."
 hideTitle: true
 sidebar:
   hide: true
