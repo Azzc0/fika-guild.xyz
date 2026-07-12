@@ -33,6 +33,10 @@ menu:
         icon: 'discord'
 
 params:
+  title: "Fika"
+  description: "Fika, en svensk World of Warcraft guild op Chromiecraft."
+  images:
+  - https://res.cloudinary.com/dhmmkvcpy/image/upload/banner_lbze4h.png
   theme:
     default: "dark"
     displayToggle: false
