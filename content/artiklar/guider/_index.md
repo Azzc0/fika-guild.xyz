@@ -2,7 +2,7 @@
 title: "Guider"
 type: "docs"
 weight: 3
-prev: /artiklar/start/bugs
+prev: /artiklar/guild/ranker
 next: /artiklar/addons/
 ---
 

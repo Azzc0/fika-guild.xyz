@@ -2,7 +2,7 @@
 title: "Gillet"
 weight: 2
 type: "docs"
-prev: /artiklar/
+prev: /artiklar/start/klientmod
 next: /artiklar/guild/regler
 ---
 

@@ -2,7 +2,7 @@
 title: "Klient Moddar"
 type: "docs"
 prev: /artiklar/start/
-next: /artiklar/start/bugs
+next: /artiklar/guild
 ---
 
 Klientmoddar

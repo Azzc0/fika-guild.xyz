@@ -1,0 +1,18 @@
+{{- $rankId := "" -}}
+{{- if isset .Params 0 -}}
+  {{- $rankId = .Get 0 -}}
+{{- else -}}
+  {{- $rankId = .Get "rank" -}}
+{{- end -}}
+{{- $rankIdStr := string $rankId -}}
+{{- $name := "" -}}
+{{- range .Site.Data.ranks.ranks -}}
+  {{- if eq (string .rank_id) $rankIdStr -}}
+    {{- $name = .name -}}
+  {{- end -}}
+{{- end -}}
+{{- if ne $name "" -}}
+  {{- $name -}}
+{{- else -}}
+  {{- printf "Unknown Rank (%s)" $rankIdStr -}}
+{{- end -}}

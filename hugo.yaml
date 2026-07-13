@@ -29,9 +29,6 @@ menu:
       weight: 90 # Placing it at 90 keeps it cleanly left of your Discord icon button
       params:
         type: 'search'
-    - name: 'Kalender'
-      pageRef: '/kalender'
-      weight: 15       
     - name: 'Discord'
       url: 'https://discord.gg/eqPBBVZSua'
       weight: 100 # Higher weight pushes it to the far right
