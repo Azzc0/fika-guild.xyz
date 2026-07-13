@@ -1,5 +1,49 @@
+{{/* ── Raid schedule card — data fetched & enriched at BUILD time ──────────
+     No runtime fetch() to the worker anymore. Day-relative labels
+     ("Idag"/"Imorgon") are still computed client-side using the visitor's
+     real clock (not build time), so the card stays accurate between builds
+     as long as you rebuild roughly as often as the schedule changes — same
+     assumption your kalender page already relies on. ────────────────────── */}}
+
+{{ $apiBase := "https://fika-api-proxy.robin-askelin.workers.dev/raids" }}
+{{ $listUrl := printf "%s?endpoint=scheduledevents" $apiBase }}
+
+{{/* Only bother enriching (extra API call for forum_tags) events that could
+     plausibly still show in the card's 7-day window by the time of the
+     NEXT rebuild — 10 days gives some slack. Events further out are still
+     embedded (so the "N EVENT" count stays correct) just without a banner
+     tag/color until a later rebuild enriches them. */}}
+{{ $windowEnd := add now.Unix (mul 10 86400) }}
+
+{{ $listData := dict }}
+{{ with resources.GetRemote $listUrl }}
+  {{ $listData = .Content | transform.Unmarshal }}
+{{ else }}
+  {{ warnf "raid-card: failed to fetch scheduled events from %s" $listUrl }}
+{{ end }}
+
+{{ $cardEvents := slice }}
+{{ range $listData.postedEvents }}
+  {{ $ev := . }}
+  {{ $start := int $ev.startTime }}
+  {{ if le $start $windowEnd }}
+    {{ $detailUrl := printf "%s?endpoint=event&eventId=%s" $apiBase $ev.id }}
+    {{ with resources.GetRemote $detailUrl }}
+      {{ $detail := .Content | transform.Unmarshal }}
+      {{ $tags := "" }}
+      {{ with $detail.advancedSettings }}
+        {{ $tags = .forum_tags | default "" }}
+      {{ end }}
+      {{ $ev = merge $ev (dict "forum_tags" $tags) }}
+    {{ else }}
+      {{ warnf "raid-card: failed to fetch detail for event %s" $ev.id }}
+    {{ end }}
+  {{ end }}
+  {{ $cardEvents = $cardEvents | append $ev }}
+{{ end }}
+
 <div class="hextras-card-custom nx-not-prose" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; min-height: 400px; border-radius: 0.5rem; overflow: hidden; border: 1px solid rgba(156, 163, 175, 0.15); background: #1a1b1e; padding: 1.25rem; box-sizing: border-box; font-family: sans-serif; text-align: left;">
-  
+
   <div style="display: flex; flex-direction: column; height: calc(100% - 45px);">
     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
       <div style="display: flex; align-items: center; gap: 0.5rem;">
@@ -10,39 +54,102 @@
     </div>
 
     <div style="font-size: 0.75rem; font-weight: 700; color: #4e5058; text-transform: uppercase; letter-spacing: 0.5px; margin: 0.75rem 0 0.5rem 0;">Kommande vecka</div>
-    
+
     <div id="raid-list-container" style="display: flex; flex-direction: column; gap: 8px; flex-grow: 1; height: 240px; overflow-y: auto; margin-bottom: 1rem; padding-right: 4px;">
       <div style="color: #71717a; font-size: 0.85rem; padding: 4px;">Laddar rädschema...</div>
     </div>
   </div>
 
-  <a href="/evenemang" style="display: block; width: 100%; text-align: center; background: #5865F2; color: #fff; text-decoration: none; padding: 0.55rem; border-radius: 0.375rem; font-size: 0.85rem; font-weight: 500; transition: background 0.2s;">
+  <a href="/kalender" style="display: block; width: 100%; text-align: center; background: #5865F2; color: #fff; text-decoration: none; padding: 0.55rem; border-radius: 0.375rem; font-size: 0.85rem; font-weight: 500; transition: background 0.2s;">
     Visa fullständigt schema
   </a>
+
+  {{/* Data fetched & enriched at build time — no client-side API call. */}}
+  <script type="application/json" id="raid-card-events-data">{{ $cardEvents | jsonify | safeJS }}</script>
+
+  {{/* Same central forum-tag → difficulty-badge lookup as the calendar,
+       sourced from data/forum_tag_badges.yaml — edit that one file, both
+       surfaces update on next build. */}}
+  <script type="application/json" id="raid-card-badges-data">{{ site.Data.forum_tag_badges | jsonify | safeJS }}</script>
+
+  {{/* Same central forum-tag → raid-banner lookup as the calendar,
+       sourced from data/forum_tag_backgrounds.yaml. */}}
+  <script type="application/json" id="raid-card-backgrounds-data">{{ site.Data.forum_tag_backgrounds | jsonify | safeJS }}</script>
 
   <script>
     (function() {
       const DISCORD_SERVER_ID = "1509567817870082048";
-      const API_BASE = "https://fika-api-proxy.robin-askelin.workers.dev/raids";
-      
+
+      // Sourced entirely from data/forum_tag_backgrounds.yaml — same file
+      // and same exact-tag-match convention as the calendar. That file's
+      // order is the priority order (top wins). Entries with no url yet
+      // (placeholder raids before art is uploaded) are skipped.
+      let BACKGROUND_ENTRIES = [];
+      (function loadBackgroundEntries() {
+        const raw = document.getElementById('raid-card-backgrounds-data');
+        try {
+          const entries = JSON.parse(raw?.textContent || "[]");
+          BACKGROUND_ENTRIES = entries
+            .filter(e => e.url)
+            .map(e => ({
+              url: e.url,
+              tagSet: new Set((e.tags || []).map(t => String(t).toLowerCase().trim())),
+            }));
+        } catch (e) {
+          console.error("raid-card: could not parse background data", e);
+        }
+      })();
+
+      function detectRaidImage(tagsStr) {
+        const tags = String(tagsStr || "").split(",").map(t => t.toLowerCase().trim()).filter(Boolean);
+        if (tags.length === 0) return null;
+        for (const entry of BACKGROUND_ENTRIES) {
+          if (tags.some(t => entry.tagSet.has(t))) return entry.url;
+        }
+        return null;
+      }
+
+      function parseColor(colorStr) {
+        if (!colorStr) return [100, 100, 100];
+        const p = String(colorStr).split(",").map(n => parseInt(n.trim(), 10));
+        return (p.length === 3 && p.every(n => !isNaN(n))) ? p : [100, 100, 100];
+      }
+
       const listContainer = document.getElementById('raid-list-container');
       const qtyBadge = document.getElementById('raid-qty');
 
-      function getDifficultyIcon(sizeTag, titleStr, forumTags) {
-        const title = titleStr.toLowerCase();
-        const tags = forumTags.map(t => t.toLowerCase().trim());
-        const isHeroic = title.includes('heroic') || title.includes('hc') || title.includes('hm') || title.includes('hardmode') ||
-                         tags.includes('heroic') || tags.includes('hc') || tags.includes('hm') || tags.includes('hardmode');
-        
-        const size = (sizeTag || '').toLowerCase().replace('m', '');
-        if (size === '25') {
-          return isHeroic 
-            ? "https://res.cloudinary.com/dhmmkvcpy/image/upload/v1783872384/25heroic_d5soiz.png"
-            : "https://res.cloudinary.com/dhmmkvcpy/image/upload/v1783872385/25_cyyzkf.png";
+      // Difficulty badges are driven ENTIRELY by forum_tags, matched
+      // exactly (case-insensitively) against data/forum_tag_badges.yaml —
+      // the same file the calendar reads. That file is the single source
+      // of truth; add/relabel tags there, not here. No regex guessing:
+      // an unmapped tag (guild meeting, dungeon run, etc.) just gets no
+      // badge, which is correct until you add an entry for it.
+      let BADGE_LOOKUP = {};
+      (function loadBadgeLookup() {
+        const raw = document.getElementById('raid-card-badges-data');
+        try {
+          const entries = JSON.parse(raw?.textContent || "[]");
+          entries.forEach(entry => {
+            (entry.tags || []).forEach(tag => {
+              BADGE_LOOKUP[String(tag).toLowerCase().trim()] = entry.url;
+            });
+          });
+        } catch (e) {
+          console.error("raid-card: could not parse badge data", e);
         }
-        return isHeroic 
-          ? "https://res.cloudinary.com/dhmmkvcpy/image/upload/v1783872384/10heroic_hbdwj7.png"
-          : "https://res.cloudinary.com/dhmmkvcpy/image/upload/v1783872386/10_d7ojfl.png";
+      })();
+
+      // Returns { badgeUrl, size } from an event's forum_tags string, or
+      // nulls if no tag matched anything in the lookup.
+      function resolveDifficulty(tags) {
+        const list = String(tags || "").split(",").map(t => t.toLowerCase().trim()).filter(Boolean);
+        for (const tag of list) {
+          if (BADGE_LOOKUP[tag]) {
+            const sizeMatch = tag.match(/(\d+)/);
+            return { badgeUrl: BADGE_LOOKUP[tag], size: sizeMatch ? sizeMatch[1] : null };
+          }
+        }
+        return { badgeUrl: null, size: null };
       }
 
       function getRelativeDayName(eventDate, nowDate) {
@@ -52,105 +159,112 @@
 
         if (diffDays === 0) return "Idag";
         if (diffDays === 1) return "Imorgon";
-        
+
         const weekdayNames = ["Sön", "Mån", "Tis", "Ons", "Tor", "Fre", "Lör"];
         return weekdayNames[eventDate.getDay()];
       }
 
-      async function fetchRaidSchedule() {
+      function renderRaidSchedule() {
+        const raw = document.getElementById('raid-card-events-data');
+        let cardEvents = [];
         try {
-          const response = await fetch(API_BASE + "?endpoint=scheduledevents");
-          if (!response.ok) throw new Error("Network response error");
-          const data = await response.json();
-          
-          const now = new Date();
-          
-          // Total pool of active future events
-          const futureEvents = (data.postedEvents || []).map(e => {
-            e.eventDate = new Date(e.startTime * 1000);
-            return e;
-          }).filter(e => e.eventDate >= now);
-
-          // Universal count badge text update
-          const eventWord = futureEvents.length === 1 ? " EVENT" : " EVENT";
-          qtyBadge.textContent = futureEvents.length + eventWord;
-
-          // Filter view list strictly to the rolling 7 days
-          const oneWeekFromNow = new Date();
-          oneWeekFromNow.setDate(now.getDate() + 7);
-          
-          const weekEvents = futureEvents
-            .filter(e => e.eventDate <= oneWeekFromNow)
-            .sort((a, b) => a.eventDate - b.eventDate);
-
-          if (weekEvents.length === 0) {
-            listContainer.innerHTML = '<div style="color: #71717a; font-size: 0.85rem; padding: 4px;">Inga planerade event närmsta 7 dagarna.</div>';
-            return;
-          }
-
-          let htmlOutput = "";
-          
-          for (let i = 0; i < weekEvents.length; i++) {
-            const event = weekEvents[i];
-            
-            let sizeTag = null;
-            let forumTags = [];
-            if (event.advancedSettings && event.advancedSettings.forum_tags) {
-              const rawTags = event.advancedSettings.forum_tags.split(',').map(t => t.trim());
-              for (let j = 0; j < rawTags.length; j++) {
-                const tag = rawTags[j];
-                if (!tag) continue;
-                if (/^\d+m$/i.test(tag) && !sizeTag) {
-                  sizeTag = tag;
-                } else {
-                  forumTags.push(tag);
-                }
-              }
-            }
-
-            const finalImageUrl = getDifficultyIcon(sizeTag, event.title, forumTags);
-            const dayLabel = getRelativeDayName(event.eventDate, now);
-            const timeString = event.eventDate.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' });
-            const signUps = typeof event.signUpCount !== 'undefined' ? event.signUpCount : (event.signUps ? event.signUps.length : 0);
-            
-            const discordLink = "https://discord.com/channels/" + DISCORD_SERVER_ID + "/" + event.channelId + "/" + event.id;
-            
-            let metaSegments = [dayLabel + " kl " + timeString];
-            if (sizeTag) {
-              metaSegments.push("(" + signUps + "/" + sizeTag.slice(0, -1) + ")");
-            }
-            if (event.leaderName) {
-              metaSegments.push("Ledare: " + event.leaderName);
-            }
-            
-            const metaDisplay = metaSegments.join(" • ");
-
-            htmlOutput += '<div style="display: flex; align-items: center; gap: 0.65rem; padding: 2px 4px; width: 100%; box-sizing: border-box;">';
-            
-            // Difficulty Icon
-            htmlOutput += '  <div style="position: relative; display: flex; flex-shrink: 0; width: 24px; height: 24px; background: transparent; overflow: hidden; align-items: center; justify-content: center;">';
-            htmlOutput += '    <img src="' + finalImageUrl + '" alt="" style="width: 100%; height: 100%; object-fit: contain;">';
-            htmlOutput += '  </div>';
-            
-            // Content Block
-            htmlOutput += '  <div style="display: flex; flex-direction: column; overflow: hidden; flex-grow: 1; min-width: 0;">';
-            htmlOutput += '    <div style="display: flex; align-items: baseline; gap: 0.35rem; width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">';
-            htmlOutput += '      <a href="' + discordLink + '" target="_blank" style="text-decoration: none; color: #dbdee1; font-size: 0.85rem; font-weight: 500; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">' + event.title + '</a>';
-            htmlOutput += '    </div>';
-            htmlOutput += '    <span style="color: #949ba4; font-size: 0.7rem; display: block; width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">';
-            htmlOutput += '      ' + metaDisplay;
-            htmlOutput += '    </span>';
-            htmlOutput += '  </div>';
-            htmlOutput += '</div>';
-          }
-
-          listContainer.innerHTML = htmlOutput;
-        } catch (error) {
-          listContainer.innerHTML = '<div style="color: #ef4444; font-size: 0.85rem; padding: 4px;">Kunde inte hämta rädschemat.</div>';
+          cardEvents = JSON.parse(raw?.textContent || "[]") || [];
+        } catch (e) {
+          console.error("raid-card: could not parse embedded event data", e);
         }
+
+        const now = new Date();
+
+        // Total pool of active future events (embedded at build time)
+        const futureEvents = cardEvents.map(e => {
+          e.eventDate = new Date(e.startTime * 1000);
+          return e;
+        }).filter(e => e.eventDate >= now);
+
+        qtyBadge.textContent = futureEvents.length + " EVENT";
+
+        // View list strictly limited to the rolling 7 days, computed against
+        // the VISITOR's real clock (not build time).
+        const oneWeekFromNow = new Date();
+        oneWeekFromNow.setDate(now.getDate() + 7);
+
+        const weekEvents = futureEvents
+          .filter(e => e.eventDate <= oneWeekFromNow)
+          .sort((a, b) => a.eventDate - b.eventDate);
+
+        if (weekEvents.length === 0) {
+          listContainer.innerHTML = '<div style="color: #71717a; font-size: 0.85rem; padding: 4px;">Inga planerade event närmsta 7 dagarna.</div>';
+          return;
+        }
+
+        let htmlOutput = "";
+
+        for (let i = 0; i < weekEvents.length; i++) {
+          const event = weekEvents[i];
+
+          const { badgeUrl, size } = resolveDifficulty(event.forum_tags);
+          const bannerUrl = detectRaidImage(event.forum_tags);
+          const [r, g, b] = parseColor(event.color);
+          const dayLabel = getRelativeDayName(event.eventDate, now);
+          const timeString = event.eventDate.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' });
+          const signUps = typeof event.signUpCount !== 'undefined' ? event.signUpCount : (event.signUps ? event.signUps.length : 0);
+
+          const discordLink = "https://discord.com/channels/" + DISCORD_SERVER_ID + "/" + event.channelId + "/" + event.id;
+
+          let metaSegments = [dayLabel + " kl " + timeString];
+          if (size) {
+            metaSegments.push("(" + signUps + "/" + size + ")");
+          }
+        //   if (event.leaderName) {
+        //     metaSegments.push("Ledare: " + event.leaderName);
+        //   }
+
+          const metaDisplay = metaSegments.join(" • ");
+
+          // Row background: raid banner art if we matched one, faded on all
+          // four edges (vignette) so it dissolves into the card background
+          // instead of cutting off hard against neighboring rows. Rows with
+          // no matched banner (guild meetings, dungeons, anything untagged)
+          // just get a flat tint from the event's own color — set via
+          // background-color, not background-image, since a plain color is
+          // not a valid background-image value.
+          const rowStyleBase = `display: flex; align-items: center; gap: 0.65rem; padding: 4px 6px; width: 100%; box-sizing: border-box; border-left: 3px solid rgb(${r},${g},${b}); border-radius: 4px; background-repeat: no-repeat;`;
+
+          const rowStyle = bannerUrl
+            ? `${rowStyleBase} background-color: #1a1b1e; background-image:
+                 linear-gradient(to bottom, rgba(26,27,30,0.96) 0%, rgba(26,27,30,0.45) 30%, rgba(26,27,30,0.45) 70%, rgba(26,27,30,0.96) 100%),
+                 linear-gradient(to right, rgba(26,27,30,0.92) 0%, rgba(26,27,30,0.35) 45%, rgba(26,27,30,0.8) 100%),
+                 url('${bannerUrl}');
+               background-size: cover, cover, cover; background-position: center, center, center;`
+            : `${rowStyleBase} background-color: rgba(${r},${g},${b},0.08);`;
+
+          htmlOutput += `<div style="${rowStyle}">`;
+
+          // Difficulty icon — only rendered when a raid size was actually
+          // identified. No guessing: guild meetings, dungeons, and anything
+          // untagged simply show no icon here.
+          if (badgeUrl) {
+            htmlOutput += '  <div style="position: relative; display: flex; flex-shrink: 0; width: 24px; height: 24px; background: transparent; overflow: hidden; align-items: center; justify-content: center;">';
+            htmlOutput += '    <img src="' + badgeUrl + '" alt="" style="width: 100%; height: 100%; object-fit: contain;">';
+            htmlOutput += '  </div>';
+          }
+
+          // Content Block
+          htmlOutput += '  <div style="display: flex; flex-direction: column; overflow: hidden; flex-grow: 1; min-width: 0;">';
+          htmlOutput += '    <div style="display: flex; align-items: baseline; gap: 0.35rem; width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">';
+          htmlOutput += '      <a href="' + discordLink + '" target="_blank" style="text-decoration: none; color: #dbdee1; font-size: 0.85rem; font-weight: 500; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">' + event.title + '</a>';
+          htmlOutput += '    </div>';
+          htmlOutput += '    <span style="color: #949ba4; font-size: 0.7rem; display: block; width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">';
+          htmlOutput += '      ' + metaDisplay;
+          htmlOutput += '    </span>';
+          htmlOutput += '  </div>';
+          htmlOutput += '</div>';
+        }
+
+        listContainer.innerHTML = htmlOutput;
       }
 
-      fetchRaidSchedule();
+      renderRaidSchedule();
     })();
   </script>
 </div>

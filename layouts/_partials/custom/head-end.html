@@ -21,6 +21,17 @@
   {{- end -}}
 {{ end }}
 
+{{ if eq .Section "kalender" }}
+  {{- with resources.Get "css/calendar.css" -}}
+    {{- $css := . | resources.Minify | resources.Fingerprint -}}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{- end -}}
+  {{- with resources.Get "js/calendar.js" -}}
+    {{- $js := . | resources.Minify | resources.Fingerprint -}}
+    <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+  {{- end -}}
+{{ end }}
+
 {{ if eq .Section "medlemslista" }}
   {{- with resources.Get "css/roster.css" -}}
     {{- $css := . | resources.Minify | resources.Fingerprint -}}

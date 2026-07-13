@@ -21,7 +21,7 @@ const CLASS_EMOJI = {
 };
 
 // ── Role data ─────────────────────────────────────────────────────────────────
-const ROLE_SRC = { tank:"/img/tank.png", heal:"/img/heal.png", dps:"/img/dps.png" };
+const ROLE_SRC = { tank:"https://res.cloudinary.com/dhmmkvcpy/image/upload/v1783882546/tank_hwrbwi.png", heal:"https://res.cloudinary.com/dhmmkvcpy/image/upload/v1783882545/heal_nhnuvj.png", dps:"https://res.cloudinary.com/dhmmkvcpy/image/upload/v1783882544/dps_nr2vpp.png" };
 
 const normalizeRole = (specStr) => {
     if (!specStr || specStr === "EMPTY") return null;

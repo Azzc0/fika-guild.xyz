@@ -29,6 +29,9 @@ menu:
       weight: 90 # Placing it at 90 keeps it cleanly left of your Discord icon button
       params:
         type: 'search'
+    - name: 'Kalender'
+      pageRef: '/kalender'
+      weight: 15       
     - name: 'Discord'
       url: 'https://discord.gg/eqPBBVZSua'
       weight: 100 # Higher weight pushes it to the far right
@@ -86,11 +89,8 @@ mediaTypes:
 
 caches:
   getresource:
-    resourceDir: :cacheDir/getresource
-    maxAge: '14h' # Default cache time for standard assets
-    rules:
-      - pattern: 'https://azzco\.xyz/data/.*'
-        maxAge: 0s # NEVER cache your professions data
+    dir: ':cacheDir/:project'
+    maxAge: 0
 
 security:
   enableInlineShortcodes: false
@@ -118,6 +118,7 @@ security:
       - 'https://wowgaming.altervista.org/*'
       - 'https://cdn.jsdelivr.net/*'
       - 'https://azzco.xyz/*'
+      - 'https://fika-api-proxy.robin-askelin.workers.dev/*'
     mediaTypes:
       - '^text/html$'
       - '^text/xml$'

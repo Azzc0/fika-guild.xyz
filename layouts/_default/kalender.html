@@ -1,0 +1,78 @@
+{{ define "main" }}
+
+{{/* ── Fetch events at build time ───────────────────────────────────────── */}}
+{{ $eventsData := dict }}
+{{ $apiBase := "https://fika-api-proxy.robin-askelin.workers.dev/raids" }}
+{{ $listUrl := printf "%s?endpoint=scheduledevents" $apiBase }}
+
+{{ with resources.GetRemote $listUrl }}
+  {{ $eventsData = .Content | transform.Unmarshal }}
+{{ else }}
+  {{ warnf "kalender: failed to fetch scheduled events from %s" $listUrl }}
+{{ end }}
+
+{{/* ── Enrich each event with forum_tags from the detail API ─────────── */}}
+{{ $enriched := slice }}
+{{ range $eventsData.postedEvents }}
+  {{ $ev := . }}
+  {{ $detailUrl := printf "%s?endpoint=event&eventId=%s" $apiBase .id }}
+  {{ with resources.GetRemote $detailUrl }}
+    {{ $detail := .Content | transform.Unmarshal }}
+    {{ $tags := "" }}
+    {{ with $detail.advancedSettings }}
+      {{ $tags = .forum_tags | default "" }}
+    {{ end }}
+    {{ $ev = merge $ev (dict "forum_tags" $tags) }}
+  {{ else }}
+    {{ warnf "kalender: failed to fetch detail for event %s" $ev.id }}
+  {{ end }}
+  {{ $enriched = $enriched | append $ev }}
+{{ end }}
+{{ $eventsData = merge $eventsData (dict "postedEvents" $enriched) }}
+
+<div class="cal-page">
+
+    <div id="cal-detail-backdrop" class="detail-backdrop"></div>
+
+    <div class="cal-layout">
+
+        <section class="cal-left">
+
+            <div class="cal-header">
+                <button id="cal-prev" class="cal-nav-btn" aria-label="Föregående månad">&#8249;</button>
+                <h2 id="cal-month-label" class="cal-month-label"></h2>
+                <button id="cal-next" class="cal-nav-btn" aria-label="Nästa månad">&#8250;</button>
+            </div>
+
+            <div class="cal-weekdays">
+                <span>Sön</span><span>Mån</span><span>Tis</span>
+                <span>Ons</span><span>Tor</span><span>Fre</span><span>Lör</span>
+            </div>
+
+            <div id="cal-grid" class="cal-grid"></div>
+
+        </section>
+
+        <aside class="cal-right">
+            <div id="cal-detail" class="detail-panel">
+                <div class="detail-empty">Välj ett event för att se detaljer.</div>
+            </div>
+        </aside>
+
+    </div>
+
+</div>
+
+{{/* Embed build-time event data for the JS to consume */}}
+<script id="cal-events-data" type="application/json">{{ $eventsData | jsonify | safeJS }}</script>
+
+{{/* Central forum-tag → difficulty-badge lookup, maintained in data/forum_tag_badges.yaml.
+     Same blob is embedded on the raid card — edit the one file, both surfaces update. */}}
+<script id="forum-tag-badges-data" type="application/json">{{ site.Data.forum_tag_badges | jsonify | safeJS }}</script>
+
+{{/* Central forum-tag → raid-banner lookup, maintained in data/forum_tag_backgrounds.yaml.
+     Order in that file is the display priority (top wins) when several
+     events land on the same day. Same blob is embedded on the raid card. */}}
+<script id="forum-tag-backgrounds-data" type="application/json">{{ site.Data.forum_tag_backgrounds | jsonify | safeJS }}</script>
+
+{{ end }}

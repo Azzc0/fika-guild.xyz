@@ -31,7 +31,7 @@
 
   container.innerHTML = `
     <div style="padding: 0.75rem 1.25rem; width: 100%; box-sizing: border-box;">
-      <h4 style="margin: 0 0 0.4rem 0; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; opacity: 0.5;">Online just nu</h4>
+      <h4 style="margin: 0 0 0.4rem 0; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; opacity: 0.5; white-space: nowrap;">Online just nu</h4>
       <ul class="list-{{ $randId }}" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.45rem; max-height: 125px; overflow-y: auto;"></ul>
     </div>
   `;
@@ -56,14 +56,14 @@
       }
 
       listEl.innerHTML = online.sort((a,b) => a.rank - b.rank).map(m => `
-        <li style="display:flex; align-items:center; gap:0.4rem; font-size:0.85rem;">
-          ${classEmojiIds[m.classId] ? `<img src="https://cdn.discordapp.com/emojis/${classEmojiIds[m.classId]}.png" style="width:13px;height:13px;">` : ''}
-          <a href="https://chromiecraft.com/en/armory/?character/ChromieCraft/${encodeURIComponent(m.name)}" 
-             style="text-decoration:none; font-weight:600; color:inherit; pointer-events:auto;"
+        <li style="display:flex; align-items:center; gap:0.4rem; font-size:0.85rem; white-space:nowrap;">
+          ${classEmojiIds[m.classId] ? `<img src="https://cdn.discordapp.com/emojis/${classEmojiIds[m.classId]}.png" style="width:13px;height:13px;flex-shrink:0;">` : ''}
+          <a href="https://chromiecraft.com/en/armory/?character/WOW/${encodeURIComponent(m.name)}" 
+             style="text-decoration:none; font-weight:600; color:inherit; pointer-events:auto; overflow:hidden; text-overflow:ellipsis;"
              onclick="event.stopPropagation()">
              ${m.name}
           </a>
-          <span style="margin-left:auto; color:#71717a;">${m.level}</span>
+          <span style="margin-left:auto; color:#71717a; padding-left:0.25rem; flex-shrink:0;">${m.level}</span>
         </li>
       `).join('');
     } catch(e) { listEl.innerHTML = '<li style="font-size:0.85rem; opacity:0.5;">Data saknas</li>'; }
