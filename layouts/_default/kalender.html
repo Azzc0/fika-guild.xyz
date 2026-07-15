@@ -30,6 +30,10 @@
 {{ end }}
 {{ $eventsData = merge $eventsData (dict "postedEvents" $enriched) }}
 
+{{/* Create a clean events.json file at build-time in the site root */}}
+  {{ $eventsJSON := resources.FromString "events.json" ($eventsData | jsonify) }}
+  {{ $noop := $eventsJSON.Permalink }}
+
 <div class="cal-page">
 
     <div id="cal-detail-backdrop" class="detail-backdrop"></div>
