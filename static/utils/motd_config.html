@@ -28,23 +28,20 @@
         <h1 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
           <span>📜 MOTD Rotation Editor</span>
         </h1>
-        <p class="text-sm text-slate-400 mt-1">Manage message pools, rotation ranges, and daily overrides.</p>
+        <p class="text-sm text-slate-400 mt-1">Manage message pools, stacked ranges, and advanced overrides with live UTF-8 byte checks.</p>
       </div>
       
       <div class="flex flex-wrap items-center gap-3">
-        <!-- Load Hosted -->
         <button @click="fetchHostedConfig" :disabled="loading" 
           class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-sm font-medium rounded-lg transition flex items-center gap-2 border border-slate-700">
           <span>🔄 Reload Hosted File</span>
         </button>
 
-        <!-- Load Local -->
         <label class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-sm font-medium rounded-lg transition cursor-pointer border border-slate-700 flex items-center gap-2">
           <span>📂 Load Local File</span>
           <input type="file" accept=".json" @change="loadLocalFile" class="hidden">
         </label>
 
-        <!-- Download -->
         <button @click="downloadConfig" 
           class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white text-sm font-medium rounded-lg shadow-lg shadow-brand-500/20 transition flex items-center gap-2">
           <span>💾 Download JSON</span>
@@ -74,28 +71,60 @@
             <input v-model="model.fireTime" type="time" 
               class="bg-slate-900 border border-slate-700 rounded-md px-3 py-1.5 text-white focus:outline-none focus:border-brand-500 font-mono">
           </div>
-          <p class="text-xs text-slate-500 mt-2">If missing or invalid, the bot defaults to 06:00.</p>
+        </section>
+
+        <!-- Quick-Add Presets Toolbar -->
+        <section class="bg-gradient-to-r from-slate-800/80 to-slate-800/30 border border-slate-800 rounded-xl p-5">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-2">⚡ Quick-Add Seasonal & Holiday Presets</h2>
+          <p class="text-xs text-slate-400 mb-4">Adds a seasonal theme pool and its calendar window. Since overlapping ranges now stack together natively, all active ranges will blend automatically!</p>
+          <div class="flex flex-wrap gap-2">
+            <button @click="applyPreset('spring', '03-01', '05-31', 1.0)" class="px-3 py-1.5 bg-emerald-950/60 hover:bg-emerald-900/80 border border-emerald-700/50 text-emerald-300 text-xs font-medium rounded-lg transition">🌱 Spring (Mar-May)</button>
+            <button @click="applyPreset('summer', '06-01', '08-31', 0.8)" class="px-3 py-1.5 bg-amber-950/60 hover:bg-amber-900/80 border border-amber-700/50 text-amber-300 text-xs font-medium rounded-lg transition">☀️ Summer (Jun-Aug)</button>
+            <button @click="applyPreset('autumn', '09-01', '11-30', 1.0)" class="px-3 py-1.5 bg-orange-950/60 hover:bg-orange-900/80 border border-orange-700/50 text-orange-300 text-xs font-medium rounded-lg transition">🍂 Autumn (Sep-Nov)</button>
+            <button @click="applyPreset('winter', '12-01', '02-28', 1.0)" class="px-3 py-1.5 bg-cyan-950/60 hover:bg-cyan-900/80 border border-cyan-700/50 text-cyan-300 text-xs font-medium rounded-lg transition">❄️ Winter (Dec-Feb)</button>
+            <button @click="applyPreset('midsummer', '06-19', '06-21', 1.5)" class="px-3 py-1.5 bg-yellow-950/60 hover:bg-yellow-900/80 border border-yellow-700/50 text-yellow-300 text-xs font-medium rounded-lg transition">🇸🇪 Midsummer Week</button>
+            <button @click="applyPreset('halloween', '10-15', '11-01', 0.7)" class="px-3 py-1.5 bg-purple-950/60 hover:bg-purple-900/80 border border-purple-700/50 text-purple-300 text-xs font-medium rounded-lg transition">🎃 Halloween</button>
+          </div>
         </section>
 
         <!-- Pools Editor -->
         <section class="bg-slate-800/50 border border-slate-800 rounded-xl p-5">
-          <div class="flex justify-between items-center mb-4">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-slate-800">
             <div>
               <h2 class="text-lg font-semibold text-slate-200">📦 Message Pools</h2>
-              <p class="text-xs text-slate-400">Named buckets of candidate messages. Blended against the default pool by weight.</p>
+              <p class="text-xs text-slate-400">Configure core pools, adjust roll weights, and manage contextual flags.</p>
             </div>
-            <button @click="addPool" class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-xs font-medium rounded-md transition">+ Add Pool</button>
+            
+            <form @submit.prevent="addCustomPool" class="flex items-center gap-2 w-full sm:w-auto">
+              <input v-model="newPoolName" placeholder="New pool name..." 
+                class="bg-slate-900 border border-slate-700 rounded px-3 py-1.5 text-sm font-mono focus:outline-none focus:border-brand-500 w-full sm:w-44">
+              <button type="submit" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-500 text-white text-xs font-medium rounded-md transition whitespace-nowrap">+ Add Pool</button>
+            </form>
           </div>
 
-          <div class="space-y-4">
-            <div v-for="(pool, idx) in model.pools" :key="idx" class="bg-slate-900/80 border border-slate-700/80 rounded-lg p-4">
-              <div class="flex flex-wrap justify-between items-center gap-4 mb-3 pb-3 border-b border-slate-800">
-                <div class="flex items-center gap-3">
-                  <input v-model="pool.name" placeholder="Pool Name (e.g. default)" 
-                    :disabled="pool.name === 'default'"
-                    class="bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono font-bold text-brand-500 focus:outline-none focus:border-brand-500 disabled:opacity-70">
-                  <span v-if="pool.name === 'default'" class="text-[10px] bg-brand-500/10 text-brand-500 border border-brand-500/20 px-1.5 py-0.5 rounded uppercase font-semibold">Required</span>
+          <div class="space-y-6">
+            <div v-for="(pool, idx) in model.pools" :key="idx" class="bg-slate-900/80 border border-slate-700/80 rounded-lg p-4 space-y-3">
+              <!-- Top bar controls -->
+              <div class="flex flex-wrap justify-between items-start gap-4 pb-3 border-b border-slate-800">
+                <div class="space-y-1">
+                  <div class="flex items-center gap-3">
+                    <input v-model="pool.name" placeholder="Pool Name" 
+                      :disabled="pool.name === 'default'"
+                      class="bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono font-bold text-brand-500 focus:outline-none focus:border-brand-500 disabled:opacity-70">
+                    
+                    <!-- Always Active Flag Toggle -->
+                    <label v-if="pool.name !== 'default'" class="inline-flex items-center gap-1.5 text-xs text-slate-400 cursor-pointer select-none">
+                      <input type="checkbox" v-model="pool.alwaysActive" class="rounded border-slate-700 bg-slate-800 text-brand-600 focus:ring-0">
+                      <span>Always Active</span>
+                    </label>
+                    <span v-else class="text-[10px] bg-brand-500/10 text-brand-500 border border-brand-500/20 px-1.5 py-0.5 rounded uppercase font-semibold">Implicitly Active</span>
+                  </div>
+                  
+                  <!-- Metadata Identification Description Field -->
+                  <input v-model="pool.description" placeholder="Add custom meta description for this theme (ignored by backend)..."
+                    class="w-full bg-transparent border-none placeholder-slate-600 focus:ring-0 text-xs text-slate-400 p-0 italic">
                 </div>
+
                 <div class="flex items-center gap-3">
                   <label class="text-xs text-slate-400">Weight:</label>
                   <input v-model.number="pool.weight" type="number" step="0.1" min="0" 
@@ -107,10 +136,18 @@
               <!-- Messages List -->
               <div class="space-y-2">
                 <label class="text-xs font-medium text-slate-400">Messages ({{ pool.messages.length }}):</label>
-                <div v-for="(msg, mIdx) in pool.messages" :key="mIdx" class="flex gap-2">
-                  <input v-model="pool.messages[mIdx]" type="text" placeholder="Enter MOTD message string..."
-                    class="flex-1 bg-slate-800 border border-slate-700 rounded px-3 py-1 text-sm focus:outline-none focus:border-brand-500">
-                  <button @click="pool.messages.splice(mIdx, 1)" class="px-2 text-slate-500 hover:text-red-400">✕</button>
+                <div v-for="(msg, mIdx) in pool.messages" :key="mIdx" class="space-y-1">
+                  <div class="flex gap-2 items-center">
+                    <input v-model="pool.messages[mIdx]" type="text" placeholder="Enter MOTD message string..."
+                      class="flex-1 bg-slate-800 border border-slate-700 rounded px-3 py-1 text-sm focus:outline-none focus:border-brand-500">
+                    <button @click="pool.messages.splice(mIdx, 1)" class="px-2 text-slate-500 hover:text-red-400">✕</button>
+                  </div>
+                  <!-- Byte counter indicator -->
+                  <div class="flex justify-end text-[10px] pr-8 font-mono">
+                    <span :class="getByteLength(pool.messages[mIdx]) > 255 ? 'text-red-400 font-bold' : 'text-slate-500'">
+                      {{ getByteLength(pool.messages[mIdx]) }} / 255 bytes
+                    </span>
+                  </div>
                 </div>
                 <button @click="pool.messages.push('')" class="text-xs text-brand-500 hover:underline pt-1 inline-block">+ Add Message</button>
               </div>
@@ -123,7 +160,7 @@
           <div class="flex justify-between items-center mb-4">
             <div>
               <h2 class="text-lg font-semibold text-slate-200">📅 Date Ranges</h2>
-              <p class="text-xs text-slate-400">Recurring (MM-dd) or absolute (yyyy-MM-dd) date windows. <strong class="text-amber-400">First match wins!</strong></p>
+              <p class="text-xs text-slate-400">Overlapping active windows stack dynamically into a unified daily lottery mix.</p>
             </div>
             <button @click="addRange" class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-xs font-medium rounded-md transition">+ Add Range</button>
           </div>
@@ -133,7 +170,7 @@
           <div class="space-y-3">
             <div v-for="(range, idx) in model.ranges" :key="idx" class="flex flex-wrap items-center gap-3 bg-slate-900/80 border border-slate-700/80 rounded-lg p-3">
               <div class="flex flex-col">
-                <span class="text-[10px] text-slate-500 font-mono">#{{ idx + 1 }} Target Pool</span>
+                <span class="text-[10px] text-slate-500 font-mono">Target Pool</span>
                 <select v-model="range.name" class="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-sm text-brand-500 font-mono focus:outline-none">
                   <option v-for="p in model.pools" :key="p.name" :value="p.name">{{ p.name }}</option>
                 </select>
@@ -141,19 +178,15 @@
               
               <div class="flex flex-col flex-1 min-w-[120px]">
                 <span class="text-[10px] text-slate-500 font-mono">Start (MM-dd / yyyy-MM-dd)</span>
-                <input v-model="range.start" placeholder="e.g. 10-15 or 2026-04-02" class="bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono focus:outline-none focus:border-brand-500">
+                <input v-model="range.start" placeholder="e.g. 06-01" class="bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono focus:outline-none focus:border-brand-500">
               </div>
 
               <div class="flex flex-col flex-1 min-w-[120px]">
                 <span class="text-[10px] text-slate-500 font-mono">End (MM-dd / yyyy-MM-dd)</span>
-                <input v-model="range.end" placeholder="e.g. 11-01 or 2026-04-17" class="bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono focus:outline-none focus:border-brand-500">
+                <input v-model="range.end" placeholder="e.g. 08-31" class="bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono focus:outline-none focus:border-brand-500">
               </div>
 
-              <div class="flex items-center gap-1 self-end pb-1">
-                <button @click="moveRange(idx, -1)" :disabled="idx === 0" class="p-1 text-slate-400 hover:text-white disabled:opacity-30" title="Move Up">▲</button>
-                <button @click="moveRange(idx, 1)" :disabled="idx === model.ranges.length - 1" class="p-1 text-slate-400 hover:text-white disabled:opacity-30" title="Move Down">▼</button>
-                <button @click="model.ranges.splice(idx, 1)" class="p-1 text-red-400 hover:text-red-300 ml-1">🗑️</button>
-              </div>
+              <button @click="model.ranges.splice(idx, 1)" class="p-1 text-red-400 hover:text-red-300 self-end pb-1.5">🗑️</button>
             </div>
           </div>
         </section>
@@ -161,7 +194,7 @@
         <!-- Days of Week Editor -->
         <section class="bg-slate-800/50 border border-slate-800 rounded-xl p-5">
           <h2 class="text-lg font-semibold text-slate-200 mb-1">🗓️ Day of Week Overrides</h2>
-          <p class="text-xs text-slate-400 mb-4">Map specific weekdays to a pool. Unassigned days default to the standard selection.</p>
+          <p class="text-xs text-slate-400 mb-4">Map specific weekdays to contribute a pool's weights to today's active blend selection.</p>
           
           <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
             <div v-for="day in weekdays" :key="day" class="bg-slate-900/80 border border-slate-700/80 rounded-lg p-2.5 flex flex-col">
@@ -178,19 +211,50 @@
         <section class="bg-slate-800/50 border border-slate-800 rounded-xl p-5">
           <div class="flex justify-between items-center mb-4">
             <div>
-              <h2 class="text-lg font-semibold text-slate-200">🎯 Exact Date Overrides</h2>
-              <p class="text-xs text-slate-400">Exact MM-dd matches return literal strings immediately, bypassing all pools and weights.</p>
+              <h2 class="text-lg font-semibold text-slate-200">🎯 Exact Date Options</h2>
+              <p class="text-xs text-slate-400">Configure absolute entries as hard-line bypasses or soft-weighted lottery entries.</p>
             </div>
             <button @click="addDate" class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-xs font-medium rounded-md transition">+ Add Date</button>
           </div>
 
           <div v-if="model.dates.length === 0" class="text-xs text-slate-500 italic py-2">No exact dates configured.</div>
 
-          <div class="space-y-3">
-            <div v-for="(item, idx) in model.dates" :key="idx" class="flex items-center gap-3 bg-slate-900/80 border border-slate-700/80 rounded-lg p-3">
-              <input v-model="item.date" placeholder="MM-dd (e.g. 12-24)" class="w-28 bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono focus:outline-none focus:border-brand-500">
-              <input v-model="item.message" placeholder="Literal message string..." class="flex-1 bg-slate-800 border border-slate-700 rounded px-3 py-1 text-sm focus:outline-none focus:border-brand-500">
-              <button @click="model.dates.splice(idx, 1)" class="text-red-400 hover:text-red-300 px-1">🗑️</button>
+          <div class="space-y-4">
+            <div v-for="(item, idx) in model.dates" :key="idx" class="bg-slate-900/80 border border-slate-700/80 rounded-lg p-3 space-y-2">
+              <div class="flex flex-wrap items-center gap-3">
+                <input v-model="item.date" placeholder="MM-dd" class="w-24 bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono focus:outline-none focus:border-brand-500">
+                
+                <!-- Format selector (String vs Object configuration) -->
+                <select v-model="item.isObject" :value="item.isObject" @change="toggleDateStructure(item)"
+                  class="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs font-semibold text-slate-300 focus:outline-none">
+                  <option :value="false">Plain String (Hard Override)</option>
+                  <option :value="true">Advanced Object Configuration</option>
+                </select>
+
+                <!-- Nested weight and override configs if object layout selected -->
+                <div v-if="item.isObject" class="flex items-center gap-4 border-l border-slate-700 pl-4 py-0.5">
+                  <label class="text-xs text-slate-400 flex items-center gap-1">
+                    <input type="checkbox" v-model="item.hardOverride" class="rounded border-slate-700 bg-slate-800 text-brand-600 focus:ring-0">
+                    <span>Hard Override</span>
+                  </label>
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-400">Weight:</span>
+                    <input v-model.number="item.weight" type="number" step="0.1" min="0" 
+                      class="bg-slate-800 border border-slate-700 rounded w-16 px-1.5 py-0.5 text-xs font-mono text-right focus:outline-none">
+                  </div>
+                </div>
+
+                <button @click="model.dates.splice(idx, 1)" class="text-red-400 hover:text-red-300 ml-auto text-sm">🗑️</button>
+              </div>
+
+              <div class="space-y-1">
+                <input v-model="item.message" placeholder="Enter override message string..." class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1 text-sm focus:outline-none focus:border-brand-500">
+                <div class="flex justify-end text-[10px] font-mono">
+                  <span :class="getByteLength(item.message) > 255 ? 'text-red-400 font-bold' : 'text-slate-500'">
+                    {{ getByteLength(item.message) }} / 255 bytes
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -228,18 +292,25 @@
         const loading = ref(false)
         const statusMsg = ref('')
         const statusType = ref('success')
+        const newPoolName = ref('')
         const weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 
-        // Reactive internal model
+        const encoder = new TextEncoder()
+
         const model = ref({
           fireTime: '06:00',
-          pools: [{ name: 'default', weight: 1.0, messages: ['Welcome to the guild!'] }],
+          pools: [{ name: 'default', weight: 0.3, alwaysActive: false, description: 'Default fallback messages', messages: [''] }],
           ranges: [],
           days: { monday: '', tuesday: '', wednesday: '', thursday: '', friday: '', saturday: '', sunday: '' },
           dates: []
         })
 
-        // Convert raw JSON object to internal editing array model
+        // Live helper to calculate exact string byte footprint (UTF-8 multi-byte processing)
+        const getByteLength = (str) => {
+          if (!str) return 0
+          return encoder.encode(str).length
+        }
+
         const parseJsonToModel = (json) => {
           const newModel = {
             fireTime: json.fireTime || '06:00',
@@ -249,37 +320,44 @@
             dates: []
           }
 
-          // Pools
           if (json.pools) {
             for (const [key, val] of Object.entries(json.pools)) {
               newModel.pools.push({
                 name: key,
                 weight: val.weight !== undefined ? val.weight : 1.0,
+                alwaysActive: val.alwaysActive === true,
+                description: val.description || '',
                 messages: Array.isArray(val.messages) ? [...val.messages] : []
               })
             }
           }
-          // Ensure default pool exists
           if (!newModel.pools.some(p => p.name === 'default')) {
-            newModel.pools.unshift({ name: 'default', weight: 1.0, messages: [] })
+            newModel.pools.unshift({ name: 'default', weight: 0.3, alwaysActive: false, description: 'Default fallback pool', messages: [] })
           }
 
-          // Days
           weekdays.forEach(day => {
             newModel.days[day] = (json.days && json.days[day]) ? json.days[day] : ''
           })
 
-          // Dates
           if (json.dates) {
-            for (const [dateKey, msg] of Object.entries(json.dates)) {
-              newModel.dates.push({ date: dateKey, message: msg })
+            for (const [dateKey, val] of Object.entries(json.dates)) {
+              if (typeof val === 'string') {
+                newModel.dates.push({ date: dateKey, isObject: false, message: val, weight: 1.0, hardOverride: true })
+              } else if (val && typeof val === 'object') {
+                newModel.dates.push({
+                  date: dateKey,
+                  isObject: true,
+                  message: val.message || '',
+                  weight: val.weight !== undefined ? val.weight : 1.0,
+                  hardOverride: val.hardOverride !== false
+                })
+              }
             }
           }
 
           model.value = newModel
         }
 
-        // Convert internal array model back to clean JSON string
         const generatedJson = computed(() => {
           const out = {
             fireTime: model.value.fireTime || '06:00',
@@ -289,17 +367,19 @@
             dates: {}
           }
 
-          // Pools
           model.value.pools.forEach(p => {
             if (p.name.trim()) {
-              out.pools[p.name.trim()] = {
-                weight: Number(p.weight) || 0,
-                messages: p.messages.filter(m => m.trim() !== '')
+              const basePool = {
+                weight: Number(p.weight) || 0
               }
+              if (p.alwaysActive && p.name !== 'default') basePool.alwaysActive = true
+              if (p.description && p.description.trim() !== '') basePool.description = p.description.trim()
+              basePool.messages = p.messages.filter(m => m.trim() !== '')
+              
+              out.pools[p.name.trim()] = basePool
             }
           })
 
-          // Days (only export active overrides)
           weekdays.forEach(day => {
             if (model.value.days[day]) {
               out.days[day] = model.value.days[day]
@@ -307,19 +387,26 @@
           })
           if (Object.keys(out.days).length === 0) delete out.days
 
-          // Dates
           model.value.dates.forEach(d => {
             if (d.date.trim() && d.message.trim()) {
-              out.dates[d.date.trim()] = d.message.trim()
+              if (!d.isObject) {
+                out.dates[d.date.trim()] = d.message.trim()
+              } else {
+                out.dates[d.date.trim()] = {
+                  message: d.message.trim(),
+                  weight: Number(d.weight) || 1.0,
+                  hardOverride: d.hardOverride
+                }
+              }
             }
           })
+          
           if (Object.keys(out.dates).length === 0) delete out.dates
           if (out.ranges.length === 0) delete out.ranges
 
           return JSON.stringify(out, null, 2)
         })
 
-        // Actions
         const showStatus = (msg, type = 'success') => {
           statusMsg.value = msg
           statusType.value = type
@@ -355,7 +442,7 @@
             }
           }
           reader.readAsText(file)
-          event.target.value = '' // reset input
+          event.target.value = ''
         }
 
         const downloadConfig = () => {
@@ -376,39 +463,61 @@
           showStatus('Copied JSON to clipboard!')
         }
 
-        // Mutators
-        const addPool = () => {
-          const name = 'pool_' + (model.value.pools.length)
-          model.value.pools.push({ name, weight: 1.0, messages: [''] })
+        const addCustomPool = () => {
+          const name = newPoolName.value.trim().toLowerCase()
+          if (!name) return
+          if (model.value.pools.some(p => p.name.toLowerCase() === name)) {
+            showStatus(`Pool "${name}" already exists!`, 'error')
+            return
+          }
+          model.value.pools.push({ name, weight: 1.0, alwaysActive: false, description: '', messages: [''] })
+          newPoolName.value = ''
+          showStatus(`Added pool "${name}".`)
         }
+
+        const applyPreset = (name, start, end, weight = 1.0) => {
+          let pool = model.value.pools.find(p => p.name === name)
+          if (!pool) {
+            model.value.pools.push({ name, weight, alwaysActive: false, description: `${name} seasonal pool messages`, messages: [''] })
+          }
+          if (!model.value.ranges.some(r => r.name === name && r.start === start && r.end === end)) {
+            model.value.ranges.push({ name, start, end })
+          }
+          showStatus(`Applied preset configs for "${name}".`)
+        }
+
+        const toggleDateStructure = (item) => {
+          if (item.isObject) {
+            item.weight = 1.0
+            item.hardOverride = false
+          } else {
+            item.weight = 1.0
+            item.hardOverride = true
+          }
+        }
+
         const removePool = (idx) => {
           const poolName = model.value.pools[idx].name
           model.value.pools.splice(idx, 1)
-          // Clean up orphaned references
           model.value.ranges.forEach(r => { if (r.name === poolName) r.name = 'default' })
           weekdays.forEach(day => { if (model.value.days[day] === poolName) model.value.days[day] = '' })
         }
+        
         const addRange = () => {
           const firstPool = model.value.pools[0]?.name || 'default'
           model.value.ranges.push({ name: firstPool, start: '', end: '' })
         }
-        const moveRange = (idx, dir) => {
-          const target = idx + dir
-          if (target < 0 || target >= model.value.ranges.length) return
-          const temp = model.value.ranges[idx]
-          model.value.ranges[idx] = model.value.ranges[target]
-          model.value.ranges[target] = temp
-        }
-        const addDate = () => model.value.dates.push({ date: '', message: '' })
+        
+        const addDate = () => model.value.dates.push({ date: '', isObject: false, message: '', weight: 1.0, hardOverride: true })
 
         onMounted(() => {
           fetchHostedConfig()
         })
 
         return {
-          loading, statusMsg, statusType, weekdays, model, generatedJson,
-          fetchHostedConfig, loadLocalFile, downloadConfig, copyJson,
-          addPool, removePool, addRange, moveRange, addDate
+          loading, statusMsg, statusType, weekdays, model, generatedJson, newPoolName,
+          fetchHostedConfig, loadLocalFile, downloadConfig, copyJson, getByteLength,
+          addCustomPool, applyPreset, removePool, addRange, addDate, toggleDateStructure
         }
       }
     }).mount('#app')
