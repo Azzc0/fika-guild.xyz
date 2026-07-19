@@ -1,0 +1,106 @@
+{
+  "-1": {
+    "type": "Meeting",
+    "aliases": ["meeting", "event"]
+  },
+  "46": {
+    "type": "Raid",
+    "description": "Onyxia's Lair 10",
+    "aliases": ["ony10"]
+  },
+  "159": {
+    "type": "Raid",
+    "description": "Naxxramas 10",
+    "aliases": ["naxx10"]
+  },
+  "223": {
+    "type": "Raid",
+    "description": "Eye of Eternity 10",
+    "aliases": ["eoe10", "eye10"]
+  },
+  "224": {
+    "type": "Raid",
+    "description": "Obsidian Sanctum 10",
+    "aliases": ["os10"]
+  },
+  "227": {
+    "type": "Raid",
+    "description": "Naxxramas 25",
+    "aliases": ["naxx25"]
+  },
+  "237": {
+    "type": "Raid",
+    "description": "Eye of Eternity 25",
+    "aliases": ["eoe25", "eye25"]
+  },
+  "238": {
+    "type": "Raid",
+    "description": "Obsidian Sanctum 25",
+    "aliases": ["os25"]
+  },
+  "239": {
+    "type": "Raid",
+    "description": "Vault of Archavon 10",
+    "aliases": ["voa10"]
+  },
+  "240": {
+    "type": "Raid",
+    "description": "Vault of Archavon 25",
+    "aliases": ["voa25"]
+  },
+  "243": {
+    "type": "Raid",
+    "description": "Ulduar 10",
+    "aliases": ["ulduar10", "uld10"]
+  },
+  "244": {
+    "type": "Raid",
+    "description": "Ulduar 25",
+    "aliases": ["ulduar25", "uld25"]
+  },
+  "246": {
+    "type": "Raid",
+    "description": "Trial of the Crusader 10",
+    "aliases": ["toc10"]
+  },
+  "247": {
+    "type": "Raid",
+    "description": "Trial of the Grand Crusader 10",
+    "aliases": ["togc10"]
+  },
+  "248": {
+    "type": "Raid",
+    "description": "Trial of the Crusader 25",
+    "aliases": ["toc25"]
+  },
+  "250": {
+    "type": "Raid",
+    "description": "Trial of the Grand Crusader 25",
+    "aliases": ["togc25"]
+  },
+  "257": {
+    "type": "Raid",
+    "description": "Onyxia's Lair 25",
+    "aliases": ["ony25"]
+  },
+  "279": {
+    "type": "Raid",
+    "description": "Icecrown Citadel 10",
+    "aliases": ["icc10", "icc10hm", "icc10heroic", "icc10h", "icc10hc"]
+  },
+  "280": {
+    "type": "Raid",
+    "description": "Icecrown Citadel 25",
+    "aliases": ["icc25", "icc25hm", "icc25heroic", "icc25h", "icc25hc"]
+  },
+  "293": {
+    "type": "Raid",
+    "description": "Ruby Sanctum 10",
+    "aliases": ["rs10"]
+  },
+  "294": {
+    "type": "Raid",
+    "description": "Ruby Sanctum 25",
+    "aliases": ["rs25"]
+  }
+}
