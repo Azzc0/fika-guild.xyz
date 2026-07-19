@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOTD Configuration Editor</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 500: '#3b82f6', 600: '#2563eb' }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen font-sans pb-16">
+  <div id="app" class="max-w-6xl mx-auto px-4 py-8">
+    
+    <!-- Top Header & Controls -->
+    <header class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-800 pb-6 mb-8 gap-4">
+      <div>
+        <h1 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+          <span>📜 MOTD Rotation Editor</span>
+        </h1>
+        <p class="text-sm text-slate-400 mt-1">Manage message pools, rotation ranges, and daily overrides.</p>
+      </div>
+      
+      <div class="flex flex-wrap items-center gap-3">
+        <!-- Load Hosted -->
+        <button @click="fetchHostedConfig" :disabled="loading" 
+          class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-sm font-medium rounded-lg transition flex items-center gap-2 border border-slate-700">
+          <span>🔄 Reload Hosted File</span>
+        </button>
+
+        <!-- Load Local -->
+        <label class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-sm font-medium rounded-lg transition cursor-pointer border border-slate-700 flex items-center gap-2">
+          <span>📂 Load Local File</span>
+          <input type="file" accept=".json" @change="loadLocalFile" class="hidden">
+        </label>
+
+        <!-- Download -->
+        <button @click="downloadConfig" 
+          class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white text-sm font-medium rounded-lg shadow-lg shadow-brand-500/20 transition flex items-center gap-2">
+          <span>💾 Download JSON</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Status Alerts -->
+    <div v-if="statusMsg" :class="statusType === 'error' ? 'bg-red-900/50 border-red-700 text-red-200' : 'bg-emerald-900/50 border-emerald-700 text-emerald-200'" class="p-4 rounded-lg mb-6 border text-sm flex justify-between items-center">
+      <span>{{ statusMsg }}</span>
+      <button @click="statusMsg = ''" class="font-bold ml-4 opacity-70 hover:opacity-100">✕</button>
+    </div>
+
+    <!-- Main Editor Grid -->
+    <div v-if="model" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <!-- Left 2 Columns: Interactive Editors -->
+      <div class="lg:col-span-2 space-y-8">
+        
+        <!-- Global Settings -->
+        <section class="bg-slate-800/50 border border-slate-800 rounded-xl p-5">
+          <h2 class="text-lg font-semibold mb-4 text-slate-200 flex items-center gap-2">
+            <span>⚙️ Global Settings</span>
+          </h2>
+          <div class="flex items-center gap-4">
+            <label class="text-sm font-medium text-slate-400">Daily Fire Time (24h format):</label>
+            <input v-model="model.fireTime" type="time" 
+              class="bg-slate-900 border border-slate-700 rounded-md px-3 py-1.5 text-white focus:outline-none focus:border-brand-500 font-mono">
+          </div>
+          <p class="text-xs text-slate-500 mt-2">If missing or invalid, the bot defaults to 06:00.</p>
+        </section>
+
+        <!-- Pools Editor -->
+        <section class="bg-slate-800/50 border border-slate-800 rounded-xl p-5">
+          <div class="flex justify-between items-center mb-4">
+            <div>
+              <h2 class="text-lg font-semibold text-slate-200">📦 Message Pools</h2>
+              <p class="text-xs text-slate-400">Named buckets of candidate messages. Blended against the default pool by weight.</p>
+            </div>
+            <button @click="addPool" class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-xs font-medium rounded-md transition">+ Add Pool</button>
+          </div>
+
+          <div class="space-y-4">
+            <div v-for="(pool, idx) in model.pools" :key="idx" class="bg-slate-900/80 border border-slate-700/80 rounded-lg p-4">
+              <div class="flex flex-wrap justify-between items-center gap-4 mb-3 pb-3 border-b border-slate-800">
+                <div class="flex items-center gap-3">
+                  <input v-model="pool.name" placeholder="Pool Name (e.g. default)" 
+                    :disabled="pool.name === 'default'"
+                    class="bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono font-bold text-brand-500 focus:outline-none focus:border-brand-500 disabled:opacity-70">
+                  <span v-if="pool.name === 'default'" class="text-[10px] bg-brand-500/10 text-brand-500 border border-brand-500/20 px-1.5 py-0.5 rounded uppercase font-semibold">Required</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <label class="text-xs text-slate-400">Weight:</label>
+                  <input v-model.number="pool.weight" type="number" step="0.1" min="0" 
+                    class="bg-slate-800 border border-slate-700 rounded w-20 px-2 py-1 text-sm font-mono text-right focus:outline-none focus:border-brand-500">
+                  <button v-if="pool.name !== 'default'" @click="removePool(idx)" class="text-red-400 hover:text-red-300 text-xs ml-2">🗑️</button>
+                </div>
+              </div>
+
+              <!-- Messages List -->
+              <div class="space-y-2">
+                <label class="text-xs font-medium text-slate-400">Messages ({{ pool.messages.length }}):</label>
+                <div v-for="(msg, mIdx) in pool.messages" :key="mIdx" class="flex gap-2">
+                  <input v-model="pool.messages[mIdx]" type="text" placeholder="Enter MOTD message string..."
+                    class="flex-1 bg-slate-800 border border-slate-700 rounded px-3 py-1 text-sm focus:outline-none focus:border-brand-500">
+                  <button @click="pool.messages.splice(mIdx, 1)" class="px-2 text-slate-500 hover:text-red-400">✕</button>
+                </div>
+                <button @click="pool.messages.push('')" class="text-xs text-brand-500 hover:underline pt-1 inline-block">+ Add Message</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Ranges Editor -->
+        <section class="bg-slate-800/50 border border-slate-800 rounded-xl p-5">
+          <div class="flex justify-between items-center mb-4">
+            <div>
+              <h2 class="text-lg font-semibold text-slate-200">📅 Date Ranges</h2>
+              <p class="text-xs text-slate-400">Recurring (MM-dd) or absolute (yyyy-MM-dd) date windows. <strong class="text-amber-400">First match wins!</strong></p>
+            </div>
+            <button @click="addRange" class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-xs font-medium rounded-md transition">+ Add Range</button>
+          </div>
+
+          <div v-if="model.ranges.length === 0" class="text-xs text-slate-500 italic py-2">No date ranges configured.</div>
+          
+          <div class="space-y-3">
+            <div v-for="(range, idx) in model.ranges" :key="idx" class="flex flex-wrap items-center gap-3 bg-slate-900/80 border border-slate-700/80 rounded-lg p-3">
+              <div class="flex flex-col">
+                <span class="text-[10px] text-slate-500 font-mono">#{{ idx + 1 }} Target Pool</span>
+                <select v-model="range.name" class="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-sm text-brand-500 font-mono focus:outline-none">
+                  <option v-for="p in model.pools" :key="p.name" :value="p.name">{{ p.name }}</option>
+                </select>
+              </div>
+              
+              <div class="flex flex-col flex-1 min-w-[120px]">
+                <span class="text-[10px] text-slate-500 font-mono">Start (MM-dd / yyyy-MM-dd)</span>
+                <input v-model="range.start" placeholder="e.g. 10-15 or 2026-04-02" class="bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono focus:outline-none focus:border-brand-500">
+              </div>
+
+              <div class="flex flex-col flex-1 min-w-[120px]">
+                <span class="text-[10px] text-slate-500 font-mono">End (MM-dd / yyyy-MM-dd)</span>
+                <input v-model="range.end" placeholder="e.g. 11-01 or 2026-04-17" class="bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono focus:outline-none focus:border-brand-500">
+              </div>
+
+              <div class="flex items-center gap-1 self-end pb-1">
+                <button @click="moveRange(idx, -1)" :disabled="idx === 0" class="p-1 text-slate-400 hover:text-white disabled:opacity-30" title="Move Up">▲</button>
+                <button @click="moveRange(idx, 1)" :disabled="idx === model.ranges.length - 1" class="p-1 text-slate-400 hover:text-white disabled:opacity-30" title="Move Down">▼</button>
+                <button @click="model.ranges.splice(idx, 1)" class="p-1 text-red-400 hover:text-red-300 ml-1">🗑️</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Days of Week Editor -->
+        <section class="bg-slate-800/50 border border-slate-800 rounded-xl p-5">
+          <h2 class="text-lg font-semibold text-slate-200 mb-1">🗓️ Day of Week Overrides</h2>
+          <p class="text-xs text-slate-400 mb-4">Map specific weekdays to a pool. Unassigned days default to the standard selection.</p>
+          
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div v-for="day in weekdays" :key="day" class="bg-slate-900/80 border border-slate-700/80 rounded-lg p-2.5 flex flex-col">
+              <span class="text-xs font-semibold capitalize text-slate-300 mb-1">{{ day }}</span>
+              <select v-model="model.days[day]" class="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs font-mono text-brand-500 focus:outline-none">
+                <option value="">(No Override)</option>
+                <option v-for="p in model.pools" :key="p.name" :value="p.name">{{ p.name }}</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <!-- Exact Dates Editor -->
+        <section class="bg-slate-800/50 border border-slate-800 rounded-xl p-5">
+          <div class="flex justify-between items-center mb-4">
+            <div>
+              <h2 class="text-lg font-semibold text-slate-200">🎯 Exact Date Overrides</h2>
+              <p class="text-xs text-slate-400">Exact MM-dd matches return literal strings immediately, bypassing all pools and weights.</p>
+            </div>
+            <button @click="addDate" class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-xs font-medium rounded-md transition">+ Add Date</button>
+          </div>
+
+          <div v-if="model.dates.length === 0" class="text-xs text-slate-500 italic py-2">No exact dates configured.</div>
+
+          <div class="space-y-3">
+            <div v-for="(item, idx) in model.dates" :key="idx" class="flex items-center gap-3 bg-slate-900/80 border border-slate-700/80 rounded-lg p-3">
+              <input v-model="item.date" placeholder="MM-dd (e.g. 12-24)" class="w-28 bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono focus:outline-none focus:border-brand-500">
+              <input v-model="item.message" placeholder="Literal message string..." class="flex-1 bg-slate-800 border border-slate-700 rounded px-3 py-1 text-sm focus:outline-none focus:border-brand-500">
+              <button @click="model.dates.splice(idx, 1)" class="text-red-400 hover:text-red-300 px-1">🗑️</button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Right 1 Column: Live JSON Preview -->
+      <div class="lg:col-span-1">
+        <div class="sticky top-8 bg-slate-800/80 border border-slate-700 rounded-xl p-5 flex flex-col h-[calc(100vh-4rem)]">
+          <div class="flex justify-between items-center mb-3">
+            <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-300">👁️ Live JSON Output</h3>
+            <button @click="copyJson" class="text-xs bg-slate-700 hover:bg-slate-600 px-2.5 py-1 rounded transition text-slate-200">📋 Copy</button>
+          </div>
+          
+          <textarea readonly :value="generatedJson" 
+            class="w-full flex-1 bg-slate-950 border border-slate-800 rounded-lg p-4 font-mono text-xs text-emerald-400 focus:outline-none resize-none overflow-y-auto leading-relaxed"></textarea>
+          
+          <div class="mt-4 pt-4 border-t border-slate-700/50 flex flex-col gap-2">
+            <button @click="downloadConfig" class="w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-medium rounded-lg text-sm transition shadow-lg shadow-brand-500/20 text-center">
+              💾 Download motd_config.json
+            </button>
+            <p class="text-[11px] text-slate-500 text-center">Download this file and replace your hosted static/utils/motd_config.json.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const { createApp, ref, computed, onMounted } = Vue
+
+    createApp({
+      setup() {
+        const loading = ref(false)
+        const statusMsg = ref('')
+        const statusType = ref('success')
+        const weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+
+        // Reactive internal model
+        const model = ref({
+          fireTime: '06:00',
+          pools: [{ name: 'default', weight: 1.0, messages: ['Welcome to the guild!'] }],
+          ranges: [],
+          days: { monday: '', tuesday: '', wednesday: '', thursday: '', friday: '', saturday: '', sunday: '' },
+          dates: []
+        })
+
+        // Convert raw JSON object to internal editing array model
+        const parseJsonToModel = (json) => {
+          const newModel = {
+            fireTime: json.fireTime || '06:00',
+            pools: [],
+            ranges: json.ranges || [],
+            days: {},
+            dates: []
+          }
+
+          // Pools
+          if (json.pools) {
+            for (const [key, val] of Object.entries(json.pools)) {
+              newModel.pools.push({
+                name: key,
+                weight: val.weight !== undefined ? val.weight : 1.0,
+                messages: Array.isArray(val.messages) ? [...val.messages] : []
+              })
+            }
+          }
+          // Ensure default pool exists
+          if (!newModel.pools.some(p => p.name === 'default')) {
+            newModel.pools.unshift({ name: 'default', weight: 1.0, messages: [] })
+          }
+
+          // Days
+          weekdays.forEach(day => {
+            newModel.days[day] = (json.days && json.days[day]) ? json.days[day] : ''
+          })
+
+          // Dates
+          if (json.dates) {
+            for (const [dateKey, msg] of Object.entries(json.dates)) {
+              newModel.dates.push({ date: dateKey, message: msg })
+            }
+          }
+
+          model.value = newModel
+        }
+
+        // Convert internal array model back to clean JSON string
+        const generatedJson = computed(() => {
+          const out = {
+            fireTime: model.value.fireTime || '06:00',
+            pools: {},
+            ranges: model.value.ranges.filter(r => r.name && r.start && r.end),
+            days: {},
+            dates: {}
+          }
+
+          // Pools
+          model.value.pools.forEach(p => {
+            if (p.name.trim()) {
+              out.pools[p.name.trim()] = {
+                weight: Number(p.weight) || 0,
+                messages: p.messages.filter(m => m.trim() !== '')
+              }
+            }
+          })
+
+          // Days (only export active overrides)
+          weekdays.forEach(day => {
+            if (model.value.days[day]) {
+              out.days[day] = model.value.days[day]
+            }
+          })
+          if (Object.keys(out.days).length === 0) delete out.days
+
+          // Dates
+          model.value.dates.forEach(d => {
+            if (d.date.trim() && d.message.trim()) {
+              out.dates[d.date.trim()] = d.message.trim()
+            }
+          })
+          if (Object.keys(out.dates).length === 0) delete out.dates
+          if (out.ranges.length === 0) delete out.ranges
+
+          return JSON.stringify(out, null, 2)
+        })
+
+        // Actions
+        const showStatus = (msg, type = 'success') => {
+          statusMsg.value = msg
+          statusType.value = type
+          setTimeout(() => { if (statusMsg.value === msg) statusMsg.value = '' }, 5000)
+        }
+
+        const fetchHostedConfig = async () => {
+          loading.value = true
+          try {
+            const res = await fetch('motd_config.json?t=' + new Date().getTime())
+            if (!res.ok) throw new Error(`HTTP ${res.status}: Failed to load file`)
+            const data = await res.json()
+            parseJsonToModel(data)
+            showStatus('Successfully loaded hosted motd_config.json')
+          } catch (err) {
+            showStatus('Could not load hosted file (' + err.message + '). Using default template.', 'error')
+          } finally {
+            loading.value = false
+          }
+        }
+
+        const loadLocalFile = (event) => {
+          const file = event.target.files[0]
+          if (!file) return
+          const reader = new FileReader()
+          reader.onload = (e) => {
+            try {
+              const parsed = JSON.parse(e.target.result)
+              parseJsonToModel(parsed)
+              showStatus(`Loaded local file: ${file.name}`)
+            } catch (err) {
+              showStatus('Invalid JSON file.', 'error')
+            }
+          }
+          reader.readAsText(file)
+          event.target.value = '' // reset input
+        }
+
+        const downloadConfig = () => {
+          const blob = new Blob([generatedJson.value], { type: 'application/json' })
+          const url = URL.createObjectURL(blob)
+          const a = document.createElement('a')
+          a.href = url
+          a.download = 'motd_config.json'
+          document.body.appendChild(a)
+          a.click()
+          document.body.removeChild(a)
+          URL.revokeObjectURL(url)
+          showStatus('Downloaded motd_config.json ready for replacement!')
+        }
+
+        const copyJson = () => {
+          navigator.clipboard.writeText(generatedJson.value)
+          showStatus('Copied JSON to clipboard!')
+        }
+
+        // Mutators
+        const addPool = () => {
+          const name = 'pool_' + (model.value.pools.length)
+          model.value.pools.push({ name, weight: 1.0, messages: [''] })
+        }
+        const removePool = (idx) => {
+          const poolName = model.value.pools[idx].name
+          model.value.pools.splice(idx, 1)
+          // Clean up orphaned references
+          model.value.ranges.forEach(r => { if (r.name === poolName) r.name = 'default' })
+          weekdays.forEach(day => { if (model.value.days[day] === poolName) model.value.days[day] = '' })
+        }
+        const addRange = () => {
+          const firstPool = model.value.pools[0]?.name || 'default'
+          model.value.ranges.push({ name: firstPool, start: '', end: '' })
+        }
+        const moveRange = (idx, dir) => {
+          const target = idx + dir
+          if (target < 0 || target >= model.value.ranges.length) return
+          const temp = model.value.ranges[idx]
+          model.value.ranges[idx] = model.value.ranges[target]
+          model.value.ranges[target] = temp
+        }
+        const addDate = () => model.value.dates.push({ date: '', message: '' })
+
+        onMounted(() => {
+          fetchHostedConfig()
+        })
+
+        return {
+          loading, statusMsg, statusType, weekdays, model, generatedJson,
+          fetchHostedConfig, loadLocalFile, downloadConfig, copyJson,
+          addPool, removePool, addRange, moveRange, addDate
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>
