@@ -1,0 +1,95 @@
+{
+  "fireTime": "07:30",
+
+  "pools": {
+    "default": {
+      "weight": 1.0,
+      "messages": [
+        "Vi hittade din skugga. Den mådde inte så bra så vi lät den gå hem tidigt. Du får klara dig själv idag.",
+        "Det bästa med framtiden är att den inte har hänt än. Det sämsta är att den planerar att göra det snart.",
+        "Ditt öde är skrivet i stjärnorna. Tyvärr är stjärnorna usla på grammatik och ganska elaka.",
+        "Det är dags för fika. Ta en bulle, drick ditt kaffe och titta absolut inte på det som krafsar under bordet.",
+        "Kaffet i fikarummet är helt säkert idag. Ignorera viskningarna från sumpen, det är bara koffeinet.",
+        "Bullarna är färska, kaffet är varmt och mörkret utanför fönstret vill bara ha en liten munsbit.",
+        "Om du känner att du faller, kom ihåg att marken också faller. Ni är i det här tillsammans.",
+        "Du är gjord av stjärndamm och gamla kvitton. Mest kvitton. Och en svag doft av bränt kaffe.",
+        "Kafferepet är inställt tills vidare. Kaksmulorna har bildat en pakt och kräver självständighet.",
+        "Det är okej att prata med sig själv vid kaffemaskinen, så länge du inte svarar med en röst som inte är din.",
+        "Doften av nybakt fyller rummet. Det är märkligt, eftersom ingen har använt ugnen sedan katastrofen 2014.",
+        "Kaffemaskinen kräver ett lösenord idag. Det är åtta bokstäver långt och låter som ett dämpat snyftande.",
+        "Skeden du rör om i kaffet med har alltid varit där. Även innan vi köpte den. Tänk inte mer på det.",
+        "Det är absolut ingenting i frysboxen. Så den kan sluta banka på insidan av luckan nu. Vi lyssnar inte.",
+        "Mjölken i kylskåpet har gått ut. Inte i datum, utan den har bara packat sina väskor och lämnat byggnaden.",
+        "Om påtåren smakar lite som ett gammalt minne av en bortglömd släkting, har du tagit fel kanna. Ta den röda.",
+        "Det är ingen idé att räkna kaffekopparna i skåpet. Antalet förändras så fort du blinkar ändå. Drick bara.",
+        "Någon har lämnat kvar sin matlåda sedan i tisdags. Den har börjat utveckla ett eget postnummer och en armé.",
+        "Kaffefiltren har börjat viska instruktioner på ett utdött språk. Vik dem dubbelt så slutar de oftast.",
+        "Bullarna är inte runda idag, de har formen av en perfekt oktagon. Fråga inte bagaren varför, bagaren gråter.",
+        "Kylskåpet har börjat surra i g-moll. It's not broken, it's just trying to chord with the void.",
+        "Det är absolut inget fel på sockret. Det är bara lite mer medvetet om sin egen existens än vad vi är vana vid.",
+        "Tecknen på kaffemuggen är inte dekorativa. Om de börjar glöda, ställ ner muggen och backa långsamt ut ur rummet.",
+        "Kaffetåren ger dig energi, men kom ihåg att energin inte skapas – den lånas bara från ditt framtida, äldre jag.",
+        "Påtåren är inte obligatorisk, men om du tackar nej kommer skuggorna i hörnet att titta på dig väldigt länge.",
+        "Om du ser någon som ser exakt ut som du sitta på din vanliga plats vid fikat, låt dem sitta kvar. Det är deras tur nu.",
+        "Chokladbollarna rullar av sig själva idag. Försök inte stoppa dem, de ska till ett viktigt möte under soffan.",
+        "Mazarinen stirrar tillbaka. Det är bäst att du äter den innan den hinner bilda sig en uppfattning om din karaktär.",
+        "Prinsesstårtan har blivit krönt till enväldig härskare över fikarummet. Böj ert huvud eller ta en bit till.",
+        "Sju sorters kakor är ett absolut krav. Om du bara ser sex, betyder det att den sjunde gömmer sig bakom dig.",
+        "Kladdkakan är inte kladdig på grund av smör. Det är bara så kosmiskt vemod smakar när det bakas i 175 grader.",
+        "Någon har tagit sista biten av rulltårtan. Det är okej, den var ändå på väg att rulla ut ur vår dimension.",
+        "Koppen är halvfull. Eller halvtom. Det beror helt på om vätskan i den expanderar eller krymper i din hand.",
+        "Vänligen sitt inte på den röda stolen. Den har tagit tjänstledigt för att begrunda sina egna synder till på fredag.",
+        "Allt har ett slut, utom fikarasten som pågår i en isolerad tidsficka strax utanför vårt kända universum.",
+        "Det är ingen idé att köpa mazariner i Dalaran. De smakar alltid svagt av brutna tidslinjer och lila magi.",
+        "Arille på Ledgerdemain har gömt undan det bästa fikat. Man måste kunna lösenordet, eller bara se väldigt trött ut.",
+        "Om du hittar en kvarglömd tårta i Antonidas Memorial, rör den inte. Den tillhör numera de döda magikerna.",
+        "Någon har spillt kaffe på mattan på övervåningen i Ledgerdemain Lounge. Fläcken har redan bildat en portal till en sämre måndag.",
+        "Ät inte äppelkakan som står kvarglömd nära Krasus' Landing. Den har stått där så länge että den har fått flygcertifikat.",
+        "Trollkarlarna i Violet Citadel har lagt en förbannelse över kaffepannan. Den ger oändligt med påtår, men bara om man ber snällt.",
+        "Kexen på Ledgerdemain Lounge smakar extra mycket aska idag. Det är säkert bara en bieffekt av de senaste eldmagi-proven.",
+        "Om du ser någon som ser exakt ut som du i Eventide Quarter, bjud dem inte på fika. Det slutar alltid med en tids-paradox.",
+        "Kaffekopparna i Underbelly har börjat utveckla egna personligheter. De flesta är ganska cyniska och vägrar hålla värmen.",
+        "Det är ingen idé att köpa frallor av Marcia Chase idag. De är gjorda av bröd, men de beter sig misstänkt mycket som fiskar.",
+        "Kaffet i fikarummet har bryggts på smältvatten från Northrend. Det är extremt upppiggande, men du kommer att frysa om själen.",
+        "Om du hör ett dämpat tickande inifrån din tårtbit, är det bara en ingenjör från gillet som har tappat bort sina reservdelar.",
+        "Muffinsarna har börjat sväva igen. Om du vill ha en får du använda ett spjut eller kasta ett välriktat sockerpaket.",
+        "Teet i fikarummet är bryggt på bär från Grizzly Hills. Det smakar ljuvligt, men du kommer att vilja yla mot månen ikväll.",
+        "Någon har tappat en rulle Ballerina i Sholazar Basin, försök inte hämta det. En hord arga Gorlocs har redan förklarat det heligt.",
+        "Kexen från Borean Tundra är så hårda att inte ens en gnomisk plasmaskärare rår på dem. Doppa i kaffet i minst en timme.",
+        "Varm choklad bryggd i Wintergrasp smakar bäst när vi kontrollerar fästningen. Annars smakar den mest bitter förlust.",
+        "Någon har glömt en påse mandelflarn i Utgarde Keep. De vaktas numera av en mycket hängiven proto-drake. Låt dem vara.",
+        "Alkemisterna har lämnat en kanna te på trappan. Det bubblar grönt, men de svär på att det bara är en vanlig earl grey.",
+        "Portalen i brunnen är tillfälligt blockerad av en enorm semla. Använd trapporna tills magikerna har ätit upp den.",
+        "Om du vaknar upp i en av de fyra sängarna på First to Your Aid, drick teet. Fråga inte vad de har plåstrat om dig med.",
+        "Om du går vilse, fråga på Dalaran Visitors Centre. De vet exakt var kaffet är, men deras vägbeskrivningar rimmar alltid.",
+        "Teet på Sisters Sorcerous har en tendens att förvandla den som dricker till en fårskock. Effekten är tack och lov kort.",
+        "Portalen i Violet Gate är stabil idag, men din medtagna bulle kan komma att anlända tre minuter före resten av din kropp.",
+        "Om du köper fika av Darahir i Underbelly, kolla så att hans Ghostly Skull inte har flugit ner i din kopp och dött en gång till.",
+        "Om du tar upp fikat till The Purple Parlor, hälsa på butlern. Men håll hårt i bullarna, han har en tendens att städa bort allt.",
+        "Kyparen står parkerad på Ledgerdemain Lounge idag. Om han vägrar svara, har han säkert bara tagit en välförtjänt fika-reset."
+      ]
+    },
+
+    "weekend": {
+      "weight": 1.0,
+      "messages": [
+        "Helg i Azeroth! Dags för lite extra fika och kanske en raid eller två."
+      ]
+    },
+
+    "christmas": {
+      "weight": 0.8,
+      "messages": [
+        "God jul från hela Fika! 🎄"
+      ]
+    }
+  },
+
+  "ranges": [
+    { "name": "christmas", "start": "12-20", "end": "01-06" }
+  ],
+
+  "dates": {
+    "01-01": "Gott nytt år från Fika! 🎉"
+  }
+}
