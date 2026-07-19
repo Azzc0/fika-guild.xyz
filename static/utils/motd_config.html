@@ -20,9 +20,9 @@
   </script>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen font-sans pb-16">
-  <div id="app" class="max-w-6xl mx-auto px-4 py-8">
+  <div id="app" class="max-w-4xl mx-auto px-4 py-8">
     
-    <!-- Top Header & Controls -->
+    <!-- Top Header & Primary Controls -->
     <header class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-800 pb-6 mb-8 gap-4">
       <div>
         <h1 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
@@ -31,20 +31,25 @@
         <p class="text-sm text-slate-400 mt-1">Manage message pools, stacked ranges, and advanced overrides with live UTF-8 byte checks.</p>
       </div>
       
-      <div class="flex flex-wrap items-center gap-3">
+      <div class="flex flex-wrap items-center gap-2 w-full md:w-auto justify-end">
         <button @click="fetchHostedConfig" :disabled="loading" 
-          class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-sm font-medium rounded-lg transition flex items-center gap-2 border border-slate-700">
-          <span>🔄 Reload Hosted File</span>
+          class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-medium rounded-lg transition border border-slate-700">
+          🔄 Reload Hosted
         </button>
 
-        <label class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-sm font-medium rounded-lg transition cursor-pointer border border-slate-700 flex items-center gap-2">
-          <span>📂 Load Local File</span>
+        <label class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-medium rounded-lg transition cursor-pointer border border-slate-700 text-center">
+          📂 Load Local File
           <input type="file" accept=".json" @change="loadLocalFile" class="hidden">
         </label>
 
+        <button @click="copyJson" 
+          class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-medium rounded-lg transition border border-slate-700">
+          📋 Copy JSON
+        </button>
+
         <button @click="downloadConfig" 
-          class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white text-sm font-medium rounded-lg shadow-lg shadow-brand-500/20 transition flex items-center gap-2">
-          <span>💾 Download JSON</span>
+          class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white text-xs font-medium rounded-lg shadow-lg shadow-brand-500/20 transition font-bold">
+          💾 Download motd_config.json
         </button>
       </div>
     </header>
@@ -55,231 +60,217 @@
       <button @click="statusMsg = ''" class="font-bold ml-4 opacity-70 hover:opacity-100">✕</button>
     </div>
 
-    <!-- Main Editor Grid -->
-    <div v-if="model" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- Main Editor Layout (Full Width Stack) -->
+    <div v-if="model" class="space-y-8">
       
-      <!-- Left 2 Columns: Interactive Editors -->
-      <div class="lg:col-span-2 space-y-8">
-        
-        <!-- Global Settings -->
-        <section class="bg-slate-800/50 border border-slate-800 rounded-xl p-5">
-          <h2 class="text-lg font-semibold mb-4 text-slate-200 flex items-center gap-2">
-            <span>⚙️ Global Settings</span>
-          </h2>
-          <div class="flex items-center gap-4">
-            <label class="text-sm font-medium text-slate-400">Daily Fire Time (24h format):</label>
-            <input v-model="model.fireTime" type="time" 
-              class="bg-slate-900 border border-slate-700 rounded-md px-3 py-1.5 text-white focus:outline-none focus:border-brand-500 font-mono">
-          </div>
-        </section>
+      <!-- Global Settings -->
+      <section class="bg-slate-800/50 border border-slate-800 rounded-xl p-5">
+        <h2 class="text-base font-semibold mb-4 text-slate-200 flex items-center gap-2">
+          <span>⚙️ Global Settings</span>
+        </h2>
+        <div class="flex items-center gap-4">
+          <label class="text-sm font-medium text-slate-400">Daily Fire Time (24h format):</label>
+          <input v-model="model.fireTime" type="time" 
+            class="bg-slate-900 border border-slate-700 rounded-md px-3 py-1.5 text-white focus:outline-none focus:border-brand-500 font-mono text-sm">
+        </div>
+      </section>
 
-        <!-- Quick-Add Presets Toolbar -->
-        <section class="bg-gradient-to-r from-slate-800/80 to-slate-800/30 border border-slate-800 rounded-xl p-5">
-          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-2">⚡ Quick-Add Seasonal & Holiday Presets</h2>
-          <p class="text-xs text-slate-400 mb-4">Adds a seasonal theme pool and its calendar window. Since overlapping ranges now stack together natively, all active ranges will blend automatically!</p>
-          <div class="flex flex-wrap gap-2">
-            <button @click="applyPreset('spring', '03-01', '05-31', 1.0)" class="px-3 py-1.5 bg-emerald-950/60 hover:bg-emerald-900/80 border border-emerald-700/50 text-emerald-300 text-xs font-medium rounded-lg transition">🌱 Spring (Mar-May)</button>
-            <button @click="applyPreset('summer', '06-01', '08-31', 0.8)" class="px-3 py-1.5 bg-amber-950/60 hover:bg-amber-900/80 border border-amber-700/50 text-amber-300 text-xs font-medium rounded-lg transition">☀️ Summer (Jun-Aug)</button>
-            <button @click="applyPreset('autumn', '09-01', '11-30', 1.0)" class="px-3 py-1.5 bg-orange-950/60 hover:bg-orange-900/80 border border-orange-700/50 text-orange-300 text-xs font-medium rounded-lg transition">🍂 Autumn (Sep-Nov)</button>
-            <button @click="applyPreset('winter', '12-01', '02-28', 1.0)" class="px-3 py-1.5 bg-cyan-950/60 hover:bg-cyan-900/80 border border-cyan-700/50 text-cyan-300 text-xs font-medium rounded-lg transition">❄️ Winter (Dec-Feb)</button>
-            <button @click="applyPreset('midsummer', '06-19', '06-21', 1.5)" class="px-3 py-1.5 bg-yellow-950/60 hover:bg-yellow-900/80 border border-yellow-700/50 text-yellow-300 text-xs font-medium rounded-lg transition">🇸🇪 Midsummer Week</button>
-            <button @click="applyPreset('halloween', '10-15', '11-01', 0.7)" class="px-3 py-1.5 bg-purple-950/60 hover:bg-purple-900/80 border border-purple-700/50 text-purple-300 text-xs font-medium rounded-lg transition">🎃 Halloween</button>
-          </div>
-        </section>
+      <!-- Quick-Add Presets Toolbar -->
+      <section class="bg-gradient-to-r from-slate-800/80 to-slate-800/30 border border-slate-800 rounded-xl p-5">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">⚡ Quick-Add Seasonal & Holiday Presets</h2>
+        <div class="flex flex-wrap gap-2">
+          <button @click="applyPreset('spring', '03-01', '05-31', 1.0)" class="px-2.5 py-1.5 bg-emerald-950/60 hover:bg-emerald-900/80 border border-emerald-700/50 text-emerald-300 text-xs rounded-lg transition">🌱 Spring</button>
+          <button @click="applyPreset('summer', '06-01', '08-31', 0.8)" class="px-2.5 py-1.5 bg-amber-950/60 hover:bg-amber-900/80 border border-amber-700/50 text-amber-300 text-xs rounded-lg transition">☀️ Summer</button>
+          <button @click="applyPreset('autumn', '09-01', '11-30', 1.0)" class="px-2.5 py-1.5 bg-orange-950/60 hover:bg-orange-900/80 border border-orange-700/50 text-orange-300 text-xs rounded-lg transition">🍂 Autumn</button>
+          <button @click="applyPreset('winter', '12-01', '02-28', 1.0)" class="px-2.5 py-1.5 bg-cyan-950/60 hover:bg-cyan-900/80 border border-cyan-700/50 text-cyan-300 text-xs rounded-lg transition">❄️ Winter</button>
+          <button @click="applyPreset('midsummer', '06-19', '06-21', 1.5)" class="px-2.5 py-1.5 bg-yellow-950/60 hover:bg-yellow-900/80 border border-yellow-700/50 text-yellow-300 text-xs rounded-lg transition">🇸🇪 Midsummer</button>
+          <button @click="applyPreset('halloween', '10-15', '11-01', 0.7)" class="px-2.5 py-1.5 bg-purple-950/60 hover:bg-purple-900/80 border border-purple-700/50 text-purple-300 text-xs rounded-lg transition">🎃 Halloween</button>
+        </div>
+      </section>
 
-        <!-- Pools Editor -->
-        <section class="bg-slate-800/50 border border-slate-800 rounded-xl p-5">
-          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-slate-800">
-            <div>
-              <h2 class="text-lg font-semibold text-slate-200">📦 Message Pools</h2>
-              <p class="text-xs text-slate-400">Configure core pools, adjust roll weights, and manage contextual flags.</p>
-            </div>
+      <!-- Pools Editor -->
+      <section class="bg-slate-800/50 border border-slate-800 rounded-xl p-5">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-slate-800">
+          <div>
+            <h2 class="text-lg font-semibold text-slate-200">📦 Message Pools</h2>
+            <p class="text-xs text-slate-400">Configure core message buckets and adjust baseline weights.</p>
+          </div>
+          
+          <form @submit.prevent="addCustomPool" class="flex items-center gap-2 w-full sm:w-auto">
+            <input v-model="newPoolName" placeholder="New pool name..." 
+              class="bg-slate-900 border border-slate-700 rounded px-3 py-1.5 text-sm font-mono focus:outline-none focus:border-brand-500 w-full sm:w-44">
+            <button type="submit" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-500 text-white text-xs font-medium rounded-md transition whitespace-nowrap">+ Add Pool</button>
+          </form>
+        </div>
+
+        <div class="space-y-6">
+          <div v-for="(pool, idx) in model.pools" :key="idx" class="bg-slate-900/80 border border-slate-700/80 rounded-lg p-4 space-y-4">
             
-            <form @submit.prevent="addCustomPool" class="flex items-center gap-2 w-full sm:w-auto">
-              <input v-model="newPoolName" placeholder="New pool name..." 
-                class="bg-slate-900 border border-slate-700 rounded px-3 py-1.5 text-sm font-mono focus:outline-none focus:border-brand-500 w-full sm:w-44">
-              <button type="submit" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-500 text-white text-xs font-medium rounded-md transition whitespace-nowrap">+ Add Pool</button>
-            </form>
-          </div>
-
-          <div class="space-y-6">
-            <div v-for="(pool, idx) in model.pools" :key="idx" class="bg-slate-900/80 border border-slate-700/80 rounded-lg p-4 space-y-3">
-              <!-- Top bar controls -->
-              <div class="flex flex-wrap justify-between items-start gap-4 pb-3 border-b border-slate-800">
-                <div class="space-y-1">
-                  <div class="flex items-center gap-3">
-                    <input v-model="pool.name" placeholder="Pool Name" 
-                      :disabled="pool.name === 'default'"
-                      class="bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono font-bold text-brand-500 focus:outline-none focus:border-brand-500 disabled:opacity-70">
-                    
-                    <!-- Always Active Flag Toggle -->
-                    <label v-if="pool.name !== 'default'" class="inline-flex items-center gap-1.5 text-xs text-slate-400 cursor-pointer select-none">
-                      <input type="checkbox" v-model="pool.alwaysActive" class="rounded border-slate-700 bg-slate-800 text-brand-600 focus:ring-0">
-                      <span>Always Active</span>
-                    </label>
-                    <span v-else class="text-[10px] bg-brand-500/10 text-brand-500 border border-brand-500/20 px-1.5 py-0.5 rounded uppercase font-semibold">Implicitly Active</span>
-                  </div>
-                  
-                  <!-- Metadata Identification Description Field -->
-                  <input v-model="pool.description" placeholder="Add custom meta description for this theme (ignored by backend)..."
-                    class="w-full bg-transparent border-none placeholder-slate-600 focus:ring-0 text-xs text-slate-400 p-0 italic">
-                </div>
-
+            <!-- Pool Header Configurations -->
+            <div class="flex flex-wrap justify-between items-start gap-4 pb-3 border-b border-slate-800">
+              <div class="space-y-1 flex-1 min-w-[280px]">
                 <div class="flex items-center gap-3">
-                  <label class="text-xs text-slate-400">Weight:</label>
-                  <input v-model.number="pool.weight" type="number" step="0.1" min="0" 
-                    class="bg-slate-800 border border-slate-700 rounded w-20 px-2 py-1 text-sm font-mono text-right focus:outline-none focus:border-brand-500">
-                  <button v-if="pool.name !== 'default'" @click="removePool(idx)" class="text-red-400 hover:text-red-300 text-xs ml-2">🗑️</button>
-                </div>
-              </div>
-
-              <!-- Messages List -->
-              <div class="space-y-2">
-                <label class="text-xs font-medium text-slate-400">Messages ({{ pool.messages.length }}):</label>
-                <div v-for="(msg, mIdx) in pool.messages" :key="mIdx" class="space-y-1">
-                  <div class="flex gap-2 items-center">
-                    <input v-model="pool.messages[mIdx]" type="text" placeholder="Enter MOTD message string..."
-                      class="flex-1 bg-slate-800 border border-slate-700 rounded px-3 py-1 text-sm focus:outline-none focus:border-brand-500">
-                    <button @click="pool.messages.splice(mIdx, 1)" class="px-2 text-slate-500 hover:text-red-400">✕</button>
-                  </div>
-                  <!-- Byte counter indicator -->
-                  <div class="flex justify-end text-[10px] pr-8 font-mono">
-                    <span :class="getByteLength(pool.messages[mIdx]) > 255 ? 'text-red-400 font-bold' : 'text-slate-500'">
-                      {{ getByteLength(pool.messages[mIdx]) }} / 255 bytes
-                    </span>
-                  </div>
-                </div>
-                <button @click="pool.messages.push('')" class="text-xs text-brand-500 hover:underline pt-1 inline-block">+ Add Message</button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Ranges Editor -->
-        <section class="bg-slate-800/50 border border-slate-800 rounded-xl p-5">
-          <div class="flex justify-between items-center mb-4">
-            <div>
-              <h2 class="text-lg font-semibold text-slate-200">📅 Date Ranges</h2>
-              <p class="text-xs text-slate-400">Overlapping active windows stack dynamically into a unified daily lottery mix.</p>
-            </div>
-            <button @click="addRange" class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-xs font-medium rounded-md transition">+ Add Range</button>
-          </div>
-
-          <div v-if="model.ranges.length === 0" class="text-xs text-slate-500 italic py-2">No date ranges configured.</div>
-          
-          <div class="space-y-3">
-            <div v-for="(range, idx) in model.ranges" :key="idx" class="flex flex-wrap items-center gap-3 bg-slate-900/80 border border-slate-700/80 rounded-lg p-3">
-              <div class="flex flex-col">
-                <span class="text-[10px] text-slate-500 font-mono">Target Pool</span>
-                <select v-model="range.name" class="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-sm text-brand-500 font-mono focus:outline-none">
-                  <option v-for="p in model.pools" :key="p.name" :value="p.name">{{ p.name }}</option>
-                </select>
-              </div>
-              
-              <div class="flex flex-col flex-1 min-w-[120px]">
-                <span class="text-[10px] text-slate-500 font-mono">Start (MM-dd / yyyy-MM-dd)</span>
-                <input v-model="range.start" placeholder="e.g. 06-01" class="bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono focus:outline-none focus:border-brand-500">
-              </div>
-
-              <div class="flex flex-col flex-1 min-w-[120px]">
-                <span class="text-[10px] text-slate-500 font-mono">End (MM-dd / yyyy-MM-dd)</span>
-                <input v-model="range.end" placeholder="e.g. 08-31" class="bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono focus:outline-none focus:border-brand-500">
-              </div>
-
-              <button @click="model.ranges.splice(idx, 1)" class="p-1 text-red-400 hover:text-red-300 self-end pb-1.5">🗑️</button>
-            </div>
-          </div>
-        </section>
-
-        <!-- Days of Week Editor -->
-        <section class="bg-slate-800/50 border border-slate-800 rounded-xl p-5">
-          <h2 class="text-lg font-semibold text-slate-200 mb-1">🗓️ Day of Week Overrides</h2>
-          <p class="text-xs text-slate-400 mb-4">Map specific weekdays to contribute a pool's weights to today's active blend selection.</p>
-          
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <div v-for="day in weekdays" :key="day" class="bg-slate-900/80 border border-slate-700/80 rounded-lg p-2.5 flex flex-col">
-              <span class="text-xs font-semibold capitalize text-slate-300 mb-1">{{ day }}</span>
-              <select v-model="model.days[day]" class="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs font-mono text-brand-500 focus:outline-none">
-                <option value="">(No Override)</option>
-                <option v-for="p in model.pools" :key="p.name" :value="p.name">{{ p.name }}</option>
-              </select>
-            </div>
-          </div>
-        </section>
-
-        <!-- Exact Dates Editor -->
-        <section class="bg-slate-800/50 border border-slate-800 rounded-xl p-5">
-          <div class="flex justify-between items-center mb-4">
-            <div>
-              <h2 class="text-lg font-semibold text-slate-200">🎯 Exact Date Options</h2>
-              <p class="text-xs text-slate-400">Configure absolute entries as hard-line bypasses or soft-weighted lottery entries.</p>
-            </div>
-            <button @click="addDate" class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-xs font-medium rounded-md transition">+ Add Date</button>
-          </div>
-
-          <div v-if="model.dates.length === 0" class="text-xs text-slate-500 italic py-2">No exact dates configured.</div>
-
-          <div class="space-y-4">
-            <div v-for="(item, idx) in model.dates" :key="idx" class="bg-slate-900/80 border border-slate-700/80 rounded-lg p-3 space-y-2">
-              <div class="flex flex-wrap items-center gap-3">
-                <input v-model="item.date" placeholder="MM-dd" class="w-24 bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono focus:outline-none focus:border-brand-500">
-                
-                <!-- Format selector (String vs Object configuration) -->
-                <select v-model="item.isObject" :value="item.isObject" @change="toggleDateStructure(item)"
-                  class="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs font-semibold text-slate-300 focus:outline-none">
-                  <option :value="false">Plain String (Hard Override)</option>
-                  <option :value="true">Advanced Object Configuration</option>
-                </select>
-
-                <!-- Nested weight and override configs if object layout selected -->
-                <div v-if="item.isObject" class="flex items-center gap-4 border-l border-slate-700 pl-4 py-0.5">
-                  <label class="text-xs text-slate-400 flex items-center gap-1">
-                    <input type="checkbox" v-model="item.hardOverride" class="rounded border-slate-700 bg-slate-800 text-brand-600 focus:ring-0">
-                    <span>Hard Override</span>
+                  <input v-model="pool.name" placeholder="Pool Name" 
+                    :disabled="pool.name === 'default'"
+                    class="bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono font-bold text-brand-500 focus:outline-none focus:border-brand-500 disabled:opacity-70">
+                  
+                  <label v-if="pool.name !== 'default'" class="inline-flex items-center gap-1.5 text-xs text-slate-400 cursor-pointer select-none">
+                    <input type="checkbox" v-model="pool.alwaysActive" class="rounded border-slate-700 bg-slate-800 text-brand-600 focus:ring-0">
+                    <span>Always Active</span>
                   </label>
-                  <div class="flex items-center gap-2">
-                    <span class="text-xs text-slate-400">Weight:</span>
-                    <input v-model.number="item.weight" type="number" step="0.1" min="0" 
-                      class="bg-slate-800 border border-slate-700 rounded w-16 px-1.5 py-0.5 text-xs font-mono text-right focus:outline-none">
-                  </div>
+                  <span v-else class="text-[10px] bg-brand-500/10 text-brand-500 border border-brand-500/20 px-1.5 py-0.5 rounded uppercase font-semibold">Implicitly Active</span>
                 </div>
-
-                <button @click="model.dates.splice(idx, 1)" class="text-red-400 hover:text-red-300 ml-auto text-sm">🗑️</button>
+                
+                <!-- Metadata Identification Description Field -->
+                <input v-model="pool.description" placeholder="Add custom meta description for this theme (ignored by backend)..."
+                  class="w-full bg-transparent border-none placeholder-slate-600 focus:ring-0 text-xs text-slate-400 p-0 italic">
               </div>
 
-              <div class="space-y-1">
-                <input v-model="item.message" placeholder="Enter override message string..." class="w-full bg-slate-800 border border-slate-700 rounded px-3 py-1 text-sm focus:outline-none focus:border-brand-500">
-                <div class="flex justify-end text-[10px] font-mono">
-                  <span :class="getByteLength(item.message) > 255 ? 'text-red-400 font-bold' : 'text-slate-500'">
-                    {{ getByteLength(item.message) }} / 255 bytes
+              <div class="flex items-center gap-3">
+                <label class="text-xs text-slate-400">Weight:</label>
+                <input v-model.number="pool.weight" type="number" step="0.1" min="0" 
+                  class="bg-slate-800 border border-slate-700 rounded w-20 px-2 py-1 text-sm font-mono text-right focus:outline-none focus:border-brand-500">
+                <button v-if="pool.name !== 'default'" @click="removePool(idx)" class="text-red-400 hover:text-red-300 text-xs ml-2">🗑️ Remove Pool</button>
+              </div>
+            </div>
+
+            <!-- Messages List (Upgraded to Multiline Textareas) -->
+            <div class="space-y-3">
+              <label class="text-xs font-medium text-slate-400 block">Messages ({{ pool.messages.length }}):</label>
+              
+              <div v-for="(msg, mIdx) in pool.messages" :key="mIdx" class="bg-slate-800/40 p-3 rounded-md border border-slate-800 space-y-1.5">
+                <div class="flex gap-3 items-start">
+                  <textarea v-model="pool.messages[mIdx]" rows="2" placeholder="Enter guild MOTD string..."
+                    class="flex-1 bg-slate-800 border border-slate-700 rounded p-2.5 text-sm focus:outline-none focus:border-brand-500 resize-y leading-relaxed w-full min-h-[56px]"></textarea>
+                  <button @click="pool.messages.splice(mIdx, 1)" class="pt-2 text-slate-500 hover:text-red-400 text-sm">✕</button>
+                </div>
+                
+                <!-- Byte counter indicator with dynamic color mapping -->
+                <div class="flex justify-between items-center text-[10px] px-1">
+                  <span class="text-slate-500 italic">Supports newlines inside WoW chat parameters</span>
+                  <span :class="getByteLength(pool.messages[mIdx]) > 255 ? 'text-red-400 font-bold' : 'text-slate-400'">
+                    {{ getByteLength(pool.messages[mIdx]) }} / 255 bytes (UTF-8)
                   </span>
                 </div>
               </div>
+              
+              <button @click="pool.messages.push('')" class="text-xs text-brand-500 hover:underline pt-1 inline-block">+ Add Message String</button>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-      </div>
-
-      <!-- Right 1 Column: Live JSON Preview -->
-      <div class="lg:col-span-1">
-        <div class="sticky top-8 bg-slate-800/80 border border-slate-700 rounded-xl p-5 flex flex-col h-[calc(100vh-4rem)]">
-          <div class="flex justify-between items-center mb-3">
-            <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-300">👁️ Live JSON Output</h3>
-            <button @click="copyJson" class="text-xs bg-slate-700 hover:bg-slate-600 px-2.5 py-1 rounded transition text-slate-200">📋 Copy</button>
+      <!-- Ranges Editor -->
+      <section class="bg-slate-800/50 border border-slate-800 rounded-xl p-5">
+        <div class="flex justify-between items-center mb-4">
+          <div>
+            <h2 class="text-lg font-semibold text-slate-200">📅 Date Ranges</h2>
+            <p class="text-xs text-slate-400">Overlapping active windows stack dynamically into a unified daily lottery mix.</p>
           </div>
-          
-          <textarea readonly :value="generatedJson" 
-            class="w-full flex-1 bg-slate-950 border border-slate-800 rounded-lg p-4 font-mono text-xs text-emerald-400 focus:outline-none resize-none overflow-y-auto leading-relaxed"></textarea>
-          
-          <div class="mt-4 pt-4 border-t border-slate-700/50 flex flex-col gap-2">
-            <button @click="downloadConfig" class="w-full py-2.5 bg-brand-600 hover:bg-brand-500 text-white font-medium rounded-lg text-sm transition shadow-lg shadow-brand-500/20 text-center">
-              💾 Download motd_config.json
-            </button>
-            <p class="text-[11px] text-slate-500 text-center">Download this file and replace your hosted static/utils/motd_config.json.</p>
+          <button @click="addRange" class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-xs font-medium rounded-md transition">+ Add Range</button>
+        </div>
+
+        <div v-if="model.ranges.length === 0" class="text-xs text-slate-500 italic py-2">No date ranges configured.</div>
+        
+        <div class="space-y-3">
+          <div v-for="(range, idx) in model.ranges" :key="idx" class="flex flex-wrap items-center gap-4 bg-slate-900/80 border border-slate-700/80 rounded-lg p-3">
+            <div class="flex flex-col">
+              <span class="text-[10px] text-slate-500 font-mono mb-0.5">Target Pool</span>
+              <select v-model="range.name" class="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-sm text-brand-500 font-mono focus:outline-none">
+                <option v-for="p in model.pools" :key="p.name" :value="p.name">{{ p.name }}</option>
+              </select>
+            </div>
+            
+            <div class="flex flex-col flex-1 min-w-[130px]">
+              <span class="text-[10px] text-slate-500 font-mono mb-0.5">Start (MM-dd / yyyy-MM-dd)</span>
+              <input v-model="range.start" placeholder="e.g. 06-01" class="bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono focus:outline-none focus:border-brand-500">
+            </div>
+
+            <div class="flex flex-col flex-1 min-w-[130px]">
+              <span class="text-[10px] text-slate-500 font-mono mb-0.5">End (MM-dd / yyyy-MM-dd)</span>
+              <input v-model="range.end" placeholder="e.g. 08-31" class="bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono focus:outline-none focus:border-brand-500">
+            </div>
+
+            <button @click="model.ranges.splice(idx, 1)" class="p-1 text-red-400 hover:text-red-300 self-end pb-1.5">🗑️</button>
           </div>
         </div>
-      </div>
+      </section>
+
+      <!-- Days of Week Editor -->
+      <section class="bg-slate-800/50 border border-slate-800 rounded-xl p-5">
+        <h2 class="text-lg font-semibold text-slate-200 mb-1">🗓️ Day of Week Overrides</h2>
+        <p class="text-xs text-slate-400 mb-4">Map specific weekdays to contribute a pool's weights to today's active blend selection.</p>
+        
+        <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+          <div v-for="day in weekdays" :key="day" class="bg-slate-900/80 border border-slate-700/80 rounded-lg p-2.5 flex flex-col">
+            <span class="text-xs font-semibold capitalize text-slate-300 mb-1">{{ day }}</span>
+            <select v-model="model.days[day]" class="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs font-mono text-brand-500 focus:outline-none">
+              <option value="">(No Override)</option>
+              <option v-for="p in model.pools" :key="p.name" :value="p.name">{{ p.name }}</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Exact Dates Editor -->
+      <section class="bg-slate-800/50 border border-slate-800 rounded-xl p-5">
+        <div class="flex justify-between items-center mb-4">
+          <div>
+            <h2 class="text-lg font-semibold text-slate-200">🎯 Exact Date Options</h2>
+            <p class="text-xs text-slate-400">Configure absolute entries as hard-line bypasses or soft-weighted lottery entries.</p>
+          </div>
+          <button @click="addDate" class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-xs font-medium rounded-md transition">+ Add Date</button>
+        </div>
+
+        <div v-if="model.dates.length === 0" class="text-xs text-slate-500 italic py-2">No exact dates configured.</div>
+
+        <div class="space-y-4">
+          <div v-for="(item, idx) in model.dates" :key="idx" class="bg-slate-900/80 border border-slate-700/80 rounded-lg p-4 space-y-3">
+            
+            <div class="flex flex-wrap items-center gap-3">
+              <div class="flex flex-col">
+                <span class="text-[10px] text-slate-500 font-mono mb-0.5">Date (MM-dd)</span>
+                <input v-model="item.date" placeholder="MM-dd" class="w-24 bg-slate-800 border border-slate-700 rounded px-2.5 py-1 text-sm font-mono focus:outline-none focus:border-brand-500">
+              </div>
+              
+              <div class="flex flex-col">
+                <span class="text-[10px] text-slate-500 font-mono mb-0.5">Target Routine</span>
+                <select v-model="item.isObject" :value="item.isObject" @change="toggleDateStructure(item)"
+                  class="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs font-semibold text-slate-300 focus:outline-none h-[30px]">
+                  <option :value="false">Plain String (Hard Override)</option>
+                  <option :value="true">Advanced Object Configuration</option>
+                </select>
+              </div>
+
+              <!-- Nested weight and override configs if object layout selected -->
+              <div v-if="item.isObject" class="flex items-center gap-4 border-l border-slate-700 pl-4 h-[30px] mt-4 sm:mt-0">
+                <label class="text-xs text-slate-400 flex items-center gap-1.5 cursor-pointer select-none">
+                  <input type="checkbox" v-model="item.hardOverride" class="rounded border-slate-700 bg-slate-800 text-brand-600 focus:ring-0">
+                  <span>Hard Override</span>
+                </label>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs text-slate-400">Weight:</span>
+                  <input v-model.number="item.weight" type="number" step="0.1" min="0" 
+                    class="bg-slate-800 border border-slate-700 rounded w-16 px-1.5 py-0.5 text-xs font-mono text-right focus:outline-none">
+                </div>
+              </div>
+
+              <button @click="model.dates.splice(idx, 1)" class="text-red-400 hover:text-red-300 ml-auto text-xs font-medium">🗑️ Remove Date</button>
+            </div>
+
+            <!-- Upgraded Override Input to Textarea -->
+            <div class="space-y-1.5 bg-slate-800/40 p-3 rounded-md border border-slate-800">
+              <textarea v-model="item.message" rows="2" placeholder="Enter specific exact override string..."
+                class="w-full bg-slate-800 border border-slate-700 rounded p-2.5 text-sm focus:outline-none focus:border-brand-500 resize-y leading-relaxed w-full min-h-[56px]"></textarea>
+              <div class="flex justify-end text-[10px] px-1 font-mono">
+                <span :class="getByteLength(item.message) > 255 ? 'text-red-400 font-bold' : 'text-slate-400'">
+                  {{ getByteLength(item.message) }} / 255 bytes (UTF-8)
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
     </div>
   </div>
@@ -305,7 +296,6 @@
           dates: []
         })
 
-        // Live helper to calculate exact string byte footprint (UTF-8 multi-byte processing)
         const getByteLength = (str) => {
           if (!str) return 0
           return encoder.encode(str).length
@@ -460,7 +450,7 @@
 
         const copyJson = () => {
           navigator.clipboard.writeText(generatedJson.value)
-          showStatus('Copied JSON to clipboard!')
+          showStatus('Copied JSON string to clipboard!')
         }
 
         const addCustomPool = () => {
