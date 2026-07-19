@@ -7,38 +7,38 @@ character: "Azzco"
 profession: "Jewelcrafting"
 ---
 ### Raid Target Markers
-* {{< icon skull >}} `{{</* icon skull */>}}`
-* {{< icon cross >}} `{{</* icon cross */>}}`
-* {{< icon star >}} `{{</* icon star */>}}`
-* {{< icon circle >}} `{{</* icon circle */>}}`
-* {{< icon diamond >}} `{{</* icon diamond */>}}`
-* {{< icon triangle >}} `{{</* icon triangle */>}}`
-* {{< icon square >}} `{{</* icon square */>}}`
-* {{< icon moon >}} `{{</* icon moon */>}}`
+* {{< wow-icon skull >}} `{{</* icon skull */>}}`
+* {{< wow-icon cross >}} `{{</* icon cross */>}}`
+* {{< wow-icon star >}} `{{</* icon star */>}}`
+* {{< wow-icon circle >}} `{{</* icon circle */>}}`
+* {{< wow-icon diamond >}} `{{</* icon diamond */>}}`
+* {{< wow-icon triangle >}} `{{</* icon triangle */>}}`
+* {{< wow-icon square >}} `{{</* icon square */>}}`
+* {{< wow-icon moon >}} `{{</* icon moon */>}}`
 
 ### Player Classes
-* {{< icon warrior >}} `{{</* icon warrior */>}}`
-* {{< icon druid >}} `{{</* icon druid */>}}`
-* {{< icon paladin >}} `{{</* icon paladin */>}}`
-* {{< icon rogue >}} `{{</* icon rogue */>}}`
-* {{< icon hunter >}} `{{</* icon hunter */>}}`
-* {{< icon mage >}} `{{</* icon mage */>}}`
-* {{< icon warlock >}} `{{</* icon warlock */>}}`
-* {{< icon priest >}} `{{</* icon priest */>}}`
-* {{< icon shaman >}} `{{</* icon shaman */>}}`
-* {{< icon deathknight >}} `{{</* icon deathknight */>}}`
+* {{< wow-icon warrior >}} `{{</* icon warrior */>}}`
+* {{< wow-icon druid >}} `{{</* icon druid */>}}`
+* {{< wow-icon paladin >}} `{{</* icon paladin */>}}`
+* {{< wow-icon rogue >}} `{{</* icon rogue */>}}`
+* {{< wow-icon hunter >}} `{{</* icon hunter */>}}`
+* {{< wow-icon mage >}} `{{</* icon mage */>}}`
+* {{< wow-icon warlock >}} `{{</* icon warlock */>}}`
+* {{< wow-icon priest >}} `{{</* icon priest */>}}`
+* {{< wow-icon shaman >}} `{{</* icon shaman */>}}`
+* {{< wow-icon deathknight >}} `{{</* icon deathknight */>}}`
 
 ### Professions
-* {{< icon tailoring >}} `{{</* icon tailoring */>}}`
-* {{< icon blacksmithing >}} `{{</* icon blacksmithing */>}}`
-* {{< icon engineering >}} `{{</* icon engineering */>}}`
-* {{< icon alchemy >}} `{{</* icon alchemy */>}}`
-* {{< icon leatherworking >}} `{{</* icon leatherworking */>}}`
-* {{< icon enchanting >}} `{{</* icon enchanting */>}}`
-* {{< icon jewelcrafting >}} `{{</* icon jewelcrafting */>}}`
-* {{< icon inscription >}} `{{</* icon inscription */>}}`
-* {{< icon herbalism >}} `{{</* icon herbalism */>}}`
-* {{< icon skinning >}} `{{</* icon skinning */>}}`
-* {{< icon mining >}} `{{</* icon mining */>}}`
-* {{< icon fishing >}} `{{</* icon fishing */>}}`
-* {{< icon cooking >}} `{{</* icon cooking */>}}`
+* {{< wow-icon tailoring >}} `{{</* icon tailoring */>}}`
+* {{< wow-icon blacksmithing >}} `{{</* icon blacksmithing */>}}`
+* {{< wow-icon engineering >}} `{{</* icon engineering */>}}`
+* {{< wow-icon alchemy >}} `{{</* icon alchemy */>}}`
+* {{< wow-icon leatherworking >}} `{{</* icon leatherworking */>}}`
+* {{< wow-icon enchanting >}} `{{</* icon enchanting */>}}`
+* {{< wow-icon jewelcrafting >}} `{{</* icon jewelcrafting */>}}`
+* {{< wow-icon inscription >}} `{{</* icon inscription */>}}`
+* {{< wow-icon herbalism >}} `{{</* icon herbalism */>}}`
+* {{< wow-icon skinning >}} `{{</* icon skinning */>}}`
+* {{< wow-icon mining >}} `{{</* icon mining */>}}`
+* {{< wow-icon fishing >}} `{{</* icon fishing */>}}`
+* {{< wow-icon cooking >}} `{{</* icon cooking */>}}`

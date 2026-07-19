@@ -1,5 +1,8 @@
 {{ define "main" }}
 
+{{/* Check language once to keep the markup clean */}}
+{{ $isEn := hasPrefix .Site.Language.Lang "en" }}
+
 <div class="roster-page">
 
     <div class="prose dark:prose-invert max-w-none roster-intro">
@@ -32,7 +35,11 @@
 
             <div id="roster-detail" class="detail-panel">
                 <div class="detail-empty">
-                    Välj en spelare för att se detaljer.
+                    {{ if $isEn }}
+                        Select a player to view details.
+                    {{ else }}
+                        Välj en spelare för att se detaljer.
+                    {{ end }}
                 </div>
             </div>
 

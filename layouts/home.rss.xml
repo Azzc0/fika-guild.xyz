@@ -1,4 +1,5 @@
-{{- $pages := where site.RegularPages "Section" "nyheter" -}}
+{{- /* CHANGED: Scoped to the current language's pages instead of the global site collection */ -}}
+{{- $pages := where .Site.RegularPages "Section" "nyheter" -}}
 {{- $pages = $pages.ByDate.Reverse -}}
 {{ `<?xml version="1.0" encoding="utf-8" standalone="yes" ?>` | safeHTML }}
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
@@ -7,6 +8,7 @@
     <link>{{ .Permalink }}</link>
     <description>Recent content on {{ .Site.Title }}</description>
     <generator>Hugo -- gohugo.io</generator>
+    {{- /* Natively outputs 'sv' for the Swedish feed and your new languageCode configuration for the English one */ -}}
     {{- with .Site.LanguageCode }}
     <language>{{ . }}</language>
     {{- end }}

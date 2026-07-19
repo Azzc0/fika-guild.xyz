@@ -1,7 +1,18 @@
 {{ define "main" }}
+{{- /* 1. Detect the current language context (e.g., 'sv' or 'en') */ -}}
+{{- $lang := .Lang -}}
+
 <div class="hextra-custom-container" style="padding: 2rem; max-width: 1200px; margin: 0 auto;">
   <h1>{{ .Title }}</h1>
-  <p>Automated trade network ledger pulled at build time.</p>
+  
+  {{- /* Localized Subtitles using basic conditional logic */ -}}
+  <p>
+    {{ if eq $lang "en" }}
+      Automated trade network ledger pulled at build time.
+    {{ else }}
+      Automatiserad handelsregister hämtat vid kompilering.
+    {{ end }}
+  </p>
 
   {{ $url := printf "https://azzco.xyz/data/professions.json?t=%d" now.Unix }}
   {{ $data := dict }}
@@ -20,7 +31,7 @@
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
       
       <div>
-        <h2>Characters Index</h2>
+        <h2>{{ if eq $lang "en" }}Characters Index{{ else }}Karaktärsindex{{ end }}</h2>
         {{ range $charName, $slots := $data }}
           <div style="margin-bottom: 1.5rem; border-left: 3px solid #71d5ff; padding-left: 1rem;">
             <h3 style="margin-bottom: 0.5rem;">{{ $charName }}</h3>
@@ -39,7 +50,7 @@
       </div>
 
       <div>
-        <h2>Guild Tradeskill Ledger</h2>
+        <h2>{{ if eq $lang "en" }}Guild Tradeskill Ledger{{ else }}Gillesregister för Yrken{{ end }}</h2>
         
         {{ $allProfessions := dict }}
         {{ range $charName, $slots := $data }}
@@ -55,6 +66,7 @@
 
               {{ if $profName }}
                 {{ $profName = $profName | title }}
+                
                 {{ $currentList := index $allProfessions $profName | default slice }}
                 {{ $charEntry := dict "name" $charName "raw" $rawStr }}
                 {{ $allProfessions = merge $allProfessions (dict $profName ($currentList | append $charEntry)) }}
@@ -79,7 +91,13 @@
 
     </div>
   {{ else }}
-    <p style="color: yellow;">No data was found or parsed from the resource string endpoint.</p>
+    <p style="color: yellow;">
+      {{ if eq $lang "en" }}
+        No data was found or parsed from the resource string endpoint.
+      {{ else }}
+        Ingen data hittades eller kunde tolkas från ändpunkten.
+      {{ end }}
+    </p>
   {{ end }}
 </div>
 {{ end }}

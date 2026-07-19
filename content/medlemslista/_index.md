@@ -9,4 +9,4 @@ toc:
   hide: true
 ---
 
-Nedan har du en tabell över medlemmar i \<Fika\>. För att se en spelares alter klickar du på raden.
+Nedan har du en tabell över medlemmar i \<Fika\>. För att se en spelares alter klickar du ikonen längst till vänster.

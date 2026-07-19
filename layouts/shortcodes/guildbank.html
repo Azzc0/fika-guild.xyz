@@ -17,16 +17,14 @@
     
     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #222; padding-bottom: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
         <h3 id="gb-main-title" style="margin: 0; color: #ffd100;">Gillesbank</h3>
-        <div id="gb-gold-balance" style="font-weight: bold; font-size: 0.95rem; display: flex; gap: 0.5rem; align-items: center;">
-            Laddar guld...
-        </div>
+        <div id="gb-gold-balance" style="font-weight: bold; font-size: 0.95rem; display: flex; gap: 0.5rem; align-items: center;"></div>
     </div>
 
     <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
         <div id="gb-tabs-nav" style="display: flex; flex-wrap: wrap; gap: 0.5rem;"></div>
         
         <div style="position: relative; flex: 1; max-width: 250px; min-width: 160px;">
-            <input type="text" id="gb-search-input" placeholder="Sök föremål..." 
+            <input type="text" id="gb-search-input" placeholder="" 
                    style="width: 100%; background: #1a1a1a; border: 1px solid #444; color: #fff; padding: 0.4rem 0.75rem; font-size: 0.85rem; border-radius: 4px; box-sizing: border-box; outline: none; transition: border-color 0.2s;">
         </div>
     </div>
@@ -58,7 +56,6 @@
 .gb-item-slot a { display: flex; width: 40px; height: 40px; align-items: center; justify-content: center; position: relative; box-sizing: border-box; }
 .gb-item-slot img { width: 40px; height: 40px; border-radius: 3px; display: block; object-fit: cover; margin: 0 auto; box-sizing: border-box; }
 
-/* Inactive dimming filter rule context states */
 .gb-item-slot.dimmed { opacity: 0.15; }
 
 .gb-item-count {
@@ -76,7 +73,26 @@
     const tabNotesConfig = notesEl ? JSON.parse(notesEl.textContent) : {};
     
     let currentActiveTabObj = null;
-    let itemNamesCache = {}; // Global key-map link registry directory for instant filter lookups
+    let itemNamesCache = {}; 
+
+    // ── Language Detection & Localization ─────────────────────────────────────────
+    const IS_EN = document.documentElement.lang.startsWith("en");
+    const LOCALE = IS_EN ? "en-US" : "sv-SE";
+
+    const TEXT = {
+        titlePrefix: IS_EN ? "Guild Bank" : "Gillesbank",
+        loadingGold: IS_EN ? "Loading gold..." : "Laddar guld...",
+        searchPlace: IS_EN ? "Search items..." : "Sök föremål...",
+        errorConnect:IS_EN ? "Could not connect." : "Kunde inte ansluta.",
+        scanTime:    IS_EN ? "Last scanned" : "Senast skannad",
+        infoLabel:   IS_EN ? "Info" : "Info"
+    };
+
+    // Initial string assignment setup
+    document.getElementById('gb-main-title').innerText = TEXT.titlePrefix;
+    document.getElementById('gb-gold-balance').innerText = TEXT.loadingGold;
+    const searchInput = document.getElementById('gb-search-input');
+    if (searchInput) searchInput.placeholder = TEXT.searchPlace;
 
     function fromBase36(str) {
         let num = 0;
@@ -93,7 +109,6 @@
         return `<span style="color:#e6cc80;">${gold}g</span> <span style="color:#aad3e6;">${silver}s</span> <span style="color:#c79c6e;">${copper}c</span>`;
     }
 
-    // Intercept AoWoW translations to fetch real item string values for searching
     window.$WowheadPower = window.$WowheadPower || {};
     let realRegisterFunc = window.$WowheadPower.registerItem;
 
@@ -107,7 +122,6 @@
                     });
                 }
                 
-                // Cache item names safely into our dictionary
                 if (data.name_enus) {
                     itemNamesCache[id] = data.name_enus.toLowerCase();
                 }
@@ -116,7 +130,6 @@
                     realRegisterFunc.call(this, id, type, data);
                 }
                 
-                // Trigger an on-the-fly execution loop to handle searching if input is currently filled
                 evaluateSearchFilter();
             };
         },
@@ -195,19 +208,16 @@
 
             function renderGrid(tab) {
                 currentActiveTabObj = tab;
-                document.getElementById('gb-main-title').innerText = `Gillesbank - ${tab.name}`;
+                document.getElementById('gb-main-title').innerText = `${TEXT.titlePrefix} - ${tab.name}`;
 
-                // Parse literal \n segments into authentic paragraph break tags
                 const notesPanel = document.getElementById('gb-tab-notes-panel');
                 let infoText = tabNotesConfig[tab.id];
 
                 if (infoText) {
-                    // 1. Clean the string: remove surrounding quotes, then handle newlines
                     infoText = infoText.replace(/^"|"$/g, '').replace(/\\n/g, '\n').trim();
                     
-                    // 2. Inject the label and the formatted content
                     notesPanel.innerHTML = `
-                        <div style="font-weight: bold; color: #ffd100; margin-bottom: 0.25rem;">Info</div>
+                        <div style="font-weight: bold; color: #ffd100; margin-bottom: 0.25rem;">${TEXT.infoLabel}</div>
                         <div>${infoText.replace(/\n/g, '<br>')}</div>
                     `;
                     notesPanel.style.display = 'block';
@@ -240,8 +250,8 @@
                 }
 
                 const dateOpts = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
-                const localizedTime = new Date(tab.scanTime).toLocaleDateString('sv-SE', dateOpts);
-                document.getElementById('gb-scan-time').innerText = `Senast skannad: ${localizedTime}`;
+                const localizedTime = new Date(tab.scanTime).toLocaleDateString(LOCALE, dateOpts);
+                document.getElementById('gb-scan-time').innerText = `${TEXT.scanTime}: ${localizedTime}`;
 
                 tab.items && Object.values(tab.items).forEach(item => {
                     const script = document.createElement('script');
@@ -264,10 +274,9 @@
         })
         .catch(err => {
             console.error("Failed to parse guildbank content stream:", err);
-            document.getElementById('gb-gold-balance').innerText = "Kunde inte ansluta.";
+            document.getElementById('gb-gold-balance').innerText = TEXT.errorConnect;
         });
 
-    // Real-Time Sorting Execution Evaluation Framework Engine Handler
     function evaluateSearchFilter() {
         const query = document.getElementById('gb-search-input').value.trim().toLowerCase();
         const slots = document.querySelectorAll('.gb-item-slot');

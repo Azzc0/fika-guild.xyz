@@ -1,4 +1,7 @@
 {{ define "main" }}
+{{- /* Detect the active context language */ -}}
+{{- $lang := .Lang -}}
+
 <style type="text/css">
   .tradeskill-window {
     display: grid;
@@ -55,6 +58,9 @@
   .recipe-group-block.collapsed .recipe-group-content {
     display: none !important;
   }
+  .recipe-item:hover {
+    background: #1a1a1a;
+  }
   
   @media (max-width: 1024px) {
     .tradeskill-window {
@@ -69,19 +75,36 @@
 </style>
 
 <div class="hextra-custom-container" style="padding: 1rem; max-width: 1400px; margin: 0 auto;">
-  <a href="../" style="color: #888; text-decoration: none; font-size: 0.9rem;">← Tillbaka till översikten</a>
+  <a href="../" style="color: #888; text-decoration: none; font-size: 0.9rem;">
+    {{ if eq $lang "en" }}← Back to overview{{ else }}← Tillbaka till översikten{{ end }}
+  </a>
   
   {{ $presentation := dict }}
   {{ with resources.Get "skill_presentation.json" }}
     {{ $presentation = . | transform.Unmarshal }}
   {{ end }}
 
+  {{/* Normalize lookup context via stable page params or fallback titles */}}
   {{ $currentProfessionName := .Title }}
   {{ $skillId := "" }}
   {{ $profData := dict }}
   
+  {{/* Structural English variant mapping for localized Swedish page lookups */}}
+  {{ $lookupName := $currentProfessionName | lower }}
+  {{ if eq $lookupName "första hjälpen" }}{{ $lookupName = "first aid" }}
+  {{ else if eq $lookupName "ingenjörskonst" }}{{ $lookupName = "engineering" }}
+  {{ else if eq $lookupName "smide" }}{{ $lookupName = "blacksmithing" }}
+  {{ else if eq $lookupName "alkemi" }}{{ $lookupName = "alchemy" }}
+  {{ else if eq $lookupName "förtrollning" }}{{ $lookupName = "enchanting" }}
+  {{ else if eq $lookupName "smyckeskonst" }}{{ $lookupName = "jewelcrafting" }}
+  {{ else if eq $lookupName "läderarmband" }}{{ $lookupName = "leatherworking" }}
+  {{ else if eq $lookupName "skrädderi" }}{{ $lookupName = "tailoring" }}
+  {{ else if eq $lookupName "matlagning" }}{{ $lookupName = "cooking" }}
+  {{ else if eq $lookupName "inskription" }}{{ $lookupName = "inscription" }}
+  {{ end }}
+
   {{ range $sId, $data := $presentation }}
-    {{ if eq ($data.profession_name | lower) ($currentProfessionName | lower) }}
+    {{ if eq ($data.profession_name | lower) $lookupName }}
       {{ $skillId = $sId }}
       {{ $profData = $data }}
     {{ end }}
@@ -89,68 +112,79 @@
 
   <div class="tradeskill-book-header" style="margin-bottom: 1.5rem; border-bottom: 2px solid #333; padding-bottom: 1rem; margin-top: 1rem;">
     <h1 style="margin: 0; color: #ffd100; font-family: sans-serif;">{{ .Title }}</h1>
-    {{ $preludeSlug := .Title | lower | replaceRE `\s+` "-" }}
+    
+    {{/* Request the prelude markdown asset using the structural English path slug */}}
+    {{ $preludeSlug := $lookupName | replaceRE `\s+` "-" }}
+    
+    {{/* 1. Default to original Swedish files (*.md) */}}
     {{ $preludePath := printf "profession-preludes/%s.md" $preludeSlug }}
 
+    {{/* 2. Switch to .en.md variation if browsing the English version of the site */}}
+    {{ if eq $lang "en" }}
+      {{ $enPath := printf "profession-preludes/%s.en.md" $preludeSlug }}
+      {{ if resources.Get $enPath }}
+        {{ $preludePath = $enPath }}
+      {{ end }}
+    {{ end }}
+
+    {{/* 3. Safely retrieve and render the designated asset */}}
     {{ with resources.Get $preludePath }}
     <div class="profession-prelude" style="margin-bottom: 2.5rem; color: #e5e7eb; line-height: 1.7;">
         {{ $.Page.RenderString .Content }}
     </div>
     {{ end }}
-
   </div>
 
   {{ if $profData }}
     <div class="tradeskill-window">
       <div class="recipe-sidebar">
         <div style="padding: 0.75rem; background: #161616; border-bottom: 1px solid #252525; flex-shrink: 0; display: flex; flex-direction: column; gap: 8px;">
-          <input type="text" id="recipe-search" oninput="filterRecipes()" placeholder="Sök recept..." 
+          <input type="text" id="recipe-search" oninput="filterRecipes()" 
+                 placeholder="{{ if eq $lang "en" }}Search recipes...{{ else }}Sök recept...{{ end }}" 
                  style="width: 100%; padding: 0.4rem 0.6rem; background: #0c0c0c; border: 1px solid #3a3a3a; border-radius: 4px; color: #fff; font-size: 0.85rem; outline: none;">
           <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; color: #aaa; font-size: 0.8rem;">
             <input type="checkbox" id="show-all-toggle" onchange="filterRecipes()" style="cursor: pointer; accent-color: #ffd100;">
-            Visa recept som ingen i gillet kan
+            {{ if eq $lang "en" }}Show recipes unlearned by the guild{{ else }}Visa recept som ingen i gillet kan{{ end }}
           </label>
         </div>
 
         <div id="recipe-tree-container" class="recipe-tree-scroll">
-          {{/* 1. Extract map items into a flat slice list and preserve their group key names */}}
           {{ $sortedGroups := slice }}
           {{ range $groupName, $groupData := $profData.groups }}
             {{ $groupWithKey := merge $groupData (dict "group_name_key" $groupName) }}
             {{ $sortedGroups = $sortedGroups | append $groupWithKey }}
           {{ end }}
 
-          {{/* 2. Sort the array sequentially by the sort_order variable inside the JSON */}}
           {{ range sort $sortedGroups "sort_order" "asc" }}
             {{ $groupName := .group_name_key }}
+            
+            {{/* Localize the structural navigation group display strings */}}
+            {{ $displayGroupName := $groupName }}
+            {{ if ne $lang "en" }}
+              {{ if eq $groupName "Classic" }}{{ $displayGroupName = "Klassisk" }}
+              {{ else if eq $groupName "Outland" }}{{ $displayGroupName = "Utmarken" }}
+              {{ else if eq $groupName "Northrend" }}{{ $displayGroupName = "Nordanland" }}
+              {{ end }}
+            {{ end }}
+
             <div class="recipe-group-block" id="group-wrapper-{{ md5 $groupName }}">
-              <div class="recipe-group-header" onclick="toggleGroupCollapse(this.parentElement)">{{ $groupName }}</div>
+              <div class="recipe-group-header" onclick="toggleGroupCollapse(this.parentElement)">{{ $displayGroupName }}</div>
               <div class="recipe-group-content">
                 {{ range sort .spells "req_skill" "desc" }}
-                  {{/* Track the current iteration context cleanly before entering the nested entries loop */}}
                   {{ $spellIdRaw := .spell_id }}
-                  {{ $spellScratch := newScratch }}
-                  {{ $spellIdStr := string $spellIdRaw }}
-                    {{ if or (eq $spellIdStr "25868") (eq $spellIdStr "18602") }}
-                    {{ warnf "📁 [FRONTEND LOOKUP] UI is trying to find recipe ID: %s (Raw context: %v)" $spellIdStr . }}
-                    {{ end }}
-                  {{ $spellScratch.Set "hasCrafters" false }}
+                  {{ $hasCrafters := false }}
                   
                   {{ range $.Params.entries }}
                     {{ if .profData.learnedSpells }}
-                    {{ if or (eq $spellIdStr "56205") (eq $spellIdStr "56206") (eq $spellIdStr "56208") }}
-                    {{ warnf "🔍 [FRONTEND] Checking spell %s, learnedSpells dump: %v" $spellIdStr .profData.learnedSpells }}
-                    {{ end }}
-                      {{/* Bulletproof type evaluation: checks both strict string and dynamic format strings */}}
                       {{ if or (index .profData.learnedSpells (string $spellIdRaw)) (index .profData.learnedSpells (printf "%v" $spellIdRaw)) }}
-                        {{ $spellScratch.Set "hasCrafters" true }}
+                        {{ $hasCrafters = true }}
                       {{ end }}
                     {{ end }}
                   {{ end }}
 
                   <div class="recipe-item" onclick="selectRecipe({{ .spell_id }})" id="recipe-node-{{ .spell_id }}"
-                       data-recipe-name="{{ .name | lower }}" data-has-crafters="{{ if $spellScratch.Get "hasCrafters" }}true{{ else }}false{{ end }}"
-                       style="display: flex; align-items: center; justify-content: space-between; padding: 0.4rem 0.5rem; margin-bottom: 2px; border-radius: 4px; cursor: pointer; opacity: {{ if $spellScratch.Get "hasCrafters" }}1.0{{ else }}0.4{{ end }};">
+                       data-recipe-name="{{ .name | lower }}" data-has-crafters="{{ if $hasCrafters }}true{{ else }}false{{ end }}"
+                       style="display: flex; align-items: center; justify-content: space-between; padding: 0.4rem 0.5rem; margin-bottom: 2px; border-radius: 4px; cursor: pointer; opacity: {{ if $hasCrafters }}1.0{{ else }}0.4{{ end }};">
                     <div style="display: flex; align-items: center; gap: 0.5rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
                       <img src="https://wowgaming.altervista.org/aowow/static/images/wow/icons/small/{{ .crafted_icon | lower }}.jpg" style="width: 18px; height: 18px; border: 1px solid #333; border-radius: 2px;" data-wowhead="spell={{ .spell_id }}">
                       <span class="recipe-name" style="font-size: 0.85rem; color: #fff;">{{ .name }}</span>
@@ -169,23 +203,33 @@
       <div class="recipe-detail-pane" id="detail-pane" style="background: #151515; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #666; height: 100%;">
         <div style="text-align: center;">
           <div style="font-size: 3rem; margin-bottom: 0.5rem;">📖</div>
-          <p style="font-size: 0.9rem; color: #888;">Välj ett recept i listan för att se material och tillgängliga hantverkare.</p>
+          <p style="font-size: 0.9rem; color: #888;">
+            {{ if eq $lang "en" }}Select a recipe from the list to view materials and available crafters.{{ else }}Välj ett recept i listan för att se material och tillgängliga hantverkare.{{ end }}
+          </p>
         </div>
       </div>
 
       <div class="shopping-cart-pane" style="background: #0f0f0f; border-left: 1px solid #2e2e2e; display: flex; flex-direction: column; height: 100%;">
         <div style="padding: 0.75rem; background: #161616; border-bottom: 1px solid #252525;">
-          <h3 style="margin: 0; color: #ffd100; font-size: 0.9rem; text-transform: uppercase;">📋 Inköpslista</h3>
+          <h3 style="margin: 0; color: #ffd100; font-size: 0.9rem; text-transform: uppercase;">
+            {{ if eq $lang "en" }}📋 Shopping List{{ else }}📋 Inköpslista{{ end }}
+          </h3>
         </div>
         <div id="cart-items-list" style="flex: 1; overflow-y: auto; padding: 0.5rem; border-bottom: 1px solid #222; min-height: 120px;">
-          <p style="color: #555; text-align: center; font-size: 0.8rem; margin-top: 2rem; font-style: italic;">Inga artiklar valda.</p>
+          <p style="color: #555; text-align: center; font-size: 0.8rem; margin-top: 2rem; font-style: italic;">
+            {{ if eq $lang "en" }}No items selected.{{ else }}Inga artiklar valda.{{ end }}
+          </p>
         </div>
         <div style="height: 320px; background: #0b0b0b; display: flex; flex-direction: column;">
           <div style="padding: 0.5rem 0.75rem; background: #121212; border-bottom: 1px solid #1c1c1c;">
-            <h4 style="margin: 0; color: #aaa; font-size: 0.75rem; text-transform: uppercase;">Totalt material</h4>
+            <h4 style="margin: 0; color: #aaa; font-size: 0.75rem; text-transform: uppercase;">
+              {{ if eq $lang "en" }}Total Materials{{ else }}Totalt material{{ end }}
+            </h4>
           </div>
           <div id="cart-materials-summary" style="flex: 1; overflow-y: auto; padding: 0.5rem; display: flex; flex-direction: column; gap: 4px;">
-            <p style="color: #444; text-align: center; font-size: 0.8rem; margin-top: 4rem;">Listan är tom.</p>
+            <p style="color: #444; text-align: center; font-size: 0.8rem; margin-top: 4rem;">
+              {{ if eq $lang "en" }}The list is empty.{{ else }}Listan är tom.{{ end }}
+            </p>
           </div>
         </div>
       </div>
@@ -194,6 +238,7 @@
     <script type="text/javascript">
       const professionDump = {{ $profData | jsonify | safeJS }};
       const guildEntries = {{ $.Params.entries | jsonify | safeJS }};
+      const currentLang = {{ $lang | jsonify | safeJS }};
       const recipesIndex = {};
       
       if (professionDump && professionDump.groups) {
@@ -244,7 +289,7 @@
         renderShoppingCartView();
         
         const cartInput = document.getElementById(`cart-qty-display-${spellId}`);
-        if (cartInput) cartInput.value = shoppingCart[spellId] ? shoppingCart[spellId].qty : 0;
+        if (cartInput) cartInput.value = shoppingCart[spellId] ? shoppingCart[shoppingCart[spellId] ? spellId : 0] : 0;
         const panelInput = document.getElementById(`panel-qty-input-${spellId}`);
         if (panelInput) panelInput.value = shoppingCart[spellId] ? shoppingCart[spellId].qty : 0;
       }
@@ -255,8 +300,10 @@
         const activeKeys = Object.keys(shoppingCart);
         
         if (activeKeys.length === 0) {
-          listPane.innerHTML = `<p style="color: #555; text-align: center; font-size: 0.8rem; margin-top: 2rem; font-style: italic;">Inga artiklar valda.</p>`;
-          summaryPane.innerHTML = `<p style="color: #444; text-align: center; font-size: 0.8rem; margin-top: 4rem;">Listan är tom.</p>`;
+          const fallbackText = currentLang === "en" ? "No items selected." : "Inga artiklar valda.";
+          const emptyText = currentLang === "en" ? "The list is empty." : "Listan är tom.";
+          listPane.innerHTML = `<p style="color: #555; text-align: center; font-size: 0.8rem; margin-top: 2rem; font-style: italic;">${fallbackText}</p>`;
+          summaryPane.innerHTML = `<p style="color: #444; text-align: center; font-size: 0.8rem; margin-top: 4rem;">${emptyText}</p>`;
           return;
         }
 
@@ -315,42 +362,56 @@
         if (Array.isArray(guildEntries)) {
           guildEntries.forEach(entry => {
             if (entry.profData && entry.profData.learnedSpells) {
-              // Check directly for map/dictionary truthiness of the spellId key
               const hasSpell = entry.profData.learnedSpells && 
                                (entry.profData.learnedSpells[String(spellId)] === true || entry.profData.learnedSpells[Number(spellId)] === true);
               
               if (hasSpell) {
+                const skillLabel = currentLang === "en" ? "Skill" : "Färdighet";
                 craftersHtml += `
                   <div style="display:flex; justify-content:space-between; align-items:center; background:#1c1c1c; padding:0.5rem 0.75rem; border:1px solid #2d2d2d; border-radius:4px; margin-bottom:4px;">
                     <span style="color:#1eff00; font-weight:bold; font-size:0.9rem;">${entry.charName}</span>
-                    <span style="color:#aaa; font-size:0.8rem; font-family:monospace;">Färdighet: ${entry.profData.current}/${entry.profData.max}</span>
+                    <span style="color:#aaa; font-size:0.8rem; font-family:monospace;">${skillLabel}: ${entry.profData.current}/${entry.profData.max}</span>
                   </div>`;
               }
             }
           });
         }
-        if (!craftersHtml) craftersHtml = `<p style="color:#ff3333; font-size:0.85rem; font-style:italic; margin:0;">Ingen aktiv medlem i gillet kan detta recept.</p>`;
+        if (!craftersHtml) {
+          craftersHtml = currentLang === "en" 
+            ? `<p style="color:#ff3333; font-size:0.85rem; font-style:italic; margin:0;">No active guild member knows this recipe.</p>`
+            : `<p style="color:#ff3333; font-size:0.85rem; font-style:italic; margin:0;">Ingen aktiv medlem i gillet kan detta recept.</p>`;
+        }
 
         let reagentsHtml = '';
         if (recipe.reagents && recipe.reagents.length > 0) {
           recipe.reagents.forEach(r => {
+            const amountLabel = currentLang === "en" ? "Amount" : "Mängd";
             reagentsHtml += `
               <a href="https://wowgaming.altervista.org/aowow/?item=${r.item_id}" data-wowhead="item=${r.item_id}" style="text-decoration: none; display:block;">
                 <div style="display:flex; align-items:center; gap:0.5rem; background:#1a1a1a; padding:0.4rem; border:1px solid #262626; border-radius:4px;">
                   <img src="https://wowgaming.altervista.org/aowow/static/images/wow/icons/medium/${r.icon.toLowerCase()}.jpg" style="width:24px; height:24px; border:1px solid #444; border-radius:3px;">
                   <div style="display:flex; flex-direction:column;">
                     <span style="color:#fff; font-size:0.8rem; font-weight:500;">${r.name}</span>
-                    <span style="color:#888; font-size:0.75rem; font-weight:bold;">Mängd: x${r.count}</span>
+                    <span style="color:#888; font-size:0.75rem; font-weight:bold;">${amountLabel}: x${r.count}</span>
                   </div>
                 </div>
               </a>`;
           });
-        } else { reagentsHtml = `<p style="color:#666; font-size:0.8rem; margin:0;">Inga ingredienser krävs.</p>`; }
+        } else {
+          reagentsHtml = currentLang === "en"
+            ? `<p style="color:#666; font-size:0.8rem; margin:0;">No reagents required.</p>`
+            : `<p style="color:#666; font-size:0.8rem; margin:0;">Inga ingredienser krävs.</p>`;
+        }
 
         const isItemTarget = recipe.crafted_item_id && recipe.crafted_item_id > 0;
         const detailUrl = isItemTarget ? `https://wowgaming.altervista.org/aowow/?item=${recipe.crafted_item_id}` : `https://wowgaming.altervista.org/aowow/?spell=${recipe.spell_id}`;
         const detailDataAttr = isItemTarget ? `item=${recipe.crafted_item_id}` : `spell=${recipe.spell_id}`;
         const currentQtyInCart = shoppingCart[spellId] ? shoppingCart[spellId].qty : 0;
+
+        const reqSkillLabel = currentLang === "en" ? "Requires Skill Level" : "Kräver yrkesnivå";
+        const addLabel = currentLang === "en" ? "Add" : "Lägg till";
+        const componentHeader = currentLang === "en" ? "Required Ingredients" : "Nödvändiga ingredienser";
+        const crafterHeader = currentLang === "en" ? "Available Guild Crafters" : "Tillgängliga Crafters i gillet";
 
         const pane = document.getElementById('detail-pane');
         pane.style.justifyContent = 'flex-start'; pane.style.alignItems = 'stretch';
@@ -364,11 +425,11 @@
                 <h2 style="margin:0; color:#fff; font-size:1.4rem; cursor:pointer;">${recipe.crafted_name || recipe.name}</h2>
               </a>
               <div style="font-size:0.8rem; margin-top:0.2rem;">
-                ${recipe.req_skill ? `<span style="color:#aaa;">Kräver yrkesnivå:</span> <strong style="color:#ffd100;">${recipe.req_skill}</strong>` : ''}
+                ${recipe.req_skill ? `<span style="color:#aaa;">${reqSkillLabel}:</span> <strong style="color:#ffd100;">${recipe.req_skill}</strong>` : ''}
               </div>
             </div>
             <div style="display:flex; flex-direction:column; align-items:center; background:#1c1c1c; border:1px solid #2d2d2d; border-radius:6px; padding:0.4rem 0.6rem; gap:4px; margin-left:auto;">
-              <span style="font-size:0.7rem; color:#aaa; text-transform:uppercase; font-weight:bold;">Lägg till</span>
+              <span style="font-size:0.7rem; color:#aaa; text-transform:uppercase; font-weight:bold;">${addLabel}</span>
               <div style="display:flex; align-items:center; gap:5px;">
                 <button onclick="updateCartQuantity(${spellId}, -1)" style="background:#2a2a2a; border:1px solid #444; color:#fff; width:22px; height:22px; font-weight:bold; border-radius:3px; cursor:pointer;">-</button>
                 <input type="text" id="panel-qty-input-${spellId}" readonly value="${currentQtyInCart}" style="width:30px; text-align:center; background:none; border:none; color:#ffd100; font-size:0.9rem; font-family:monospace; font-weight:bold;">
@@ -376,9 +437,9 @@
               </div>
             </div>
           </div>
-          <h3 style="color:#ffd100; font-size:0.9rem; text-transform:uppercase; margin:0 0 0.5rem 0;">Nödvändiga ingredienser</h3>
+          <h3 style="color:#ffd100; font-size:0.9rem; text-transform:uppercase; margin:0 0 0.5rem 0;">${componentHeader}</h3>
           <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:0.5rem; margin-bottom:1.5rem;">${reagentsHtml}</div>
-          <h3 style="color:#ffd100; font-size:0.9rem; text-transform:uppercase; margin:0 0 0.5rem 0;">Tillgängliga Crafters i gillet</h3>
+          <h3 style="color:#ffd100; font-size:0.9rem; text-transform:uppercase; margin:0 0 0.5rem 0;">${crafterHeader}</h3>
           <div style="display:flex; flex-direction:column; gap:2px; max-height:220px; overflow-y:auto; padding-right:4px;">${craftersHtml}</div>`;
         if (typeof $WowheadPower !== 'undefined' && $WowheadPower.refreshLinks) $WowheadPower.refreshLinks();
       }

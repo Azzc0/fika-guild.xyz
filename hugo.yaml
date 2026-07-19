@@ -10,34 +10,75 @@ outputs:
     - RSS
     - JSON
 
-# Navigation Bar Layout (Top Navbar)
-menu:
-  main:
-    - name: 'Nyheter'
-      pageRef: '/nyheter'
-      weight: 5
-    - name: 'Artiklar'
-      pageRef: '/artiklar'
-      weight: 10
-    # - name: 'Guild Rules'
-    #   pageRef: '/docs/rules'
-    #   weight: 20
-    # - name: 'Loot Priority'
-    #   pageRef: '/docs/loot'
-    #   weight: 30
-    - name: 'Search'
-      weight: 90 # Placing it at 90 keeps it cleanly left of your Discord icon button
-      params:
-        type: 'search'
-    - name: 'Discord'
-      url: 'https://discord.gg/eqPBBVZSua'
-      weight: 100 # Higher weight pushes it to the far right
-      params:
-        icon: 'discord'
+# Multilingual Configuration Core
+defaultContentLanguage: 'sv'
+defaultContentLanguageInSubdir: false
 
+languages:
+  sv:
+    languageName: 'Svenska'
+    weight: 1
+    contentDir: 'content'
+    title: 'Fika'
+    menu:
+      main:
+        - name: 'Nyheter'
+          pageRef: '/nyheter'
+          weight: 5
+        - name: 'Artiklar'
+          pageRef: '/artiklar'
+          weight: 10
+        - name: 'Search'
+          weight: 90
+          params:
+            type: 'search'
+        - name: 'Discord'
+          url: 'https://discord.gg/eqPBBVZSua'
+          weight: 100
+          params:
+            icon: 'discord'
+        - languageSwitcher: true 
+          params:
+            type: language-switch
+            label: false # optional, default is false
+            icon: "globe-alt" # optional, default is "translate"
+    params:
+      title: "Fika"
+      description: "Fika, en svensk World of Warcraft guild på Chromiecraft."
+
+  en:
+    languageName: 'English'
+    weight: 2
+    contentDir: 'content'
+    title: 'Fika'
+    menu:
+      main:
+        - name: 'News'
+          pageRef: '/nyheter' # Hugo maps this automatically if the English content file exists
+          weight: 5
+        - name: 'Articles'
+          pageRef: '/artiklar'
+          weight: 10
+        - name: 'Search'
+          weight: 90
+          params:
+            type: 'search'
+        - name: 'Discord'
+          url: 'https://discord.gg/eqPBBVZSua'
+          weight: 100
+          params:
+            icon: 'discord'
+        - languageSwitcher: true 
+          params:
+            type: language-switch
+            label: false # optional, default is false
+            icon: "globe-alt" # optional, default is "translate"
+    params:
+      title: "Fika"
+      description: "Fika, a Swedish World of Warcraft guild on Chromiecraft."
+
+# Global Shared Parameters
 params:
-  title: "Fika"
-  description: "Fika, en svensk World of Warcraft guild på Chromiecraft."
   images:
   - https://res.cloudinary.com/dhmmkvcpy/image/upload/banner_lbze4h.png
   theme:
@@ -57,9 +98,7 @@ params:
     displayCopyright: false
 
   navbar:
-    disabled: false
     logo:
-      link: '/'
       path: '/favicon.png' # Points directly to static/logo.png
       disabled: false
 
@@ -90,7 +129,7 @@ caches:
     maxAge: 0
 
 security:
-  enableInlineShortcodes: false
+  enableInlineShortcodes: true
 
   exec:
     allow:

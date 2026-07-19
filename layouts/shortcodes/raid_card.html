@@ -1,18 +1,13 @@
 {{/* ── Raid schedule card — data fetched & enriched at BUILD time ──────────
      No runtime fetch() to the worker anymore. Day-relative labels
      ("Idag"/"Imorgon") are still computed client-side using the visitor's
-     real clock (not build time), so the card stays accurate between builds
-     as long as you rebuild roughly as often as the schedule changes — same
-     assumption your kalender page already relies on. ────────────────────── */}}
+     real clock (not build time), so the card stays accurate between builds. ── */}}
 
+{{- $lang := .Page.Lang -}}
 {{ $apiBase := "https://fika-api-proxy.robin-askelin.workers.dev/raids" }}
 {{ $listUrl := printf "%s?endpoint=scheduledevents" $apiBase }}
 
-{{/* Only bother enriching (extra API call for forum_tags) events that could
-     plausibly still show in the card's 7-day window by the time of the
-     NEXT rebuild — 10 days gives some slack. Events further out are still
-     embedded (so the "N EVENT" count stays correct) just without a banner
-     tag/color until a later rebuild enriches them. */}}
+{{/* Only enrich events that could plausibly show in the 7-day window. */}}
 {{ $windowEnd := add now.Unix (mul 10 86400) }}
 
 {{ $listData := dict }}
@@ -48,42 +43,39 @@
     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
       <div style="display: flex; align-items: center; gap: 0.5rem;">
         <img src="https://res.cloudinary.com/dhmmkvcpy/image/upload/e_trim/w_44,c_scale/v1783872905/Raid_tnnvwr.png" alt="" style="width: 22px; height: 22px; object-fit: contain; margin: 0; padding: 0;">
-        <h3 style="margin: 0; font-size: 1.1rem; font-weight: 600; color: #fff; letter-spacing: 0.5px; line-height: 1;">RÄDSCHEMA</h3>
+        <h3 style="margin: 0; font-size: 1.1rem; font-weight: 600; color: #fff; letter-spacing: 0.5px; line-height: 1;">
+          {{ if eq $lang "en" }}RAID SCHEDULE{{ else }}RÄDSCHEMA{{ end }}
+        </h3>
       </div>
-      <span id="raid-qty" style="font-size: 0.75rem; font-weight: 600; color: #9ca3af; background: rgba(156, 163, 175, 0.1); padding: 2px 6px; border-radius: 10px;">0 EVENT</span>
+      <span id="raid-qty" style="font-size: 0.75rem; font-weight: 600; color: #9ca3af; background: rgba(156, 163, 175, 0.1); padding: 2px 6px; border-radius: 10px;">
+        0 {{ if eq $lang "en" }}EVENTS{{ else }}EVENT{{ end }}
+      </span>
     </div>
 
-    <div style="font-size: 0.75rem; font-weight: 700; color: #4e5058; text-transform: uppercase; letter-spacing: 0.5px; margin: 0.75rem 0 0.5rem 0;">Kommande vecka</div>
+    <div style="font-size: 0.75rem; font-weight: 700; color: #4e5058; text-transform: uppercase; letter-spacing: 0.5px; margin: 0.75rem 0 0.5rem 0;">
+      {{ if eq $lang "en" }}Upcoming week{{ else }}Kommande vecka{{ end }}
+    </div>
 
     <div id="raid-list-container" style="display: flex; flex-direction: column; gap: 8px; flex-grow: 1; height: 240px; overflow-y: auto; margin-bottom: 1rem; padding-right: 4px;">
-      <div style="color: #71717a; font-size: 0.85rem; padding: 4px;">Laddar rädschema...</div>
+      <div style="color: #71717a; font-size: 0.85rem; padding: 4px;">
+        {{ if eq $lang "en" }}Loading schedule...{{ else }}Laddar rädschema...{{ end }}
+      </div>
     </div>
   </div>
 
-  <a href="/kalender" style="display: block; width: 100%; text-align: center; background: #5865F2; color: #fff; text-decoration: none; padding: 0.55rem; border-radius: 0.375rem; font-size: 0.85rem; font-weight: 500; transition: background 0.2s;">
-    Visa fullständigt schema
+  <a href="{{ "kalender" | relLangURL }}" style="display: block; width: 100%; text-align: center; background: #5865F2; color: #fff; text-decoration: none; padding: 0.55rem; border-radius: 0.375rem; font-size: 0.85rem; font-weight: 500; transition: background 0.2s;">
+    {{ if eq $lang "en" }}View full schedule{{ else }}Visa fullständigt schema{{ end }}
   </a>
 
-  {{/* Data fetched & enriched at build time — no client-side API call. */}}
   <script type="application/json" id="raid-card-events-data">{{ $cardEvents | jsonify | safeJS }}</script>
-
-  {{/* Same central forum-tag → difficulty-badge lookup as the calendar,
-       sourced from data/forum_tag_badges.yaml — edit that one file, both
-       surfaces update on next build. */}}
   <script type="application/json" id="raid-card-badges-data">{{ site.Data.forum_tag_badges | jsonify | safeJS }}</script>
-
-  {{/* Same central forum-tag → raid-banner lookup as the calendar,
-       sourced from data/forum_tag_backgrounds.yaml. */}}
   <script type="application/json" id="raid-card-backgrounds-data">{{ site.Data.forum_tag_backgrounds | jsonify | safeJS }}</script>
 
   <script>
     (function() {
       const DISCORD_SERVER_ID = "1509567817870082048";
+      const currentLang = {{ $lang | jsonify | safeJS }};
 
-      // Sourced entirely from data/forum_tag_backgrounds.yaml — same file
-      // and same exact-tag-match convention as the calendar. That file's
-      // order is the priority order (top wins). Entries with no url yet
-      // (placeholder raids before art is uploaded) are skipped.
       let BACKGROUND_ENTRIES = [];
       (function loadBackgroundEntries() {
         const raw = document.getElementById('raid-card-backgrounds-data');
@@ -118,12 +110,6 @@
       const listContainer = document.getElementById('raid-list-container');
       const qtyBadge = document.getElementById('raid-qty');
 
-      // Difficulty badges are driven ENTIRELY by forum_tags, matched
-      // exactly (case-insensitively) against data/forum_tag_badges.yaml —
-      // the same file the calendar reads. That file is the single source
-      // of truth; add/relabel tags there, not here. No regex guessing:
-      // an unmapped tag (guild meeting, dungeon run, etc.) just gets no
-      // badge, which is correct until you add an entry for it.
       let BADGE_LOOKUP = {};
       (function loadBadgeLookup() {
         const raw = document.getElementById('raid-card-badges-data');
@@ -139,8 +125,6 @@
         }
       })();
 
-      // Returns { badgeUrl, size } from an event's forum_tags string, or
-      // nulls if no tag matched anything in the lookup.
       function resolveDifficulty(tags) {
         const list = String(tags || "").split(",").map(t => t.toLowerCase().trim()).filter(Boolean);
         for (const tag of list) {
@@ -157,10 +141,12 @@
         const localEvt = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate());
         const diffDays = Math.round((localEvt - localNow) / (1000 * 60 * 60 * 24));
 
-        if (diffDays === 0) return "Idag";
-        if (diffDays === 1) return "Imorgon";
+        if (diffDays === 0) return currentLang === "en" ? "Today" : "Idag";
+        if (diffDays === 1) return currentLang === "en" ? "Tomorrow" : "Imorgon";
 
-        const weekdayNames = ["Sön", "Mån", "Tis", "Ons", "Tor", "Fre", "Lör"];
+        const weekdayNames = currentLang === "en" 
+          ? ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+          : ["Sön", "Mån", "Tis", "Ons", "Tor", "Fre", "Lör"];
         return weekdayNames[eventDate.getDay()];
       }
 
@@ -175,16 +161,14 @@
 
         const now = new Date();
 
-        // Total pool of active future events (embedded at build time)
         const futureEvents = cardEvents.map(e => {
           e.eventDate = new Date(e.startTime * 1000);
           return e;
         }).filter(e => e.eventDate >= now);
 
-        qtyBadge.textContent = futureEvents.length + " EVENT";
+        const suffix = currentLang === "en" ? " EVENTS" : " EVENT";
+        qtyBadge.textContent = futureEvents.length + suffix;
 
-        // View list strictly limited to the rolling 7 days, computed against
-        // the VISITOR's real clock (not build time).
         const oneWeekFromNow = new Date();
         oneWeekFromNow.setDate(now.getDate() + 7);
 
@@ -193,7 +177,10 @@
           .sort((a, b) => a.eventDate - b.eventDate);
 
         if (weekEvents.length === 0) {
-          listContainer.innerHTML = '<div style="color: #71717a; font-size: 0.85rem; padding: 4px;">Inga planerade event närmsta 7 dagarna.</div>';
+          const emptyFallback = currentLang === "en"
+            ? "No events planned for the next 7 days."
+            : "Inga planerade event närmsta 7 dagarna.";
+          listContainer.innerHTML = `<div style="color: #71717a; font-size: 0.85rem; padding: 4px;">${emptyFallback}</div>`;
           return;
         }
 
@@ -206,28 +193,20 @@
           const bannerUrl = detectRaidImage(event.forum_tags);
           const [r, g, b] = parseColor(event.color);
           const dayLabel = getRelativeDayName(event.eventDate, now);
-          const timeString = event.eventDate.toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' });
+          
+          const localeStr = currentLang === "en" ? 'en-US' : 'sv-SE';
+          const timeString = event.eventDate.toLocaleTimeString(localeStr, { hour: '2-digit', minute: '2-digit' });
           const signUps = typeof event.signUpCount !== 'undefined' ? event.signUpCount : (event.signUps ? event.signUps.length : 0);
 
           const discordLink = "https://discord.com/channels/" + DISCORD_SERVER_ID + "/" + event.channelId + "/" + event.id;
 
-          let metaSegments = [dayLabel + " kl " + timeString];
+          const timeSeparator = currentLang === "en" ? " at " : " kl ";
+          let metaSegments = [dayLabel + timeSeparator + timeString];
           if (size) {
             metaSegments.push("(" + signUps + "/" + size + ")");
           }
-        //   if (event.leaderName) {
-        //     metaSegments.push("Ledare: " + event.leaderName);
-        //   }
 
           const metaDisplay = metaSegments.join(" • ");
-
-          // Row background: raid banner art if we matched one, faded on all
-          // four edges (vignette) so it dissolves into the card background
-          // instead of cutting off hard against neighboring rows. Rows with
-          // no matched banner (guild meetings, dungeons, anything untagged)
-          // just get a flat tint from the event's own color — set via
-          // background-color, not background-image, since a plain color is
-          // not a valid background-image value.
           const rowStyleBase = `display: flex; align-items: center; gap: 0.65rem; padding: 4px 6px; width: 100%; box-sizing: border-box; border-left: 3px solid rgb(${r},${g},${b}); border-radius: 4px; background-repeat: no-repeat;`;
 
           const rowStyle = bannerUrl
@@ -240,16 +219,12 @@
 
           htmlOutput += `<div style="${rowStyle}">`;
 
-          // Difficulty icon — only rendered when a raid size was actually
-          // identified. No guessing: guild meetings, dungeons, and anything
-          // untagged simply show no icon here.
           if (badgeUrl) {
             htmlOutput += '  <div style="position: relative; display: flex; flex-shrink: 0; width: 24px; height: 24px; background: transparent; overflow: hidden; align-items: center; justify-content: center;">';
             htmlOutput += '    <img src="' + badgeUrl + '" alt="" style="width: 100%; height: 100%; object-fit: contain;">';
             htmlOutput += '  </div>';
           }
 
-          // Content Block
           htmlOutput += '  <div style="display: flex; flex-direction: column; overflow: hidden; flex-grow: 1; min-width: 0;">';
           htmlOutput += '    <div style="display: flex; align-items: baseline; gap: 0.35rem; width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">';
           htmlOutput += '      <a href="' + discordLink + '" target="_blank" style="text-decoration: none; color: #dbdee1; font-size: 0.85rem; font-weight: 500; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">' + event.title + '</a>';

@@ -1,3 +1,5 @@
+{{- $lang := .Page.Lang -}}
+
 <div class="hextras-card-custom nx-not-prose" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; min-height: 400px; border-radius: 0.5rem; overflow: hidden; border: 1px solid rgba(156, 163, 175, 0.15); background: #1a1b1e; padding: 1.25rem; box-sizing: border-box; font-family: sans-serif;">
   
   <div style="display: flex; flex-direction: column; height: calc(100% - 45px);">
@@ -8,24 +10,27 @@
         </svg>
         <h3 style="margin: 0; font-size: 1.1rem; font-weight: 600; color: #fff; letter-spacing: 0.5px;">DISCORD</h3>
       </div>
-      <span id="discord-qty" style="font-size: 0.75rem; font-weight: 600; color: #9ca3af; background: rgba(156, 163, 175, 0.1); padding: 2px 6px; border-radius: 10px;">0 ONLINE</span>
+      <span id="discord-qty" style="font-size: 0.75rem; font-weight: 600; color: #9ca3af; background: rgba(156, 163, 175, 0.1); padding: 2px 6px; border-radius: 10px;">
+        0 {{ if eq $lang "en" }}ONLINE{{ else }}ONLINE{{ end }}
+      </span>
     </div>
 
-    <div style="font-size: 0.75rem; font-weight: 700; color: #4e5058; text-transform: uppercase; letter-spacing: 0.5px; margin: 0.75rem 0 0.5rem 0;">Medlemmar Online</div>
+    <div style="font-size: 0.75rem; font-weight: 700; color: #4e5058; text-transform: uppercase; letter-spacing: 0.5px; margin: 0.75rem 0 0.5rem 0;">
+      {{ if eq $lang "en" }}Members Online{{ else }}Medlemmar Online{{ end }}
+    </div>
     
     <div id="discord-members" style="display: flex; flex-direction: column; gap: 8px; flex-grow: 1; overflow-y: auto; margin-bottom: 1rem; padding-right: 4px;">
-      </div>
+    </div>
   </div>
 
   <a id="discord-link" href="#" target="_blank" rel="noopener noreferrer" style="display: block; width: 100%; text-align: center; background: #5865F2; color: #fff; text-decoration: none; padding: 0.55rem; border-radius: 0.375rem; font-size: 0.85rem; font-weight: 500; transition: background 0.2s;">
-    Anslut till servern
+    {{ if eq $lang "en" }}Join the server{{ else }}Anslut till servern{{ end }}
   </a>
 
   <script>
     (function() {
       const guildID = "1509567817870082048";
-      
-      // Fixed JS Comments
+      const currentLang = {{ $lang | jsonify | safeJS }};
       const excludedAccounts = ["ClassicBot", "RaidSignaturesBot", "WarcraftLogs", "Raid-Helper", "ChromieCraft Chat"];
 
       fetch(`https://discord.com/api/guilds/${guildID}/widget.json`)
@@ -43,20 +48,18 @@
           membersBox.innerHTML = "";
 
           realMembers.forEach(member => {
-            // 1. Row Link Box - Forced to span the entire width of the card container
             const row = document.createElement("div");
             row.style.display = "flex";
             row.style.alignItems = "center";
             row.style.gap = "0.65rem";
             row.style.padding = "2px 4px";
-            row.style.width = "100%"; // Anchor row width
+            row.style.width = "100%";
             row.style.boxSizing = "border-box";
 
-            // 2. Avatar wrapper holding status ring indicators
             const avatarWrapper = document.createElement("div");
             avatarWrapper.style.position = "relative";
             avatarWrapper.style.display = "flex";
-            avatarWrapper.style.flexShrink = "0"; // Absolutely prevent the avatar from shrinking
+            avatarWrapper.style.flexShrink = "0";
 
             const img = document.createElement("img");
             img.src = member.avatar_url;
@@ -66,7 +69,6 @@
             img.style.borderRadius = "50%";
             img.style.backgroundColor = "#2f3136";
 
-            // Tiny absolute indicator status dots
             const statusDot = document.createElement("div");
             statusDot.style.position = "absolute";
             statusDot.style.bottom = "-1px";
@@ -80,21 +82,20 @@
             avatarWrapper.appendChild(img);
             avatarWrapper.appendChild(statusDot);
 
-            // 3. Details content wrapper - Explicitly told to fill remaining space and allow text rules
             const details = document.createElement("div");
             details.style.display = "flex";
             details.style.flexDirection = "column";
             details.style.overflow = "hidden";
             details.style.flexGrow = "1";
-            details.style.minWidth = "0"; // Allow width layout calculation below parent boundaries
+            details.style.minWidth = "0";
 
             const nameSpan = document.createElement("span");
             nameSpan.textContent = member.username;
             nameSpan.style.color = "#dbdee1";
             nameSpan.style.fontSize = "0.85rem";
             nameSpan.style.fontWeight = "500";
-            nameSpan.style.display = "block"; // Turn into a block element to properly compute truncation bounds
-            nameSpan.style.width = "100%";     // Force alignment to details column footprint
+            nameSpan.style.display = "block";
+            nameSpan.style.width = "100%";
             nameSpan.style.whiteSpace = "nowrap";
             nameSpan.style.textOverflow = "ellipsis";
             nameSpan.style.overflow = "hidden";
@@ -103,7 +104,8 @@
 
             if (member.game) {
               const gameSpan = document.createElement("span");
-              gameSpan.textContent = "Spelar " + member.game.name;
+              const playPrefix = currentLang === "en" ? "Playing " : "Spelar ";
+              gameSpan.textContent = playPrefix + member.game.name;
               gameSpan.style.color = "#949ba4";
               gameSpan.style.fontSize = "0.7rem";
               gameSpan.style.display = "block";
@@ -120,7 +122,10 @@
           });
         })
         .catch(() => {
-          document.getElementById("discord-members").innerHTML = "<div style='color:#9ca3af; font-size:0.8rem;'>Kunde inte hämta onlinelista just nu.</div>";
+          const errorMsg = currentLang === "en" 
+            ? "Could not fetch online list right now." 
+            : "Kunde inte hämta onlinelista just nu.";
+          document.getElementById("discord-members").innerHTML = "<div style='color:#9ca3af; font-size:0.8rem;'>" + errorMsg + "</div>";
         });
     })();
   </script>

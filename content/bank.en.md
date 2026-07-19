@@ -1,5 +1,5 @@
 ---
-title: "Gillesbanken"
+title: "Guildbank"
 layout: "full-width"
 sidebar:
   hide: true
@@ -11,7 +11,6 @@ toc: false
     width: 2100px !important;
   }
 </style>
-
-Här kan du bläddra i gillesbankens innehåll, innehållat scannas ofta så länge våra medlemmar använder vårat gillesaddon.
+Here you can browse the contents of the guildbank, scans happen regularly as long as our members use the guild addon.
 
 {{< guildbank >}}

@@ -1,0 +1,1 @@
+**Tillhandahåller: ** MatbuffarMatlagning har vi alltid haft nytta av. I WotLK har vi fått cooking dailies och från dem får man både [cooking award currency spellid] för att köpa recept för samt [northern spice] att använda i höglevel recept.

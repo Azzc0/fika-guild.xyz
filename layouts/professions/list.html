@@ -1,10 +1,21 @@
 {{ define "main" }}
+{{- /* 1. Detect active compilation language */ -}}
+{{- $lang := .Lang -}}
+
 <div class="hextra-custom-container" style="padding: 2rem 1rem; max-width: 1200px; margin: 0 auto; font-family: sans-serif;">
   
   <!-- Header Section -->
   <div style="border-bottom: 2px solid #333; padding-bottom: 1.5rem; margin-bottom: 2.5rem;">
-    <h1 style="margin: 0; color: #ffd100; font-size: 2.5rem;">Yrkesdatabaser</h1>
-    <p style="margin: 0.5rem 0 0 0; color: #888; font-size: 1.1rem;">Välj ett yrke nedan för att se recept, tillgängliga hantverkare och materialkrav.</p>
+    <h1 style="margin: 0; color: #ffd100; font-size: 2.5rem;">
+      {{ if eq $lang "en" }}Profession Databases{{ else }}Yrkesdatabaser{{ end }}
+    </h1>
+    <p style="margin: 0.5rem 0 0 0; color: #888; font-size: 1.1rem;">
+      {{ if eq $lang "en" }}
+        Select a profession below to see recipes, available crafters, and material requirements.
+      {{ else }}
+        Välj ett yrke nedan för att se recept, tillgängliga hantverkare och materialkrav.
+      {{ end }}
+    </p>
   </div>
 
   {{/* 1. Fetch skill_presentation.json */}}
@@ -26,7 +37,7 @@
     {{ with .Err }}{{ else }}{{ $rawProfessions = .Value.Content | transform.Unmarshal }}{{ end }}
   {{ end }}
 
-  {{/* 4. Trade spell -> skill line ID map (same as _content.gotmpl) */}}
+  {{/* 4. Trade spell -> skill line ID map */}}
   {{ $tradeSpellToSkill := dict }}
   {{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "2259" "171" "3101" "171" "3464" "171" "11611" "171" "28596" "171" "51304" "171") }}
   {{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "2018" "164" "3100" "164" "3538" "164" "9785" "164" "29844" "164" "51300" "164") }}
@@ -39,39 +50,30 @@
   {{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "3273" "129" "3274" "129" "7924" "129" "10846" "129" "27028" "129" "45542" "129") }}
   {{ $tradeSpellToSkill = merge $tradeSpellToSkill (dict "45357" "773" "45363" "773") }}
 
-  {{/* 5. Base64 character lookup dicts (avoids / as dict key bug) */}}
+  {{/* 5. Base64 character lookup dicts */}}
   {{ $b64Upper := dict "A" 0 "B" 1 "C" 2 "D" 3 "E" 4 "F" 5 "G" 6 "H" 7 "I" 8 "J" 9 "K" 10 "L" 11 "M" 12 "N" 13 "O" 14 "P" 15 "Q" 16 "R" 17 "S" 18 "T" 19 "U" 20 "V" 21 "W" 22 "X" 23 "Y" 24 "Z" 25 }}
   {{ $b64Lower := dict "a" 26 "b" 27 "c" 28 "d" 29 "e" 30 "f" 31 "g" 32 "h" 33 "i" 34 "j" 35 "k" 36 "l" 37 "m" 38 "n" 39 "o" 40 "p" 41 "q" 42 "r" 43 "s" 44 "t" 45 "u" 46 "v" 47 "w" 48 "x" 49 "y" 50 "z" 51 }}
   {{ $b64Digit := dict "0" 52 "1" 53 "2" 54 "3" 55 "4" 56 "5" 57 "6" 58 "7" 59 "8" 60 "9" 61 }}
 
   {{/* 6. Decode all characters' bitmasks into a global learnedSpells set */}}
-  {{/* Result: $allLearnedSpells is a dict of spellKey -> true */}}
   {{ $allLearnedSpells := dict }}
-
   {{ range $charName, $slots := $rawProfessions }}
     {{ range $slotID, $rawString := $slots.professions }}
       {{ if and (ne $rawString "EMPTY") (findRE `\|Htrade:` $rawString) }}
-
         {{ $headerMatch := findRESubmatch `\|Htrade:(\d+):(\d+):(\d+):` $rawString }}
         {{ $tailMatch := findRESubmatch `\|Htrade(?::[^:]+){4}:([^|:]+)\|h\[([^\]]+)\]` $rawString }}
-
         {{ if and (gt (len $headerMatch) 0) (gt (len $tailMatch) 0) }}
           {{ $headerParts := index $headerMatch 0 }}
           {{ $tailParts := index $tailMatch 0 }}
           {{ $tradeSpell := index $headerParts 1 }}
           {{ $bitmaskStr := index $tailParts 1 }}
-
           {{ $skillLineId := index $tradeSpellToSkill (string $tradeSpell) }}
           {{ $orderedSpells := slice }}
-          {{ if $skillLineId }}
-            {{ $orderedSpells = index $skillMap (string $skillLineId) | default slice }}
-          {{ end }}
-
+          {{ if $skillLineId }}{{ $orderedSpells = index $skillMap (string $skillLineId) | default slice }}{{ end }}
           {{ if gt (len $orderedSpells) 0 }}
             {{ $charSlice := split $bitmaskStr "" }}
             {{ $bitIdx := newScratch }}
             {{ $bitIdx.Set "i" 0 }}
-
             {{ range $char := $charSlice }}
               {{ $val := -1 }}
               {{ if isset $b64Upper $char }}{{ $val = index $b64Upper $char }}
@@ -80,7 +82,6 @@
               {{ else if eq $char "+" }}{{ $val = 62 }}
               {{ else if eq $char "/" }}{{ $val = 63 }}
               {{ end }}
-
               {{ if ge $val 0 }}
                 {{ range $bitOffset := seq 0 1 5 }}
                   {{ $i := $bitIdx.Get "i" }}
@@ -105,34 +106,25 @@
     {{ end }}
   {{ end }}
 
-  {{/* 7. Also build a per-character learnedSpells map for crafter counting */}}
-  {{/* $craftersBySpell: spellKey -> slice of charNames */}}
+  {{/* 7. Build per-character learnedSpells map */}}
   {{ $craftersBySpell := newScratch }}
-
   {{ range $charName, $slots := $rawProfessions }}
     {{ range $slotID, $rawString := $slots.professions }}
       {{ if and (ne $rawString "EMPTY") (findRE `\|Htrade:` $rawString) }}
-
         {{ $headerMatch := findRESubmatch `\|Htrade:(\d+):(\d+):(\d+):` $rawString }}
         {{ $tailMatch := findRESubmatch `\|Htrade(?::[^:]+){4}:([^|:]+)\|h\[([^\]]+)\]` $rawString }}
-
         {{ if and (gt (len $headerMatch) 0) (gt (len $tailMatch) 0) }}
           {{ $headerParts := index $headerMatch 0 }}
           {{ $tailParts := index $tailMatch 0 }}
           {{ $tradeSpell := index $headerParts 1 }}
           {{ $bitmaskStr := index $tailParts 1 }}
-
           {{ $skillLineId := index $tradeSpellToSkill (string $tradeSpell) }}
           {{ $orderedSpells := slice }}
-          {{ if $skillLineId }}
-            {{ $orderedSpells = index $skillMap (string $skillLineId) | default slice }}
-          {{ end }}
-
+          {{ if $skillLineId }}{{ $orderedSpells = index $skillMap (string $skillLineId) | default slice }}{{ end }}
           {{ if gt (len $orderedSpells) 0 }}
             {{ $charSlice := split $bitmaskStr "" }}
             {{ $bitIdx := newScratch }}
             {{ $bitIdx.Set "i" 0 }}
-
             {{ range $char := $charSlice }}
               {{ $val := -1 }}
               {{ if isset $b64Upper $char }}{{ $val = index $b64Upper $char }}
@@ -141,7 +133,6 @@
               {{ else if eq $char "+" }}{{ $val = 62 }}
               {{ else if eq $char "/" }}{{ $val = 63 }}
               {{ end }}
-
               {{ if ge $val 0 }}
                 {{ range $bitOffset := seq 0 1 5 }}
                   {{ $i := $bitIdx.Get "i" }}
@@ -185,6 +176,7 @@
         {{ end }}
       {{ end }}
 
+      {{/* Title falls back to capitalized loop token or properties found in presentation JSON */}}
       {{ $profTitle := title $targetProf }}
       {{ if $data }}{{ $profTitle = $data.profession_name }}{{ end }}
 
@@ -245,21 +237,30 @@
           </div>
 
           <div style="font-size: 0.85rem; color: #aaa; display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.25rem;">
-            <div>Tillgängliga utövare: <strong style="color: #1eff00;">{{ $craftersCount }} st</strong></div>
+            <div>
+              {{ if eq $lang "en" }}Available Crafters:{{ else }}Tillgängliga utövare:{{ end }} 
+              <strong style="color: #1eff00;">{{ $craftersCount }} {{ if eq $lang "en" }}{{ else }}st{{ end }}</strong>
+            </div>
             {{ if not $isGathering }}
-              <div>Kända recept: <strong style="color: #ffd100;">{{ $knownGuildRecipes }} / {{ $totalRecipes }}</strong></div>
+              <div>
+                {{ if eq $lang "en" }}Known Recipes:{{ else }}Kända recept:{{ end }} 
+                <strong style="color: #ffd100;">{{ $knownGuildRecipes }} / {{ $totalRecipes }}</strong>
+              </div>
             {{ end }}
           </div>
         </div>
 
         <div style="margin-top: auto; padding-top: 0.5rem; border-top: 1px solid #222;">
           {{ if not $isGathering }}
+            {{/* Using RelPermalink ensures it resolves safely to /professions/name or /en/professions/name */}}
             <a href="{{ $targetProf | urlize }}/" style="text-decoration: none; font-size: 0.85rem; color: #ffd100; font-weight: bold; display: flex; align-items: center; gap: 4px;">
-              Visa recept <span>→</span>
+              {{ if eq $lang "en" }}View Recipes{{ else }}Visa recept{{ end }} <span>→</span>
             </a>
           {{ else }}
             <div style="font-size: 0.8rem; display: flex; flex-direction: column; gap: 4px;">
-              <span style="color: #666; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; letter-spacing: 0.3px;">Bonusförmåga:</span>
+              <span style="color: #666; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; letter-spacing: 0.3px;">
+                {{ if eq $lang "en" }}Bonus Ability:{{ else }}Bonusförmåga:{{ end }}
+              </span>
               <div class="gathering-shortcode-wrapper" style="color: #fff;">
                 {{ if eq $targetProf "mining" }}
                   {{ $.Page.RenderString "{{< wow type=\"spell\" id=\"53040\" >}}" }}

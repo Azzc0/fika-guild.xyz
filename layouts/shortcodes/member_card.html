@@ -1,3 +1,5 @@
+{{- $lang := .Page.Lang -}}
+
 <div class="hextras-card-custom nx-not-prose" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; min-height: 400px; border-radius: 0.5rem; overflow: hidden; border: 1px solid rgba(156, 163, 175, 0.15); background: #1a1b1e; padding: 1.25rem; box-sizing: border-box; font-family: sans-serif; text-align: left;">
   
   <div style="display: flex; flex-direction: column; height: calc(100% - 45px);">
@@ -7,23 +9,28 @@
              alt="WoW Icon" style="width: 22px; height: 22px; object-fit: contain;">
         <h3 style="margin: 0; font-size: 1.1rem; font-weight: 600; color: #fff; letter-spacing: 0.5px; line-height: 1;">WOW</h3>
       </div>
-      <span id="wow-qty" style="font-size: 0.75rem; font-weight: 600; color: #9ca3af; background: rgba(156, 163, 175, 0.1); padding: 2px 6px; border-radius: 10px;">0 ONLINE</span>
+      <span id="wow-qty" style="font-size: 0.75rem; font-weight: 600; color: #9ca3af; background: rgba(156, 163, 175, 0.1); padding: 2px 6px; border-radius: 10px;">
+        0 {{ if eq $lang "en" }}ONLINE{{ else }}ONLINE{{ end }}
+      </span>
     </div>
 
-    <div style="font-size: 0.75rem; font-weight: 700; color: #4e5058; text-transform: uppercase; letter-spacing: 0.5px; margin: 0.75rem 0 0.5rem 0;">Medlemmar Online</div>
+    <div style="font-size: 0.75rem; font-weight: 700; color: #4e5058; text-transform: uppercase; letter-spacing: 0.5px; margin: 0.75rem 0 0.5rem 0;">
+      {{ if eq $lang "en" }}Members Online{{ else }}Medlemmar Online{{ end }}
+    </div>
     
     <div id="wow-members" style="display: flex; flex-direction: column; gap: 8px; flex-grow: 1; height: 240px; overflow-y: auto; margin-bottom: 1rem; padding-right: 4px;">
-      </div>
+    </div>
   </div>
 
-  <a href="/medlemslista" style="display: block; width: 100%; text-align: center; background: #5865F2; color: #fff; text-decoration: none; padding: 0.55rem; border-radius: 0.375rem; font-size: 0.85rem; font-weight: 500; transition: background 0.2s;">
-    Visa medlemslista
+  <a href="{{ "medlemslista" | relLangURL }}" style="display: block; block; width: 100%; text-align: center; background: #5865F2; color: #fff; text-decoration: none; padding: 0.55rem; border-radius: 0.375rem; font-size: 0.85rem; font-weight: 500; transition: background 0.2s;">
+    {{ if eq $lang "en" }}View member roster{{ else }}Visa medlemslista{{ end }}
   </a>
 
   <script>
     (function() {
       const classColors = { 1: '#C79C6E', 2: '#F58CBA', 3: '#ABD473', 4: '#FFF569', 5: '#FFFFFF', 6: '#C41F3B', 7: '#0070DE', 8: '#69CCF0', 9: '#9482C9', 11: '#FF7D0A' };
       const emojiIds = { 1: '579532030153588739', 2: '579532029906124840', 3: '579532029880827924', 4: '579532030086217748', 5: '579532029901799437', 6: '599012538935410701', 7: '579532030056857600', 8: '579532030161977355', 9: '579532029851336716', 11: '579532029675438081' };
+      const currentLang = {{ $lang | jsonify | safeJS }};
       
       let nextDelay = 60000;
       const listContainer = document.getElementById('wow-members');
@@ -41,7 +48,7 @@
           const charData = await charRes.json();
           
           let isStale = false;
-          let formattedTime = "Okänd tid";
+          let formattedTime = currentLang === "en" ? "Unknown time" : "Okänd tid";
 
           const lastModifiedHeader = rosterRes.headers.get('Last-Modified');
           if (lastModifiedHeader) {
@@ -64,11 +71,12 @@
 
           if (isStale) {
             qtyBadge.textContent = "STALE";
-            listContainer.innerHTML = '<div style="color: #ef4444; font-size: 0.85rem; line-height: 1.4; padding: 4px;">Listan är troligtvis inaktuell.<br><span style="color: #71717a; font-size: 0.8rem;">Senaste: ' + formattedTime + '</span></div>';
+            const staleText = currentLang === "en" ? "The list is likely outdated." : "Listan är troligtvis inaktuell.";
+            const lastText = currentLang === "en" ? "Last seen: " : "Senaste: ";
+            listContainer.innerHTML = '<div style="color: #ef4444; font-size: 0.85rem; line-height: 1.4; padding: 4px;">' + staleText + '<br><span style="color: #71717a; font-size: 0.8rem;">' + lastText + formattedTime + '</span></div>';
           } else {
             const online = (roster.members || []).filter(m => m.isOnline && m.name !== "Kyparen");
             
-            // Primary sort by rankId ascending (0 for Guild Master, 1 Officer, etc.)
             online.sort((a, b) => (a.rankId || 0) - (b.rankId || 0));
             
             qtyBadge.textContent = online.length + " ONLINE";
@@ -93,7 +101,6 @@
               htmlOutput += '  </div>';
               htmlOutput += '  <div style="display: flex; flex-direction: column; overflow: hidden; flex-grow: 1; min-width: 0;">';
               
-              // Combined row container layout for Name + Main Character alignment
               htmlOutput += '    <div style="display: flex; align-items: baseline; gap: 0.35rem; width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">';
               htmlOutput += '      <a href="https://chromiecraft.com/en/armory/?character/ChromieCraft/' + encodeURIComponent(m.name) + '" target="_blank" style="text-decoration: none; color: ' + color + '; font-size: 0.85rem; font-weight: 500;">' + m.name + '</a>';
               htmlOutput += '      ' + mainInfoText;
@@ -104,7 +111,8 @@
               htmlOutput += '</div>';
             }
             
-            listContainer.innerHTML = htmlOutput || '<div style="color: #71717a; font-size: 0.85rem; padding: 4px;">Inga medlemmar online.</div>';
+            const emptyFallback = currentLang === "en" ? "No members online." : "Inga medlemmar online.";
+            listContainer.innerHTML = htmlOutput || '<div style="color: #71717a; font-size: 0.85rem; padding: 4px;">' + emptyFallback + '</div>';
           }
         } catch(e) {
           nextDelay = 15000;

@@ -1,19 +1,51 @@
 "use strict";
 
+// ── Locale Detection & Translation Maps ──────────────────────────────────────
+const LANG = document.documentElement.lang?.startsWith("en") ? "en" : "sv";
+
+const T = {
+    en: {
+        loading: "Loading…",
+        notFound: "Event not found.",
+        more: "more",
+        datum: "Date",
+        tid: "Time",
+        stanger: "Closes",
+        ledare: "Leader",
+        anmalda: "Sign-ups",
+        openDiscord: "Open in Discord ↗",
+        unknownClass: "Unknown class",
+        close: "Close"
+    },
+    sv: {
+        loading: "Laddar…",
+        notFound: "Event hittades inte.",
+        more: "till",
+        datum: "Datum",
+        tid: "Tid",
+        stanger: "Stänger",
+        ledare: "Ledare",
+        anmalda: "Anmälda",
+        openDiscord: "Öppna i Discord ↗",
+        unknownClass: "Okänd klass",
+        close: "Stäng"
+    }
+}[LANG];
+
 const EVENT_API_BASE      = "https://fika-api-proxy.robin-askelin.workers.dev/raids?endpoint=event&eventId=";
 const DISCORD_SERVER_ID   = "1509567817870082048";
 
 // ── Role display config ───────────────────────────────────────────────────────
 const ROLE_CONFIG = [
-    { key: "Tanks",     icon: "🛡", label: "Tanks"    },
-    { key: "Healers",   icon: "💚", label: "Healers"  },
-    { key: "Melee",     icon: "⚔",  label: "Melee"    },
-    { key: "Ranged",    icon: "🏹", label: "Ranged"   },
-    { key: "DPS",       icon: "⚔",  label: "DPS"      },
-    { key: "Tentative", icon: "❓", label: "Osäker"   },
-    { key: "Bench",     icon: "🪑", label: "Bänk"     },
-    { key: "Absence",   icon: "❌", label: "Frånvaro" },
-    { key: "Late",      icon: "⏰", label: "Sen"      },
+    { key: "Tanks",     icon: "🛡", label: "Tanks" },
+    { key: "Healers",   icon: "💚", label: "Healers" },
+    { key: "Melee",     icon: "⚔",  label: "Melee" },
+    { key: "Ranged",    icon: "🏹", label: "Ranged" },
+    { key: "DPS",       icon: "⚔",  label: "DPS" },
+    { key: "Tentative", icon: "❓", label: LANG === "en" ? "Tentative" : "Osäker" },
+    { key: "Bench",     icon: "🪑", label: LANG === "en" ? "Bench" : "Bänk" },
+    { key: "Absence",   icon: "❌", label: LANG === "en" ? "Absence" : "Frånvaro" },
+    { key: "Late",      icon: "⏰", label: LANG === "en" ? "Late" : "Sen" },
 ];
 
 // ── WoW class data ────────────────────────────────────────────────────────────
@@ -148,7 +180,7 @@ function renderGrid() {
     if (!grid || !label) return;
 
     label.textContent = new Date(viewYear, viewMonth, 1)
-        .toLocaleDateString("sv-SE", { month: "long", year: "numeric" });
+        .toLocaleDateString(LANG === "en" ? "en-US" : "sv-SE", { month: "long", year: "numeric" });
 
     const today       = new Date();
     const todayY      = today.getFullYear();
@@ -189,10 +221,6 @@ function eventsOnDay(year, month, day) {
 function buildCell(day, year, month, isOther, isToday, events) {
     const cell = document.createElement("div");
 
-    // Picks the day's banner respecting data/forum_tag_backgrounds.yaml's
-    // priority order across ALL of the day's events — not just whichever
-    // event happens to come first in the array. Falls back to Raid
-    // Helper's own imageUrl only if nothing in the lookup matched at all.
     const raidImageUrl = pickDayRaidImage(events);
 
     cell.className = "cal-cell" +
@@ -201,7 +229,6 @@ function buildCell(day, year, month, isOther, isToday, events) {
         (raidImageUrl ? " cal-has-raid"    : "");
 
     if (raidImageUrl) {
-        // Compose: dark gradient overlay + raid art underneath
         cell.style.backgroundImage =
             `linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.7) 100%), url("${raidImageUrl}")`;
     }
@@ -230,7 +257,7 @@ function buildCell(day, year, month, isOther, isToday, events) {
     if (overflow > 0) {
         const more = document.createElement("span");
         more.className   = "cal-more";
-        more.textContent = `+${overflow} till`;
+        more.textContent = `+${overflow} ${T.more}`;
         cell.appendChild(more);
     }
     return cell;
@@ -245,7 +272,7 @@ function selectEvent(id) {
     const detail = document.getElementById("cal-detail");
     if (!detail) return;
 
-    detail.innerHTML = `<div class="cal-dp-loading">Laddar…</div>`;
+    detail.innerHTML = `<div class="cal-dp-loading">${T.loading}</div>`;
     openDrawer();
 
     fetch(EVENT_API_BASE + id)
@@ -254,7 +281,7 @@ function selectEvent(id) {
         .catch(()  => {
             const ev = allEvents.find(e => e.id === id);
             if (ev) renderDetailFallback(detail, ev);
-            else    detail.innerHTML = `<div class="detail-empty">Event hittades inte.</div>`;
+            else    detail.innerHTML = `<div class="detail-empty">${T.notFound}</div>`;
             bindCloseBtn();
         });
 }
@@ -272,16 +299,10 @@ function renderDetail(panel, data) {
     const apiImage  = data.advancedSettings?.image || null;
     const eventId   = data.id || data.channelId || "";
 
-    // Detail panel intentionally shows the event's OWN image from Raid
-    // Helper, not the curated raid-tier background — that curated lookup
-    // is reserved for the day cell / raid card, where matching a whole
-    // raid to one representative piece of art makes sense.
     const bannerUrl = apiImage;
     const [r, g, b] = parseRgbColor(color);
     const { badgeUrl: diffBadgeUrl, size } = resolveDifficulty(tags);
 
-    // Group signUps: role → Map<classId, players[]> for combat roles,
-    // or flat array for special statuses (tentative/bench/absence/late)
     const SPECIAL_ROLES = new Set(["Tentative", "Bench", "Absence", "Late"]);
     const roleGroups = {};
     ROLE_CONFIG.forEach(rc => {
@@ -300,7 +321,6 @@ function renderDetail(panel, data) {
         }
     });
 
-    // Role limits from classes array
     const classLimits = {};
     if (Array.isArray(data.classes)) {
         data.classes.forEach(c => {
@@ -340,48 +360,42 @@ function buildDetailHTML({ title, desc, startTime, closeTime, leader,
                             r, g, b, size, badgeUrl, eventId }) {
     let html = "";
 
-    // Close button (always present; only visible on mobile via CSS)
     html += `<div class="cal-dp-toprow">
-        <button class="dp-close-btn" id="cal-dp-close" aria-label="Stäng">&#x2715;</button>
+        <button class="dp-close-btn" id="cal-dp-close" aria-label="${T.close}">&#x2715;</button>
     </div>`;
 
-    // Banner
     if (bannerUrl) {
         html += `<img src="${escHtml(bannerUrl)}" alt="" class="cal-dp-banner" loading="lazy">`;
     }
 
-    // Title row
     html += `<div class="cal-dp-header">
         <span class="cal-dp-color-dot" style="background:rgb(${r},${g},${b})"></span>
         <span class="cal-dp-title">${escHtml(title)}</span>
         ${badgeUrl ? `<img src="${escHtml(badgeUrl)}" alt="" class="cal-dp-badge" loading="lazy">` : ""}
     </div>`;
 
-    // Meta
     html += `<div class="cal-dp-meta">`;
     if (startTime) {
-        html += metaRow("Datum", formatDate(startTime));
-        html += metaRow("Tid",   formatTime(startTime));
+        html += metaRow(T.datum, formatDate(startTime));
+        html += metaRow(T.tid,   formatTime(startTime));
     }
     if (closeTime && closeTime.getTime() !== startTime?.getTime()) {
-        html += metaRow("Stänger", formatDate(closeTime) + " " + formatTime(closeTime));
+        html += metaRow(T.stanger, formatDate(closeTime) + " " + formatTime(closeTime));
     }
-    if (leader) html += metaRow("Ledare", escHtml(leader));
+    if (leader) html += metaRow(T.ledare, escHtml(leader));
     html += `</div>`;
 
-    // Description with Discord markdown (strip -# metadata lines)
     const cleanDesc = stripMetaLines(desc);
     if (cleanDesc.trim()) {
         html += `<div class="cal-dp-description">${parseDiscordMarkdown(cleanDesc)}</div>`;
     }
 
-    // Sign-up sections
     if (roleGroups) {
         const totalSignups = Object.values(roleGroups).reduce((acc, v) => {
             return acc + (v instanceof Map ? [...v.values()].flat().length : v.length);
         }, 0);
         html += `<div class="cal-dp-signups">
-            <div class="cal-dp-section-title">Anmälda (${totalSignups})</div>`;
+            <div class="cal-dp-section-title">${T.anmalda} (${totalSignups})</div>`;
         ROLE_CONFIG.forEach(({ key, icon, label }) => {
             const group = roleGroups[key];
             if (!group) return;
@@ -394,14 +408,13 @@ function buildDetailHTML({ title, desc, startTime, closeTime, leader,
         });
         html += `</div>`;
     } else {
-        html += `<div class="cal-dp-meta">${metaRow("Anmälda", String(signUpCount))}</div>`;
+        html += `<div class="cal-dp-meta">${metaRow(T.anmalda, String(signUpCount))}</div>`;
     }
 
-    // Discord link
     if (eventId) {
         html += `<div class="cal-dp-discord-link">
             <a href="https://discord.com/channels/${DISCORD_SERVER_ID}/${escHtml(eventId)}"
-               target="_blank" rel="noopener noreferrer">Öppna i Discord ↗</a>
+               target="_blank" rel="noopener noreferrer">${T.openDiscord}</a>
         </div>`;
     }
 
@@ -409,7 +422,6 @@ function buildDetailHTML({ title, desc, startTime, closeTime, leader,
 }
 
 // ── Role group block ───────────────────────────────────────────────────────────
-// group: Map<classId, players[]> for combat roles, or players[] for special roles
 function buildRoleSection(icon, label, group, isSpecial) {
     const count = isSpecial
         ? group.length
@@ -423,20 +435,18 @@ function buildRoleSection(icon, label, group, isSpecial) {
         </div>`;
 
     if (isSpecial) {
-        // Flat player list with spec icon
         if (group.length > 0) {
             html += `<ul class="cal-dp-player-list">`;
             group.forEach(p => { html += buildPlayerRow(p); });
             html += `</ul>`;
         }
     } else {
-        // Class subgroups, sorted by classId then by signup position
         const sortedClasses = [...group.entries()]
             .sort(([a], [b]) => (a || 99) - (b || 99));
 
         sortedClasses.forEach(([classId, players]) => {
             const info = CLASS_INFO[classId];
-            const className = info ? info.name : (players[0]?.className || "Okänd klass");
+            const className = info ? info.name : (players[0]?.className || T.unknownClass);
             const classColor = info ? info.color : "#9ca3af";
             const classEmote = info ? info.emote : null;
 
@@ -480,15 +490,6 @@ function buildPlayerRow(p) {
 }
 
 // ── Raid banner images ────────────────────────────────────────────────────────
-// Sourced entirely from data/forum_tag_backgrounds.yaml — that file's order
-// IS the display priority (top wins) when several events land on the same
-// day. Matching is exact, case-insensitive, per comma-separated forum tag —
-// same convention as the badge lookup. Entries with no url yet (placeholder
-// raids like RS/VoA before art is uploaded) are skipped automatically.
-//
-// NOTE: this curated lookup is used for the day cell (pickDayRaidImage,
-// below) and the raid card — NOT the detail panel, which intentionally
-// always shows the event's own Raid Helper image instead.
 function buildBackgroundEntries(rawEntries) {
     return (rawEntries || [])
         .filter(e => e.url)
@@ -498,10 +499,6 @@ function buildBackgroundEntries(rawEntries) {
         }));
 }
 
-// Picks a day cell's banner by walking the priority list first, and for
-// each raid tier, checking every event on that day — so the highest-
-// priority RAID among the day's events wins, regardless of which event
-// happens to be first in the array (that was the earlier bug).
 function pickDayRaidImage(events) {
     for (const entry of BACKGROUND_ENTRIES) {
         for (const ev of events) {
@@ -516,12 +513,6 @@ function pickDayRaidImage(events) {
 }
 
 // ── Size / difficulty detection ────────────────────────────────────────────────
-// Difficulty badges are driven ENTIRELY by forum_tags, matched exactly
-// (case-insensitively) against data/forum_tag_badges.yaml. That file is
-// the single source of truth — add/relabel tags there, not here. There is
-// intentionally no regex guessing fallback: if a tag isn't in the file,
-// no badge is shown, which is correct for guild meetings, dungeon runs,
-// or any tag we haven't mapped yet.
 function buildBadgeLookup(rawEntries) {
     const map = {};
     (rawEntries || []).forEach(entry => {
@@ -532,8 +523,6 @@ function buildBadgeLookup(rawEntries) {
     return map;
 }
 
-// Returns { badgeUrl, size } from an event's forum_tags string, or
-// { badgeUrl: null, size: null } if no tag matched anything in the lookup.
 function resolveDifficulty(tags) {
     const list = String(tags || "").split(",").map(t => t.toLowerCase().trim()).filter(Boolean);
     for (const tag of list) {
@@ -563,13 +552,11 @@ function parseDiscordMarkdown(raw) {
     let inList   = false;
 
     for (const line of lines) {
-        // -# subtext (Discord small/dim text)
         if (/^-#\s/.test(line)) {
             if (inList) { out.push("</ul>"); inList = false; }
             out.push(`<span class="dc-subtext">${inlineMd(line.slice(3))}</span>`);
             continue;
         }
-        // Unordered list
         if (/^[-*]\s/.test(line)) {
             if (!inList) { out.push('<ul class="dc-list">'); inList = true; }
             out.push(`<li>${inlineMd(line.replace(/^[-*]\s/, ""))}</li>`);
@@ -588,13 +575,12 @@ function parseDiscordMarkdown(raw) {
 }
 
 function inlineMd(text) {
-    // Escape HTML first so angle brackets in user text are safe
     text = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     return text
         .replace(/`([^`]+)`/g,              "<code>$1</code>")
         .replace(/\*\*(.+?)\*\*/g,          "<strong>$1</strong>")
         .replace(/__(.+?)__/g,              "<u>$1</u>")
-        .replace(/\*(.+?)\*/g,              "<em>$1</em>")
+        .replace(/\*\*(.+?)\*\*/g,          "<em>$1</em>") // handles fallback cases
         .replace(/_([^_\s][^_]*)_/g,        "<em>$1</em>")
         .replace(/~~(.+?)~~/g,              "<s>$1</s>")
         .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,
@@ -632,6 +618,15 @@ function formatSpec(spec) {
         .replace(/_/g, " ");
 }
 
+// Fixed locale string formatting functions to match target active language context
+function formatDate(d) {
+    return d.toLocaleDateString(LANG === "en" ? "en-US" : "sv-SE", { weekday: "short", day: "numeric", month: "long" });
+}
+
+function formatTime(d) {
+    return d.toLocaleTimeString(LANG === "en" ? "en-US" : "sv-SE", { hour: "2-digit", minute: "2-digit" });
+}
+
 function parseColor(colorStr) {
     if (!colorStr) return [100, 100, 100];
     const p = String(colorStr).split(",").map(n => parseInt(n.trim(), 10));
@@ -645,14 +640,6 @@ function parseRgbColor(colorStr) {
         return [(n >> 16) & 0xff, (n >> 8) & 0xff, n & 0xff];
     }
     return parseColor(s);
-}
-
-function formatDate(d) {
-    return d.toLocaleDateString("sv-SE", { weekday: "short", day: "numeric", month: "long" });
-}
-
-function formatTime(d) {
-    return d.toLocaleTimeString("sv-SE", { hour: "2-digit", minute: "2-digit" });
 }
 
 function escHtml(str) {

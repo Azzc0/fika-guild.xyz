@@ -34,6 +34,9 @@
   {{ $eventsJSON := resources.FromString "events.json" ($eventsData | jsonify) }}
   {{ $noop := $eventsJSON.Permalink }}
 
+<{{/* Check language once to keep the markup clean */}}
+{{ $isEn := hasPrefix .Site.Language.Lang "en" }}
+
 <div class="cal-page">
 
     <div id="cal-detail-backdrop" class="detail-backdrop"></div>
@@ -43,14 +46,17 @@
         <section class="cal-left">
 
             <div class="cal-header">
-                <button id="cal-prev" class="cal-nav-btn" aria-label="Föregående månad">&#8249;</button>
+                <button id="cal-prev" class="cal-nav-btn" aria-label="{{ if $isEn }}Previous month{{ else }}Föregående månad{{ end }}">&#8249;</button>
                 <h2 id="cal-month-label" class="cal-month-label"></h2>
-                <button id="cal-next" class="cal-nav-btn" aria-label="Nästa månad">&#8250;</button>
+                <button id="cal-next" class="cal-nav-btn" aria-label="{{ if $isEn }}Next month{{ else }}Nästa månad{{ end }}">&#8250;</button>
             </div>
 
             <div class="cal-weekdays">
-                <span>Sön</span><span>Mån</span><span>Tis</span>
-                <span>Ons</span><span>Tor</span><span>Fre</span><span>Lör</span>
+                {{ if $isEn }}
+                    <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                {{ else }}
+                    <span>Sön</span><span>Mån</span><span>Tis</span><span>Ons</span><span>Tor</span><span>Fre</span><span>Lör</span>
+                {{ end }}
             </div>
 
             <div id="cal-grid" class="cal-grid"></div>
@@ -59,7 +65,7 @@
 
         <aside class="cal-right">
             <div id="cal-detail" class="detail-panel">
-                <div class="detail-empty">Välj ett event för att se detaljer.</div>
+                <div class="detail-empty">{{ if $isEn }}Select an event to view details.{{ else }}Välj ett event för att se detaljer.{{ end }}</div>
             </div>
         </aside>
 

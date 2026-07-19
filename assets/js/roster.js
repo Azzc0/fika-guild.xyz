@@ -5,7 +5,34 @@ const ROSTER_URL       = "https://www.azzco.xyz/data/roster.json";
 const CHARACTERS_URL   = "https://www.azzco.xyz/data/characters.json";
 const TRANSLATIONS_URL = "/utils/guild-translations.json";
 
-// ── Config ────────────────────────────────────────────────────────────────────const LS_KEY_COLS  = "fika_roster_cols";
+// ── Language Detection & Localization ─────────────────────────────────────────
+const IS_EN = document.documentElement.lang.startsWith("en");
+
+const TEXT = {
+    colName:          IS_EN ? "Name" : "Namn",
+    colLevel:         IS_EN ? "Level" : "Nivå",
+    colRank:          IS_EN ? "Rank" : "Grad",
+    searchPlaceholder:IS_EN ? "Search players or alts…" : "Sök spelare eller alter…",
+    columnsBtn:       IS_EN ? "⊞ Columns" : "⊞ Kolumner",
+    columnsTitle:     IS_EN ? "Show/hide columns" : "Visa/dölj kolumner",
+    clearFilter:      IS_EN ? "Clear filter" : "Rensa filter",
+    statusAll:        IS_EN ? "All" : "Alla",
+    statusOnline:     IS_EN ? "🟢 Online" : "🟢 Online",
+    statusOffline:    IS_EN ? "⬜ Offline" : "⬜ Offline",
+    officerNote:      IS_EN ? "Officer Note" : "Officersanteckning",
+    position:         IS_EN ? "Location" : "Position",
+    note:             IS_EN ? "Note" : "Anteckning",
+    professions:      IS_EN ? "Professions" : "Yrken",
+    viewArmory:       IS_EN ? "View on Armory ↗" : "Visa på Armory ↗",
+    filterTitle:      IS_EN ? "Right-click to filter" : "Högerklicka för att filtrera",
+    errorLoad:        IS_EN ? "Could not load the guild roster. Please try again later." : "Kunde inte ladda guildlistan. Försök igen senare.",
+    stalenessWarning: (lm) => IS_EN 
+        ? `Data was last updated ${lm} and may be outdated.` 
+        : `Data uppdaterades senast ${lm} och kan vara inaktuell.`
+};
+
+// ── Config ────────────────────────────────────────────────────────────────────
+const LS_KEY_COLS  = "fika_roster_cols";
 const LS_KEY_SORT  = "fika_roster_sort";
 
 // ── Class data ────────────────────────────────────────────────────────────────
@@ -81,16 +108,15 @@ const SPECS = {
 };
 
 // ── Column definitions ────────────────────────────────────────────────────────
-// order here = default display order
 const COLUMN_DEFS = [
-    { key:"chevron",  label:"",      sortable:false, toggleable:false, filterable:false, width:"28px",  align:"center" },
-    { key:"class",    label:"",      sortable:true,  toggleable:false, filterable:true,  width:"32px",  align:"center" },
-    { key:"role1",    label:"Main Spec", sortable:true,  toggleable:true,  filterable:true,  width:"30px",  align:"center" },
-    { key:"role2",    label:"Off Spec",  sortable:true,  toggleable:true,  filterable:true,  width:"30px",  align:"center" },
-    { key:"name",     label:"Namn",  sortable:true,  toggleable:false, filterable:false, width:"110px", align:"left"   },
-    { key:"level",    label:"Nivå",  sortable:true,  toggleable:true,  filterable:false, width:"40px",  align:"right"  },
-    { key:"rank",     label:"Grad",  sortable:true,  toggleable:true,  filterable:true,  width:"100px", align:"left"   },
-    { key:"status",   label:"Status",sortable:true,  toggleable:true,  filterable:true,  width:"100px", align:"left"   },
+    { key:"chevron",  label:"",            sortable:false, toggleable:false, filterable:false, width:"28px",  align:"center" },
+    { key:"class",    label:"",            sortable:true,  toggleable:false, filterable:true,  width:"32px",  align:"center" },
+    { key:"role1",    label:"Main Spec",   sortable:true,  toggleable:true,  filterable:true,  width:"30px",  align:"center" },
+    { key:"role2",    label:"Off Spec",    sortable:true,  toggleable:true,  filterable:true,  width:"30px",  align:"center" },
+    { key:"name",     label:TEXT.colName,  sortable:true,  toggleable:false, filterable:false, width:"110px", align:"left"   },
+    { key:"level",    label:TEXT.colLevel, sortable:true,  toggleable:true,  filterable:false, width:"40px",  align:"right"  },
+    { key:"rank",     label:TEXT.colRank,  sortable:true,  toggleable:true,  filterable:true,  width:"100px", align:"left"   },
+    { key:"status",   label:"Status",      sortable:true,  toggleable:true,  filterable:true,  width:"100px", align:"left"   },
 ];
 
 // ── State ─────────────────────────────────────────────────────────────────────
@@ -137,10 +163,18 @@ const normalizeKey = (v) => String(v||"").trim().toLowerCase();
 const formatLastSeen = (days) => {
     const s = Math.max(0, Math.floor(days * 86400));
     const m = Math.floor(s/60), h = Math.floor(m/60), d = Math.floor(h/24);
-    if (d >= 1) return `${d} dag${d===1?"":"ar"} sedan`;
-    if (h >= 1) return `${h} tim${h===1?"me":"mar"} sedan`;
-    if (m >= 1) return `${m} minut${m===1?"":"er"} sedan`;
-    return "Nyligen";
+    
+    if (IS_EN) {
+        if (d >= 1) return `${d} day${d===1?"":"s"} ago`;
+        if (h >= 1) return `${h} hour${h===1?"":"s"} ago`;
+        if (m >= 1) return `${m} minute${m===1?"":"s"} ago`;
+        return "Recently";
+    } else {
+        if (d >= 1) return `${d} dag${d===1?"":"ar"} sedan`;
+        if (h >= 1) return `${h} tim${h===1?"me":"mar"} sedan`;
+        if (m >= 1) return `${m} minut${m===1?"":"er"} sedan`;
+        return "Nyligen";
+    }
 };
 
 const armoryUrl = (name) =>
@@ -211,7 +245,6 @@ const processData = (rosterData, characters, ranks, zones, fileAge) => {
         groupMap.get(mk).members.push(member);
     });
 
-    // Identify main and alts in each group
     const groups = [];
     groupMap.forEach((g, key) => {
         const main = g.members.find(m => normalizeKey(m.name) === key) || g.members[0];
@@ -220,7 +253,6 @@ const processData = (rosterData, characters, ranks, zones, fileAge) => {
                 if (a.isOnline !== b.isOnline) return a.isOnline ? -1 : 1;
                 return a.lastLogoff - b.lastLogoff;
             });
-        // Cluster-wide status
         const clusterOnline = g.members.some(x => x.isOnline);
         const clusterStatus = clusterOnline ? "Online"
             : alts.length
@@ -322,7 +354,7 @@ const isFilterActive = (key) => {
     return false;
 };
 
-const FILTERABLE_ICON = `<span class="r-filter-icon" title="Högerklicka för att filtrera">⊟</span>`;
+const FILTERABLE_ICON = `<span class="r-filter-icon" title="${esc(TEXT.filterTitle)}">⊟</span>`;
 
 const renderHeader = () => {
     const { col:sc, dir:sd } = state.sort;
@@ -356,7 +388,6 @@ const renderRow = (group) => {
 
     let html = `<tr class="${rowCls}" data-key="${esc(group.key)}">${cells}</tr>`;
 
-    // Inline alt rows
     if (isExpanded) {
         group.alts.forEach(alt => {
             const altSelected = state.selectedName === alt.name;
@@ -406,7 +437,7 @@ const buildDetailHTML = (member, showClose = false) => {
     }).join("");
 
     const officerNoteHtml = member.officerNote
-        ? `<div class="dp-section-title">Officersanteckning</div><div class="dp-text">${esc(member.officerNote)}</div>`
+        ? `<div class="dp-section-title">${TEXT.officerNote}</div><div class="dp-text">${esc(member.officerNote)}</div>`
         : "";
 
     const closeBtn = showClose
@@ -419,19 +450,19 @@ const buildDetailHTML = (member, showClose = false) => {
             <div class="dp-header-text" style="flex:1;min-width:0;">
                 <a href="${armoryUrl(member.name)}" target="_blank" rel="noopener noreferrer"
                    class="dp-name class-${member.classId}">${esc(member.name)}</a>
-                <div class="dp-rank">${esc(member.rankName)} &middot; Nivå ${member.level}</div>
+                <div class="dp-rank">${esc(member.rankName)} &middot; ${TEXT.colLevel} ${member.level}</div>
                 <div class="dp-status${member.isOnline?" online":""}">${esc(member.statusText)}</div>
             </div>
             ${closeBtn}
         </div>
         ${specs ? `<div class="dp-specs">${specs}</div>` : ""}
         <div class="dp-body">
-            ${member.zoneName    ? `<div class="dp-section-title">Position</div><div class="dp-text">${esc(member.zoneName)}</div>` : ""}
-            ${member.publicNote  ? `<div class="dp-section-title">Anteckning</div><div class="dp-text">${esc(member.publicNote)}</div>` : ""}
+            ${member.zoneName    ? `<div class="dp-section-title">${TEXT.position}</div><div class="dp-text">${esc(member.zoneName)}</div>` : ""}
+            ${member.publicNote  ? `<div class="dp-section-title">${TEXT.note}</div><div class="dp-text">${esc(member.publicNote)}</div>` : ""}
             ${officerNoteHtml}
-            ${profs.length       ? `<div class="dp-section-title">Yrken</div>${profHtml}` : ""}
+            ${profs.length       ? `<div class="dp-section-title">${TEXT.professions}</div>${profHtml}` : ""}
         </div>
-        <div class="dp-armory"><a href="${armoryUrl(member.name)}" target="_blank" rel="noopener noreferrer">Visa på Armory ↗</a></div>`;
+        <div class="dp-armory"><a href="${armoryUrl(member.name)}" target="_blank" rel="noopener noreferrer">${TEXT.viewArmory}</a></div>`;
 };
 
 const renderDetail = (member) => {
@@ -484,7 +515,7 @@ const buildMenuItems = (colKey) => {
         }));
         if (classIds.size) {
             items.push({ sep: true });
-            items.push({ html: 'Rensa filter', active: false, action: () => classIds.clear() });
+            items.push({ html: TEXT.clearFilter, active: false, action: () => classIds.clear() });
         }
     } else if (colKey === 'rank') {
         const ranks = [...new Map(state.groups.map(g => [g.main.rankId, g.main.rankName])).entries()]
@@ -496,10 +527,10 @@ const buildMenuItems = (colKey) => {
         }));
         if (rankIds.size) {
             items.push({ sep: true });
-            items.push({ html: 'Rensa filter', active: false, action: () => rankIds.clear() });
+            items.push({ html: TEXT.clearFilter, active: false, action: () => rankIds.clear() });
         }
     } else if (colKey === 'status') {
-        [{ label:'🟢 Online', val:true }, { label:'⬜ Offline', val:false }, { label:'Alla', val:null }]
+        [{ label: TEXT.statusOnline, val:true }, { label: TEXT.statusOffline, val:false }, { label: TEXT.statusAll, val:null }]
             .forEach(o => items.push({
                 html: o.label,
                 active: onlineOnly === o.val,
@@ -513,7 +544,7 @@ const buildMenuItems = (colKey) => {
         }));
         if (roles.size) {
             items.push({ sep: true });
-            items.push({ html: 'Rensa filter', active: false, action: () => roles.clear() });
+            items.push({ html: TEXT.clearFilter, active: false, action: () => roles.clear() });
         }
     }
     return items;
@@ -577,7 +608,6 @@ const bindEvents = () => {
     const colPickerEl  = document.getElementById("r-col-picker");
     const pickerWrap   = document.getElementById("r-col-picker-wrap");
 
-    // Sort
     thead.addEventListener("click", e => {
         const th = e.target.closest("[data-sort]");
         if (!th) return;
@@ -594,9 +624,7 @@ const bindEvents = () => {
         renderTable();
     });
 
-    // Row click — main rows
     tbody.addEventListener("click", e => {
-        // Column picker clicks should not bubble here
         if (e.target.closest("#r-col-picker-wrap")) return;
 
         const mainRow = e.target.closest("tr.r-main-row");
@@ -607,7 +635,6 @@ const bindEvents = () => {
             const group = findGroupByKey(key);
             if (!group) return;
 
-            // Chevron cell tapped → toggle alts only, no drawer
             if (e.target.closest(".r-td-chevron")) {
                 if (group.alts.length) {
                     state.expandedKey = state.expandedKey === key ? null : key;
@@ -617,7 +644,6 @@ const bindEvents = () => {
                 return;
             }
 
-            // Any other cell → open detail drawer only, no expansion change
             state.selectedName = group.main.name;
             renderDetail(group.main);
             openDetailDrawer();
@@ -630,16 +656,13 @@ const bindEvents = () => {
             state.selectedName = name;
             renderDetail(member);
             openDetailDrawer();
-            // Re-render just to update selected highlight
             applyFilterAndSort();
             renderTable();
         }
     });
 
-    // Search
     searchEl?.addEventListener("input", e => {
         state.search = e.target.value;
-        // Auto-expand if search matches an alt name
         if (state.search.trim()) {
             const q = state.search.toLowerCase().trim();
             const hit = state.groups.find(g => g.alts.some(a => a.name.toLowerCase().includes(q)));
@@ -649,14 +672,12 @@ const bindEvents = () => {
         renderTable();
     });
 
-    // Column picker toggle
     colToggleBtn?.addEventListener("click", e => {
         e.stopPropagation();
         pickerWrap?.classList.toggle("open");
         renderColPicker();
     });
 
-    // Column picker change
     colPickerEl?.addEventListener("change", e => {
         const cb = e.target.closest("input[data-col]");
         if (!cb) return;
@@ -666,7 +687,6 @@ const bindEvents = () => {
         renderTable();
     });
 
-    // Column header right-click → filter context menu
     thead.addEventListener('contextmenu', e => {
         e.preventDefault();
         const th = e.target.closest('th.r-th');
@@ -675,7 +695,6 @@ const bindEvents = () => {
         if (m) openCtxMenu(m[1], e.clientX, e.clientY);
     });
 
-    // Column header long-press (touch) → filter context menu
     thead.addEventListener('touchstart', e => {
         const th = e.target.closest('th.r-th');
         if (!th) return;
@@ -688,7 +707,6 @@ const bindEvents = () => {
     thead.addEventListener('touchend',  () => clearTimeout(_longPressTimer));
     thead.addEventListener('touchmove', () => clearTimeout(_longPressTimer));
 
-    // Close context menu on outside click or Escape
     document.addEventListener('click', e => {
         if (_ctxMenu && !_ctxMenu.contains(e.target)) closeCtxMenu();
     });
@@ -696,7 +714,6 @@ const bindEvents = () => {
         if (e.key === 'Escape') closeCtxMenu();
     });
 
-    // Close drawer (✕ button or backdrop click)
     document.addEventListener("click", e => {
         if (e.target.closest("[data-action='close-detail']") ||
             e.target.id === "roster-detail-backdrop") {
@@ -704,7 +721,6 @@ const bindEvents = () => {
         }
     });
 
-    // Close picker on outside click
     document.addEventListener("click", e => {
         if (!e.target.closest("#r-col-picker-wrap") && !e.target.closest("#r-col-toggle")) {
             pickerWrap?.classList.remove("open");
@@ -720,12 +736,12 @@ const buildToolbar = () => {
         <div class="r-toolbar-left">
             <label class="r-search-wrap">
                 <span class="r-search-icon">⌕</span>
-                <input id="r-search" type="text" placeholder="Sök spelare eller alter…" autocomplete="off">
+                <input id="r-search" type="text" placeholder="${TEXT.searchPlaceholder}" autocomplete="off">
             </label>
         </div>
         <div class="r-toolbar-right">
             <div style="position:relative;">
-                <button id="r-col-toggle" class="r-btn" title="Visa/dölj kolumner">⊞ Kolumner</button>
+                <button id="r-col-toggle" class="r-btn" title="${TEXT.columnsTitle}">${TEXT.columnsBtn}</button>
                 <div id="r-col-picker-wrap" class="r-col-picker-wrap">
                     <div id="r-col-picker"></div>
                 </div>
@@ -746,7 +762,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const lm = r.headers.get("Last-Modified");
             if (lm && Date.now() - new Date(lm) > 86400000) {
                 const el = document.getElementById("roster-staleness-warning");
-                if (el) { el.textContent = `Data uppdaterades senast ${lm} och kan vara inaktuell.`; el.style.display = "block"; }
+                if (el) { el.textContent = TEXT.stalenessWarning(lm); el.style.display = "block"; }
             }
             return r.json().then(data => ({ data, lm }));
         }),
@@ -762,6 +778,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(err => {
         console.error("Kunde inte ladda guildlistan:", err);
         const tbody = document.getElementById("r-tbody");
-        if (tbody) tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:2rem;color:#f87171;">Kunde inte ladda guildlistan. Försök igen senare.</td></tr>`;
+        if (tbody) tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:2rem;color:#f87171;">${TEXT.errorLoad}</td></tr>`;
     });
 });
