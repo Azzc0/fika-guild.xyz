@@ -76,7 +76,9 @@ Kärnmedlemmar är de som tar oss framåt och, som i namnet, utgör kärnan i Fi
 
 ## Rank: 5 - Kämpe
 
-Gamla hederliga godingar som tidigare varit kärnmedlemmar en längre period eller högre och som av någon anledning tagit ett kliv tillbaka i aktivitet.
+
+En medlem i fika som ofta ansluter till våra räder. Tillgång till den tredje fliken "Källaren" i guildbanken.
+
 
 {{< details title="Befogenheter" closed="true">}}
 
@@ -86,7 +88,7 @@ Gamla hederliga godingar som tidigare varit kärnmedlemmar en längre period ell
 
 ## Rank: 6 - Veteran
 
-En medlem i fika förväntas vara intresserad av att räda och ha ambitioner på att avancera till {{< guild_rank_label 4 >}}
+Gamla hederliga godingar som tidigare varit kärnmedlemmar en längre period eller högre och som av någon anledning tagit ett kliv tillbaka i aktivitet.
 
 {{< details title="Befogenheter" closed="true">}}
 
@@ -96,7 +98,7 @@ En medlem i fika förväntas vara intresserad av att räda och ha ambitioner på
 
 ## Rank: 7 - Medlem
 
-En medlem i fika som inte är intresserad av att faktiskt räda med oss men som gärna hänger med i gillet ändå.
+Medlemsranken ger vi till karaktärer som är nära eller spelar endgame.
 
 {{< details title="Befogenheter" closed="true">}}
 
@@ -106,7 +108,7 @@ En medlem i fika som inte är intresserad av att faktiskt räda med oss men som 
 
 ## Rank: 8 - Social
 
-En karaktär som tillhör någon som redan är med i gillet på en annan karaktär. Kan hända att vi kommer plocka bort denna ranken i favör för en nivå mellan kärnmedlem och vanlig medlem.
+Rank aktuell för karaktärer som inte spelar endgame PvE content. Tillgång till första fliken i guildbanken.
 
 {{< details title="Befogenheter" closed="true">}}
 
@@ -116,7 +118,7 @@ En karaktär som tillhör någon som redan är med i gillet på en annan karakt�
 
 ## Rank: 9 - Provmedlem
 
-Här landar man när man fått inbjudan till gillet. Eftersom man kan bjuda in sig själv till gillet med addonet så har denna ranken väldigt begränsade behörigheter. Skicka en bild på en kopp kaffe eller te i [`# 💬-general`](https://discord.com/channels/1509567817870082048/1509567818750754918) så vi ser att du faktiskt är en riktig fikare [^1].
+Här landar man när man fått inbjudan till gillet. Eftersom man kan bjuda in sig själv till gillet med addonet så har denna ranken väldigt begränsade behörigheter. Skicka en bild på en kopp kaffe eller te i [`# 💬-general`](https://discord.com/channels/1509567817870082048/1509567818750754918) så vi ser att du faktiskt är en riktig fikare [^1] och kan befordra dig.
 
 [^1]: Guldstjärna och plus i kanten om du har hembakade kanelbullar med i bilden.
 
