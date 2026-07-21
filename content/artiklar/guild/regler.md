@@ -1,6 +1,7 @@
 ---
 toc: false
 type: "docs"
+weight: 2
 prev: /artiklar/guild/
 next: /artiklar/guild/ranker
 ---

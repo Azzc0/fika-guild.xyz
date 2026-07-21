@@ -1,7 +1,6 @@
 ---
 title: Artiklar
 type: "docs"
-next: /artiklar/guild/
+next: /artiklar/start/
 ---
-Här samlar vi statisk information vi vill förmedla till gillet.
-
+Här samlar vi information

@@ -2,6 +2,7 @@
 type: "docs"
 prev: /artiklar/guild/regler
 next: /artiklar/guider
+weight: 4
 title: "Ranker i gillet"
 ---
 <!-- 

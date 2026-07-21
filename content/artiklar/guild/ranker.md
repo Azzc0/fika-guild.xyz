@@ -2,6 +2,7 @@
 type: "docs"
 prev: /artiklar/guild/regler
 next: /artiklar/guider
+weight: 4
 title: "Ranker i gillet"
 ---
 <!-- 
@@ -73,7 +74,7 @@ Kärnmedlemmar är de som tar oss framåt och, som i namnet, utgör kärnan i Fi
 
 {{< /details >}}
 
-## Rank: 5 - Veteran
+## Rank: 5 - Kämpe
 
 Gamla hederliga godingar som tidigare varit kärnmedlemmar en längre period eller högre och som av någon anledning tagit ett kliv tillbaka i aktivitet.
 
@@ -83,7 +84,7 @@ Gamla hederliga godingar som tidigare varit kärnmedlemmar en längre period ell
 
 {{< /details >}}
 
-## Rank: 6 - Medlem
+## Rank: 6 - Veteran
 
 En medlem i fika förväntas vara intresserad av att räda och ha ambitioner på att avancera till {{< guild_rank_label 4 >}}
 
@@ -93,7 +94,7 @@ En medlem i fika förväntas vara intresserad av att räda och ha ambitioner på
 
 {{< /details >}}
 
-## Rank: 7 - Social
+## Rank: 7 - Medlem
 
 En medlem i fika som inte är intresserad av att faktiskt räda med oss men som gärna hänger med i gillet ändå.
 
@@ -103,7 +104,7 @@ En medlem i fika som inte är intresserad av att faktiskt räda med oss men som 
 
 {{< /details >}}
 
-## Rank: 8 - Alt
+## Rank: 8 - Social
 
 En karaktär som tillhör någon som redan är med i gillet på en annan karaktär. Kan hända att vi kommer plocka bort denna ranken i favör för en nivå mellan kärnmedlem och vanlig medlem.
 

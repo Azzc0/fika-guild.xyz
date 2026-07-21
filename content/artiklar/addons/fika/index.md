@@ -1,11 +1,11 @@
 ---
 title: "Fika Gillesaddon"
 date: 2026-07-11
-summary: "Vårat kompanjon addon för att synka iformation mellan hemsida, bot och spelet."
+summary: "Vårat kompanjon addon för att synka information mellan hemsida, bot och spelet."
 image: "fika.png"
-download: "/addon/Fika.zip"
+download: "https://git.azzco.xyz/azzco/Fika/archive/v0.3.2.zip"
 sidebar:
   exclude: true
 ---
 
-Jahopp.
+Tänk dig att det står beskrivet hur addonet fungerar här.
