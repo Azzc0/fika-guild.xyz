@@ -3,7 +3,7 @@ title: "Fika Gillesaddon"
 date: 2026-07-11
 summary: "Vårat kompanjon addon för att synka information mellan hemsida, bot och spelet."
 image: "fika.png"
-download: "https://git.azzco.xyz/azzco/Fika/archive/v0.3.4.zip"
+download: "https://git.azzco.xyz/azzco/Fika/archive/v0.3.5.zip"
 sidebar:
   exclude: true
 ---
